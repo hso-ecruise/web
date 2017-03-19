@@ -5,6 +5,23 @@
   padding: 0.2em 0;
 }
 
+
+/* Optional: Makes the page fill the google maps window. */
+html, body {
+	height: 90%;
+	margin: 0;
+	padding: 0;
+}
+
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+.map {
+	height: 100%;
+	width: 100%;
+}
+
+
+
 body {
   padding: 0;
 }
@@ -15,6 +32,7 @@ body {
 .footer {
   padding-left: 15px;
   padding-right: 15px;
+
 }
 
 /* Custom page header */

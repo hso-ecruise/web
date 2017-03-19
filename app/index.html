@@ -14,6 +14,8 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+	
+
   </head>
   <body ng-app="webApp">
     <!--[if lte IE 8]>
@@ -48,10 +50,26 @@
       </div>
     </div>
 
+	<div id="map" class="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 49.48, lng: 8.47},
+          zoom: 14
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap" async defer>
+	</script>
+	
     <div class="container">
     <div ng-view=""></div>
     </div>
+	
 
+	
+	
     <div class="footer">
       <div class="container">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
