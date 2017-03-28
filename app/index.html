@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>E-Cruise UserSite</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -16,99 +16,250 @@
     <!-- endbuild -->
 	
 
-  </head>
-  <body ng-app="webApp">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+	</head>
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
 
-            <a class="navbar-brand" href="#/">web</a>
-          </div>
+	<body ng-app="webApp" ng-controller="Ctrl_Main">
+		<!--[if lte IE 8]>
+			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+		<!-- Add your site or application content here -->
+		<div class="header">
+			<div class="navbar navbar-default" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
 
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/user">User</a></li>
-              <li><a ng-href="#/admin">Admin</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
 
-	<div id="map" class="map"></div>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 49.48, lng: 8.47},
-          zoom: 14
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap" async defer>
-	</script>
-	
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
+					</div>
+
+					<div class="collapse navbar-collapse" id="js-navbar-collapse">		
+						<ul class="nav navbar-nav">
+
+							<li class="{{ bookingActive }}" ng-click="ChangeView('booking')"><a>Buchen</a></li>
+							<li class="{{ manageActive }}" ng-click="ChangeView('manage')"><a>Buchungen verwalten</a></li>
+							<li class="{{ profileActive }}" ng-click="ChangeView('profile')"><a>Profil bearbeiten</a></li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	
 
+
+
+	
+		<div class="container" ng-switch on="currentView">
+
+			<div ng-switch-when="booking">
+
+				Test
+				
+				<div id="map" class="map"></div>
+
+				<script>
+					var map;
+					function initMap() {
+						map = new google.maps.Map(document.getElementById('map'), {
+							center: {lat: 49.48, lng: 8.47},
+							zoom: 14
+						});
+					}
+				</script>
+
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap" async defer>
+				</script>
+
+			</div>
+
+
+
+			<div ng-switch-when="manage">
+
+				<div ng-controller="Ctrl_Booking">
+
+					<table>
+						<tr>
+							<td>
+
+								<table>
+									<thead>
+										<tr>
+											<td>Ausstehende Fahrten</td>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="booking in bookings track by $index">
+											<td>
+												<div>
+													<b>{{ booking.date }}</b>
+													<p>{{ booking.startTime }}</p>
+													<p>{{ booking.startPlace }}</p>
+
+													<div ng-switch on="{{ booking.state }}">
+
+														<button ng-switch-when="true">Auf Karte anzeigen</button>
+
+													</div>
+
+												</div>
+											</td>
+										</tr>
+									</tbody>
+									
+								</table>
+
+							</td>
+							
+							
+							<td>
+
+
+
+							</td>
+
+
+							<td>
+
+								<div>
+									
+								</div>
+
+
+							</td>
+						</tr>
+					</table>
+
+				</div>
+
+
+
+			</div>
+
+
+
+			<div ng-switch-when="profile">
+
+				<div ng-controller="Ctrl_Profile">
+
+					<b>Pers&ouml;nliche Daten:</b>
+
+					<table>
+						<tr>
+							<td><b>User-ID:</b></td>
+							<td><b>{{ userID }}</b></td>
+						</tr>
+						<tr>
+							<td>Vorname:</td>
+							<td><input type="text" ng-model="name"/> </td>
+						</tr>
+						<tr>
+							<td>Nachname:</td>
+							<td><input type="text" ng-model="familyName"/></td>
+						</tr>
+						<tr>
+
+						<tr><td><br /></td></tr>
+
+						</tr>
+						<tr>
+							<td>E-Mail:</td>
+							<td><input type="email" ng-model="email"/></td>
+						</tr>
+						<tr>
+							<td>Telefon:</td>
+							<td><input type="number" ng-model="phoneNr"/></td>
+						</tr>
+
+						<tr><td><br /></td></tr>
+
+						<tr>
+							<td>
+								<b>Adresse:</b>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<table>
+									<tr>
+										<td>Strasse/Nr.</td>
+										<td><input type="text" /></td>
+										<td><input type="text" /></td>
+									</tr>
+									<tr>
+										<td>Stadt/PLZ</td>
+										<td><input type="text" /></td>
+										<td><input type="text" /></td>
+									</tr>
+									<tr>
+										<td>Land</td>
+										<td colspan="2"><input type="text" /></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+
+					</table>
+
+					<br />
+
+					<button ng-click="Cancel()">Verwerfen</button>
+					<button ng-click="Safe()"> Speichern </button>
+
+				</div>
+			</div>
+	
+		</div>
 	
 	
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
+		<div class="footer">
+			<div class="container">
+				<p><span class="glyphicon glyphicon-heart"></span>From the E-Cruise Team</p>
+			</div>
+		</div>
 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+		<script>
+			!function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+				(A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+				r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+			}(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+			ga('create', 'UA-XXXXX-X');
+			ga('send', 'pageview');
+		</script>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+		<!-- build:js(.) scripts/vendor.js -->
+		<!-- bower:js -->
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.js"></script>
+		<script src="bower_components/angular-aria/angular-aria.js"></script>
+		<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+		<script src="bower_components/angular-messages/angular-messages.js"></script>
+		<script src="bower_components/angular-resource/angular-resource.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="bower_components/angular-touch/angular-touch.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<!-- endbower -->
+		<!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <!-- endbuild -->
-</body>
+		<!-- build:js({.tmp,app}) scripts/scripts.js -->
+		<script src="scripts/app.js"></script>
+		<script src="scripts/controllers/main.js"></script>
+		<script src="scripts/controllers/about.js"></script>
+		<!-- endbuild -->
+	</body>
 </html>
