@@ -17,7 +17,10 @@ angular.module('webApp')
   });
 
 
-var application = angular.module('webApp', ['ngAnimate']);
+var application = angular.module('webApp', [
+	'ngAnimate',
+	'ngMaterial'
+]);
 
 application.controller('Ctrl_Main', function ($rootScope, $scope) {
 
