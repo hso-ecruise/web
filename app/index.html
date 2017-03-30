@@ -220,10 +220,21 @@
 					</table>
 
 					<br />
-
+					
 					<button ng-click="Cancel()">Verwerfen</button>
 					<button ng-click="Safe()"> Speichern </button>
-
+					<br>
+					<div class="btn-group">
+					<label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Left'" uncheckable>Left</label>
+					<label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Middle'" uncheckable>Middle</label>
+					<label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="uncheckable">Right</label>
+					</div>
+					
+					<br>
+					<md-container>
+					<md-button class="md-raised md-warn" ng-click="Cancel()"> Verwerfen </md-button>
+					<md-button class="md-raised md-primary" ng-click="Safe()"> Speichern </md-button>
+					</md-container>
 				</div>
 			</div>
 	
