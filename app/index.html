@@ -93,54 +93,137 @@
 
 			<div ng-switch-when="manage">
 
-				<div ng-controller="Ctrl_Booking">
+				<div ng-controller="Ctrl_Manage">
 
 					<table>
+
+						<thead>
+							<tr>
+								<td>
+									<md-toolbar class="md-hue-2">
+										<div class="md-toolbar-tools">
+											<h2 class="md-flex">Ausstehende Fahrten</h2>
+										</div>
+									</md-toolbar>
+								</td>
+								<td>
+									<b style="margin-left: 25px;"></b>
+								</td>
+								<td>
+									<md-toolbar class="md-hue-2">
+										<div class="md-toolbar-tools">
+											<h2 class="md-flex">Abgeschlossene Fahrten</h2>
+										</div>
+									</md-toolbar>
+								</td>
+								<td>
+									<b style="margin-left: 25px;"></b>
+								</td>
+								<td>
+									<md-toolbar class="md-hue-2">
+										<div class="md-toolbar-tools">
+											<h2 class="md-flex">Rechnung</h2>
+										</div>
+									</md-toolbar>
+								</td>
+							</tr>
+						</thead>
+
+
 						<tr>
 							<td>
-
-								<table>
-									<thead>
-										<tr>
-											<td>Ausstehende Fahrten</td>
-										</tr>
-									</thead>
-
-									<tbody>
-										<tr ng-repeat="booking in bookings track by $index">
-											<td>
-												<div>
-													<b>{{ booking.date }}</b>
-													<p>{{ booking.startTime }}</p>
-													<p>{{ booking.startPlace }}</p>
-
-													<div ng-switch on="{{ booking.state }}">
-
-														<button ng-switch-when="true">Auf Karte anzeigen</button>
-
-													</div>
-
-												</div>
-											</td>
-										</tr>
-									</tbody>
+								<table style="width: 300px;">
 									
+									<tr ng-repeat="booking in bookings track by $index">
+										<td  ng-switch on="{{ booking.state }}">
+
+											<md-content flex layout-padding class="md-block">	
+									
+												<label> Datum:  {{ booking.date }} </label>
+												<br />
+												<label> Fahrtbeginn:  {{ booking.startTime }} </label>
+												<br />
+												<label> Startort:  {{ booking.startPlace }} </label>
+									
+												<label  ng-switch-when="true">
+													<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
+
+												</label>
+
+											</md-content>
+
+											<br />
+
+										</td>
+									</tr>
+						
+								</table>
+							</td>
+							<td></td>
+							<td>
+								<table style="width: 300px;">
+
+
+									<tr ng-repeat="booking in finishedBookings track by $index">
+										<td  ng-switch on="{{ booking.state }}">
+
+											<md-content flex layout-padding class="md-block">	
+									
+												<label> Datum:  {{ booking.date }} </label>
+												<br />
+												<label> Fahrtbeginn:  {{ booking.startTime }} </label>
+												<label> {{ booking.startPlace }} </label>
+												<br />
+												<label> Fahrtende:  {{ booking.endTime }} </label>
+												<label> {{ booking.endPlace }} </label>
+												<br />
+												<md-button class="md-raised md-primary" ng-click="ShowBilling($index)">Rechnung anzeigen</md-button>
+
+
+											</md-content>
+
+											<br />
+
+										</td>
+									</tr>
+						
+								</table>
+							</td>
+							<td></td>
+							<td>
+
+								<table style="width: 300px;">
+									
+									<tr>
+										<td>
+											<md-content flex layout-padding class="md-block">	
+									
+												<label> Datum:  {{ currentBooking.date }} </label>
+												<br />
+												<label> Fahrtbeginn:  {{ currentBooking.startTime }} </label>
+												<label> Startpunkt:  {{ currentBooking.startPlace }} </label>
+												<br />
+												<label> Fahrtende:  {{ currentBooking.endTime }} </label>
+												<label> Endpunkt:  {{ currentBooking.endPlace }} </label>
+												<br />
+												<label> Preis: {{ currentBooking.billing }}</label>
+												<label> Rechnung: {{ currentBooking.payed }}</label>
+
+											</md-content>
+										</td>
+									</tr>
+						
 								</table>
 
 							</td>
-							
-							
-							<td>
 
-
-
-							</td>
-
-
-							<td>
-							</td>
 						</tr>
 					</table>
+
+
+					
+
+							
 
 				</div>
 
@@ -167,52 +250,54 @@
 					
 						<md-input-container>
 							<label>Vorname</label>
-							<input ng-model="user.name" placeholder="Max">
+							<input ng-model="user.name" placeholder="Max"/>
 						</md-input-container>
 					  
 						<md-input-container>
 							<label>Nachname</label>
-							<input ng-model="user.vorname" placeholder="Mustermann">
+							<input ng-model="user.familyName" placeholder="Mustermann"/>
 						</md-input-container>
 					</md-content>
 					  
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Email</label>
-							<input ng-model="user.email" type="email" >
+							<input ng-model="user.email" type="email" />
 						</md-input-container>
 						<md-input-container>
 							<label>Telefon</label>
-							<input ng-model="user.phone">
+							<input ng-model="user.phone"/>
 						</md-input-container>
 					</md-content>
 					
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Strasse</label>
-							<input ng-model="strasse" >
+							<input ng-model="user.address.street" />
 						</md-input-container>
 						<md-input-container>
 							<label>Hausnummer</label>
-							<input ng-model="number" >
+							<input ng-model="user.address.number" />
 						</md-input-container>
 					</md-content>
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Land</label>
-							<input ng-model="land" >
+							<input ng-model="user.address.country" />
 						</md-input-container>
 						<md-input-container>
 							<label>PLZ</label>
-							<input ng-model="plz" >
+							<input ng-model="user.address.zip" />
 						</md-input-container>
-					</md-content>	
+					</md-content>
+					<!--TODO-->
 					<md-content flex layout-padding>
 						<md-input-container>
 							<label>Stadt</label>
-							<md-select ng-model="user.state">
-							  <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-								{{state.abbrev}}
+							<input ng-model="user.address.city" />
+							<md-select ng-model="user.address.state">
+							  <md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
+								{{user.address.state.abbrev}}
 							  </md-option>
 							</md-select>
 						</md-input-container>
@@ -268,7 +353,7 @@
 		<script src="scripts/app.js"></script>
 		<script src="scripts/controllers/main.js"></script>
 		<script src="scripts/controllers/about.js"></script>
-		<script src="scripts/design.js"></script>
+		<script src="scripts/controllers/design.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>

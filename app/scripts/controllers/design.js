@@ -1,6 +1,6 @@
 'use strict';
 
-var application = angular.module('webApp', ['ngMaterial', 'ngMessages']);
+var application = angular.module('MyApp', ['ngMaterial', 'ngMessages']);
 
 application.controller('Ctrl_Profile', function ($scope) {
 	$scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +

@@ -1,5 +1,12 @@
 'use strict';
 
+
+
+
+
+
+
+
 /**
  * @ngdoc function
  * @name webApp.controller:MainCtrl
@@ -7,20 +14,30 @@
  * # MainCtrl
  * Controller of the webApp
  */
-angular.module('webApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
-
 
 var application = angular.module('webApp', [
 	'ngAnimate',
 	'ngMaterial'
 ]);
+
+application.controller('Ctrl_Login', function ($rootScope, $scope) {
+
+	$scope.loggedIn = "false";
+
+	$scope.LogIn = function(){
+		
+		var email = $scope.login.email;
+		var password = $scope.login.password;
+		
+		if (email === "test" && password === "test") {
+			$scope.loggedIn = "true";
+		}
+
+		console.log(email + "  " + password);
+
+	}
+
+});
 
 application.controller('Ctrl_Main', function ($rootScope, $scope) {
 
@@ -54,16 +71,18 @@ application.controller('Ctrl_Main', function ($rootScope, $scope) {
 });
 
 
-application.controller('Ctrl_Booking', function ($rootScope, $scope) {
+application.controller('Ctrl_Manage', function ($rootScope, $scope) {
 
 	var bookings = [];
+	var finishedBookings = [];
 
-	for (var i = 0; i < 5; i++) {
+	for (var i = 0; i < 3; i++) {
 		var booking = new Object();
 		booking.date = "01.01.2017";
-		booking.startTime = "10:00";
-		booking.startPlace = "Hauptstraße 1";
-		if (i % 2 === 0) {
+		booking.startTime = "1" + i + ":00";
+		booking.startPlace = "Hauptstrasse 1";
+		if (i === 0) {
+			console.log("WRITE");
 			booking.state = "true";
 		} else {
 			booking.state = "false";
@@ -72,18 +91,55 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 		bookings.push(booking);
 	}
 
+	for (var i = 0; i < 3; i++) {
+		var booking = {
+			date: "01.01.2017",
+			startTime: "1" + i + ":00",
+			startPlace: "Hauptstrasse 1",
+			endTime: "1" + (i + 1) + ":00",
+			endPlace: "Hauptstrasse 2",
+			billing: "Preis: " + (i+1) + "00 Euro",
+			payed: "Bezahlt"
+		}
+
+		if (i % 2 !== 0)
+			booking.payed = "Nicht bezahlt";
+
+		finishedBookings.push(booking);
+	}
+
+
 	$scope.bookings = bookings;
+	$scope.finishedBookings = finishedBookings;
+	$scope.currentBooking = finishedBookings[0];
+
+	$scope.ShowBilling = function (index) {
+		console.log(index + "   " + finishedBookings[index].billing);
+		$scope.currentBooking = finishedBookings[index];
+	}
 
 });
 
 
 application.controller('Ctrl_Profile', function ($rootScope, $scope) {
 
-	$scope.userID = "12345";
-	$scope.name = "Max";
-	$scope.familyName = "Mustermann";
-	$scope.email = "max.mustermann@gmail.com";
-	$scope.phoneNr = 12354356;
+	//Dummy replaced by get call to backend
+	var user = {
+		userID : "12345",
+		name : "Max",
+		familyName: "Mustermann",
+		email : "max.mustermann@gmail.com",
+		phone : 12354356,
+		address : {
+			street : "Musterstrasse",
+			number : 123,
+			country : "Germany",
+			zip: 234234,
+			city: "Musterstadt"
+		}
+	}
+
+	$scope.user = user;
 
 	$scope.Safe = function () {
 
