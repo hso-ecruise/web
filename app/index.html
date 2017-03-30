@@ -21,7 +21,7 @@
 
 
 
-	<body ng-app="webApp" ng-controller="Ctrl_Main">
+	<body ng-app="webApp" ng-controller="Ctrl_Main" ng-cloak>
 		<!--[if lte IE 8]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
@@ -138,12 +138,6 @@
 
 
 							<td>
-
-								<div>
-									
-								</div>
-
-
 							</td>
 						</tr>
 					</table>
@@ -156,7 +150,7 @@
 
 
 
-			<div ng-switch-when="profile">
+			<div ng-switch-when="profile" class="content">
 
 				<div ng-controller="Ctrl_Profile" layout="column" ng-cloak class="md-inline-form">
 
@@ -165,68 +159,69 @@
 							<h2 class="md-flex">Pers&ouml;nliche Daten</h2>
 						</div>
 					</md-toolbar>
-					<md-content flex layout-padding>					
+					<md-content flex layout-padding class="">					
 						<md-input-container class="md-block" flex-gt-xs>
-							<label> User-ID:  {{ userID }} </label>
+							<label> Ihre Kundennummer:  {{ userID }} </label>
 							<input disabled>
 						</md-input-container>			
 					
 						<md-input-container>
 							<label>Vorname</label>
-							<input ng-model="name">
+							<input ng-model="user.name" placeholder="Max">
 						</md-input-container>
 					  
 						<md-input-container>
 							<label>Nachname</label>
-							<input ng-model="familyName">
+							<input ng-model="user.vorname" placeholder="Mustermann">
 						</md-input-container>
 					</md-content>
 					  
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Email</label>
-							<input ng-model="email" type="email">
+							<input ng-model="user.email" type="email" >
 						</md-input-container>
 						<md-input-container>
 							<label>Telefon</label>
-							<input ng-model="phoneNr" type="phoneNr">
+							<input ng-model="user.phone">
 						</md-input-container>
 					</md-content>
 					
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Strasse</label>
-							<input ng-model="strasse">
+							<input ng-model="strasse" >
 						</md-input-container>
 						<md-input-container>
 							<label>Hausnummer</label>
-							<input ng-model="number">
+							<input ng-model="number" >
 						</md-input-container>
 					</md-content>
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Land</label>
-							<input ng-model="land">
+							<input ng-model="land" >
 						</md-input-container>
 						<md-input-container>
 							<label>PLZ</label>
-							<input ng-model="plz">
-						</md-input-container>
-						<md-input-container>
-							<label>Stadt</label>
-							<input ng-model="stadt">
+							<input ng-model="plz" >
 						</md-input-container>
 					</md-content>	
-					<md-content flex layout-padding>		
+					<md-content flex layout-padding>
+						<md-input-container>
+							<label>Stadt</label>
+							<md-select ng-model="user.state">
+							  <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+								{{state.abbrev}}
+							  </md-option>
+							</md-select>
+						</md-input-container>
+					</md-content>	
+					<md-content flex layout-padding>
 					<md-button class="md-raised md-warn" ng-click="Cancel()"> Verwerfen </md-button>
 					<md-button class="md-raised md-primary" ng-click="Safe()"> Speichern </md-button>
 					</md-content>
 					
-					
-					
-
-
-
 				</div>
 			</div>
 	
@@ -273,6 +268,7 @@
 		<script src="scripts/app.js"></script>
 		<script src="scripts/controllers/main.js"></script>
 		<script src="scripts/controllers/about.js"></script>
+		<script src="scripts/design.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>

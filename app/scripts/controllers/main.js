@@ -58,7 +58,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 
 	var bookings = [];
 
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 5; i++) {
 		var booking = new Object();
 		booking.date = "01.01.2017";
 		booking.startTime = "10:00";
