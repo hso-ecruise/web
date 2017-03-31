@@ -70,25 +70,31 @@
 		
 		<div class="container" ng-switch on="currentView">
 
-			<div ng-switch-when="booking">
+			<div ng-controller="Ctrl_Booking">
 
-				<div id="map" class="map"></div>
+				<div ng-switch-when="booking">
 
-				<script>
-					var map;
-					function initMap() {
-						map = new google.maps.Map(document.getElementById('map'), {
-							center: {lat: 49.48, lng: 8.47},
-							zoom: 14
-						});
-					}
-				</script>
+					<div id="map" class="map"></div>
 
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap" async defer>
-				</script>
+					<script>
+						/*
+						var map;
+						function initMap() {
+							map = new google.maps.Map(document.getElementById('map'), {
+								center: {lat: 49.48, lng: 8.47},
+								zoom: 14
+							});
+						}
+						*/
+					</script>
+
+					<!--
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap" async defer>
+					</script>
+					-->
+				</div>
 
 			</div>
-
 
 
 			<div ng-switch-when="manage">
@@ -295,11 +301,13 @@
 						<md-input-container>
 							<label>Stadt</label>
 							<input ng-model="user.address.city" />
+						<!--
 							<md-select ng-model="user.address.state">
 							  <md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
 								{{user.address.state.abbrev}}
 							  </md-option>
 							</md-select>
+						-->
 						</md-input-container>
 					</md-content>	
 					<md-content flex layout-padding>
@@ -321,6 +329,7 @@
 
 
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+		
 		<script>
 			!function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
 				(A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
@@ -330,6 +339,8 @@
 			ga('create', 'UA-XXXXX-X');
 			ga('send', 'pageview');
 		</script>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o" async defer></script>
 
 		<!-- build:js(.) scripts/vendor.js -->
 		<!-- bower:js -->

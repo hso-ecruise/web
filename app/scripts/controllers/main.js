@@ -71,6 +71,22 @@ application.controller('Ctrl_Main', function ($rootScope, $scope) {
 });
 
 
+application.controller('Ctrl_Booking', function ($rootScope, $scope) {
+
+	$scope.initialize = function () {
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center: { lat: -34.397, lng: 150.644 },
+			zoom: 8
+		});
+	}
+
+	google.maps.event.addDomListener(window, 'load', $scope.initialize);
+
+
+});
+
+
+
 application.controller('Ctrl_Manage', function ($rootScope, $scope) {
 
 	var bookings = [];
