@@ -20,26 +20,71 @@ var application = angular.module('webApp', [
 	'ngMaterial'
 ]);
 
-application.controller('Ctrl_Login', function ($rootScope, $scope) {
+application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
 
-	$scope.loggedIn = "false";
+	$scope.login_register = 'login';
+	$rootScope.loggedIN = "false";
+	
+	$scope.Login = function () {
 
-	$scope.LogIn = function(){
-		
 		var email = $scope.login.email;
 		var password = $scope.login.password;
-		
+
 		if (email === "test" && password === "test") {
-			$scope.loggedIn = "true";
+			$rootScope.loggedIN = "true";
 		}
 
-		console.log(email + "  " + password);
+	};
+	
+	$scope.Register = function () {
 
-	}
+		/*
+		var password = $scope.register.password;
+		var password_confirm = $scope.register.password_confirm;
+
+		if (password === password_confirm) {
+
+			var name = $scope.register.name;
+			console.log(name);
+
+			var newUser = {
+
+				name: $scope.register.name,
+				familyName: $scope.register.familyName,
+				email: $scope.register.email,
+				phone: $scope.register.phone,
+				address: {
+					street: $scope.register.address.street,
+					number: $scope.register.address.number,
+					country: $scope.register.address.country,
+					zip: $scope.register.address.zip,
+					city: $scope.register.address.city
+				}
+
+			}
+
+			console.log(newUser);
+
+			$rootScope.user = newUser;
+			$rootScope.loggedIN = "true";
+
+		}
+		*/
+	};
+
+	$scope.ChangeView = function (state) {
+		if (state === 'login') {
+			$scope.login_register = "login";
+		} else {
+			$scope.login_register = "register";
+		}
+	};
 
 });
 
 application.controller('Ctrl_Main', function ($rootScope, $scope) {
+
+	$rootScope.loggedIN = "false";
 
 	$scope.bookingActive = "active";
 	$scope.manageActive = "inactive";
@@ -84,7 +129,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 
 
 });
-
 
 
 application.controller('Ctrl_Manage', function ($rootScope, $scope) {
@@ -155,7 +199,11 @@ application.controller('Ctrl_Profile', function ($rootScope, $scope) {
 		}
 	}
 
-	$scope.user = user;
+	if ($rootScope.user === null) {
+		$scope.user = user;
+	} else {
+		$scope.user = $rootScope.user;
+	}
 
 	$scope.Safe = function () {
 

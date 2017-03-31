@@ -21,7 +21,7 @@
 
 
 
-	<body ng-app="webApp" ng-controller="Ctrl_Main" ng-cloak>
+	<body ng-app="webApp" ng-controller="Ctrl_Main" ng-cloak ng-switch on="loggedIN">
 		<!--[if lte IE 8]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
@@ -57,267 +57,374 @@
 		</div>
 		
 		<!-- Add your site or application content here -->
-		
-		<div class="header navbar" layout-align="center" layout="row">
-		  <md-content class="md-padding" >
-			<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links" layout-align="center center">
-			  <md-nav-item md-nav-click="ChangeView('booking')" name="booking">Buchen</md-nav-item >
-			  <md-nav-item md-nav-click="ChangeView('manage')"  name="manage" >Buchungen verwalten</md-nav-item>
-			  <md-nav-item md-nav-click="ChangeView('profile')" name="profile" >Profil bearbeiten</md-nav-item>
-			</md-nav-bar>
-		  </md-content>
-		</div>
-		
-		<div class="container" ng-switch on="currentView">
 
-			<div ng-controller="Ctrl_Booking">
+		<div ng-switch-when="false">
 
-				<div ng-switch-when="booking">
-
-					<div id="map" class="map"></div>
-
-					<script>
-						/*
-						var map;
-						function initMap() {
-							map = new google.maps.Map(document.getElementById('map'), {
-								center: {lat: 49.48, lng: 8.47},
-								zoom: 14
-							});
-						}
-						*/
-					</script>
-
-					<!--
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap" async defer>
-					</script>
-					-->
+			<div ng-controller="Ctrl_Login_Register">
+			
+				<div class="header navbar" layout-align="center" layout="row">
+					<md-content class="md-padding" >
+						<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links" layout-align="center center">
+							<md-nav-item md-nav-click="ChangeView('login')"  name="manage" >Login</md-nav-item>
+							<md-nav-item md-nav-click="ChangeView('register')" name="profile" >Registrieren</md-nav-item>
+						</md-nav-bar>
+					</md-content>
 				</div>
 
-			</div>
-
-
-			<div ng-switch-when="manage">
-
-				<div ng-controller="Ctrl_Manage">
-
-					<table>
-
-						<thead>
-							<tr>
-								<td>
-									<md-toolbar class="md-hue-2">
-										<div class="md-toolbar-tools">
-											<h2 class="md-flex">Ausstehende Fahrten</h2>
-										</div>
-									</md-toolbar>
-								</td>
-								<td>
-									<b style="margin-left: 25px;"></b>
-								</td>
-								<td>
-									<md-toolbar class="md-hue-2">
-										<div class="md-toolbar-tools">
-											<h2 class="md-flex">Abgeschlossene Fahrten</h2>
-										</div>
-									</md-toolbar>
-								</td>
-								<td>
-									<b style="margin-left: 25px;"></b>
-								</td>
-								<td>
-									<md-toolbar class="md-hue-2">
-										<div class="md-toolbar-tools">
-											<h2 class="md-flex">Rechnung</h2>
-										</div>
-									</md-toolbar>
-								</td>
-							</tr>
-						</thead>
-
-
-						<tr>
-							<td>
-								<table style="width: 300px;">
-									
-									<tr ng-repeat="booking in bookings track by $index">
-										<td  ng-switch on="{{ booking.state }}">
-
-											<md-content flex layout-padding class="md-block">	
-									
-												<label> Datum:  {{ booking.date }} </label>
-												<br />
-												<label> Fahrtbeginn:  {{ booking.startTime }} </label>
-												<br />
-												<label> Startort:  {{ booking.startPlace }} </label>
-									
-												<label  ng-switch-when="true">
-													<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
-
-												</label>
-
-											</md-content>
-
-											<br />
-
-										</td>
-									</tr>
-						
-								</table>
-							</td>
-							<td></td>
-							<td>
-								<table style="width: 300px;">
-
-
-									<tr ng-repeat="booking in finishedBookings track by $index">
-										<td  ng-switch on="{{ booking.state }}">
-
-											<md-content flex layout-padding class="md-block">	
-									
-												<label> Datum:  {{ booking.date }} </label>
-												<br />
-												<label> Fahrtbeginn:  {{ booking.startTime }} </label>
-												<label> {{ booking.startPlace }} </label>
-												<br />
-												<label> Fahrtende:  {{ booking.endTime }} </label>
-												<label> {{ booking.endPlace }} </label>
-												<br />
-												<md-button class="md-raised md-primary" ng-click="ShowBilling($index)">Rechnung anzeigen</md-button>
-
-
-											</md-content>
-
-											<br />
-
-										</td>
-									</tr>
-						
-								</table>
-							</td>
-							<td></td>
-							<td>
-
-								<table style="width: 300px;">
-									
-									<tr>
-										<td>
-											<md-content flex layout-padding class="md-block">	
-									
-												<label> Datum:  {{ currentBooking.date }} </label>
-												<br />
-												<label> Fahrtbeginn:  {{ currentBooking.startTime }} </label>
-												<label> Startpunkt:  {{ currentBooking.startPlace }} </label>
-												<br />
-												<label> Fahrtende:  {{ currentBooking.endTime }} </label>
-												<label> Endpunkt:  {{ currentBooking.endPlace }} </label>
-												<br />
-												<label> Preis: {{ currentBooking.billing }}</label>
-												<label> Rechnung: {{ currentBooking.payed }}</label>
-
-											</md-content>
-										</td>
-									</tr>
-						
-								</table>
-
-							</td>
-
-						</tr>
-					</table>
-
-
+					<md-content flex layout-padding>	
+						<md-input-container>
+							<label>E-Mail:</label>
+							<input ng-model="login.email" />
+						</md-input-container>
+						<md-input-container>
+							<label>Passwort:</label>
+							<input type="password" ng-model="login.password" />
+						</md-input-container>
+				
+					</md-content>
+				
+					<md-content flex layout-padding>
+						<md-button class="md-raised md-primary" ng-click="Login()"> Login </md-button>
+					</md-content>
+				</div>
+				<!--
+				<div ng-switch-when="register">
 					
-
-							
-
-				</div>
-
-
-
-			</div>
-
-
-
-			<div ng-switch-when="profile" class="content">
-
-				<div ng-controller="Ctrl_Profile" layout="column" ng-cloak class="md-inline-form">
-
-					<md-toolbar class="md-hue-2">
-						<div class="md-toolbar-tools">
-							<h2 class="md-flex">Pers&ouml;nliche Daten</h2>
-						</div>
-					</md-toolbar>
-					<md-content flex layout-padding class="">					
-						<md-input-container class="md-block" flex-gt-xs>
-							<label> Ihre Kundennummer:  {{ userID }} </label>
-							<input disabled>
-						</md-input-container>			
+					<md-content flex layout-padding class="">							
 					
 						<md-input-container>
 							<label>Vorname</label>
-							<input ng-model="user.name" placeholder="Max"/>
+							<input ng-model="register.name"/>
 						</md-input-container>
-					  
+					
 						<md-input-container>
 							<label>Nachname</label>
-							<input ng-model="user.familyName" placeholder="Mustermann"/>
+							<input ng-model="register.familyName"/>
 						</md-input-container>
 					</md-content>
-					  
+
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Email</label>
-							<input ng-model="user.email" type="email" />
+							<input ng-model="register.email" type="email" />
 						</md-input-container>
 						<md-input-container>
 							<label>Telefon</label>
-							<input ng-model="user.phone"/>
+							<input type="number" ng-model="register.phone"/>
 						</md-input-container>
 					</md-content>
 					
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Strasse</label>
-							<input ng-model="user.address.street" />
+							<input ng-model="register.address.street" />
 						</md-input-container>
 						<md-input-container>
 							<label>Hausnummer</label>
-							<input ng-model="user.address.number" />
+							<input ng-model="register.address.number" />
 						</md-input-container>
 					</md-content>
+
 					<md-content flex layout-padding>	
 						<md-input-container>
 							<label>Land</label>
-							<input ng-model="user.address.country" />
+							<input ng-model="register.address.country" />
 						</md-input-container>
 						<md-input-container>
 							<label>PLZ</label>
-							<input ng-model="user.address.zip" />
+							<input ng-model="register.address.zip" />
 						</md-input-container>
 					</md-content>
-					<!--TODO-->
+					
 					<md-content flex layout-padding>
 						<md-input-container>
 							<label>Stadt</label>
-							<input ng-model="user.address.city" />
-						<!--
-							<md-select ng-model="user.address.state">
-							  <md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
-								{{user.address.state.abbrev}}
-							  </md-option>
-							</md-select>
-						-->
+							<input ng-model="register.address.city" />
 						</md-input-container>
-					</md-content>	
-					<md-content flex layout-padding>
-					<md-button class="md-raised md-warn" ng-click="Cancel()"> Verwerfen </md-button>
-					<md-button class="md-raised md-primary" ng-click="Safe()"> Speichern </md-button>
 					</md-content>
 					
+					<md-content flex layout-padding>	
+						<md-input-container>
+							<label>Passwort</label>
+							<input type="password" ng-model="register.password" />
+						</md-input-container>
+						<md-input-container>
+							<label>Passwort best&auml;tigen</label>
+							<input type="password" ng-model="register.password_confirm" />
+						</md-input-container>
+					</md-content>
+
+
+					<md-content flex layout-padding>
+						<md-button class="md-raised md-primary" ng-click="Register()"> Register </md-button>
+					</md-content>
+
+				</div>
+				-->
+
+		</div>
+
+		<div ng-switch-when="true">
+
+			<div class="header navbar" layout-align="center" layout="row">
+			  <md-content class="md-padding" >
+				<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links" layout-align="center center">
+				  <md-nav-item md-nav-click="ChangeView('booking')" name="booking">Buchen</md-nav-item >
+				  <md-nav-item md-nav-click="ChangeView('manage')"  name="manage" >Buchungen verwalten</md-nav-item>
+				  <md-nav-item md-nav-click="ChangeView('profile')" name="profile" >Profil bearbeiten</md-nav-item>
+				</md-nav-bar>
+			  </md-content>
+			</div>
+		
+			<div class="container" ng-switch on="currentView">
+
+				<div ng-switch-when="booking">
+				
+					<div ng-controller="Ctrl_Booking">
+
+						<div id="map" class="map"></div>
+
+						<script>
+							/*
+							var map;
+							function initMap() {
+								map = new google.maps.Map(document.getElementById('map'), {
+									center: {lat: 49.48, lng: 8.47},
+									zoom: 14
+								});
+							}
+							*/
+						</script>
+
+						<!--
+						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap" async defer>
+						</script>
+						-->
+					</div>
+
+				</div>
+
+
+				<div ng-switch-when="manage">
+
+					<div ng-controller="Ctrl_Manage">
+
+						<table>
+
+							<thead>
+								<tr>
+									<td>
+										<md-toolbar class="md-hue-2">
+											<div class="md-toolbar-tools">
+												<h2 class="md-flex">Ausstehende Fahrten</h2>
+											</div>
+										</md-toolbar>
+									</td>
+									<td>
+										<b style="margin-left: 25px;"></b>
+									</td>
+									<td>
+										<md-toolbar class="md-hue-2">
+											<div class="md-toolbar-tools">
+												<h2 class="md-flex">Abgeschlossene Fahrten</h2>
+											</div>
+										</md-toolbar>
+									</td>
+									<td>
+										<b style="margin-left: 25px;"></b>
+									</td>
+									<td>
+										<md-toolbar class="md-hue-2">
+											<div class="md-toolbar-tools">
+												<h2 class="md-flex">Rechnung</h2>
+											</div>
+										</md-toolbar>
+									</td>
+								</tr>
+							</thead>
+
+
+							<tr>
+								<td>
+									<table style="width: 300px;">
+									
+										<tr ng-repeat="booking in bookings track by $index">
+											<td  ng-switch on="{{ booking.state }}">
+
+												<md-content flex layout-padding class="md-block">	
+									
+													<label> Datum:  {{ booking.date }} </label>
+													<br />
+													<label> Fahrtbeginn:  {{ booking.startTime }} </label>
+													<br />
+													<label> Startort:  {{ booking.startPlace }} </label>
+									
+													<label  ng-switch-when="true">
+														<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
+
+													</label>
+
+												</md-content>
+
+												<br />
+
+											</td>
+										</tr>
+						
+									</table>
+								</td>
+								<td></td>
+								<td>
+									<table style="width: 300px;">
+
+
+										<tr ng-repeat="booking in finishedBookings track by $index">
+											<td  ng-switch on="{{ booking.state }}">
+
+												<md-content flex layout-padding class="md-block">	
+									
+													<label> Datum:  {{ booking.date }} </label>
+													<br />
+													<label> Fahrtbeginn:  {{ booking.startTime }} </label>
+													<label> {{ booking.startPlace }} </label>
+													<br />
+													<label> Fahrtende:  {{ booking.endTime }} </label>
+													<label> {{ booking.endPlace }} </label>
+													<br />
+													<md-button class="md-raised md-primary" ng-click="ShowBilling($index)">Rechnung anzeigen</md-button>
+
+
+												</md-content>
+
+												<br />
+
+											</td>
+										</tr>
+						
+									</table>
+								</td>
+								<td></td>
+								<td>
+
+									<table style="width: 300px;">
+									
+										<tr>
+											<td>
+												<md-content flex layout-padding class="md-block">	
+									
+													<label> Datum:  {{ currentBooking.date }} </label>
+													<br />
+													<label> Fahrtbeginn:  {{ currentBooking.startTime }} </label>
+													<label> Startpunkt:  {{ currentBooking.startPlace }} </label>
+													<br />
+													<label> Fahrtende:  {{ currentBooking.endTime }} </label>
+													<label> Endpunkt:  {{ currentBooking.endPlace }} </label>
+													<br />
+													<label> Preis: {{ currentBooking.billing }}</label>
+													<label> Rechnung: {{ currentBooking.payed }}</label>
+
+												</md-content>
+											</td>
+										</tr>
+						
+									</table>
+
+								</td>
+
+							</tr>
+						</table>
+
+
+					
+
+							
+
+					</div>
+
+
+
+				</div>
+
+
+				<div ng-switch-when="profile" class="content">
+
+					<div ng-controller="Ctrl_Profile" layout="column" ng-cloak class="md-inline-form">
+
+						<md-toolbar class="md-hue-2">
+							<div class="md-toolbar-tools">
+								<h2 class="md-flex">Pers&ouml;nliche Daten</h2>
+							</div>
+						</md-toolbar>
+						<md-content flex layout-padding class="">					
+							<md-input-container class="md-block" flex-gt-xs>
+								<label> Ihre Kundennummer:  {{ userID }} </label>
+								<input disabled>
+							</md-input-container>			
+					
+							<md-input-container>
+								<label>Vorname</label>
+								<input ng-model="user.name" placeholder="Max"/>
+							</md-input-container>
+					  
+							<md-input-container>
+								<label>Nachname</label>
+								<input ng-model="user.familyName" placeholder="Mustermann"/>
+							</md-input-container>
+						</md-content>
+					  
+						<md-content flex layout-padding>	
+							<md-input-container>
+								<label>Email</label>
+								<input ng-model="user.email" type="email" />
+							</md-input-container>
+							<md-input-container>
+								<label>Telefon</label>
+								<input ng-model="user.phone"/>
+							</md-input-container>
+						</md-content>
+					
+						<md-content flex layout-padding>	
+							<md-input-container>
+								<label>Strasse</label>
+								<input ng-model="user.address.street" />
+							</md-input-container>
+							<md-input-container>
+								<label>Hausnummer</label>
+								<input ng-model="user.address.number" />
+							</md-input-container>
+						</md-content>
+						<md-content flex layout-padding>	
+							<md-input-container>
+								<label>Land</label>
+								<input ng-model="user.address.country" />
+							</md-input-container>
+							<md-input-container>
+								<label>PLZ</label>
+								<input ng-model="user.address.zip" />
+							</md-input-container>
+						</md-content>
+						<!--TODO-->
+						<md-content flex layout-padding>
+							<md-input-container>
+								<label>Stadt</label>
+								<input ng-model="user.address.city" />
+							<!--
+								<md-select ng-model="user.address.state">
+								  <md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
+									{{user.address.state.abbrev}}
+								  </md-option>
+								</md-select>
+							-->
+							</md-input-container>
+						</md-content>	
+						<md-content flex layout-padding>
+						<md-button class="md-raised md-warn" ng-click="Cancel()"> Verwerfen </md-button>
+						<md-button class="md-raised md-primary" ng-click="Safe()"> Speichern </md-button>
+						</md-content>
+					
+					</div>
 				</div>
 			</div>
-	
 		</div>
 	
 	
