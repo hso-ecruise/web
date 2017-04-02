@@ -1,6 +1,23 @@
 'use strict';
 
 
+const IP = 'localhost';
+const PORT = '8080';
+
+const CUSTOMER = "customers";
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -19,6 +36,74 @@ var application = angular.module('webApp', [
 	'ngAnimate',
 	'ngMaterial'
 ]);
+
+
+
+
+
+
+
+
+
+application.service('GetCaller', function ($http) {
+
+	this.Get = function (url) {
+		return $http.get(url);
+	};
+
+});
+
+application.service('PostCaller', function ($http) {
+
+	this.Post = function (url, state) {
+		var post = $http({
+			method: "post",
+			url: url,
+			data: state
+		});
+		return post;
+	};
+
+});
+
+application.service('PostReset', function ($http) {
+
+	this.PostReset = function (url) {
+		var post = $http({
+			method: "post",
+			url: url,
+			data: [""]
+		});
+		return post;
+	};
+
+});
+
+
+application.factory('RESTFactory', function ($http, GetCaller, PostCaller, PostReset) {
+
+	return {
+		GetUser: function (id) {
+			var url = 'http://' + IP + ':' + PORT + '/' + CUSTOMER + "?userID=" + id;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		}
+
+	};
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
 
@@ -123,7 +208,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 			center: { lat: -34.397, lng: 150.644 },
 			zoom: 8
 		});
-	}
+	};
 
 	google.maps.event.addDomListener(window, 'load', $scope.initialize);
 
@@ -158,9 +243,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope) {
 			startPlace: "Hauptstrasse 1",
 			endTime: "1" + (i + 1) + ":00",
 			endPlace: "Hauptstrasse 2",
-			billing: "Preis: " + (i+1) + "00 Euro",
+			billing: "Preis: " + (i + 1) + "00 Euro",
 			payed: "Bezahlt"
-		}
+		};
 
 		if (i % 2 !== 0)
 			booking.payed = "Nicht bezahlt";
@@ -181,7 +266,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope) {
 });
 
 
-application.controller('Ctrl_Profile', function ($rootScope, $scope) {
+application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope) {
 
 	//Dummy replaced by get call to backend
 	var user = {
@@ -199,13 +284,21 @@ application.controller('Ctrl_Profile', function ($rootScope, $scope) {
 		}
 	}
 
+	RESTFactory.GetUser(0).then(function (responseData) {
+		$scope.user = responseData.data[0];
+		console.log(responseData.data);
+	}, function (response) {
+		console.log(response);
+	});
+
+	/*
 	if ($rootScope.user === null) {
-		$scope.user = user;
 	} else {
 		$scope.user = $rootScope.user;
 	}
-
+	*/
 	$scope.Safe = function () {
+
 
 		var obj = new Object();
 		obj.userID = $scope.userID;

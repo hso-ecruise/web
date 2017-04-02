@@ -27,6 +27,7 @@ angular
 			controller: 'MainCtrl',
 			controllerAs: 'main'
 		})
+		$routeProvider
 		.when('/about', {
 			templateUrl: 'views/about.html',
 			controller: 'AboutCtrl',
