@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 
 const IP = 'localhost';
@@ -34,7 +34,8 @@ const CUSTOMER = "customers";
 
 var application = angular.module('webApp', [
 	'ngAnimate',
-	'ngMaterial'
+	'ngMaterial',
+	'leaflet-directive'
 ]);
 
 
@@ -203,14 +204,50 @@ application.controller('Ctrl_Main', function ($rootScope, $scope) {
 
 application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 
-	$scope.initialize = function () {
-		var map = new google.maps.Map(document.getElementById('map'), {
-			center: { lat: -34.397, lng: 150.644 },
-			zoom: 8
-		});
+	var local_icons = {
+		default_icon: {},
+		leaf_icon: {
+			iconUrl: 'examples/img/leaf-green.png',
+			shadowUrl: 'examples/img/leaf-shadow.png',
+			iconSize: [38, 95], // size of the icon
+			shadowSize: [50, 64], // size of the shadow
+			iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+			shadowAnchor: [4, 62],  // the same for the shadow
+			popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+		},
+		car_loading: {
+			iconUrl: 'images/icons/car_available.png',
+			iconSize: [60, 85], // size of the icon
+			iconAnchor: [30, 85], // point of the icon which will correspond to marker's location
+			popupAnchor: [0, -85] // point from which the popup should open relative to the iconAnchor
+		}
 	};
 
-	google.maps.event.addDomListener(window, 'load', $scope.initialize);
+    //TUTORIAL
+    // http://tombatossals.github.io/angular-leaflet-directive/#!/examples/customized-markers
+    // http://stackoverflow.com/questions/20532635/how-can-i-change-the-background-color-of-a
+
+	var marker = {
+	  lat: 49.5,
+	  lng: 8.434,
+	  message: "Available car",
+	  draggable: false,
+	  icon: local_icons.car_loading
+	}
+
+	angular.extend($scope, {
+		mannheim: {
+			scrollWheelZoom: true,
+			lat: 49.5,
+			lng: 8.433,
+			zoom: 12
+		},
+		markers: {
+			marker
+		}
+	});
+
+
 
 
 });

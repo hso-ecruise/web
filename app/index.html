@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -10,6 +10,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -182,7 +183,7 @@
 				
 					<div ng-controller="Ctrl_Booking">
 
-						<div id="map" class="map"></div>
+                      <leaflet lf-center="mannheim" markers="markers" width="800px" height="500px"></leaflet>
 
 						<script>
 							/*
@@ -464,6 +465,8 @@
 		<script src="bower_components/angular-touch/angular-touch.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 		<script src="bower_components/angular-material/angular-material.js"></script>
+		<script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+		<script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
 		<!-- endbower -->
 		<!-- endbuild -->
 
