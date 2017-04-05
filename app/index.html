@@ -10,7 +10,6 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -183,26 +182,15 @@
 				
 					<div ng-controller="Ctrl_Booking">
                     
-                      <div id="userMap" style="width: 1300px; height: 600px;"></div>
-                      <!--
-                      <leaflet lf-center="mannheim" markers="markers" width="800px" height="500px"></leaflet>
-                          -->
-						<script>
-							/*
-							var map;
-							function initMap() {
-								map = new google.maps.Map(document.getElementById('map'), {
-									center: {lat: 49.48, lng: 8.47},
-									zoom: 14
-								});
-							}
-							*/
-						</script>
-
-						<!--
-						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap" async defer>
-						</script>
-						-->
+                      <div style="width: 800px; height: 600px;" map-lazy-load="https://maps.google.com/maps/api/js"
+                           map-lazy-load-params="{{googleMapsUrl}}">
+                        <ng-map center="49.5, 8.434" zoom="12">
+                          <div ng-repeat="p in points">
+                            <marker position="{{ p.latitude }}, {{ p.longitude }}"></marker>
+                          </div>
+                        </ng-map>
+                      </div>
+                    
 					</div>
 
 				</div>
@@ -450,7 +438,7 @@
 			ga('send', 'pageview');
 		</script>
 		
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o" async defer></script>
+      <script src="http://maps.google.com/maps/api/js"></script>
 
 		<!-- build:js(.) scripts/vendor.js -->
 		<!-- bower:js -->
@@ -467,8 +455,7 @@
 		<script src="bower_components/angular-touch/angular-touch.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 		<script src="bower_components/angular-material/angular-material.js"></script>
-		<script src="bower_components/leaflet/dist/leaflet-src.js"></script>
-		<script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+		<script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
 		<!-- endbower -->
 		<!-- endbuild -->
 

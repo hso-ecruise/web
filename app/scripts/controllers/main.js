@@ -6,7 +6,7 @@ const PORT = '8080';
 
 const CUSTOMER = "customers";
 
-
+const API_KEY = "AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap";
 
 
 
@@ -35,7 +35,7 @@ const CUSTOMER = "customers";
 var application = angular.module('webApp', [
 	'ngAnimate',
 	'ngMaterial',
-	'leaflet-directive'
+    'ngMap'
 ]);
 
 
@@ -202,8 +202,8 @@ application.controller('Ctrl_Main', function ($rootScope, $scope) {
 });
 
 
-application.controller('Ctrl_Booking', function ($rootScope, $scope) {
-
+application.controller('Ctrl_Booking', function ($rootScope, $scope, NgMap) {
+  /*
 	var icon_table = {
 		default_icon: {},
 		car_loading_00: L.icon({
@@ -255,52 +255,29 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 			popupAnchor: [0, -85]
 		})
 	};
-
-	var myIcon = L.icon({
-		iconUrl: 'images/icons/car_available.png',
-		iconSize: [60, 85], // size of the icon
-		iconAnchor: [30, 85], // point of the icon which will correspond to marker's location
-		popupAnchor: [0, -85] // point from which the popup should open relative to the iconAnchor
+    */
+	$scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + API_KEY;
+	NgMap.getMap().then(function (map) {
+	  map.setZoom(12);
+	  map.setCenter(49.5, 8.434);
 	});
 
-	var map = L.map('userMap').setView([49.5, 8.433], 12);
-
-
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', { foo: 'bar' }).addTo(map);
-
-	var currentSelection = L.popup();
-
-	function onMapClick(e) {
-		currentSelection
-			.setLatLng(e.latlng)
-			.setContent("Fahrtdetails hinzufügen")
-			.openOn(map);
-	}
-
-	map.on('click', onMapClick);
-
+	var points = [];
 
 	for (var i = 0; i < 10; i++) {
-
-		AddVehicle(49.5 + Math.random() * 0.006, 8.434 + Math.random() * 0.001, "TEST", i);
-
-		AddStation(49.45 + Math.random() * 0.006, 8.43 + Math.random() * 0.001, "Frei", i);
-
+        points.push(AddVehicle(49.5 + Math.random() * 0.006, 8.434 + Math.random() * 0.001, "TEST", i));
 	}
-
+	 $scope.points = points;
+  
 	function AddVehicle(lat, lon, content, state) {
 
-		var marker = new L.marker([lat, lon], {
-			draggable: false,
-			icon: icon_table.car_loading_75
-		});
+	  return {
+	    name: content,
+	    latitude: lat,
+	    longitude: lon,
+	    icon: 'images/icons/car_loading_25.png'
+	  };
 
-		if (state % 2 === 0) {
-			marker.setIcon(icon_table.car_available);
-		}
-
-		marker.bindPopup(content).openPopup();
-		marker.addTo(map);
 
 	}
 
@@ -323,30 +300,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 	
     /*
     //TUTORIAL
-    // http://tombatossals.github.io/angular-leaflet-directive/#!/examples/customized-markers
-    // http://stackoverflow.com/questions/20532635/how-can-i-change-the-background-color-of-a
-
-	var marker = {
-	  lat: 49.5,
-	  lng: 8.434,
-	  message: "Available car",
-	  draggable: false,
-	  icon: local_icons.car_loading
-	}
-
-	angular.extend($scope, {
-		mannheim: {
-			scrollWheelZoom: true,
-			lat: 49.5,
-			lng: 8.433,
-			zoom: 12
-		},
-		markers: {
-			marker
-		}
-	});
-
-
+    // https://ngmap.github.io/#/!custom-marker.html
     */
 
 });
