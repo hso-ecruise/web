@@ -204,25 +204,124 @@ application.controller('Ctrl_Main', function ($rootScope, $scope) {
 
 application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 
-	var local_icons = {
+	var icon_table = {
 		default_icon: {},
-		leaf_icon: {
-			iconUrl: 'examples/img/leaf-green.png',
-			shadowUrl: 'examples/img/leaf-shadow.png',
-			iconSize: [38, 95], // size of the icon
-			shadowSize: [50, 64], // size of the shadow
-			iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-			shadowAnchor: [4, 62],  // the same for the shadow
-			popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-		},
-		car_loading: {
+		car_loading_00: L.icon({
+			iconUrl: 'images/icons/car_loading_00.png',
+			iconSize: [60, 85],
+			iconAnchor: [30, 85],
+			popupAnchor: [0, -85]
+		}),
+		car_loading_25: L.icon({
+			iconUrl: 'images/icons/car_loading_25.png',
+			iconSize: [60, 85],
+			iconAnchor: [30, 85],
+			popupAnchor: [0, -85]
+		}),
+		car_loading_50: L.icon({
+			iconUrl: 'images/icons/car_loading_50.png',
+			iconSize: [60, 85],
+			iconAnchor: [30, 85],
+			popupAnchor: [0, -85]
+		}),
+		car_loading_75: L.icon({
+			iconUrl: 'images/icons/car_loading_75.png',
+			iconSize: [60, 85],
+			iconAnchor: [30, 85],
+			popupAnchor: [0, -85]
+		}),
+		car_available: L.icon({
 			iconUrl: 'images/icons/car_available.png',
-			iconSize: [60, 85], // size of the icon
-			iconAnchor: [30, 85], // point of the icon which will correspond to marker's location
-			popupAnchor: [0, -85] // point from which the popup should open relative to the iconAnchor
-		}
+			iconSize: [60, 85],
+			iconAnchor: [30, 85],
+			popupAnchor: [0, -85]
+		}),
+		car_occupied: L.icon({
+			iconUrl: 'images/icons/car_occupied.png',
+			iconSize: [60, 85],
+			iconAnchor: [30, 85],
+			popupAnchor: [0, -85]
+		}),
+		station_available: L.icon({
+			iconUrl: 'images/icons/station_available.png',
+			iconSize: [60, 85],
+			iconAnchor: [30, 85],
+			popupAnchor: [0, -85]
+		}),
+		station_occupied: L.icon({
+			iconUrl: 'images/icons/station_occupied.png',
+			iconSize: [60, 85],
+			iconAnchor: [30, 85],
+			popupAnchor: [0, -85]
+		})
 	};
 
+	var myIcon = L.icon({
+		iconUrl: 'images/icons/car_available.png',
+		iconSize: [60, 85], // size of the icon
+		iconAnchor: [30, 85], // point of the icon which will correspond to marker's location
+		popupAnchor: [0, -85] // point from which the popup should open relative to the iconAnchor
+	});
+
+	var map = L.map('userMap').setView([49.5, 8.433], 12);
+
+
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', { foo: 'bar' }).addTo(map);
+
+	var currentSelection = L.popup();
+
+	function onMapClick(e) {
+		currentSelection
+			.setLatLng(e.latlng)
+			.setContent("Fahrtdetails hinzufügen")
+			.openOn(map);
+	}
+
+	map.on('click', onMapClick);
+
+
+	for (var i = 0; i < 10; i++) {
+
+		AddVehicle(49.5 + Math.random() * 0.006, 8.434 + Math.random() * 0.001, "TEST", i);
+
+		AddStation(49.45 + Math.random() * 0.006, 8.43 + Math.random() * 0.001, "Frei", i);
+
+	}
+
+	function AddVehicle(lat, lon, content, state) {
+
+		var marker = new L.marker([lat, lon], {
+			draggable: false,
+			icon: icon_table.car_loading_75
+		});
+
+		if (state % 2 === 0) {
+			marker.setIcon(icon_table.car_available);
+		}
+
+		marker.bindPopup(content).openPopup();
+		marker.addTo(map);
+
+	}
+
+	function AddStation(lat, lon, content, state) {
+
+		var marker = new L.marker([lat, lon], {
+			draggable: false,
+			icon: icon_table.station_available
+		});
+
+		if (state % 2 === 0) {
+			marker.setIcon(icon_table.station_occupied);
+		}
+
+		marker.bindPopup(content).openPopup();
+		marker.addTo(map);
+
+	}
+    
+	
+    /*
     //TUTORIAL
     // http://tombatossals.github.io/angular-leaflet-directive/#!/examples/customized-markers
     // http://stackoverflow.com/questions/20532635/how-can-i-change-the-background-color-of-a
@@ -248,7 +347,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope) {
 	});
 
 
-
+    */
 
 });
 
