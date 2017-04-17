@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -16,9 +16,14 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 	
+    
+      
+      
+      <style>
 
+      </style>
 	</head>
-
+    
 
 
 	<body ng-app="webApp" ng-controller="Ctrl_Main" ng-cloak ng-switch on="loggedIN">
@@ -28,36 +33,6 @@
 		<!--
 		<!-- Add your site or application content here -->
 		
-		<!--[ausblenden for mom]>
-		<div class="header">
-			<div class="navbar navbar-default" role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-
-					</div>
-
-					<div class="collapse navbar-collapse" id="js-navbar-collapse">		
-						<ul class="nav navbar-nav">
-
-							<li class="{{ bookingActive }}" ng-click="ChangeView('booking')"><a>Buchen</a></li>
-							<li class="{{ manageActive }}" ng-click="ChangeView('manage')"><a>Buchungen verwalten</a></li>
-							<li class="{{ profileActive }}" ng-click="ChangeView('profile')"><a>Profil bearbeiten</a></li>
-
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Add your site or application content here -->
-
 		<div ng-switch-when="false">
 
 			<div ng-controller="Ctrl_Login_Register">
@@ -70,25 +45,33 @@
 						</md-nav-bar>
 					</md-content>
 				</div>
-					<div class="login-form" layout-align="center">
-						<form>
-						
-						<md-content flex layout-padding>	
-							<md-input-container>
-								<input placeholder="E-Mail" type="" ng-model="login.email"/>
-							</md-input-container>
+                
+                
+                
+                
+					
+                    <div class="login-form content">
+                            <md-toolbar class="md-hue-2">
+                                <div class="md-toolbar-tools">
+                                    <h2 class="md-flex toolbar-text">Please login</h2>							
+                                </div>
+                            </md-toolbar>
+                            <md-content layout-padding>	
+                                <md-input-container>
+                                    <input placeholder="E-Mail" type="" ng-model="login.email"/>    <!-- required spaeter hinzufuegen-->
+                                </md-input-container>
+                                <md-input-container>
+                                    <input placeholder="Passwort" type="password" ng-model="login.password" />  <!-- required -->
+                                </md-input-container>
 
-							<md-input-container>
-								<input placeholder="Passwort" type="password" ng-model="login.password" required/>
-							</md-input-container>
-							
-						</md-content>
-						
-						<md-content flex layout-padding>
-							<md-button class="md-raised md-primary" ng-click="Login()"> Login </md-button>
-						</md-content>
-						</form>
+                            </md-content>
+                            <md-content flex layout-padding>
+                                <md-button class="md-raised md-primary button-to-right" ng-click="Login()"> Login </md-button>
+                            </md-content>
 					</div>
+                
+                
+                
 				</div>
 				<!--
 				<div ng-switch-when="register">
@@ -340,7 +323,7 @@
 				</div>
 
 
-				<div ng-switch-when="profile" class="content">
+				<div ng-switch-when="profile" class="content user-edit">
 
 					<div ng-controller="Ctrl_Profile" layout="column" ng-cloak class="md-inline-form">
 
