@@ -1,22 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>E-Cruise UserSite</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-	
-	</head>
+      <meta charset="utf-8">
+      <title>E-Cruise UserSite</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+      <!-- build:css(.) styles/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+      <!-- endbower -->
+      <!-- endbuild -->
+      <!-- build:css(.tmp) styles/main.css -->
+      <link rel="stylesheet" href="styles/main.css">
+      <!-- endbuild -->
+      <style>
+          
+
+      </style>
+    </head>
+    
     
 	
 	<body ng-app="webApp">
@@ -263,7 +266,7 @@
 					<!-- MANAGE END -->
 
 					<!-- PROFILE START -->
-					<div ng-switch-when="profile" class="content user-edit">
+					<div ng-switch-when="profile" class="user-edit content">
 
 						<div ng-controller="Ctrl_Profile" layout="column" ng-cloak class="md-inline-form">
 
@@ -334,6 +337,14 @@
 								-->
 								</md-input-container>
 							</md-content>	
+                            <md-content flex layout-padding>	
+								<md-input-container>
+									<input placeholder="Altes Passwort" ng-model="user.password.old" />
+								</md-input-container>
+								<md-input-container>
+                                    <input placeholder="Neues Passwort" ng-model="user.password.new" />
+								</md-input-container>
+							</md-content>
 							<md-content flex layout-padding>
 							<md-button class="md-raised md-warn" ng-click="Cancel()"> Verwerfen </md-button>
 							<md-button class="md-raised md-primary" ng-click="Safe()"> Speichern </md-button>
