@@ -1,5 +1,16 @@
 ﻿'use strict';
 
+/**
+ * @ngdoc function
+ * @name webApp.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the webApp
+ */
+
+
+
+
 
 const IP = 'localhost';
 const PORT = '8080';
@@ -11,36 +22,11 @@ const API_KEY = "AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * @ngdoc function
- * @name webApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the webApp
- */
-
 var application = angular.module('webApp', [
 	'ngAnimate',
 	'ngMaterial',
     'ngMap'
 ]);
-
-
-
-
 
 
 
@@ -101,26 +87,53 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, PostR
 
 
 
+application.controller('Ctrl_Main', function ($rootScope, $scope) {
 
+  var init = function () {
+
+    $rootScope.loggedIN = "false";
+
+  };
+
+  init();
+
+
+
+  $scope.ChangeView = function (input) {
+
+    $scope.currentView = input;
+    
+  };
+
+});
 
 
 
 
 application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
 
-	$scope.login_register = 'login';
-	$rootScope.loggedIN = "false";
-	
-	$scope.Login = function () {
+  $scope.Login = function () {
 
-		var email = $scope.login.email;
-		var password = $scope.login.password;
+    var email = $scope.login.email;
+    var password = $scope.login.password;
+    console.log("LOGIN " + email + "   " + password);
 
-		if (email === "test" && password === "test") {
-			$rootScope.loggedIN = "true";
-		}
+    if (email === "test" && password === "test") {
+      $rootScope.loggedIN = "true";
+      $rootScope.currentView = "booking";
+    }
 
-	};
+  };
+
+  var init = function () {
+
+    $scope.loginORregister = "login";
+
+  };
+
+  init();
+
+
 	
 	$scope.Register = function () {
 
@@ -159,116 +172,18 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
 	};
 
 	$scope.ChangeView = function (state) {
-		if (state === 'login') {
-			$scope.login_register = "login";
-		} else {
-			$scope.login_register = "register";
-		}
+      
+	  $scope.loginORregister = state;
+
 	};
 
 });
 
-application.controller('Ctrl_Main', function ($rootScope, $scope) {
 
-	$rootScope.loggedIN = "false";
-
-	$scope.bookingActive = "active";
-	$scope.manageActive = "inactive";
-	$scope.profileActive = "inactive";
-
-	$scope.ChangeView = function (input) {
-
-		$scope.bookingActive = "inactive";
-		$scope.manageActive = "inactive";
-		$scope.profileActive = "inactive";
-
-		switch (input) {
-			case 'booking':
-				$scope.bookingActive = "active";
-				$scope.currentView = "booking";
-				break;
-			case 'manage':
-				$scope.manageActive = "active";
-				$scope.currentView = "manage";
-				break;
-			case 'profile':
-				$scope.profileActive = "active";
-				$scope.currentView = "profile";
-				console.log("PROFIL");
-				break;
-		}
-	};
-
-});
 
 
 application.controller('Ctrl_Booking', function ($rootScope, $scope, NgMap) {
-  /*
-	var icon_table = {
-		default_icon: {},
-		car_loading_00: L.icon({
-			iconUrl: 'images/icons/car_loading_00.png',
-			iconSize: [60, 85],
-			iconAnchor: [30, 85],
-			popupAnchor: [0, -85]
-		}),
-		car_loading_25: L.icon({
-			iconUrl: 'images/icons/car_loading_25.png',
-			iconSize: [60, 85],
-			iconAnchor: [30, 85],
-			popupAnchor: [0, -85]
-		}),
-		car_loading_50: L.icon({
-			iconUrl: 'images/icons/car_loading_50.png',
-			iconSize: [60, 85],
-			iconAnchor: [30, 85],
-			popupAnchor: [0, -85]
-		}),
-		car_loading_75: L.icon({
-			iconUrl: 'images/icons/car_loading_75.png',
-			iconSize: [60, 85],
-			iconAnchor: [30, 85],
-			popupAnchor: [0, -85]
-		}),
-		car_available: L.icon({
-			iconUrl: 'images/icons/car_available.png',
-			iconSize: [60, 85],
-			iconAnchor: [30, 85],
-			popupAnchor: [0, -85]
-		}),
-		car_occupied: L.icon({
-			iconUrl: 'images/icons/car_occupied.png',
-			iconSize: [60, 85],
-			iconAnchor: [30, 85],
-			popupAnchor: [0, -85]
-		}),
-		station_available: L.icon({
-			iconUrl: 'images/icons/station_available.png',
-			iconSize: [60, 85],
-			iconAnchor: [30, 85],
-			popupAnchor: [0, -85]
-		}),
-		station_occupied: L.icon({
-			iconUrl: 'images/icons/station_occupied.png',
-			iconSize: [60, 85],
-			iconAnchor: [30, 85],
-			popupAnchor: [0, -85]
-		})
-	};
-    */
-	$scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + API_KEY;
-	NgMap.getMap().then(function (map) {
-	  map.setZoom(12);
-	  map.setCenter(49.5, 8.434);
-	});
 
-	var points = [];
-
-	for (var i = 0; i < 10; i++) {
-        points.push(AddVehicle(49.5 + Math.random() * 0.006, 8.434 + Math.random() * 0.001, "TEST", i));
-	}
-	 $scope.points = points;
-  
 	function AddVehicle(lat, lon, content, state) {
 
 	  return {
@@ -282,7 +197,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, NgMap) {
 	}
 
 	function AddStation(lat, lon, content, state) {
-
+/*
 		var marker = new L.marker([lat, lon], {
 			draggable: false,
 			icon: icon_table.station_available
@@ -294,8 +209,25 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, NgMap) {
 
 		marker.bindPopup(content).openPopup();
 		marker.addTo(map);
-
+*/
 	}
+
+
+  $scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + API_KEY;
+
+	NgMap.getMap().then(function (map) {
+	  map.setZoom(12);
+	  map.setCenter(new google.maps.LatLng(49.5, 8.434));
+	});
+
+	var points = [];
+
+	for (var i = 0; i < 10; i++) {
+        points.push(new AddVehicle(49.5 + Math.random() * 0.006, 8.434 + Math.random() * 0.001, "TEST", i));
+	}
+	 $scope.points = points;
+  
+	
     
 	
     /*
@@ -311,22 +243,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope) {
 	var bookings = [];
 	var finishedBookings = [];
 
-	for (var i = 0; i < 3; i++) {
-		var booking = new Object();
-		booking.date = "01.01.2017";
-		booking.startTime = "1" + i + ":00";
-		booking.startPlace = "Hauptstrasse 1";
-		if (i === 0) {
-			console.log("WRITE");
-			booking.state = "true";
-		} else {
-			booking.state = "false";
-		}
+	var i = 0;
 
-		bookings.push(booking);
-	}
-
-	for (var i = 0; i < 3; i++) {
+	for (i = 0; i < 3; i++) {
 		var booking = {
 			date: "01.01.2017",
 			startTime: "1" + i + ":00",
@@ -337,10 +256,29 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope) {
 			payed: "Bezahlt"
 		};
 
-		if (i % 2 !== 0)
+		if (i % 2 !== 0){
 			booking.payed = "Nicht bezahlt";
+		}
+		
+		bookings.push(booking);
+	}
 
-		finishedBookings.push(booking);
+	for (i = 0; i < 3; i++) {
+		var booking2 = {
+			date: "01.01.2017",
+			startTime: "1" + i + ":00",
+			startPlace: "Hauptstrasse 1",
+			endTime: "1" + (i + 1) + ":00",
+			endPlace: "Hauptstrasse 2",
+			billing: "Preis: " + (i + 1) + "00 Euro",
+			payed: "Bezahlt"
+		};
+
+		if (i % 2 !== 0){
+			booking2.payed = "Nicht bezahlt";
+		}
+		
+		finishedBookings.push(booking2);
 	}
 
 
@@ -351,7 +289,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope) {
 	$scope.ShowBilling = function (index) {
 		console.log(index + "   " + finishedBookings[index].billing);
 		$scope.currentBooking = finishedBookings[index];
-	}
+	};
 
 });
 
@@ -372,14 +310,16 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			zip: 234234,
 			city: "Musterstadt"
 		}
-	}
+	};
 
-	RESTFactory.GetUser(0).then(function (responseData) {
-		$scope.user = responseData.data[0];
-		console.log(responseData.data);
-	}, function (response) {
-		console.log(response);
-	});
+
+	var init = function () {
+
+	   $scope.user = user;
+	  
+	};
+
+	init();
 
 	/*
 	if ($rootScope.user === null) {
@@ -390,13 +330,14 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	$scope.Safe = function () {
 
 
-		var obj = new Object();
-		obj.userID = $scope.userID;
-		obj.name = $scope.name;
-		obj.familyName = $scope.familyName;
-		obj.email = $scope.email;
-		obj.phoneNr = $scope.phoneNr;
-
+		var obj = {
+			userID: $scope.userID,
+			name: $scope.name,
+			familyName: $scope.familyName,
+			email: $scope.email,
+			phoneNr: $scope.phoneNr
+		};
+		
 		console.log(obj);
 
 	};
@@ -404,6 +345,19 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	$scope.Cancel = function () {
 
 
+
+	};
+
+	$scope.ChangePassword = function(){
+	
+	  var old_password = $scope.password.old;
+	  var new_password = $scope.password.new;
+	  var new_password_conf = $scope.password.confirm;
+
+	  if (new_password === new_password_conf) {
+	    //Check if the old password is correct
+        //make rest call with new password
+	  }
 
 	};
 
