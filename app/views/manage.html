@@ -1,0 +1,136 @@
+<div class="header navbar" layout-align="center" layout="row">
+	<md-content class="md-padding" >
+		<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links" layout-align="center center">
+			<md-nav-item md-nav-href="booking" name="booking">Buchen</md-nav-item >
+			<md-nav-item md-nav-href="manage"  name="manage" >Buchungen verwalten</md-nav-item>
+			<md-nav-item md-nav-href="profile" name="profile" >Profil bearbeiten</md-nav-item>
+		</md-nav-bar>
+	</md-content>
+</div>
+
+<table>
+	<thead>
+		<tr>
+			<td>
+				<md-toolbar class="md-hue-2">
+					<div class="md-toolbar-tools">
+						<h2 class="md-flex">Ausstehende Fahrten</h2>
+					</div>
+				</md-toolbar>
+			</td>
+			<td>
+				<b style="margin-left: 25px;"></b>
+			</td>
+			<td>
+				<md-toolbar class="md-hue-2">
+					<div class="md-toolbar-tools">
+						<h2 class="md-flex">Abgeschlossene Fahrten</h2>
+					</div>
+				</md-toolbar>
+			</td>
+			<td>
+				<b style="margin-left: 25px;"></b>
+			</td>
+			<td>
+				<md-toolbar class="md-hue-2">
+					<div class="md-toolbar-tools">
+						<h2 class="md-flex">Rechnung</h2>
+					</div>
+				</md-toolbar>
+			</td>
+		</tr>
+	</thead>
+
+
+	<tr>
+		<td>
+			<table style="width: 300px;">
+			
+				<tr ng-repeat="booking in bookings track by $index">
+					<td  ng-switch on="{{ booking.state }}">
+
+						<md-content flex layout-padding class="md-block">	
+			
+							<label> Datum:  {{ booking.date }} </label>
+							<br />
+							<label> Fahrtbeginn:  {{ booking.startTime }} </label>
+							<br />
+							<label> Startort:  {{ booking.startPlace }} </label>
+			
+							<label  ng-switch-when="true">
+								<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
+
+							</label>
+
+						</md-content>
+
+						<br />
+
+					</td>
+				</tr>
+
+			</table>
+		</td>
+		<td></td>
+		<td>
+			<table style="width: 300px;">
+
+
+				<tr ng-repeat="booking in finishedBookings track by $index">
+					<td  ng-switch on="{{ booking.state }}">
+
+						<md-content flex layout-padding class="md-block">	
+			
+							<label> Datum:  {{ booking.date }} </label>
+							<br />
+							<label> Fahrtbeginn:  {{ booking.startTime }} </label>
+							<label> {{ booking.startPlace }} </label>
+							<br />
+							<label> Fahrtende:  {{ booking.endTime }} </label>
+							<label> {{ booking.endPlace }} </label>
+							<br />
+							<md-button class="md-raised md-primary" ng-click="ShowBilling($index)">Rechnung anzeigen</md-button>
+
+
+						</md-content>
+
+						<br />
+
+					</td>
+				</tr>
+
+			</table>
+		</td>
+		<td></td>
+		<td>
+
+			<table style="width: 300px;">
+			
+				<tr>
+					<td>
+						<md-content flex layout-padding class="md-block">	
+			
+							<label> Datum:  {{ currentBooking.date }} </label>
+							<br />
+							<label> Fahrtbeginn:  {{ currentBooking.startTime }} </label>
+							<label> Startpunkt:  {{ currentBooking.startPlace }} </label>
+							<br />
+							<label> Fahrtende:  {{ currentBooking.endTime }} </label>
+							<label> Endpunkt:  {{ currentBooking.endPlace }} </label>
+							<br />
+							<label> Preis: {{ currentBooking.billing }}</label>
+							<label> Rechnung: {{ currentBooking.payed }}</label>
+
+						</md-content>
+					</td>
+				</tr>
+
+			</table>
+
+		</td>
+
+	</tr>
+</table>
+</div>
+
+</div>

@@ -9,21 +9,6 @@ const CUSTOMER = "customers";
 const API_KEY = "AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * @ngdoc function
  * @name webApp.controller:MainCtrl
@@ -35,13 +20,66 @@ const API_KEY = "AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap";
 var application = angular.module('webApp', [
 	'ngAnimate',
 	'ngMaterial',
-    'ngMap'
+        'ngMap',
+        'ngRoute'
 ]);
 
+application.config(function ($routeProvider, $locationProvider){
 
+    $routeProvider
+	.when('/', {
+	    templateUrl: 'views/main.html',
+	    resolve: {
+		factory: checkRouting
+	    }
+	})
+	.when('/login',
+	      {
+		  templateUrl : 'views/login.html',
+		  controller: 'Ctrl_Login_Register'
+	      })
+	.when('/register',
+	      {
+		  templateUrl : 'views/register.html',
+		  controller: 'Ctrl_Login_Register'
+	      })
+    	.when('/booking',
+	      {
+		  templateUrl : 'views/booking.html',
+		  controller: 'Ctrl_Booking'
+	      })
+	.when ('/about', {
+	    templateUrl: 'views/about.html'
+	})
+    	.when ('/manage', {
+	    templateUrl: 'views/manage.html',
+	    controller: 'Ctrl_Manage'
+	})
+	.when ('/profile', {
+	    templateUrl: 'views/profile.html',
+	    controller: 'Ctrl_Manage'
+	})
+	.otherwise(
+	    {
+		template: 'NO PAGE'
+	    });
+	
+    $locationProvider
+    .html5Mode(true);
 
+});
 
-
+var checkRouting= function ($rootScope, $location) {
+    if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
+    {
+       $location.path("/login");
+    }
+    else
+    {
+	alert("true or other");
+	alert($rootScope.LoggedIN);
+    }
+};
 
 
 
@@ -95,19 +133,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, PostR
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
-
+application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $location) {
 	$scope.login_register = 'login';
 	$rootScope.loggedIN = "false";
 	
@@ -116,12 +142,14 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
 		var email = $scope.login.email;
 		var password = $scope.login.password;
 
-		if (email === "test" && password === "test") {
-			$rootScope.loggedIN = "true";
+	    if (email === "test" && password === "test") {
+		$rootScope.loggedIN = "true";
+		$location.path("/booking");
 		}
 
 	};
-	
+
+    
 	$scope.Register = function () {
 
 		/*
@@ -168,9 +196,16 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
 
 });
 
-application.controller('Ctrl_Main', function ($rootScope, $scope) {
-
+application.controller('Ctrl_Main', function ($rootScope, $scope, $location) {
+    if ( $rootScope.loggedIN === undefined )
+    {
 	$rootScope.loggedIN = "false";
+    }
+    else
+    {
+	alert($rootScope.loggedIN);
+    }
+
 
 	$scope.bookingActive = "active";
 	$scope.manageActive = "inactive";

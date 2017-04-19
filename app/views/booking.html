@@ -1,0 +1,18 @@
+<div class="header navbar" layout-align="center" layout="row">
+	<md-content class="md-padding" >
+		<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links" layout-align="center center">
+			<md-nav-item md-nav-href="booking" name="booking">Buchen</md-nav-item >
+			<md-nav-item md-nav-href="manage"  name="manage" >Buchungen verwalten</md-nav-item>
+			<md-nav-item md-nav-href="profile" name="profile" >Profil bearbeiten</md-nav-item>
+		</md-nav-bar>
+	</md-content>
+</div>
+<div align="center"
+<div style="width: 800px; height: 600px;" map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{googleMapsUrl}}">
+	<ng-map center="49.5, 8.434" zoom="12">
+		<div ng-repeat="p in points">
+			<marker position="{{ p.latitude }}, {{ p.longitude }}"></marker>
+		</div>
+	</ng-map>
+</div>
+</div>
