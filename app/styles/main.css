@@ -12,7 +12,27 @@ md-input-container{
     height: 37px;
 }
 
-
+	  
+.profile-flex-container{
+	display:flex;
+	width: 830px;
+}
+	.user-edit-left{
+	flex:10;
+}
+	.user-edit-mid{
+	flex:1;
+}
+.user-edit-right{
+	height: 330px;
+	flex:10;
+}
+	
+.content{
+	background: #fafafa;
+	border: 0px solid #ebebeb;
+	box-shadow: rgba(0,0,0,0.16) 0px 2px 2px 0px,rgba(0,0,0,0.09804) 0px 2px 2px 0px;
+}
 
 body {
   padding: 0;
