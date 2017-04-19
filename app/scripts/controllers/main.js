@@ -302,7 +302,7 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		name : "Max",
 		familyName: "Mustermann",
 		email : "max.mustermann@gmail.com",
-		phone : 12354356,
+		phoneNr : 12354356,
 		address : {
 			street : "Musterstrasse",
 			number : 123,
@@ -350,9 +350,9 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 
 	$scope.ChangePassword = function(){
 	
-	  var old_password = $scope.password.old;
-	  var new_password = $scope.password.new;
-	  var new_password_conf = $scope.password.confirm;
+	  var old_password = $scope.user.password.old;
+	  var new_password = $scope.user.password.new;
+	  var new_password_conf = $scope.user.password.confirm;
 
 	  if (new_password === new_password_conf) {
 	    //Check if the old password is correct
