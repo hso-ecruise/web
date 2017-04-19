@@ -15,7 +15,10 @@
       <link rel="stylesheet" href="styles/main.css">
       <!-- endbuild -->
       <style>
-
+#gmap{
+	width: 850px; 
+	height: 770px;
+}
       </style>
     </head>
     
@@ -104,9 +107,9 @@
 					
 						<div ng-controller="Ctrl_Booking">
 						
-						  <div style="width: 800px; height: 600px;" map-lazy-load="https://maps.google.com/maps/api/js"
+						  <div map-lazy-load="https://maps.google.com/maps/api/js"
 							   map-lazy-load-params="{{googleMapsUrl}}">
-							<ng-map center="49.5, 8.434" zoom="12">
+							<ng-map id="gmap" center="49.5, 8.434" zoom="12">
 							  <div ng-repeat="p in points">
 								<marker position="{{ p.latitude }}, {{ p.longitude }}"></marker>
 							  </div>

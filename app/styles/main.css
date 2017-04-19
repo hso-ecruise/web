@@ -47,9 +47,9 @@ body {
   padding-right: 15px;
 
 }
-.map {
-	height: 100%;
-	width: 100%;
+#gmap{
+	width: 850px; 
+	height: 770px;
 }
 /* Optional: Makes the page fill the google maps window. */
 html, body {
