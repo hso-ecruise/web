@@ -74,16 +74,17 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, PostR
 			var url = 'http://' + IP + ':' + PORT + '/' + CUSTOMER + "?userID=" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
+		},
+		GetAddress: function(lat, lon){
+			var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+			url += lat + "," + lon + "&key=" + API_KEY;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
 		}
 
 	};
 
 });
-
-
-
-
-
 
 
 
@@ -121,6 +122,8 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
     if (email === "test" && password === "test") {
       $rootScope.loggedIN = "true";
       $rootScope.currentView = "booking";
+	  //REST Call
+	  $rootScope.customerId = 12345;
     }
 
   };
@@ -183,108 +186,173 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope) {
 
 
 application.controller('Ctrl_Booking', function ($rootScope, $scope, NgMap) {
-
-	function AddVehicle(lat, lon, content, state) {
-
-	  return {
-	    name: content,
-	    latitude: lat,
-	    longitude: lon,
-	    icon: 'images/icons/car_loading_25.png'
-	  };
-
-
-	}
-
-	function AddStation(lat, lon, content, state) {
-/*
-		var marker = new L.marker([lat, lon], {
-			draggable: false,
-			icon: icon_table.station_available
-		});
-
-		if (state % 2 === 0) {
-			marker.setIcon(icon_table.station_occupied);
+	
+	var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: new google.maps.LatLng(49.5, 8.434),
+		mapTypeId: 'roadmap'
+    });
+	
+	
+	var icons = {
+		car_available: {
+			icon: "images/icons/car_available.png"
+		},
+		car_loading_25:{
+			icon: "images/icons/car_loading_25.png"
 		}
-
-		marker.bindPopup(content).openPopup();
-		marker.addTo(map);
-*/
-	}
-
-
-  $scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + API_KEY;
-
-	NgMap.getMap().then(function (map) {
-	  map.setZoom(12);
-	  map.setCenter(new google.maps.LatLng(49.5, 8.434));
-	});
-
-	var points = [];
-
-	for (var i = 0; i < 10; i++) {
-        points.push(new AddVehicle(49.5 + Math.random() * 0.006, 8.434 + Math.random() * 0.001, "TEST", i));
-	}
-	 $scope.points = points;
-  
+	};
 	
-    
+	var image = {
+		url: 'images/icons/car_available.png',
+		scaledSize: new google.maps.Size(60, 96),
+		origin: new google.maps.Point(0, 0),
+    	anchor: new google.maps.Point(0, 32)
+	};
 	
-    /*
-    //TUTORIAL
-    // https://ngmap.github.io/#/!custom-marker.html
-    */
+	
+	var CreateMarker = function(lat, lon, state){
+		
+		image.url = icons[state].icon;
+		
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(lat, lon),
+			map: map,
+			icon: image
+		});
+		
+	}
+	
+	CreateMarker(49.5, 8.434, "car_loading_25");
+	CreateMarker(49.501, 8.434, "car_available");
+	
+	
+
 
 });
 
 
-application.controller('Ctrl_Manage', function ($rootScope, $scope) {
+application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory) {
 
-	var bookings = [];
-	var finishedBookings = [];
-
+	var open_bookings = [];
+	var done_bookings = [];
+	
+	//Make REST Call to /bookings/by-customer/{CustomerID}
+	
+	//Offene Buchungen
+	/*
+		
+		  {
+			"BookingId": 0,
+			"CustomerId": 0,
+			"TripId": 0,
+			"InvoiceId": 0,
+			"BookedPositionLatitude": 0,
+			"BookedPositionLongitude": 0,
+			"BookingDate": "2017-04-23T11:52:57.780Z",
+			"PlannedDate": "2017-04-23T11:52:57.780Z"
+		  }
+		
+	*/
+	
+	
+	
 	var i = 0;
 
 	for (i = 0; i < 3; i++) {
-		var booking = {
-			date: "01.01.2017",
-			startTime: "1" + i + ":00",
-			startPlace: "Hauptstrasse 1",
-			endTime: "1" + (i + 1) + ":00",
-			endPlace: "Hauptstrasse 2",
-			billing: "Preis: " + (i + 1) + "00 Euro",
-			payed: "Bezahlt"
+		
+		//REST Call
+		var return_obj = {
+			BookingId: 0,
+			CustomerId: 0,
+			TripId: 0,
+			InvoiceId: 0,
+			BookedPositionLatitude: 50.127714,
+			BookedPositionLongitude: 8.640663,
+			BookingDate: "2017-04-23T11:52:57.780Z",
+			PlannedDate: "2017-04-23T11:52:57.780Z"
 		};
-
-		if (i % 2 !== 0){
-			booking.payed = "Nicht bezahlt";
+		
+		
+		
+		var d = new Date(return_obj.PlannedDate);
+		
+		var day = d.getDate();
+		var month = d.getMonth() + 1;
+		var year = d.getFullYear();
+		
+		if(month < 10){
+			month = "0" + month;
 		}
 		
-		bookings.push(booking);
-	}
-
-	for (i = 0; i < 3; i++) {
-		var booking2 = {
-			date: "01.01.2017",
-			startTime: "1" + i + ":00",
-			startPlace: "Hauptstrasse 1",
-			endTime: "1" + (i + 1) + ":00",
-			endPlace: "Hauptstrasse 2",
-			billing: "Preis: " + (i + 1) + "00 Euro",
-			payed: "Bezahlt"
-		};
-
-		if (i % 2 !== 0){
-			booking2.payed = "Nicht bezahlt";
-		}
+		var start_date = day + "." + month + "." + year;
+		var start_time = d.getHours() + ":" + d.getMinutes();
 		
-		finishedBookings.push(booking2);
+		RESTFactory.GetAddress(return_obj.BookedPositionLatitude, return_obj.BookedPositionLongitude).then(function(response){
+			
+			console.log(response);
+			
+			var ret = response.data.results[0].address_components;
+			
+			var address = { };
+			
+			for(var i = 0;i < ret.length; i++){
+				
+				for(var j = 0; j < ret[i].types.length; j++){
+					switch(ret[i].types[j]){
+						case "street_number":
+							address.number = ret[i].long_name;
+							break;
+						case "route":
+							address.street = ret[i].long_name;
+							break;
+						case "locality":
+							address.city = ret[i].long_name;
+							break;
+						case "postal_code":
+							address.zip = ret[i].long_name;
+							break;
+						default:
+							break;
+					}
+				}
+				
+			}
+			
+			
+			var start = {
+				
+				date: start_date,
+				time: start_time,
+				address: address
+				
+			};
+			
+			var booking = {
+				bookingId: i,
+				start: start
+			};
+			console.log(booking);
+			
+			if (i % 2 !== 0){
+				booking.payed = "Nicht bezahlt";
+			}
+		
+			open_bookings.push(booking);
+			
+			$scope.open_bookings = open_bookings;
+		});
+		
+		
+		
+	//	var start_place = GeoCode_Reverse.geocodeLatLng(return_obj.BookedPositionLatitude, return_obj.BookedPositionLongitude);
+		
+	//	console.log(start_place);
+		
+		
 	}
 
 
-	$scope.bookings = bookings;
-	$scope.finishedBookings = finishedBookings;
-	$scope.currentBooking = finishedBookings[0];
 
 	$scope.ShowBilling = function (index) {
 		console.log(index + "   " + finishedBookings[index].billing);
