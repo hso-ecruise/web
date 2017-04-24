@@ -496,3 +496,173 @@ Total 654ms
 [36mCompleted in 0.000s at Mon Apr 24 2017 21:09:45 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile "app/index.html" changed.
 [36mCompleted in 0.000s at Mon Apr 24 2017 21:17:38 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/profile.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:39:57 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:40:31 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:40:54 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+
+[4mRunning "copy:styles" (copy) task[24m
+Copied 1 file
+
+[4mRunning "newer-postrun:copy:styles:1:/shared/web/node_modules/grunt-newer/.cache" (newer-postrun) task[24m
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-24 21:40:58 UTC+2)
+loading tasks                   290ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
+loading grunt-newer              34ms  ▇▇ 5%
+newer:copy:styles                16ms  ▇ 2%
+loading grunt-contrib-copy        7ms  ▇ 1%
+copy:styles                       8ms  ▇ 1%
+newer-postrun:...-newer/.cache  125ms  ▇▇▇▇▇▇ 18%
+loading grunt-postcss            57ms  ▇▇▇ 8%
+postcss:server                  118ms  ▇▇▇▇▇▇ 17%
+postcss:dist                     25ms  ▇▇ 4%
+Total 681ms
+
+[36mCompleted in 1.154s at Mon Apr 24 2017 21:40:59 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-24 21:42:17 UTC+2)
+loading tasks          294ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 44%
+loading grunt-newer     34ms  ▇▇ 5%
+newer:copy:styles       18ms  ▇▇ 3%
+loading grunt-postcss   68ms  ▇▇▇▇ 10%
+postcss:server         236ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 35%
+postcss:dist            16ms  ▇ 2%
+Total 667ms
+
+[36mCompleted in 1.126s at Mon Apr 24 2017 21:42:17 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:42:18 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-24 21:42:21 UTC+2)
+loading tasks          289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 44%
+loading grunt-newer     37ms  ▇▇▇ 6%
+newer:copy:styles       18ms  ▇▇ 3%
+loading grunt-postcss   59ms  ▇▇▇▇ 9%
+postcss:server         241ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
+postcss:dist            14ms  ▇ 2%
+Total 659ms
+
+[36mCompleted in 1.118s at Mon Apr 24 2017 21:42:22 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:42:22 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:42:29 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:44:43 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-24 21:45:10 UTC+2)
+loading tasks          290ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 44%
+loading grunt-newer     36ms  ▇▇▇ 6%
+newer:copy:styles       16ms  ▇ 2%
+loading grunt-postcss   58ms  ▇▇▇▇ 9%
+postcss:server         238ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 36%
+postcss:dist            15ms  ▇ 2%
+Total 653ms
+
+[36mCompleted in 1.115s at Mon Apr 24 2017 21:45:11 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:45:11 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-24 21:45:19 UTC+2)
+loading tasks          289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 44%
+loading grunt-newer     38ms  ▇▇▇ 6%
+newer:copy:styles       17ms  ▇▇ 3%
+loading grunt-postcss   59ms  ▇▇▇▇ 9%
+postcss:server         239ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 36%
+postcss:dist            15ms  ▇ 2%
+Total 658ms
+
+[36mCompleted in 1.117s at Mon Apr 24 2017 21:45:20 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:45:20 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-24 21:45:24 UTC+2)
+loading tasks          295ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 45%
+loading grunt-newer     37ms  ▇▇▇ 6%
+newer:copy:styles       17ms  ▇▇ 3%
+loading grunt-postcss   58ms  ▇▇▇▇ 9%
+postcss:server         237ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 36%
+postcss:dist            16ms  ▇ 2%
+Total 660ms
+
+[36mCompleted in 1.126s at Mon Apr 24 2017 21:45:24 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.001s at Mon Apr 24 2017 21:45:25 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:45:27 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 21:45:40 GMT+0200 (CEST)[39m - Waiting...
