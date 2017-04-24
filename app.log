@@ -15,11 +15,11 @@
     [32mDone, without errors.[39m
     
     
-    Execution Time (2017-04-17 22:10:51 UTC+2)
-    loading tasks               305ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 63%
-    loading grunt-contrib-copy  140ms  ▇▇▇▇▇▇▇▇▇▇ 29%
-    copy:styles                  37ms  ▇▇▇ 8%
-    Total 482ms
+    Execution Time (2017-04-24 19:33:24 UTC+2)
+    loading tasks               328ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 47%
+    loading grunt-contrib-copy  305ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
+    copy:styles                  71ms  ▇▇▇▇ 10%
+    Total 705ms
     
 [4mRunning "postcss:server" (postcss) task[24m
 [32m>> [39m1 processed stylesheet created.
@@ -29,684 +29,109 @@ Started connect web server on http://0.0.0.0:9000
 
 [4mRunning "watch" task[24m
 Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-
-[4mRunning "copy:styles" (copy) task[24m
-Copied 1 file
-
-[4mRunning "newer-postrun:copy:styles:1:/shared/web/node_modules/grunt-newer/.cache" (newer-postrun) task[24m
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 22:20:01 UTC+2)
-loading tasks                   295ms  ▇▇▇▇▇▇▇▇▇▇▇▇ 38%
-loading grunt-newer              92ms  ▇▇▇▇ 12%
-newer:copy:styles                31ms  ▇▇ 4%
-loading grunt-contrib-copy       13ms  ▇ 2%
-copy:styles                      11ms  ▇ 1%
-newer-postrun:...-newer/.cache  129ms  ▇▇▇▇▇ 16%
-loading grunt-postcss            58ms  ▇▇▇ 7%
-postcss:server                  128ms  ▇▇▇▇▇ 16%
-postcss:dist                     27ms  ▇▇ 3%
-Total 786ms
-
-[36mCompleted in 1.254s at Mon Apr 17 2017 22:20:02 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 22:20:12 UTC+2)
-loading tasks          289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
-loading grunt-newer     34ms  ▇▇ 5%
-newer:copy:styles       18ms  ▇▇ 3%
-loading grunt-postcss   68ms  ▇▇▇▇ 10%
-postcss:server         252ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 36%
-postcss:dist            30ms  ▇▇ 4%
-Total 693ms
-
-[36mCompleted in 1.157s at Mon Apr 17 2017 22:20:13 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 22:20:19 UTC+2)
-loading tasks          292ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
-loading grunt-newer     35ms  ▇▇ 5%
-newer:copy:styles       17ms  ▇ 2%
-loading grunt-postcss   58ms  ▇▇▇▇ 8%
-postcss:server         253ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            28ms  ▇▇ 4%
-Total 685ms
-
-[36mCompleted in 1.148s at Mon Apr 17 2017 22:20:20 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:20:20 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:22:26 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:22:31 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:22:45 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:23:10 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 22:23:30 UTC+2)
-loading tasks          290ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
-loading grunt-newer     36ms  ▇▇▇ 5%
-newer:copy:styles       17ms  ▇ 2%
-loading grunt-postcss   58ms  ▇▇▇▇ 9%
-postcss:server         253ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            28ms  ▇▇ 4%
-Total 682ms
-
-[36mCompleted in 1.146s at Mon Apr 17 2017 22:23:31 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:23:31 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 22:23:37 UTC+2)
-loading tasks          289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
-loading grunt-newer     37ms  ▇▇▇ 5%
-newer:copy:styles       18ms  ▇▇ 3%
-loading grunt-postcss   57ms  ▇▇▇▇ 8%
-postcss:server         248ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            28ms  ▇▇ 4%
-Total 678ms
-
-[36mCompleted in 1.140s at Mon Apr 17 2017 22:23:38 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:23:38 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 22:23:56 UTC+2)
-loading tasks          291ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
-loading grunt-newer     35ms  ▇▇▇ 5%
-newer:copy:styles       18ms  ▇▇ 3%
-loading grunt-postcss   58ms  ▇▇▇▇ 9%
-postcss:server         248ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            28ms  ▇▇ 4%
-Total 679ms
-
-[36mCompleted in 1.142s at Mon Apr 17 2017 22:23:57 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 22:23:57 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:24:02 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 22:25:38 UTC+2)
-loading tasks          290ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
-loading grunt-newer     36ms  ▇▇▇ 5%
-newer:copy:styles       18ms  ▇▇ 3%
-loading grunt-postcss   65ms  ▇▇▇▇ 9%
-postcss:server         256ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            28ms  ▇▇ 4%
-Total 693ms
-
-[36mCompleted in 1.153s at Mon Apr 17 2017 22:25:39 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:25:55 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:26:15 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 22:26:20 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:26:25 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 22:26:45 UTC+2)
-loading tasks          290ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
-loading grunt-newer     34ms  ▇▇ 5%
-newer:copy:styles       19ms  ▇▇ 3%
-loading grunt-postcss   64ms  ▇▇▇▇ 9%
-postcss:server         256ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            28ms  ▇▇ 4%
-Total 691ms
-
-[36mCompleted in 1.152s at Mon Apr 17 2017 22:26:46 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:27:38 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:27:55 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:28:13 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:28:17 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:35:16 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:35:18 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:35:20 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.002s at Mon Apr 17 2017 22:35:31 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:35:36 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:35:48 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:35:55 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:35:58 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:36:01 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:36:26 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:36:34 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:37:05 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:37:14 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:37:24 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:37:30 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:39:21 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 22:39:49 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:40:13 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:40:24 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 22:40:30 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:40:42 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:40:56 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:41:06 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:41:14 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 22:41:44 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:41:52 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:44:20 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:44:23 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:44:30 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:44:37 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:44:42 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:44:57 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:45:12 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:45:22 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:45:39 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:45:50 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:46:03 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:46:54 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:47:09 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:47:26 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:47:43 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:48:02 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:48:07 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:48:11 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:48:21 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:48:38 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 22:48:51 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:48:53 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:49:39 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:50:05 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:50:18 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:50:24 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:52:45 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:53:39 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:53:53 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:53:59 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:54:05 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:54:12 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:54:16 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:54:20 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:54:22 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:54:26 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:55:04 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:55:14 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:55:22 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:55:31 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:56:01 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:56:13 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:56:47 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:56:53 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:56:57 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:58:20 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:58:43 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 22:58:46 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:02:30 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:02:33 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:02:35 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:02:39 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:02:42 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:02:44 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:04:14 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:06:19 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:06:26 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:06:38 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:07:10 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:07:16 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:07:18 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:07:23 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:07:28 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:07:32 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:07:36 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:07:55 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:08:09 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:08:12 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:08:41 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:08:53 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:09:03 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 23:09:10 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 23:09:29 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:09:34 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:09:45 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:09:46 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 23:11:26 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:11:30 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:11:45 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:11:52 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-
-[4mRunning "copy:styles" (copy) task[24m
-Copied 1 file
-
-[4mRunning "newer-postrun:copy:styles:1:/shared/web/node_modules/grunt-newer/.cache" (newer-postrun) task[24m
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 23:12:11 UTC+2)
-loading tasks                   294ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
-loading grunt-newer              34ms  ▇▇ 5%
-newer:copy:styles                17ms  ▇ 2%
-copy:styles                       9ms  ▇ 1%
-newer-postrun:...-newer/.cache  125ms  ▇▇▇▇▇▇ 18%
-loading grunt-postcss            57ms  ▇▇▇ 8%
-postcss:server                  129ms  ▇▇▇▇▇▇ 19%
-postcss:dist                     25ms  ▇▇ 4%
-Total 697ms
-
-[36mCompleted in 1.158s at Mon Apr 17 2017 23:12:12 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:12:20 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:12:33 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:13:07 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:13:09 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:13:19 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:13:25 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 23:13:27 UTC+2)
-loading tasks          290ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
-loading grunt-newer     38ms  ▇▇▇ 6%
-newer:copy:styles       18ms  ▇▇ 3%
-loading grunt-postcss   62ms  ▇▇▇▇ 9%
-postcss:server         251ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            17ms  ▇ 3%
-Total 677ms
-
-[36mCompleted in 1.137s at Mon Apr 17 2017 23:13:28 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 23:13:29 UTC+2)
-loading tasks          292ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
-loading grunt-newer     37ms  ▇▇▇ 5%
-newer:copy:styles       18ms  ▇▇ 3%
-loading grunt-postcss   59ms  ▇▇▇▇ 9%
-postcss:server         249ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            18ms  ▇▇ 3%
-Total 675ms
-
-[36mCompleted in 2.296s at Mon Apr 17 2017 23:13:29 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:13:29 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:14:41 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:14:54 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:15:10 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:15:53 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:16:15 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.001s at Mon Apr 17 2017 23:16:24 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:16:55 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-
-[4mRunning "copy:styles" (copy) task[24m
-Copied 1 file
-
-[4mRunning "newer-postrun:copy:styles:1:/shared/web/node_modules/grunt-newer/.cache" (newer-postrun) task[24m
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 23:17:03 UTC+2)
-loading tasks                   291ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
-loading grunt-newer              35ms  ▇▇ 5%
-newer:copy:styles                17ms  ▇ 2%
-copy:styles                       8ms  ▇ 1%
-newer-postrun:...-newer/.cache  126ms  ▇▇▇▇▇▇ 18%
-loading grunt-postcss            57ms  ▇▇▇ 8%
-postcss:server                  130ms  ▇▇▇▇▇▇ 19%
-postcss:dist                     26ms  ▇▇ 4%
-Total 697ms
-
-[36mCompleted in 1.156s at Mon Apr 17 2017 23:17:03 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 23:17:16 UTC+2)
-loading tasks          289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 44%
-loading grunt-newer     37ms  ▇▇▇ 6%
-newer:copy:styles       18ms  ▇▇ 3%
-loading grunt-postcss   58ms  ▇▇▇▇ 9%
-postcss:server         246ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            15ms  ▇ 2%
-Total 664ms
-
-[36mCompleted in 1.122s at Mon Apr 17 2017 23:17:17 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:17:17 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 23:17:33 UTC+2)
-loading tasks          296ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 44%
-loading grunt-newer     34ms  ▇▇ 5%
-newer:copy:styles       17ms  ▇ 3%
-loading grunt-postcss   58ms  ▇▇▇▇ 9%
-postcss:server         251ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            16ms  ▇ 2%
-Total 673ms
-
-[36mCompleted in 1.134s at Mon Apr 17 2017 23:17:34 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:17:34 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 23:17:37 UTC+2)
-loading tasks          290ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 44%
-loading grunt-newer     34ms  ▇▇ 5%
-newer:copy:styles       18ms  ▇▇ 3%
-loading grunt-postcss   57ms  ▇▇▇▇ 9%
-postcss:server         249ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
-postcss:dist            16ms  ▇ 2%
-Total 665ms
-
-[36mCompleted in 1.128s at Mon Apr 17 2017 23:17:38 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:17:38 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/styles/main.css" changed.
-[4mRunning "newer:copy:styles" (newer) task[24m
-No newer files to process.
-
-[4mRunning "postcss:server" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[4mRunning "postcss:dist" (postcss) task[24m
-[32m>> [39m1 processed stylesheet created.
-
-[32mDone, without errors.[39m
-
-
-Execution Time (2017-04-17 23:18:24 UTC+2)
-loading tasks          289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
-loading grunt-newer     34ms  ▇▇ 5%
-newer:copy:styles       16ms  ▇ 2%
-loading grunt-postcss   59ms  ▇▇▇▇ 9%
-postcss:server         252ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
-postcss:dist            16ms  ▇ 2%
-Total 667ms
-
-[36mCompleted in 1.129s at Mon Apr 17 2017 23:18:25 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile ".tmp/styles/main.css" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:18:25 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:18:30 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Mon Apr 17 2017 23:18:42 GMT+0200 (CEST)[39m - Waiting...
+[36mCompleted in 0.001s at Mon Apr 24 2017 19:36:19 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[32m>> [39mFile "app/views/main.html" changed.
+[32m>> [39mFile "app/scripts/app.js" changed.
+[32m>> [39mFile "app/scripts/controllers/main.js" changed.
+[32m>> [39mFile "app/images/icons" added.
+[32m>> [39mFile "app/scripts/controllers/booking.js" added.
+[32m>> [39mFile "app/scripts/controllers/loginRegister.js" added.
+[32m>> [39mFile "app/scripts/controllers/mainCtrl.js" added.
+[32m>> [39mFile "app/scripts/controllers/manage.js" added.
+[32m>> [39mFile "app/scripts/controllers/profile.js" added.
+[4mRunning "newer:jshint:all" (newer) task[24m
+
+[4mRunning "jshint:all" (jshint) task[24m
+
+app/scripts/app.js
+  line 21   col 7   Expected an identifier and instead saw '.'.
+  line 21   col 8   Expected ']' to match '[' from line 12 and instead saw 'blubb'.
+  line 23   col 3   Expected ')' and instead saw ']'.
+  line 23   col 4   Missing semicolon.
+  line 23   col 4   Expected an identifier and instead saw ')'.
+  line 24   col 3   Expected an operator and instead saw '.'.
+  line 24   col 3   Expected an assignment or function call and instead saw an expression.
+  line 24   col 4   Missing semicolon.
+  line 24   col 4   'config' is not defined.
+
+app/scripts/controllers/booking.js
+  line 2    col 5   Missing "use strict" statement.
+  line 33   col 6   Missing semicolon.
+  line 1    col 1   'application' is not defined.
+  line 2    col 19  'google' is not defined.
+  line 4    col 21  'google' is not defined.
+  line 19   col 21  'google' is not defined.
+  line 20   col 17  'google' is not defined.
+  line 21   col 21  'google' is not defined.
+  line 27   col 22  'google' is not defined.
+  line 28   col 23  'google' is not defined.
+  line 1    col 70  'NgMap' is defined but never used.
+  line 1    col 62  '$scope' is defined but never used.
+  line 1    col 50  '$rootScope' is defined but never used.
+  line 27   col 9   'marker' is defined but never used.
+
+app/scripts/controllers/loginRegister.js
+  line 3    col 3   Missing "use strict" statement.
+  line 1    col 1   'application' is not defined.
+
+app/scripts/controllers/main.js
+  line 31   col 5   'alert' is not defined.
+  line 32   col 5   'alert' is not defined.
+  line 119  col 76  'PostReset' is defined but never used.
+  line 119  col 64  'PostCaller' is defined but never used.
+
+app/scripts/controllers/mainCtrl.js
+  line 2    col 5   Missing "use strict" statement.
+  line 1    col 1   'application' is not defined.
+
+app/scripts/controllers/manage.js
+  line 2    col 5   Missing "use strict" statement.
+  line 107  col 6   Don't make functions within a loop.
+  line 1    col 1   'application' is not defined.
+  line 121  col 33  'finishedBookings' is not defined.
+  line 122  col 29  'finishedBookings' is not defined.
+  line 3    col 9   'done_bookings' is defined but never used.
+
+app/scripts/controllers/profile.js
+  line 3    col 5   Missing "use strict" statement.
+  line 1    col 1   'application' is not defined.
+
+  ✖  9 errors
+  ⚠  30 warnings
+
+[33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
+
+[31mAborted due to warnings.[39m
+
+
+Execution Time (2017-04-24 19:36:28 UTC+2)
+loading tasks                 287ms  ▇▇▇▇▇▇▇▇▇▇ 29%
+loading grunt-newer            78ms  ▇▇▇ 8%
+newer:jshint:all               18ms  ▇ 2%
+loading grunt-contrib-jshint  318ms  ▇▇▇▇▇▇▇▇▇▇▇ 32%
+jshint:all                    302ms  ▇▇▇▇▇▇▇▇▇▇ 30%
+Total 1s
+
+[36mCompleted in 2.942s at Mon Apr 24 2017 19:36:29 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/profile.html" deleted.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:34:35 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/profile.html" added.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:34:37 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/profile.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:35:22 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/profile.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:35:27 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/profile.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:35:51 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/profile.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:36:38 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/profile.html" changed.
+[36mCompleted in 0.001s at Mon Apr 24 2017 20:36:53 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" deleted.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:38:06 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" added.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:38:08 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Mon Apr 24 2017 20:38:56 GMT+0200 (CEST)[39m - Waiting...
