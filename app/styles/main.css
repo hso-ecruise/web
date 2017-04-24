@@ -24,7 +24,7 @@ md-input-container{
 	flex:1;
 }
 .user-edit-right{
-	height: 330px;
+	height: 450px;
 	flex:10;
 }
 	
@@ -40,9 +40,7 @@ body {
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
+.header{
   padding-left: 15px;
   padding-right: 15px;
 
