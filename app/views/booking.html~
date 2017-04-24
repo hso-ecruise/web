@@ -1,0 +1,9 @@
+<div style="width: 800px; height: 600px;" id='map' ></div>
+<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{googleMapsUrl}}">
+  <ng-map id="gmap" center="49.5, 8.434" zoom="12">
+    <div ng-repeat="p in points">
+      <marker position="{{ p.latitude }}, {{ p.longitude }}"></marker>
+    </div>
+  </ng-map>
+</div>
+</div>

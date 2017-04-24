@@ -1,0 +1,105 @@
+<!-- PROFILE START -->
+<div class="profile-flex-container" >
+  <div ng-cloak class="user-edit-left content">
+    <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+	<h2 class="md-flex">Pers&ouml;nliche Daten</h2>
+      </div>
+    </md-toolbar>
+
+    <md-content flex layout-padding class="">
+      <md-input-container class="md-block" flex-gt-xs>
+	<label> Ihre Kundennummer:  {{ user.userID }} </label>
+	<input disabled>
+      </md-input-container>			
+      
+      <md-input-container>
+	<label>Vorname</label>
+	<input ng-model="user.name"/>
+      </md-input-container>
+      
+      <md-input-container>
+	<label>Nachname</label>
+	<input ng-model="user.familyName"/>
+      </md-input-container>
+    </md-content>
+    
+    <md-content flex layout-padding>	
+      <md-input-container>
+	<label>Email</label>
+	<input ng-model="user.email" type="email" />
+      </md-input-container>
+      <md-input-container>
+	<label>Telefon</label>
+	<input ng-model="user.phoneNr"/>
+      </md-input-container>
+    </md-content>
+    
+    <md-content flex layout-padding>	
+      <md-input-container>
+	<label>Strasse</label>
+	<input ng-model="user.address.street" />
+      </md-input-container>
+      <md-input-container>
+	<label>Hausnummer</label>
+	<input ng-model="user.address.number" />
+      </md-input-container>
+    </md-content>
+    <md-content flex layout-padding>	
+      <md-input-container>
+	<label>Land</label>
+	<input ng-model="user.address.country" />
+      </md-input-container>
+      <md-input-container>
+	<label>PLZ</label>
+	<input ng-model="user.address.zip" />
+      </md-input-container>
+    </md-content>
+    <!--TODO-->
+    <md-content flex layout-padding>
+      <md-input-container>
+	<label>Stadt</label>
+	<input ng-model="user.address.city" />
+	<!--
+	    <md-select ng-model="user.address.state">
+	      <md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
+		{{user.address.state.abbrev}}
+	      </md-option>
+	    </md-select>
+	    -->
+      </md-input-container>
+    </md-content>
+    
+    <md-content flex layout-padding>
+      <md-button class="md-raised md-warn" ng-click="Cancel()"> Verwerfen </md-button>
+      <md-button class="md-raised md-primary" ng-click="Safe()"> Speichern </md-button>
+    </md-content>
+  </div>
+
+  <div class="user-edit-mid"></div>
+  <div ng-controller="Ctrl_Profile"  ng-cloak class="user-edit-right content">
+    <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+	<h2 class="md-flex">Passwort &auml;ndern</h2>
+      </div>
+    </md-toolbar>
+    <md-content flex layout-padding>	
+      <md-input-container>
+	<input type="password" placeholder="Altes Passwort" ng-model="user.password.old" />
+      </md-input-container>
+    </md-content>
+    <md-content flex layout-padding>	
+      <md-input-container>
+	<input type="password" placeholder="Neues Passwort" ng-model="user.password.new" />
+      </md-input-container>
+      <md-input-container>
+        <input type="password" placeholder="Passwort bestätigen" ng-model="user.password.confirm" />
+      </md-input-container>
+    </md-content>
+    <md-content flex layout-padding>
+      <md-button class="md-raised md-primary" ng-click="ChangePassword()"> Passwort &auml;ndern </md-button>
+    </md-content>
+  </div>
+</div>
+
+<!-- PROFILE END -->
