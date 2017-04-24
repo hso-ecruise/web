@@ -33,15 +33,6 @@
                     <input placeholder="Land" ng-model="user.address.country" />
                 </md-input-container>
             </md-content>
-
-            <md-content flex layout-padding>	
-                <md-input-container>
-                    <input placeholder="Strasse" ng-model="user.address.street" />
-                </md-input-container>
-                <md-input-container>
-                    <input placeholder="Hausnummer" ng-model="user.address.number" />
-                </md-input-container>
-            </md-content>
             <md-content flex layout-padding>
                 <md-input-container>
                     <input placeholder="PLZ" ng-model="user.address.zip" />
@@ -50,13 +41,22 @@
                     <input placeholder="Stadt" ng-model="user.address.city" />
                 </md-input-container>
             </md-content>
-                    <!--
-                    <md-select ng-model="user.address.state">
-                    <md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
-                    {{user.address.state.abbrev}}
-                    </md-option>
-                    </md-select>
-                    -->
+            <md-content flex layout-padding>	
+                <md-input-container>
+                    <input placeholder="Strasse" ng-model="user.address.street" />
+                </md-input-container>
+                <md-input-container>
+                    <input placeholder="Hausnummer" ng-model="user.address.number" />
+                </md-input-container>
+            </md-content>
+
+            <!--
+<md-select ng-model="user.address.state">
+<md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
+{{user.address.state.abbrev}}
+</md-option>
+</md-select>
+-->
 
 
             <md-content flex layout-padding>
