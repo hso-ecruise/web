@@ -24,12 +24,12 @@ var application = angular.module('webApp', [
 var checkRouting= function ($rootScope, $location) {
     if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
     {
-       $location.path("/login");
+		$location.path("/login");
     }
     else
     {
-	alert("true or other");
-	alert($rootScope.LoggedIN);
+		alert("true or other");
+		alert($rootScope.LoggedIN);
     }
 };
 
@@ -39,38 +39,50 @@ application.config(function ($routeProvider, $locationProvider){
 	.when('/', {
 	    templateUrl: 'views/main.html',
 	    resolve: {
-		factory: checkRouting
-	    }
-	})
+			factory: checkRouting
+			}
+		})
+	
 	.when('/login',
-	      {
-		  templateUrl : 'views/login.html',
-		  controller: 'Ctrl_Login_Register'
-	      })
+	    {
+			templateUrl : 'views/login.html',
+			controller: 'Ctrl_Login_Register'
+	    })
+		
 	.when('/register',
-	      {
-		  templateUrl : 'views/register.html',
-		  controller: 'Ctrl_Login_Register'
-	      })
-    	.when('/booking',
-	      {
-		  templateUrl : 'views/booking.html',
-		  controller: 'Ctrl_Booking'
-	      })
-	.when ('/about', {
-	    templateUrl: 'views/about.html'
-	})
-    	.when ('/manage', {
-	    templateUrl: 'views/manage.html',
-	    controller: 'Ctrl_Manage'
-	})
-	.when ('/profile', {
-	    templateUrl: 'views/profile.html',
-	    controller: 'Ctrl_Manage'
-	})
+	    {
+			templateUrl : 'views/register.html',
+			controller: 'Ctrl_Login_Register'
+	    })
+		
+    .when('/booking',
+	    {
+			templateUrl : 'views/booking.html',
+			controller: 'Ctrl_Booking'
+		})
+		
+	.when ('/about',
+		{
+			templateUrl: 'views/about.html'
+		})
+    
+	.when ('/manage',
+		{
+			templateUrl: 'views/manage.html',
+			controller: 'Ctrl_Manage'
+		})
+	
+	.when ('/profile',
+		{
+			templateUrl: 'views/profile.html',
+			controller: 'Ctrl_Manage'
+		})
+	
 	.otherwise(
 	    {
-		template: 'NO PAGE'
+			templateUrl : 'views/login.html',
+			controller: 'Ctrl_Login_Register'
+			//template: 'NO PAGE'
 	    });
 	
     $locationProvider

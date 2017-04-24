@@ -1,3 +1,5 @@
+'use strict';
+
 application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $location) {
 
   $scope.Login = function () {
