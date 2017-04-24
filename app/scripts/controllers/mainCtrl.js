@@ -1,3 +1,5 @@
+'use strict';
+
 application.controller('Ctrl_Main', function ($rootScope, $scope) {
     var init = function () {
 	$rootScope.loggedIN = "false";

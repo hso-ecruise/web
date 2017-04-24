@@ -1,3 +1,5 @@
+'use strict';
+
 application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope) {
     
     var userID = "";
