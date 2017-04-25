@@ -16,7 +16,14 @@
         <!-- endbuild -->
         <style>
 
-
+.manage-flex-container{
+display:flex;
+width: 80%;
+margin: auto;
+margin-top: 10px;
+margin-bottom: 0; 
+}
+            
         </style>
     </head>
 
@@ -26,7 +33,7 @@
             <div ng-switch-when="false">
                 <!-- HEAD LINE START -->
                 <div class="header navbar" >
-                    <md-content class="md-padding" >
+                    <md-content class="md-padding">
                         <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links" >
                             <md-nav-item md-nav-href="login"  name="login" > Login </md-nav-item>
                             <md-nav-item md-nav-href="register" name="register" > Registrieren </md-nav-item>
@@ -94,7 +101,7 @@
         <script src="scripts/controllers/booking.js"></script>
         <script src="scripts/controllers/profile.js"></script>
         <script src="scripts/controllers/mainCtrl.js"></script>
-        <script src="scripts/controllers/design.js"></script>
+        <script src="styles/design.js"></script>
         <!-- endbuild -->
     </body>
 </html>

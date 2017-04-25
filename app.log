@@ -1660,3 +1660,225 @@ jshint:all                    270ms  ▇▇▇▇▇▇▇▇▇▇▇▇ 35%
 Total 771ms
 
 [36mCompleted in 1.234s at Tue Apr 25 2017 18:41:17 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 18:44:06 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 18:44:27 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 18:44:35 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.001s at Tue Apr 25 2017 18:44:43 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/OLD MANAGE BACKUP.html" added.
+[36mCompleted in 0.001s at Tue Apr 25 2017 19:35:04 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" deleted.
+[36mCompleted in 0.000s at Tue Apr 25 2017 19:52:13 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" added.
+[36mCompleted in 0.000s at Tue Apr 25 2017 19:52:20 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 19:52:45 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 19:54:00 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/scripts/controllers/design.js" changed.
+[4mRunning "newer:jshint:all" (newer) task[24m
+
+[4mRunning "jshint:all" (jshint) task[24m
+
+app/scripts/app.js
+  line 36   col 9   'alert' is not defined.
+  line 37   col 9   'alert' is not defined.
+
+app/scripts/controllers/booking.js
+  line 3    col 1   'application' is not defined.
+  line 5    col 19  'google' is not defined.
+  line 7    col 21  'google' is not defined.
+  line 49   col 25  'google' is not defined.
+  line 50   col 21  'google' is not defined.
+  line 51   col 21  'google' is not defined.
+  line 58   col 26  'google' is not defined.
+  line 59   col 27  'google' is not defined.
+  line 3    col 70  'NgMap' is defined but never used.
+  line 3    col 62  '$scope' is defined but never used.
+  line 3    col 50  '$rootScope' is defined but never used.
+  line 58   col 13  'marker' is defined but never used.
+
+app/scripts/controllers/design.js
+  line 7    col 31  Missing semicolon.
+  line 11   col 19  'Ctrl_Main' was used before it was defined.
+
+app/scripts/controllers/loginRegister.js
+  line 3    col 1   'application' is not defined.
+
+app/scripts/controllers/main.js
+  line 31   col 9   'alert' is not defined.
+  line 32   col 9   'alert' is not defined.
+  line 131  col 76  'PostReset' is defined but never used.
+  line 131  col 64  'PostCaller' is defined but never used.
+
+app/scripts/controllers/mainCtrl.js
+  line 3    col 1   'application' is not defined.
+
+app/scripts/controllers/manage.js
+  line 110  col 10  Don't make functions within a loop.
+  line 3    col 1   'application' is not defined.
+  line 124  col 33  'finishedBookings' is not defined.
+  line 125  col 29  'finishedBookings' is not defined.
+  line 5    col 9   'done_bookings' is defined but never used.
+
+app/scripts/controllers/profile.js
+  line 3    col 1   'application' is not defined.
+
+  ⚠  28 warnings
+
+[33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
+
+[31mAborted due to warnings.[39m
+
+
+Execution Time (2017-04-25 19:56:18 UTC+2)
+loading tasks                 295ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+loading grunt-newer            37ms  ▇▇ 5%
+newer:jshint:all               20ms  ▇ 3%
+loading grunt-contrib-jshint  154ms  ▇▇▇▇▇▇▇ 20%
+jshint:all                    273ms  ▇▇▇▇▇▇▇▇▇▇▇▇ 35%
+Total 780ms
+
+[36mCompleted in 1.248s at Tue Apr 25 2017 19:56:19 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/scripts/controllers/design.js" deleted.
+[4mRunning "newer:jshint:all" (newer) task[24m
+
+[4mRunning "jshint:all" (jshint) task[24m
+
+app/scripts/app.js
+  line 36   col 9   'alert' is not defined.
+  line 37   col 9   'alert' is not defined.
+
+app/scripts/controllers/booking.js
+  line 3    col 1   'application' is not defined.
+  line 5    col 19  'google' is not defined.
+  line 7    col 21  'google' is not defined.
+  line 49   col 25  'google' is not defined.
+  line 50   col 21  'google' is not defined.
+  line 51   col 21  'google' is not defined.
+  line 58   col 26  'google' is not defined.
+  line 59   col 27  'google' is not defined.
+  line 3    col 70  'NgMap' is defined but never used.
+  line 3    col 62  '$scope' is defined but never used.
+  line 3    col 50  '$rootScope' is defined but never used.
+  line 58   col 13  'marker' is defined but never used.
+
+app/scripts/controllers/loginRegister.js
+  line 3    col 1   'application' is not defined.
+
+app/scripts/controllers/main.js
+  line 31   col 9   'alert' is not defined.
+  line 32   col 9   'alert' is not defined.
+  line 131  col 76  'PostReset' is defined but never used.
+  line 131  col 64  'PostCaller' is defined but never used.
+
+app/scripts/controllers/mainCtrl.js
+  line 3    col 1   'application' is not defined.
+
+app/scripts/controllers/manage.js
+  line 110  col 10  Don't make functions within a loop.
+  line 3    col 1   'application' is not defined.
+  line 124  col 33  'finishedBookings' is not defined.
+  line 125  col 29  'finishedBookings' is not defined.
+  line 5    col 9   'done_bookings' is defined but never used.
+
+app/scripts/controllers/profile.js
+  line 3    col 1   'application' is not defined.
+
+  ⚠  26 warnings
+
+[33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
+
+[31mAborted due to warnings.[39m
+
+
+Execution Time (2017-04-25 19:56:27 UTC+2)
+loading tasks                 289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+loading grunt-newer            34ms  ▇▇ 4%
+newer:jshint:all               19ms  ▇ 2%
+loading grunt-contrib-jshint  153ms  ▇▇▇▇▇▇▇ 20%
+jshint:all                    268ms  ▇▇▇▇▇▇▇▇▇▇▇▇ 35%
+Total 764ms
+
+[36mCompleted in 1.224s at Tue Apr 25 2017 19:56:28 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 19:57:03 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:05:28 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.001s at Tue Apr 25 2017 20:07:54 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:08:00 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:08:10 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:09:07 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:09:14 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:12:46 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:15:17 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.001s at Tue Apr 25 2017 20:18:26 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:19:52 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:22:52 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:23:30 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:23:32 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:24:45 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:25:02 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:25:52 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.001s at Tue Apr 25 2017 20:26:27 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:26:36 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:31:14 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:32:50 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:33:10 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:33:26 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:34:47 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:35:16 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:35:26 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.001s at Tue Apr 25 2017 20:35:37 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:36:03 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:36:23 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:38:34 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:40:12 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:40:55 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:41:35 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:41:43 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:43:49 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:44:21 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:45:04 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.001s at Tue Apr 25 2017 20:45:11 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 20:46:26 GMT+0200 (CEST)[39m - Waiting...

@@ -1,0 +1,130 @@
+
+<table>
+	<thead>
+		<tr>
+			<td>
+				<md-toolbar class="md-hue-2">
+					<div class="md-toolbar-tools">
+						<h2 class="md-flex">Ausstehende Fahrten</h2>
+					</div>
+				</md-toolbar>
+			</td>
+			<td>
+				<b style="margin-left: 25px;"></b>
+			</td>
+			<td>
+				<md-toolbar class="md-hue-2">
+					<div class="md-toolbar-tools">
+						<h2 class="md-flex">Abgeschlossene Fahrten</h2>
+					</div>
+				</md-toolbar>
+			</td>
+			<td>
+				<b style="margin-left: 25px;"></b>
+			</td>
+			<td>
+				<md-toolbar class="md-hue-2">
+					<div class="md-toolbar-tools">
+						<h2 class="md-flex">Rechnung</h2>
+					</div>
+				</md-toolbar>
+			</td>
+		</tr>
+	</thead>
+	<!--
+      
+      für die Tabllen zum Auflisten:
+      
+      Ausstehende Fahrten
+      
+      //If it can be shown on map
+      {{ booking.state }}
+      
+      {{ booking.start.date }}
+      {{ booking.start.time }}
+      {{ booking.start.address.number }}
+      {{ booking.start.address.street }}
+      {{ booking.start.address.zip }}
+      {{ booking.start.address.city }}
+      
+      {{ booking.end.date }}
+      {{ booking.end.time }}
+      {{ booking.end.address.number }}
+      {{ booking.end.address.street }}
+      {{ booking.end.address.zip }}
+      {{ booking.end.address.city }}
+      
+      {{ booking.vehicleID }}
+      
+      
+      Abgeschlossene Fahrten
+      
+    -->
+	<tbody>
+		<tr>
+			<td>
+				<table style="width: 300px;">
+					<tr ng-repeat="booking in open_bookings track by $index">
+						<td  ng-switch on="{{ booking.state }}">
+							<md-content flex layout-padding class="md-block">
+								<label> Datum:  {{ booking.start.date }} </label>
+								<br />
+								<label> Fahrtbeginn:  {{ booking.start.time }} </label>
+								<br />
+								<label> Straße Nr.:  {{ booking.start.address.street }} {{ booking.start.address.number }}  </label>
+								<label> PLZ:  {{ booking.start.address.zip }} </label>
+								<label> Stadt: {{ booking.start.address.city }} </label>
+								<label  ng-switch-when="true">
+									<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
+								</label>
+							</md-content>
+							<br />
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td></td>
+			<td>
+				<table style="width: 300px;">
+					<tr ng-repeat="booking in done_bookings track by $index">
+						<td  ng-switch on="{{ booking.state }}">
+							<md-content flex layout-padding class="md-block">
+							<label> Datum:  {{ booking.date }} </label>
+							<br />
+							<label> Fahrtbeginn:  {{ booking.startTime }} </label>
+							<label> {{ booking.startPlace }} </label>
+							<br />
+							<label> Fahrtende:  {{ booking.endTime }} </label>
+							<label> {{ booking.endPlace }} </label>
+							<br />
+							<md-button class="md-raised md-primary" ng-click="ShowBilling($index)">Rechnung anzeigen</md-button>
+							</md-content>
+							<br />
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td></td>
+			<td>
+				<table style="width: 300px;">
+					<tr>
+						<td>
+							<md-content flex layout-padding class="md-block">
+								<label> Datum:  {{ currentBooking.date }} </label>
+								<br />
+								<label> Fahrtbeginn:  {{ currentBooking.startTime }} </label>
+								<label> Startpunkt:  {{ currentBooking.startPlace }} </label>
+								<br />
+								<label> Fahrtende:  {{ currentBooking.endTime }} </label>
+								<label> Endpunkt:  {{ currentBooking.endPlace }} </label>
+								<br />
+								<label> Preis: {{ currentBooking.billing }}</label>
+								<label> Rechnung: {{ currentBooking.payed }}</label>
+							</md-content>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</body>
+</table>
