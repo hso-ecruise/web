@@ -13,6 +13,14 @@ md-input-container{
 }
 
 
+.manage-flex-container{
+display:flex;
+width: 80%;
+margin: auto;
+margin-top: 10px;
+margin-bottom: 0; 
+}
+
 .profile-flex-container{
     display:flex;
     width: 830px;

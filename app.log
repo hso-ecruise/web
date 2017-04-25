@@ -1884,3 +1884,132 @@ Total 764ms
 [36mCompleted in 0.000s at Tue Apr 25 2017 20:46:26 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile "app/views/manage.html" changed.
 [36mCompleted in 0.000s at Tue Apr 25 2017 20:49:48 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:02:45 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:02:59 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:03:12 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.001s at Tue Apr 25 2017 21:04:14 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:09:46 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:09:51 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" deleted.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:20:36 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/scripts/app.js" changed.
+[32m>> [39mFile "app/views/profile.html" changed.
+[32m>> [39mFile "app/scripts/controllers/manage.js" changed.
+[32m>> [39mFile "app/index.html" changed.
+[32m>> [39mFile "app/scripts/controllers/profile.js" changed.
+[32m>> [39mFile "app/views/manage.html" added.
+[4mRunning "newer:jshint:all" (newer) task[24m
+
+[4mRunning "jshint:all" (jshint) task[24m
+
+app/scripts/app.js
+  line 36   col 9   'alert' is not defined.
+  line 37   col 9   'alert' is not defined.
+
+app/scripts/controllers/booking.js
+  line 3    col 1   'application' is not defined.
+  line 5    col 19  'google' is not defined.
+  line 7    col 21  'google' is not defined.
+  line 49   col 25  'google' is not defined.
+  line 50   col 21  'google' is not defined.
+  line 51   col 21  'google' is not defined.
+  line 58   col 26  'google' is not defined.
+  line 59   col 27  'google' is not defined.
+  line 3    col 70  'NgMap' is defined but never used.
+  line 3    col 62  '$scope' is defined but never used.
+  line 3    col 50  '$rootScope' is defined but never used.
+  line 58   col 13  'marker' is defined but never used.
+
+app/scripts/controllers/loginRegister.js
+  line 3    col 1   'application' is not defined.
+
+app/scripts/controllers/main.js
+  line 31   col 9   'alert' is not defined.
+  line 32   col 9   'alert' is not defined.
+  line 131  col 76  'PostReset' is defined but never used.
+  line 131  col 64  'PostCaller' is defined but never used.
+
+app/scripts/controllers/mainCtrl.js
+  line 3    col 1   'application' is not defined.
+
+app/scripts/controllers/manage.js
+  line 65   col 13  Missing 'new' prefix when invoking a constructor.
+  line 65   col 46  Missing semicolon.
+  line 137  col 13  Expected '{' and instead saw 'open_bookings'.
+  line 160  col 9   Missing 'new' prefix when invoking a constructor.
+  line 3    col 1   'application' is not defined.
+  line 243  col 33  'finishedBookings' is not defined.
+  line 244  col 29  'finishedBookings' is not defined.
+  line 6    col 9   'done_bookings' is defined but never used.
+
+app/scripts/controllers/profile.js
+  line 3    col 1   'application' is not defined.
+
+  ⚠  29 warnings
+
+[33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
+
+[31mAborted due to warnings.[39m
+
+
+Execution Time (2017-04-25 21:20:43 UTC+2)
+loading tasks                 288ms  ▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+loading grunt-newer            36ms  ▇▇ 5%
+newer:jshint:all               19ms  ▇ 2%
+loading grunt-contrib-jshint  153ms  ▇▇▇▇▇▇▇ 20%
+jshint:all                    271ms  ▇▇▇▇▇▇▇▇▇▇▇▇ 35%
+Total 768ms
+
+[36mCompleted in 1.235s at Tue Apr 25 2017 21:20:44 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:22:43 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" deleted.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:24:05 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" added.
+[36mCompleted in 0.001s at Tue Apr 25 2017 21:24:07 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" deleted.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:24:24 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/manage.html" added.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:27:21 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" deleted.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:29:47 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" added.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:29:49 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Tue Apr 25 2017 21:29:56 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+
+[4mRunning "copy:styles" (copy) task[24m
+Copied 1 file
+
+[4mRunning "newer-postrun:copy:styles:1:/shared/web/node_modules/grunt-newer/.cache" (newer-postrun) task[24m
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-25 21:30:16 UTC+2)
+loading tasks                   289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
+loading grunt-newer              34ms  ▇▇ 5%
+newer:copy:styles                16ms  ▇ 2%
+loading grunt-contrib-copy        7ms  ▇ 1%
+copy:styles                       9ms  ▇ 1%
+newer-postrun:...-newer/.cache  125ms  ▇▇▇▇▇▇ 18%
+loading grunt-postcss            57ms  ▇▇▇ 8%
+postcss:server                  118ms  ▇▇▇▇▇▇ 17%
+postcss:dist                     26ms  ▇▇ 4%
+Total 682ms
+
+[36mCompleted in 1.145s at Tue Apr 25 2017 21:30:16 GMT+0200 (CEST)[39m - Waiting...

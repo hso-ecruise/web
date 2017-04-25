@@ -1,197 +1,60 @@
+<div ng-cloak layout-gt-sm="row" layout="column" class="manage-flex-container">
 
-<div class="user-edit">
-    <div class="profile-flex-container" >
-        <div ng-cloak class="user-edit-left content">
-            <md-toolbar class="md-hue-2">
-                <div class="md-toolbar-tools">
-                    <h2 class="md-flex">Ausstehende Fahrten</h2>
-                </div>
-            </md-toolbar>
-			
-			<table>
-			
-				<tr ng-repeat="booking in open_bookings track by $index">
-					<td  ng-switch on="{{ booking.state }}">
-						<md-content flex layout-padding class="md-block">
-							<label> Datum:  {{ booking.start.date }}  Uhrzeit: {{ booking.start.time }} </label>
-							<br />
-							<label> Straße Nr.:  {{ booking.start.address.street }} {{ booking.start.address.number }}  </label>
-							<label> Stadt: {{ booking.start.address.city }} </label>
-							<label> PLZ:  {{ booking.start.address.zip }} </label>
-							<label  ng-switch-when="true">
-								<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
-							</label>
-						</md-content>
-						<br />
-					</td>
-				</tr>
-			
-			</table>
-			
-        </div>
-
-        <div class="user-edit-mid">
-		
-			<md-toolbar class="md-hue-2">
-                <div class="md-toolbar-tools">
-                    <h2 class="md-flex">Abgeschlossene Fahrten</h2>
-                </div>
-            </md-toolbar>
-			
-			<table>
-			
-				<tr ng-repeat="booking in done_bookings track by $index">
-					<td  ng-switch on="{{ booking.state }}">
-						<md-content flex layout-padding class="md-block">
-							<label> Datum:  {{ booking.start.date }} Uhrzeit: {{ booking.start.time }} </label>
-							<br />
-							<label> Straße Nr.:  {{ booking.start.address.street }} {{ booking.start.address.number }}  </label>
-							<label> Stadt: {{ booking.start.address.city }} </label>
-							<label> PLZ:  {{ booking.start.address.zip }} </label>
-							<label  ng-switch-when="true">
-								<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
-							</label>
-						</md-content>
-						<br />
-					</td>
-				</tr>
-			
-			</table>
-		
-		</div>
-
-        <div ng-cloak class="user-edit-right content">
-            <md-toolbar class="md-hue-2">
-                <div class="md-toolbar-tools">
-                    <h2 class="md-flex">Rechnung</h2>
-                </div>
-            </md-toolbar>
-			
-            <md-content flex layout-padding>
-                
-            </md-content>
-        </div>
+    <div flex-gt-sm="25" flex class="content">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">Ausstehende Fahrten</h2>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <md-list flex>
+              <!--  <md-subheader class="md-no-sticky"></md-subheader> -->
+                <md-list-item class="md-3-line" ng-repeat="booking in open_bookings track by $index" ng-click="Safe()">
+                    <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
+                        <h3>{{ booking.start.date }}  ab {{ booking.start.time }}</h3>
+                        <h4>Stra&szlig;e Nr.: {{ booking.start.address.street }} {{ booking.start.address.number }} </h4>
+                        <p>PLZ:  {{ booking.start.address.zip }}</p>
+                        <p>Stadt: {{ booking.start.address.city }}</p>
+                    </div>
+                    <md-divider ></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
     </div>
-</div>
+    
+    <div flex-gt-sm="3" flex></div>
 
+    <div flex-gt-sm="25" flex class="content">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">Abgeschlossene Fahrten</h2>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <md-list flex>
+                <md-list-item class="md-3-line" ng-repeat="booking in done_bookings track by $index" ng-click="ShowBilling($index)">
+                    <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
+                        <h3>{{ booking.date }} </h3>
+                        <h4>Fahrtbeginn:  {{ booking.startTime }}  {{ booking.startPlace }}</h4>
+                        <h4>Fahrtende:  {{ booking.endTime }}  {{ booking.endPlace }}</h4>
+                    </div>
+                    <md-divider ></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
 
+    <div flex-gt-sm="3" flex></div>
 
+    <div flex-gt-sm="45" flex class="content">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">Rechnung</h2>
+            </div>
+        </md-toolbar>
 
-
-<!--
-<table>
-	<thead>
-		<tr>
-			<td>
-				<md-toolbar class="md-hue-2">
-					<div class="md-toolbar-tools">
-						<h2 class="md-flex">Ausstehende Fahrten</h2>
-					</div>
-				</md-toolbar>
-			</td>
-			<td>
-				<b style="margin-left: 25px;"></b>
-			</td>
-			<td>
-				<md-toolbar class="md-hue-2">
-					<div class="md-toolbar-tools">
-						<h2 class="md-flex">Abgeschlossene Fahrten</h2>
-					</div>
-				</md-toolbar>
-			</td>
-			<td>
-				<b style="margin-left: 25px;"></b>
-			</td>
-			<td>
-				<md-toolbar class="md-hue-2">
-					<div class="md-toolbar-tools">
-						<h2 class="md-flex">Rechnung</h2>
-					</div>
-				</md-toolbar>
-			</td>
-		</tr>
-	</thead>
-	-->
-	<!--
-      
-      für die Tabllen zum Auflisten:
-      
-      Ausstehende Fahrten
-      
-      //If it can be shown on map
-      {{ booking.state }}
-      
-      {{ booking.start.date }}
-      {{ booking.start.time }}
-      {{ booking.start.address.number }}
-      {{ booking.start.address.street }}
-      {{ booking.start.address.zip }}
-      {{ booking.start.address.city }}
-      
-      {{ booking.end.date }}
-      {{ booking.end.time }}
-      {{ booking.end.address.number }}
-      {{ booking.end.address.street }}
-      {{ booking.end.address.zip }}
-      {{ booking.end.address.city }}
-      
-      {{ booking.vehicleID }}
-      
-      
-      Abgeschlossene Fahrten
-      
-    -->
-	<!--
-	<tbody>
-		<tr>
-			<td>
-				<table style="width: 300px;">
-					<tr ng-repeat="booking in open_bookings track by $index">
-						<td  ng-switch on="{{ booking.state }}">
-							<md-content flex layout-padding class="md-block">
-								<label> Datum:  {{ booking.start.date }} </label>
-								<br />
-								<label> Fahrtbeginn:  {{ booking.start.time }} </label>
-								<br />
-								<label> Straße Nr.:  {{ booking.start.address.street }} {{ booking.start.address.number }}  </label>
-								<label> PLZ:  {{ booking.start.address.zip }} </label>
-								<label> Stadt: {{ booking.start.address.city }} </label>
-								<label  ng-switch-when="true">
-									<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
-								</label>
-							</md-content>
-							<br />
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td></td>
-			<td>
-				<table style="width: 300px;">
-					<tr ng-repeat="booking in done_bookings track by $index">
-						<td  ng-switch on="{{ booking.state }}">
-							<md-content flex layout-padding class="md-block">
-							<label> Datum:  {{ booking.date }} </label>
-							<br />
-							<label> Fahrtbeginn:  {{ booking.startTime }} </label>
-							<label> {{ booking.startPlace }} </label>
-							<br />
-							<label> Fahrtende:  {{ booking.endTime }} </label>
-							<label> {{ booking.endPlace }} </label>
-							<br />
-							<md-button class="md-raised md-primary" ng-click="ShowBilling($index)">Rechnung anzeigen</md-button>
-							</md-content>
-							<br />
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td></td>
-			<td>
-				<table style="width: 300px;">
-					<tr>
-						<td>
-							<md-content flex layout-padding class="md-block">
+        <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
+                        <md-content flex layout-padding class="md-block">
 								<label> Datum:  {{ currentBooking.date }} </label>
 								<br />
 								<label> Fahrtbeginn:  {{ currentBooking.startTime }} </label>
@@ -203,11 +66,4 @@
 								<label> Preis: {{ currentBooking.billing }}</label>
 								<label> Rechnung: {{ currentBooking.payed }}</label>
 							</md-content>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</body>
-</table>
--->
+</div>
