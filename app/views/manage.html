@@ -52,10 +52,8 @@
                 <h2 class="md-flex">Rechnung</h2>
             </div>
         </md-toolbar>
-        <md-content>
-            <md-list flex>
-                <md-list-item class="md-3-line" ng-repeat="booking in open_bookings track by $index" ng-click="Safe()">
-                    <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
+
+        <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
                         <md-content flex layout-padding class="md-block">
 								<label> Datum:  {{ currentBooking.date }} </label>
 								<br />
@@ -68,11 +66,4 @@
 								<label> Preis: {{ currentBooking.billing }}</label>
 								<label> Rechnung: {{ currentBooking.payed }}</label>
 							</md-content>
-                    </div>
-                    <md-divider ></md-divider>
-                </md-list-item>
-            </md-list>
-        </md-content>
-    </div>
-
 </div>
