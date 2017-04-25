@@ -80,7 +80,7 @@ application.config(function ($routeProvider, $locationProvider){
 	.when ('/profile',
 		{
 			templateUrl: 'views/profile.html',
-			controller: 'Ctrl_Manage'
+			controller: 'Ctrl_Profile'
 		})
 	
 	.otherwise(

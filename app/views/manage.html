@@ -1,4 +1,84 @@
 
+<div class="user-edit">
+    <div class="profile-flex-container" >
+        <div ng-cloak class="user-edit-left content">
+            <md-toolbar class="md-hue-2">
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Ausstehende Fahrten</h2>
+                </div>
+            </md-toolbar>
+			
+			<table>
+			
+				<tr ng-repeat="booking in open_bookings track by $index">
+					<td  ng-switch on="{{ booking.state }}">
+						<md-content flex layout-padding class="md-block">
+							<label> Datum:  {{ booking.start.date }}  Uhrzeit: {{ booking.start.time }} </label>
+							<br />
+							<label> Straße Nr.:  {{ booking.start.address.street }} {{ booking.start.address.number }}  </label>
+							<label> Stadt: {{ booking.start.address.city }} </label>
+							<label> PLZ:  {{ booking.start.address.zip }} </label>
+							<label  ng-switch-when="true">
+								<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
+							</label>
+						</md-content>
+						<br />
+					</td>
+				</tr>
+			
+			</table>
+			
+        </div>
+
+        <div class="user-edit-mid">
+		
+			<md-toolbar class="md-hue-2">
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Abgeschlossene Fahrten</h2>
+                </div>
+            </md-toolbar>
+			
+			<table>
+			
+				<tr ng-repeat="booking in done_bookings track by $index">
+					<td  ng-switch on="{{ booking.state }}">
+						<md-content flex layout-padding class="md-block">
+							<label> Datum:  {{ booking.start.date }} Uhrzeit: {{ booking.start.time }} </label>
+							<br />
+							<label> Straße Nr.:  {{ booking.start.address.street }} {{ booking.start.address.number }}  </label>
+							<label> Stadt: {{ booking.start.address.city }} </label>
+							<label> PLZ:  {{ booking.start.address.zip }} </label>
+							<label  ng-switch-when="true">
+								<md-button class="md-raised md-primary" ng-click="Safe()"> Auf Karte anzeigen </md-button>
+							</label>
+						</md-content>
+						<br />
+					</td>
+				</tr>
+			
+			</table>
+		
+		</div>
+
+        <div ng-cloak class="user-edit-right content">
+            <md-toolbar class="md-hue-2">
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Rechnung</h2>
+                </div>
+            </md-toolbar>
+			
+            <md-content flex layout-padding>
+                
+            </md-content>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--
 <table>
 	<thead>
 		<tr>
@@ -31,6 +111,7 @@
 			</td>
 		</tr>
 	</thead>
+	-->
 	<!--
       
       für die Tabllen zum Auflisten:
@@ -60,6 +141,7 @@
       Abgeschlossene Fahrten
       
     -->
+	<!--
 	<tbody>
 		<tr>
 			<td>
@@ -128,3 +210,4 @@
 		</tr>
 	</body>
 </table>
+-->
