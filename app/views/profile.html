@@ -8,12 +8,13 @@
                 </div>
             </md-toolbar>
 
-            <md-content flex layout-padding class="">
+            <md-content flex layout-padding >
                 <md-input-container class="md-block" flex-gt-xs>
                     <label> Ihre Kundennummer:  {{ user.userID }} </label>
                     <input disabled>
-                </md-input-container>			
-
+                </md-input-container>		
+            </md-content>
+            <md-content flex layout-padding>
                 <md-input-container>
                     <label>Vorname</label>
                     <input ng-model="user.name"/>
@@ -59,7 +60,7 @@
 -->
 
                 <md-button class="md-raised md-primary button-to-right" ng-click="Safe()"> Speichern </md-button>
-                <md-button class="md-accent button-to-right" ng-click="Cancel()"> Verwerfen </md-button>
+                <md-button class="md-primary md-hue-1 button-to-right" ng-click="Cancel()"> Verwerfen </md-button>
             </md-content>
         </div>
 
