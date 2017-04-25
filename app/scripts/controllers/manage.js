@@ -131,8 +131,8 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory)
 		};
 		
 		var invoice = {
-			InvoiceId: 0,
-			TotalAmount: 0,
+			InvoiceId: invoiceID,
+			TotalAmount: 100,
 			Paid: true
 		};
 		
@@ -161,13 +161,18 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory)
 				};
 				
 				var booking = {
-					bookingId: bookingID,
+					bookingID: bookingID,
 					start: start,
-					end: end,
-					paid: invoice.Paid
+					end: end
 				};
 				
-				console.log(booking);
+				//Invoice taken from Backend
+				
+				booking.invoice = {
+					invoiceID: invoice.InvoiceId,
+					totalAmount: invoice.TotalAmount,
+					paid: invoice.Paid
+				}
 				
 				done_bookings.push(booking);
 				
@@ -184,10 +189,10 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory)
 	
 		//REST Call
 		var return_obj = {
-			BookingId: 0,
+			BookingId: i,
 			CustomerId: 0,
 			TripId: 0,
-			InvoiceId: 0,
+			InvoiceId: i,
 			BookedPositionLatitude: 50.127714,
 			BookedPositionLongitude: 8.640663,
 			BookingDate: "2017-04-26T11:52:57.780Z",
@@ -272,9 +277,47 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory)
 
 
 
-    $scope.ShowBilling = function (index) {
-		console.log(index + "   " + done_bookings[index].billing);
-		$scope.currentBooking = done_bookings[index];
+    $scope.ShowBilling = function (id) {
+		
+		var i = 0;
+		while(i < done_bookings.Length){
+			
+			if(done_bookings[i].bookingID === id){
+				break;
+			}
+			
+			i++;
+		}
+		
+		//Get all elements from List
+		
+		var items = [
+		  {
+			InvoiceItemId: 0,
+			InvoiceId: 0,
+			Reason: "Auto kaputt",
+			Type: "DEBIT",
+			Amount: 100
+		  }, {
+			InvoiceItemId: 0,
+			InvoiceId: 0,
+			Reason: "Gutschrift",
+			Type: "DEBIT",
+			Amount: -10
+		  }
+		];
+		
+		var currentBill = {
+			
+			start: done_bookings[i].start,
+			end: done_bookings[i].end,
+			invoice: done_bookings[i].invoice,
+			items: items
+			
+		};
+		
+		console.log(currentBill);
+		$scope.currentBill = currentBill;
     };
 
 });

@@ -9,12 +9,15 @@
         <md-content>
             <md-list flex>
               <!--  <md-subheader class="md-no-sticky"></md-subheader> -->
-                <md-list-item class="md-3-line" ng-repeat="booking in open_bookings track by $index" ng-click="Safe()">
+                <md-list-item class="md-3-line" ng-repeat="booking in open_bookings track by $index" ng-click="ShowOnMap($index)">
                     <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
                         <h3>{{ booking.start.date }}  ab {{ booking.start.time }}</h3>
                         <h4>Stra&szlig;e Nr.: {{ booking.start.address.street }} {{ booking.start.address.number }} </h4>
                         <p>PLZ:  {{ booking.start.address.zip }}</p>
                         <p>Stadt: {{ booking.start.address.city }}</p>
+						
+						<!-- Icon das über ng-switch-when="true" angezeigt wird (Fahrzeug schon verfügbar) -->
+						
                     </div>
                     <md-divider ></md-divider>
                 </md-list-item>
@@ -32,12 +35,25 @@
         </md-toolbar>
         <md-content>
             <md-list flex>
-                <md-list-item class="md-3-line" ng-repeat="booking in done_bookings track by $index" ng-click="ShowBilling($index)">
-                    <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
-                        <h3>{{ booking.date }} </h3>
-                        <h4>Fahrtbeginn:  {{ booking.startTime }}  {{ booking.startPlace }}</h4>
+                <md-list-item class="md-3-line" ng-repeat="booking in done_bookings track by $index">
+                    <div class="md-list-item-text" layout="column" ng-switch="booking.invoice.paid" ng-click="ShowBilling(booking.bookingID)">
+                        
+						<h4>Start {{ booking.start.date }} um {{ booking.start.time }} </h4>
+                        <p>Stra&szlig;e Nr.: {{ booking.start.address.street }} {{ booking.start.address.number }}</p>
+						<h4>Ende {{ booking.end.date }} um {{ booking.end.time }} </h4>
+                        <p>Stra&szlig;e Nr.: {{ booking.end.address.street }} {{ booking.end.address.number }}</p>
+                        
+						<p ng-switch-when="true" style="background: #00ff00">Rechnung: bezahlt</p>
+						<p ng-switch-when="false" style="background: #aa0000">Rechnung: nicht bezahlt</p>
+						
+						<!-- Feld oder Button in grün/rot der über ng-switch-when="true/false" dargestellt wird (Rechnung bezahl oder nicht) -->
+						
+						<!--
+						<h3>{{ booking.start.date }} </h3>
+                        <h4>Fahrtbeginn:  {{ booking.start.time }}  {{ booking.start.address.street }}</h4>
                         <h4>Fahrtende:  {{ booking.endTime }}  {{ booking.endPlace }}</h4>
-                    </div>
+						-->
+					</div>
                     <md-divider ></md-divider>
                 </md-list-item>
             </md-list>
@@ -53,19 +69,29 @@
             </div>
         </md-toolbar>
 
-        <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
-                        <md-content flex layout-padding class="md-block">
-								<label> Datum:  {{ currentBooking.date }} </label>
-								<br />
-								<label> Fahrtbeginn:  {{ currentBooking.startTime }} </label>
-								<label> Startpunkt:  {{ currentBooking.startPlace }} </label>
-								<br />
-								<label> Fahrtende:  {{ currentBooking.endTime }} </label>
-								<label> Endpunkt:  {{ currentBooking.endPlace }} </label>
-								<br />
-								<label> Preis: {{ currentBooking.billing }}</label>
-								<label> Rechnung: {{ currentBooking.payed }}</label>
-							</md-content>
-</div>
+        <div class="md-list-item-text" layout="column">
+            <md-content flex layout-padding class="md-block">
+				<label> Datum:  {{currentBill.start.date }} RechnungsID: {{ currentBill.invoice.invoiceID }}</label>
+				<br />
+				<label> Fahrtbeginn am {{currentBill.start.date }} um {{currentBill.start.time }} </label>
+				<label> Startpunkt:  {{currentBill.start.address.street }} {{currentBill.start.address.number }} </label>
+				<br />
+				<label> Fahrtende am {{currentBill.end.date }} um {{currentBill.end.time }} </label>
+				<label> Endpunkt:  {{currentBill.end.address.street }} {{currentBill.end.address.number }} </label>
+				<br />
+				<label> Preis: {{currentBill.invoice.totalAmount}}</label>
+				<label> Rechnung: {{ currentBill.invoice.paid }}</label>
+				<br />
+				<md-list flex>
+					<md-list-item class="md-3-line" ng-repeat="item in currentBill.items track by $index">
+						<div class="md-list-item-text" layout="column">
+							<h4>Preis: {{item.Amount }}</h4>
+							<p>Grund: {{ item.Reason }}</p>
+						</div>
+						<md-divider ></md-divider>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</div>
     </div>
 </div>
