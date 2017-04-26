@@ -35,7 +35,7 @@ margin-bottom: 0;
 }
 .user-edit-right{
     flex:10;
-    height: 500px;
+    height: 580px;
 }
 
 .content{
@@ -65,6 +65,7 @@ body {
 html, body {
     margin: 0;
     padding: 0;
+	background: #eee;
 }
 
 /* Always set the map height explicitly to define the size of the div

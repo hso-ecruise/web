@@ -36,7 +36,11 @@
         <md-content>
             <md-list flex>
                 <md-list-item class="md-3-line" ng-repeat="booking in done_bookings track by $index" ng-click="ShowBilling(booking.bookingID)">
+                    
+                    <i class="material-icons md-avatar" style="color: #00ff00">done</i>
+                    <i ng-switch-when="false" class="material-icons md-avatar" style="color: #aa0000; font-size:40dp;">report_problem</i>              
                     <div class="md-list-item-text" layout="column" ng-switch="booking.invoice.paid" >
+
                         <h4>Start {{ booking.start.date }} um {{ booking.start.time }} </h4>
                         <p>von Stra&szlig;e : {{ booking.start.address.street }} {{ booking.start.address.number }}</p>
                         <h4>Ende {{ booking.end.date }} um {{ booking.end.time }} </h4>

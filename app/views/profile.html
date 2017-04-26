@@ -34,16 +34,16 @@
                     <input placeholder="Land" ng-model="user.address.country" />
                 </md-input-container>
             </md-content>
-            
-			<md-content flex layout-padding>
+
+            <md-content flex layout-padding>
                 <md-input-container>
                     <input placeholder="Stadt" ng-model="user.address.city" />
                 </md-input-container>
-				<md-input-container>
+                <md-input-container>
                     <input placeholder="PLZ" ng-model="user.address.zip" />
                 </md-input-container>
             </md-content>
-			
+
             <md-content flex layout-padding>	
                 <md-input-container>
                     <input placeholder="Strasse" ng-model="user.address.street" />
@@ -51,22 +51,22 @@
                 <md-input-container>
                     <input placeholder="Hausnummer" ng-model="user.address.number" />
                 </md-input-container>
-			</md-content>
-			
-			<md-content flex layout-padding>
+            </md-content>
+
+            <md-content flex layout-padding>
                 <md-input-container>
                     <input placeholder="Zusatz" ng-model="user.address.extra" />
                 </md-input-container>
             </md-content>
 
-                <!--
+            <!--
 <md-select ng-model="user.address.state">
 <md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
 {{user.address.state.abbrev}}
 </md-option>
 </md-select>
 -->
-			<md-content flex layout-padding>
+            <md-content flex layout-padding>
                 <md-button class="md-raised md-primary button-to-right" ng-click="Safe()"> Speichern </md-button>
                 <md-button class="md-primary md-hue-1 button-to-right" ng-click="Cancel()"> Verwerfen </md-button>
             </md-content>
@@ -94,6 +94,10 @@
                 </md-input-container>
             </md-content>
             <md-content flex layout-padding>
+                <md-button class="md-raised md-primary button-to-right" ng-click="ChangePassword()"> Passwort &Auml;ndern </md-button>
+            </md-content>
+
+            <md-content flex layout-padding>
                 <md-input-container class="md-block" flex-gt-sm>
                     <input placeholder="Aktuelle Email-Adresse" ng-model="user.email" type="email"  />
                 </md-input-container>
@@ -103,7 +107,7 @@
                     <input placeholder="Neue Email-Adresse" ng-model="user.email.new" type="email" width="140px" />
                 </md-input-container>
 
-                <md-button class="md-raised md-primary button-to-right" ng-click="ChangePassword()"> Speichern </md-button>
+                <md-button class="md-raised md-primary button-to-right" ng-click="ChangeEmail()"> Email &Auml;ndern </md-button>
             </md-content>
         </div>
     </div>
