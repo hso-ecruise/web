@@ -14,29 +14,36 @@ md-input-container{
 
 
 .manage-flex-container{
-display:flex;
-width: 80%;
-margin: auto;
-margin-top: 10px;
-margin-bottom: 0; 
+    display:flex;
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 0; 
 }
 
+
+md-nav-bar md-nav-ink-bar {
+    background: blue;
+    accentPalette:blue;
+}
 .profile-flex-container{
     display:flex;
-    width: 830px;
+    width: 50%;
     margin: auto;
 }
-
-.user-edit-left{
-    flex:10;
-}
-.user-edit-mid{
-    flex:1;
-}
 .user-edit-right{
-    flex:10;
-    height: 580px;
+    min-width: 450px;
 }
+.user-edit-right md-content {
+    background-color: transparent !important; }
+.user-edit-right md-content md-tabs {
+    background: #fafafa;
+    border: 2px solid #ebebeb; }
+.user-edit-right md-content md-tabs md-tabs-wrapper {
+    background: white; }
+.user-edit-right md-content h1:first-child {
+    margin-top: 0; }
+
 
 .content{
     background: #fafafa;
@@ -55,7 +62,6 @@ body {
 .footer {
     padding-left: 15px;
     padding-right: 15px;
-
 }
 #gmap{
     width: 850px; 
@@ -65,7 +71,7 @@ body {
 html, body {
     margin: 0;
     padding: 0;
-	background: #eee;
+    background: #eee;
 }
 
 /* Always set the map height explicitly to define the size of the div

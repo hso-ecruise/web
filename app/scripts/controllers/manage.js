@@ -195,8 +195,8 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory)
 			InvoiceId: i,
 			BookedPositionLatitude: 50.127714,
 			BookedPositionLongitude: 8.640663,
-			BookingDate: "2017-04-26T11:52:57.780Z",
-			PlannedDate: "2017-04-26T11:52:57.780Z"
+			BookingDate: "2018-04-26T11:52:57.780Z",
+			PlannedDate: "2018-04-26T11:52:57.780Z"
 		};
 	
 		if(i % 2 === 0){

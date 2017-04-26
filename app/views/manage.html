@@ -10,6 +10,7 @@
             <md-list flex>
                 <!--  <md-subheader class="md-no-sticky"></md-subheader> -->
                 <md-list-item class="md-3-line" ng-repeat="booking in open_bookings track by $index" ng-click="ShowOnMap($index)">
+                    <i class="material-icons md-avatar" style="color: #aa0000; width:25px;" title="Rechnung nicht bezahlt" >report_problem</i>
                     <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
                         <h3>{{ booking.start.date }}  ab {{ booking.start.time }}</h3>
                         <h4>Stra&szlig;e Nr.: {{ booking.start.address.street }} {{ booking.start.address.number }} </h4>
@@ -37,8 +38,8 @@
             <md-list flex>
                 <md-list-item class="md-3-line" ng-repeat="booking in done_bookings track by $index" ng-click="ShowBilling(booking.bookingID)">
                     
-                    <i class="material-icons md-avatar" style="color: #00ff00">done</i>
-                    <i ng-switch-when="false" class="material-icons md-avatar" style="color: #aa0000; font-size:40dp;">report_problem</i>              
+                    <i class="material-icons md-avatar" style="color: #00ff00; width:25px;" aria-label="Rechnung bezahlt" >done</i>
+                    <i ng-switch-when="false" class="material-icons md-avatar" style="color: #aa0000;">report_problem</i>              
                     <div class="md-list-item-text" layout="column" ng-switch="booking.invoice.paid" >
 
                         <h4>Start {{ booking.start.date }} um {{ booking.start.time }} </h4>
@@ -46,9 +47,9 @@
                         <h4>Ende {{ booking.end.date }} um {{ booking.end.time }} </h4>
                         <p>bis Stra&szlig;e Nr.: {{ booking.end.address.street }} {{ booking.end.address.number }}</p>
 
-                        <p ng-switch-when="true" style="background: #00ff00">Rechnung: bezahlt</p>
+                        <!-- <p ng-switch-when="true" style="background: #00ff00">Rechnung: bezahlt</p>
                         <p ng-switch-when="false" style="background: #aa0000">Rechnung: nicht bezahlt</p>
-
+                        -->
                         <!-- Feld oder Button in grün/rot der über ng-switch-when="true/false" dargestellt wird (Rechnung bezahl oder nicht) -->
 
                         <!--
