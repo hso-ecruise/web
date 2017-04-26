@@ -1,6 +1,6 @@
   'use strict';
 
-    angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache']).config(function($mdThemingProvider) {
+    angular.module('myApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache']).config(function($mdThemingProvider) {
       $mdThemingProvider.theme('docs-dark', 'default')
         .primaryPalette('grey')
         .warnPalette('red')
