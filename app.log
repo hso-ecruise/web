@@ -106,3 +106,61 @@ Total 798ms
 [36mCompleted in 0.001s at Thu Apr 27 2017 21:00:26 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile "app/views/profile.html" changed.
 [36mCompleted in 0.000s at Thu Apr 27 2017 21:00:36 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Thu Apr 27 2017 21:11:19 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+
+[4mRunning "copy:styles" (copy) task[24m
+Copied 1 file
+
+[4mRunning "newer-postrun:copy:styles:1:/shared/web/node_modules/grunt-newer/.cache" (newer-postrun) task[24m
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-27 21:11:24 UTC+2)
+loading tasks                   291ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
+loading grunt-newer              38ms  ▇▇ 6%
+newer:copy:styles                16ms  ▇ 2%
+loading grunt-contrib-copy        7ms  ▇ 1%
+copy:styles                       9ms  ▇ 1%
+newer-postrun:...-newer/.cache  124ms  ▇▇▇▇▇▇ 18%
+loading grunt-postcss            57ms  ▇▇▇ 8%
+postcss:server                  117ms  ▇▇▇▇▇▇ 17%
+postcss:dist                     27ms  ▇▇ 4%
+Total 687ms
+
+[36mCompleted in 1.160s at Thu Apr 27 2017 21:11:25 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-04-27 21:11:27 UTC+2)
+loading tasks          289ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 43%
+loading grunt-newer     38ms  ▇▇▇ 6%
+newer:copy:styles       17ms  ▇ 3%
+loading grunt-postcss   58ms  ▇▇▇▇ 9%
+postcss:server         239ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 36%
+postcss:dist            27ms  ▇▇ 4%
+Total 669ms
+
+[36mCompleted in 1.133s at Thu Apr 27 2017 21:11:28 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Thu Apr 27 2017 21:11:28 GMT+0200 (CEST)[39m - Waiting...

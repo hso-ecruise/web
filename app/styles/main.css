@@ -25,10 +25,10 @@ md-input-container{
 md-nav-bar md-nav-ink-bar {
     background: blue;
     accentPalette:blue;
-}
+}      
 .profile-flex-container{
     display:flex;
-    width: 50%;
+    width: 60%;
     margin: auto;
 }
 
