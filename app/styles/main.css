@@ -31,9 +31,8 @@ md-nav-bar md-nav-ink-bar {
     width: 50%;
     margin: auto;
 }
-.user-edit-right{
-    min-width: 450px;
-}
+
+
 .user-edit-right md-content {
     background-color: transparent !important; }
 .user-edit-right md-content md-tabs {
