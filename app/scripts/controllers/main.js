@@ -103,24 +103,24 @@ application.service('GetCaller', function ($http) {
 
 application.service('PostCaller', function ($http) {
 
-	this.Post = function (url, state) {
+	this.Post = function (url, body) {
 		var post = $http({
 			method: "post",
 			url: url,
-			data: state
+			data: body
 		});
 		return post;
 	};
 
 });
 
-application.service('PostReset', function ($http) {
+application.service('PatchCaller', function ($http) {
 
-	this.PostReset = function (url) {
+	this.PostReset = function (url, body) {
 		var post = $http({
-			method: "post",
+			method: "patch",
 			url: url,
-			data: [""]
+			data: body
 		});
 		return post;
 	};
@@ -128,7 +128,7 @@ application.service('PostReset', function ($http) {
 });
 
 
-application.factory('RESTFactory', function ($http, GetCaller, PostCaller, PostReset) {
+application.factory('RESTFactory', function ($http, GetCaller, PostCaller, PatchCaller) {
 
 	return {
 		GetUser: function (id) {
@@ -140,6 +140,31 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, PostR
 			var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 			url += lat + "," + lon + "&key=" + API_KEY;
 			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
+		Trips_Get: function(){
+			var url = 'http://' + IP + ':' + PORT + "/trips";
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
+		Trips_Get_TripID: function(id){
+			var url = 'http://' + IP + ':' + PORT + "/trips?TripId=" + id;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
+		Trips_Get_CarId: function(id){
+			var url = 'http://' + IP + ':' + PORT + "/trips/by-car?CarId=" + id;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
+		Trips_Post: function(data){
+			var url = 'http://' + IP + ':' + PORT + "/trips";
+			var orig = Promise.resolve(PostCaller.Get(url, data));
+			return orig;
+		},
+		Trips_Patch: function(id, data){
+			var url = 'http://' + IP + ':' + PORT + "/trips?TripId=" + id;
+			var orig = Promise.resolve(PatchCaller.Get(url, data));
 			return orig;
 		}
 
