@@ -13,7 +13,7 @@ const PORT = '8080';
 const CUSTOMER = "customers";
 const API_KEY = "AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap";
 
-
+/*
 var application = angular.module('webApp', [
     'ngAnimate',
     'ngMaterial',
@@ -89,7 +89,7 @@ application.config(function ($routeProvider, $locationProvider){
     .html5Mode(true);
 
 });
-
+*/
 
 
 
