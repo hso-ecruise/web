@@ -215,7 +215,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	
 	
 	
-	function GetBilling(month){
+	function GetBilling(month, year){
 		
 		var bill = {};
 		
@@ -225,70 +225,129 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 		for(i = 0; i < done_bookings.length; i++){
 			
-			if(done_bookings[i].end.date.month === month){
+			if(done_bookings[i].end.date.month === month && done_bookings[i].end.date.year === year){
 				relevant_bookings.push(done_bookings[i]);
 			}
 			
 		}
 		
-		//Get Invoice Items
-		//REST CALL
-		var invoice = {
-			InvoiceId: 0,
-			TotalAmount: 200,
-			Paid: true
+		var invoiceID = 123;
+		
+		bill.date = {
+			month: month,
+			year: year
 		};
 		
-		//Following in then part
+		var prom_invoice = RESTFactory.Invoices_Get_InvoiceID(invoiceID);
 		
-		bill.invoiceID = invoice.InvoiceId;
-		bill.totalAmount = invoice.TotalAmount;
-		bill.paid = invoice.Paid;
-		
-		//REST CALL
-		var items = [
-			{
-				InvoiceItemId: 0,
-				InvoiceId: 0,
-				Reason: "string",
-				Type: "DEBIT",
-				Amount: 0
-			}
-		];
-		
-		var bill_items = [];
-		
-		for(i = 0; i < items.length; i++){
+		prom_invoice.then(function(response){
 			
-			var item = {};
-			item.invoiceID = items[i].InvoiceId;
-			item.invoiceItemID = items[i].InvoiceItemId;
-			item.reason = items[i].Reason;
-			item.type = items[i].Type;
-			item.amount = items[i].Amount;
-			item.hasBooking = false;
+			var invoice = response.data;
+			bill.invoiceID = invoice.InvoiceId;
+			bill.totalAmount = invoice.TotalAmount;
+			bill.paid = invoice.Paid;
+			bill.paidText = "Bezahlt";
+			if(bill.paid === false){ bill.paidText = "Nicht bezahlt";}
+			bill.active = true;
 			
-			var j = 0;
-			while(j < relevant_bookings.length){
-				if(relevant_bookings[j].invoice.inveoiceItemID === item.invoiceItemID){
-					item.hasBooking = true;
-					item.booking = relevant_bookings[j];
-					break;
+			var prom_invoice_items = RESTFactory.Invoices_Get_Items(invoiceID);
+			prom_invoice_items.then(function(response){
+				
+				var items = response.data;
+				var bill_items = [];
+				
+				for(var i = 0; i < items.length; i++){
+					
+					var item = {};
+					item.invoiceID = items[i].InvoiceId;
+					item.invoiceItemID = items[i].InvoiceItemId;
+					item.reason = items[i].Reason;
+					item.type = items[i].Type;
+					item.amount = items[i].Amount;
+					item.hasBooking = false;
+				
+					var j = 0;
+					while(j < relevant_bookings.length){
+						if(relevant_bookings[j].invoice.inveoiceItemID === item.invoiceItemID){
+							item.hasBooking = true;
+							item.booking = relevant_bookings[j];
+							break;
+						}
+						j++;
+					}
+				
+					bill_items.push(item);
+					
 				}
-				j++;
+
+				$scope.currentBill = bill;
+
+			});
+			
+		}, function(response){
+			
+			console.log("Failed to get invoice");
+			console.log(response);
+			
+			bill.active = false;
+
+//REMOVE START
+			bill.invoiceID = 10;
+			bill.totalAmount = 200;
+			bill.paid = true;
+			bill.paidText = "Bezahlt";
+			if(bill.paid === false){ bill.paidText = "Nicht bezahlt";}
+			bill.active = true;
+			
+			var items = [
+				{
+					InvoiceItemId: 0,
+					InvoiceId: 0,
+					Reason: "string",
+					Type: "DEBIT",
+					Amount: 2200
+				},
+				{
+					InvoiceItemId: 1,
+					InvoiceId: 0,
+					Reason: "Auto kaputt",
+					Type: "DEBIT",
+					Amount: 0
+				}
+			
+			]
+			
+			var bill_items = [];
+				
+			for(var i = 0; i < items.length; i++){
+				
+				var item = {};
+				item.invoiceID = items[i].InvoiceId;
+				item.invoiceItemID = items[i].InvoiceItemId;
+				item.reason = items[i].Reason;
+				item.type = items[i].Type;
+				item.amount = items[i].Amount;
+				item.hasBooking = false;
+				
+				if(i === 0){
+					item.hasBooking = true;
+					item.booking = open_bookings[0];
+				}
+				
+				bill_items.push(item);
+				
 			}
 			
-			bill_items.push(item);
+			bill.items = bill_items;
 			
-		}
-		
-		currentBill.items = bill_items;
-		
-		$scope.currentBill = bill;
+//REMOVE END
+			$scope.currentBill = bill;
+			
+		});
 		
 	}
 	
-	
+	GetBilling(1,2017);
 	
 	
 	
@@ -320,47 +379,6 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 		GetBilling(month);
 		
-		/*
-		var i = 0;
-		while(i < done_bookings.Length){
-			
-			if(done_bookings[i].bookingID === id){
-				break;
-			}
-			
-			i++;
-		}
-		
-		//Get all elements from List
-		
-		var items = [
-		  {
-			InvoiceItemId: 0,
-			InvoiceId: 0,
-			Reason: "Auto kaputt",
-			Type: "DEBIT",
-			Amount: 100
-		  }, {
-			InvoiceItemId: 0,
-			InvoiceId: 0,
-			Reason: "Gutschrift",
-			Type: "DEBIT",
-			Amount: -10
-		  }
-		];
-		
-		var currentBill = {
-			
-			start: done_bookings[i].start,
-			end: done_bookings[i].end,
-			invoice: done_bookings[i].invoice,
-			items: items
-			
-		};
-		
-		console.log(currentBill);
-		$scope.currentBill = currentBill;
-		*/
     };
 
 });

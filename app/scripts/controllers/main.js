@@ -224,6 +224,41 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var url = 'http://' + IP + ':' + PORT + "/car-charging-stations/by-car/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
+		},
+		Invoices_Get: function(){
+			var url = 'http://' + IP + ':' + PORT + "/invoices";
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
+		Invoices_Post: function(data){
+			var url = 'http://' + IP + ':' + PORT + "/invoices";
+			var orig = Promise.resolve(PostCaller.Get(url, data));
+			return orig;
+		},
+		Invoices_Get_InvoiceID: function(id){
+			var url = 'http://' + IP + ':' + PORT + "/invoices/" + id;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
+		Invoices_Patch_Paid: function(id, data){
+			var url = 'http://' + IP + ':' + PORT + "/invoices/" + id + "/paid";
+			var orig = Promise.resolve(PatchCaller.Patch(url, data));
+			return orig;
+		},
+		Invoices_Get_Items: function(id){
+			var url = 'http://' + IP + ':' + PORT + "/invoices/" + id + "/items";
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
+		Invoices_Post: function(id, data){
+			var url = 'http://' + IP + ':' + PORT + "/invoices/" + id + "/items";
+			var orig = Promise.resolve(PostCaller.Get(url, data));
+			return orig;
+		},
+		Invoices_Get_Items_ItemID: function(id, itemID){
+			var url = 'http://' + IP + ':' + PORT + "/invoices/" + id + "/items/" + itemID;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
 		}
 		
 
