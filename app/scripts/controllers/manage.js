@@ -1,6 +1,6 @@
 'use strict';
 
-application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory) {
+application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory, Helper) {
     
 	var open_bookings = [];
     var done_bookings = [];
@@ -99,11 +99,11 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory)
 		var lat = return_obj.BookedPositionLatitude;
 		var lon = return_obj.BookedPositionLongitude;
 	
-		Get_Address(lat, lon).then(function(address){
+		Helper.Get_Address(lat, lon).then(function(address){
 			
 			var start = {
-				date : Get_Date(return_obj.PlannedDate),
-				time: Get_Time(return_obj.PlannedDate),
+				date : Helper.Get_Date(return_obj.PlannedDate),
+				time: Helper.Get_Time(return_obj.PlannedDate),
 				address: address
 			};
 			
@@ -159,21 +159,21 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory)
 			var end_lat = trip.EndPositionLatitude;
 			var end_lon = trip.EndPositionLongitude;
 		
-			var start_get = Get_Address(start_lat, start_lon);
-			var end_get = Get_Address(end_lat, end_lon);
+			var start_get = Helper.Get_Address(start_lat, start_lon);
+			var end_get = Helper.Get_Address(end_lat, end_lon);
 			
 			start_get.then(function(start_addr){
 				end_get.then(function(end_addr){
 					
 					var start = {
-						date : Get_Date(trip.StartDate),
-						time: Get_Time(trip.StartDate),
+						date : Helper.Get_Date(trip.StartDate),
+						time: Helper.Get_Time(trip.StartDate),
 						address: start_addr
 					};
 					
 					var end = {
-						date : Get_Date(trip.EndDate),
-						time: Get_Time(trip.EndDate),
+						date : Helper.Get_Date(trip.EndDate),
+						time: Helper.Get_Time(trip.EndDate),
 						address: end_addr
 					};
 					
@@ -314,75 +314,6 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory)
 		HandleResult_Booking(return_obj);
 		
     }
-	
-	function Get_Date(input){
-		
-		var d = new Date(input);
-		
-		var day = d.getDate();
-		var month = d.getMonth() + 1;
-		var year = d.getFullYear();
-		
-		if(month < 10){
-			month = "0" + month;
-		}
-	
-		var date = day + "." + month + "." + year;
-		
-		return date;
-		
-	}
-	
-	function Get_Time(input){
-		
-		var d = new Date(input);
-		
-		var time = d.getHours() + ":" + d.getMinutes();
-		
-		return time;
-		
-	}
-	
-	function Get_Address(lat, lon){
-		
-		return new Promise(function(resolve, reject){
-			
-			RESTFactory.GetAddress(lat, lon).then(function(response){
-				
-				var ret = response.data.results[0].address_components;
-				
-				var address = { };
-				
-				for(var i = 0;i < ret.length; i++){
-					for(var j = 0; j < ret[i].types.length; j++){
-						switch(ret[i].types[j]){
-							case "street_number":
-								address.number = ret[i].long_name;
-								break;
-							case "route":
-								address.street = ret[i].long_name;
-								break;
-							case "locality":
-								address.city = ret[i].long_name;
-								break;
-							case "postal_code":
-								address.zip = ret[i].long_name;
-								break;
-							default:
-								break;
-						}
-					}
-				}
-				
-				resolve(address);
-				
-				reject("error");
-				
-			});
-		});
-		
-	}
-
 	
 
     $scope.ShowBilling = function (month) {

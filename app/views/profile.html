@@ -15,6 +15,7 @@
                     <input disabled>
                 </md-input-container>		
             </md-content>
+			
             <md-content flex layout-padding>
                 <md-input-container>
                     <label>Vorname</label>
@@ -59,14 +60,7 @@
                     <input placeholder="Zusatz" ng-model="user.address.extra" />
                 </md-input-container>
             </md-content>
-
-            <!--
-<md-select ng-model="user.address.state">
-<md-option ng-repeat="state in states" value="{{user.address.state.abbrev}}">
-{{user.address.state.abbrev}}
-</md-option>
-</md-select>
--->
+			
             <md-content flex layout-padding>
                 <md-button class="md-raised md-primary button-to-right" ng-click="Safe()"> Speichern </md-button>
                 <md-button class="md-primary md-hue-1 button-to-right" ng-click="Cancel()"> Verwerfen </md-button>
@@ -86,10 +80,9 @@
                     <md-tab label="Passwort">
                         <md-content flex layout-padding>	
                             <md-input-container>
-                                <input type="password" placeholder="Altes Passwort" ng-model="user.password.old" />
+                                <input type="password" placeholder="Altes Passwort" ng-model="user.password.current"/>
                             </md-input-container>
                         </md-content>
-
 
                         <md-content flex layout-padding>	
                             <md-input-container>
@@ -104,25 +97,30 @@
                             <md-button class="md-raised md-primary button-to-right" ng-click="ChangePassword()"> Passwort &Auml;ndern </md-button>
                         </md-content>
                     </md-tab>
+					
                     <md-tab label="Email">
                         <md-content flex layout-padding>
                             <md-input-container class="md-block" flex-gt-sm>
-                                <input placeholder="Aktuelle Email-Adresse" ng-model="user.email" type="email"  />
+                                <input placeholder="Aktuelle Email-Adresse" ng-model="user.email.current" type="email" disabled/>
                             </md-input-container>
                         </md-content >
+						
                         <md-content flex layout-padding>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <input placeholder="Neue Email-Adresse" ng-model="user.email.new" type="email" width="140px" />
                             </md-input-container>
                         </md-content >
+						
                         <md-content flex layout-padding>
                             <md-input-container class="md-block" flex-gt-sm>
-                                <input placeholder="Neue Email-Adresse best&auml;tigen" ng-model="user.email.new" type="email" width="140px" />
+                                <input placeholder="Neue Email-Adresse best&auml;tigen" ng-model="user.email.confirm" type="email" width="140px" />
                             </md-input-container>
                             <md-button class="md-raised md-primary button-to-right" ng-click="ChangeEmail()"> Email &Auml;ndern </md-button>
                         </md-content>
                     </md-tab>
-                    </div>
-                </div>
+				</md-tabs>
+			</md-content>
         </div>
+    </div>
+</div>
         <!-- PROFILE END -->

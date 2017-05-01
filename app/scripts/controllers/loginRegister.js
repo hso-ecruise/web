@@ -10,12 +10,19 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $loc
 
     if (email === "test" && password === "test") {
       $rootScope.loggedIN = "true";
-	//      $rootScope.currentView = "booking";
-	if (email === "test" && password === "test") {
-	    $rootScope.loggedIN = "true";
-	    $location.path("/booking");
-	    $rootScope.customerId = 12345;
-	}
+		//      $rootScope.currentView = "booking";
+		if (email === "test" && password === "test") {
+			$rootScope.loggedIN = "true";
+			
+			var login = {};
+			login.password = password;
+			login.email = email;
+			
+			$rootScope.login = login;
+			$rootScope.customerID = 12345;
+			
+			$location.path("/booking");
+		}
     }
 
   };

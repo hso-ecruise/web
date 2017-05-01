@@ -1,6 +1,6 @@
 'use strict';
 
-application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, RESTFactory) {    
+application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, RESTFactory, Helper) {    
     
 	var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -16,7 +16,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 		
 		map.panTo(new google.maps.LatLng(lat, lon));
 		
-		Get_Address(lat, lon).then(function(address){
+		Helper.Get_Address(lat, lon).then(function(address){
 			ShowInputPopUp(address, lat, lon);
 		});
 		
@@ -58,28 +58,29 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 		}
     };
     
-    var image = {
-		url: 'images/icons/car_available.png',
-		scaledSize: new google.maps.Size(60, 96),
-		origin: new google.maps.Point(0, 0),
-    	anchor: new google.maps.Point(0, 32)
-    };
     
-    var CreateMarker = function(lat, lon, state){
+	function AddMarker(title, content, image_string, lat, lon){
 		
-		image.url = icons[state].icon;
-	
+		var img = {
+			url: 'images/icons/car_available.png',
+			scaledSize: new google.maps.Size(60, 87),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(0, 30)
+		};
+		
+		img.url = icons[image_string].icon;
+		
 		var marker = new google.maps.Marker({
 			position: new google.maps.LatLng(lat, lon),
 			map: map,
-			icon: image
+			icon: img
 		});
 		
 		marker.addListener('click', function(event){
 			alert = $mdDialog.alert({
-				title: "Fahrzeuginformationen",
-				textContent: "Fahrzeug lädt. 60%",
-				ok: 'X'
+				title: title,
+				textContent: content,
+				ok: 'OK'
 			});
 
 			$mdDialog
@@ -87,11 +88,162 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 				.finally(function() {
 					alert = undefined;
 				});
-			console.log("Marker clicked");
 		});
 		
-    };
+	}
 	
+	function AddVehicle(car){
+		
+		if(car.BookingState === "FREE"){
+			
+			var lat = car.LastKnownPositionLatitude;
+			var lon = car.LastKnownPositionLongitude;
+			var bat = car.ChargeLevel;
+			var carID = car.CarId;
+			
+			var title = "Fahrzeugdetails:";
+			
+			if(bat < 100){
+				
+				var res = RESTFactory.Car_Charging_Stations_Get_CarID(carID);
+				
+				res.then(function(response){
+					var info = response.data;
+					if(info.length > 0){
+						
+						var time = Helper.Get_Time(info[0].ChargeEnd);
+						var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtlich um " + time + "fertig geladen.";
+						
+						if(bat < 25){
+							AddMarker(title, content, "car_loading_00", lat, lon);
+						}else if (bat < 50){
+							AddMarker(title, content, "car_loading_25", lat, lon);
+						}else if (bat < 75){
+							AddMarker(title, content, "car_loading_50", lat, lon);
+						}else if (bat < 100){
+							AddMarker(title, content, "car_loading_75", lat, lon);
+						}
+						
+					}
+				}, function(response){
+					
+					console.log("Failed to get loading informations");
+					
+					var time = Helper.Get_Time(new Date());
+					
+					var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtlich um " + time + " fertig geladen.";
+					if(bat < 25){
+						AddMarker(title, content, "car_loading_00", lat, lon);
+					}else if (bat < 50){
+						AddMarker(title, content, "car_loading_25", lat, lon);
+					}else if (bat < 75){
+						AddMarker(title, content, "car_loading_50", lat, lon);
+					}else if (bat < 100){
+						AddMarker(title, content, "car_loading_75", lat, lon);
+					}
+						
+				});
+				
+				
+				
+			}else{
+				
+				var content = "Das Fahrzeug ist voll geladen und kann benutzt werden.";
+				
+				AddMarker(title, content, "car_available", lat, lon);
+				
+			}
+			
+		}
+		
+	}
+	
+	function AddStation(station){
+		
+		var lat = station.Latitude;
+		var lon = station.Longitude;
+		
+		
+		var occupied = station.SlotsOccupied;
+		var total = station.Slots;
+		
+		var diff = total - occupied;
+		
+		var title = "Ladestation";
+		var content =  diff + " von " + total + " Slots frei";
+		
+		if(diff === 0){
+			AddMarker(title, content, "station_occupied", lat, lon);
+		}else{
+			AddMarker(title, content, "station_available", lat, lon);
+		}
+		
+	}
+	
+	function LoadPositions(){
+		
+		//GET Call to get all cars
+		var res_cars = RESTFactory.Cars_Get();
+		res_cars.then(function(response){
+			
+			var cars = response.data;
+			
+			for(var i = 0; i < cars.length; i++){
+				var car = cars[i];
+				AddVehicle(car);
+			}
+			
+		}, function(response){
+			
+			console.log("Failed to get cars position.");
+			
+			for(var i = 0; i < 50; i++){
+				
+				var car = {
+					LastKnownPositionLatitude: 49.5 + Math.random() * 0.1,
+					LastKnownPositionLongitude: 8.434 + Math.random() * 0.1,
+					ChargeLevel: Math.random() * 100.0,
+					BookingState: "FREE"
+				};
+				
+				AddVehicle(car);
+				
+			}
+			
+		});
+		
+		
+		//GET Call to get all stations
+		var res_stations = RESTFactory.Cars_Get();
+		res_stations.then(function(response){
+			
+			var stations = response.data;
+			
+			for(var i = 0; i < stations.length; i++){
+				var station = stations[i];
+				AddStation(station);
+			}
+			
+		}, function(response){
+			
+			console.log("Failed to get cars position.");
+			
+			for(var i = 0; i < 50; i++){
+				
+				var station = {
+					Slots: parseInt(2 + Math.random() * 3),
+					SlotsOccupied: parseInt(Math.random() * 5),
+					Latitude: 49.5 + Math.random() * 0.1,
+					Longitude: 8.434 + Math.random() * 0.1
+				};
+				
+				AddStation(station);
+				
+			}
+			
+		});
+		
+	}
 	
 	function ShowInputPopUp(address, lat, lon){
 		
@@ -148,64 +300,20 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 				
 				$scope.closeDialog = function(){
 					$mdDialog.hide();
-				}
+				};
 				
 				$scope.Save = function(){
 					
 					console.log("REST call for booking: " + lat + " , " + lon + "  Datum: " + $scope.date + " Uhrzeit: " + $scope.time);
 					
 					$scope.closeDialog();
-				}
+				};
 				
 			}
 		});
 		
 	}
-    
-    new CreateMarker(49.5, 8.434, "car_loading_25");
-    new CreateMarker(49.501, 8.434, "car_available");
-
 	
-	
-	
-	function Get_Address(lat, lon){
-		
-		return new Promise(function(resolve, reject){
-			
-			RESTFactory.GetAddress(lat, lon).then(function(response){
-				
-				var ret = response.data.results[0].address_components;
-				
-				var address = { };
-				
-				for(var i = 0;i < ret.length; i++){
-					for(var j = 0; j < ret[i].types.length; j++){
-						switch(ret[i].types[j]){
-							case "street_number":
-								address.number = ret[i].long_name;
-								break;
-							case "route":
-								address.street = ret[i].long_name;
-								break;
-							case "locality":
-								address.city = ret[i].long_name;
-								break;
-							case "postal_code":
-								address.zip = ret[i].long_name;
-								break;
-							default:
-								break;
-						}
-					}
-				}
-				
-				resolve(address);
-				
-				reject("error");
-				
-			});
-		});
-		
-	}
+	LoadPositions();
 	
 });
