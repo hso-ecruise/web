@@ -28,8 +28,35 @@ md-nav-bar md-nav-ink-bar {
 }      
 .profile-flex-container{
     display:flex;
-    width: 60%;
+    width: 55%;
     margin: auto;
+}
+.navbar{
+    width: 60%;
+    margin:auto;
+    margin-bottom: 15px;
+}
+.booking-dialog{
+    min-width: 350px;
+}
+.booking-map{
+    width: 100%;
+    height: 90%;
+}
+#map{
+    width: 100%;
+    min-height: 670px;
+    max-height: 870px;
+    -webkit-logical-height: 870px;
+}
+.user-edit-left{
+    max-width: 450px;
+}
+.user-edit-right{
+    max-width: 450px;
+}
+body {
+    overflow:hidden;
 }
 
 
@@ -62,10 +89,7 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
-#gmap{
-    width: 850px; 
-    height: 770px;
-}
+
 /* Optional: Makes the page fill the google maps window. */
 html, body {
     margin: 0;
@@ -105,6 +129,10 @@ html, body {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
+    .booking-map{
+        width: 100%; 
+        height:650px;
+    }
     .container {
         max-width: 850px;
     }

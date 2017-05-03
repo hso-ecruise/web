@@ -256,7 +256,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             scope: $scope,
             preserveScope: true,
             template:
-            '<md-dialog>'+
+            '<md-dialog class="booking-dialog">'+
             '	<md-dialog-content>' +
 
             '		<md-toolbar class="md-hue-2">' +

@@ -10,7 +10,7 @@
             <md-list flex>
                 <!--  <md-subheader class="md-no-sticky"></md-subheader> -->
                 <md-list-item class="md-3-line" ng-repeat="booking in open_bookings track by $index" ng-click="ShowOnMap($index)">
-                    <i class="material-icons md-avatar" style="color: #aa0000; width:25px;" title="Rechnung nicht bezahlt" >report_problem</i>
+                    <i class="material-icons md-avatar" style="color: #green; width:25px;" title="Auf Karte anzeigen" >map</i>
                     <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
                         <h3>{{ booking.start.date }}  ab {{ booking.start.time }}</h3>
                         <h4>Stra&szlig;e Nr.: {{ booking.start.address.street }} {{ booking.start.address.number }} </h4>
