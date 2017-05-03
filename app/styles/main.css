@@ -21,7 +21,6 @@ md-input-container{
     margin-bottom: 0; 
 }
 
-
 md-nav-bar md-nav-ink-bar {
     background: blue;
     accentPalette:blue;
@@ -34,7 +33,7 @@ md-nav-bar md-nav-ink-bar {
 .navbar{
     width: 60%;
     margin:auto;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 .booking-dialog{
     min-width: 350px;

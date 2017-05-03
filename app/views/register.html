@@ -1,61 +1,37 @@
 <div class="login-form content">
-	<md-content flex layout-padding>	
-		<md-input-container>
-			<label>Email</label>
-			<input ng-model="register.email" type="email" />
-		</md-input-container>
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2 class="md-flex">Registrieren</h2>
+        </div>
+    </md-toolbar>
 
-		<md-input-container>
-			<label>Telefon</label>
-			<input type="number" ng-model="register.phone"/>
-		</md-input-container>
-	</md-content>
-					
-	<md-content flex layout-padding>	
-		<md-input-container>
-			<label>Strasse</label>
-			<input ng-model="register.address.street" />
-		</md-input-container>
 
-		<md-input-container>
-			<label>Hausnummer</label>
-			<input ng-model="register.address.number" />
-		</md-input-container>
-	</md-content>
+    <md-content flex layout-padding>
+        <md-input-container>
+            <label>Vorname</label>
+            <input ng-model="register.name"/>
+        </md-input-container>
 
-	<md-content flex layout-padding>	
-		<md-input-container>
-			<label>Land</label>
-			<input ng-model="register.address.country" />
-		</md-input-container>
-						
-		<md-input-container>
-			<label>PLZ</label>
-			<input ng-model="register.address.zip" />
-		</md-input-container>
-	</md-content>
-					
-	<md-content flex layout-padding>
-		<md-input-container>
-			<label>Stadt</label>
-			<input ng-model="register.address.city" />
-		</md-input-container>
-	</md-content>
-					
-	<md-content flex layout-padding>	
-		<md-input-container>
-			<label>Passwort</label>
-			<input type="password" ng-model="register.password" />
-		</md-input-container>
-						
-		<md-input-container>
-			<label>Passwort best&auml;tigen</label>
-			<input type="password" ng-model="register.password_confirm" />
-		</md-input-container>
-	</md-content>
+        <md-input-container>
+            <label>Nachname</label>
+            <input ng-model="register.familyName"/>
+        </md-input-container>
+    </md-content>
 
-	<md-content flex layout-padding>
-		<md-button class="md-raised md-primary" ng-click="Register()"> Register </md-button>
-	</md-content>
+    <md-content flex layout-padding>	
+        <md-input-container>
+            <label>Email</label>
+            <input ng-model="register.email" type="email" />
+        </md-input-container>
+
+        <md-input-container>
+            <label>Passwort</label>
+            <input type="password" ng-model="register.password" />
+        </md-input-container>
+    </md-content>
+
+    <md-content flex layout-padding>
+        <md-button class="md-raised md-primary button-to-right" ng-click="Register()"> Register </md-button>
+    </md-content>
 
 </div>

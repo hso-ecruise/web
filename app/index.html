@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>E-Cruise UserSite</title>
+        <title>e-Cruise UserSite</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.) styles/vendor.css -->
@@ -31,32 +31,28 @@
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
                             <a class="navbar-brand" href="#">e-Cruise</a>
                         </div>
-
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li><a href="booking" name="booking"> Buchen </a></li>
                                 <li><a href="manage" name="manage"> Verwalten </a></li>
                                 <li><a href="profile" name="profile"> Profil bearbeiten </a></li>
-
                             </ul>
                             <div ng-switch-when="false">
                                 <ul class="nav navbar-nav navbar-right" >
-                                    <li><a href="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                                    <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                    <li><a href="register"><span class="glyphicon glyphicon-user"></span> Registrieren </a></li>
+                                    <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
                                 </ul>
                             </div>
-                            <p  ng-switch-when="true"class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link"> USERNAME</a></p>
-
+                            <div ng-switch-when="true" >
+                                <ul class="nav navbar-nav navbar-right" ><li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li></ul>
+                            </div>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
                 <!-- HEAD LINE END -->
             </div>
             <div ng-view></div>
-
-
-        </div>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
         <script>

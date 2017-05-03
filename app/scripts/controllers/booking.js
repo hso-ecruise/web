@@ -297,7 +297,9 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
                 $scope.date = new Date();
                 $scope.time = new Date();
-
+                $scope.time.setMilliseconds(0);
+                $scope.time.setSeconds(0);
+                
                 $scope.closeDialog = function(){
                     $mdDialog.hide();
                 };
