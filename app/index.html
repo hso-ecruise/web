@@ -15,56 +15,64 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
         <style>
-
+            .navbar{
+                width: 60%;
+                margin:auto;
+                margin-bottom: 15px;
+            }
         </style>
     </head>
 
     <body ng-app="webApp">
         <base href="/index.html">
         <div ng-controller="Ctrl_Main" ng-cloak ng-switch on="loggedIN" ng-app="MyApp">
-            <div ng-switch-when="false">
                 <!-- HEAD LINE START -->
-                <div class="header navbar" >
-                    <md-content md-theme="docs-dark" class="md-padding">
-                        <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links" >
-                            <md-nav-item md-nav-href="login"  name="login" > Login </md-nav-item>
-                            <md-nav-item md-nav-href="register" name="register" > Registrieren </md-nav-item>
-                        </md-nav-bar>
-                    </md-content>
-                </div>
-                <!-- HEAD LINE END -->
-            </div>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
+                            <a class="navbar-brand" href="#">e-Cruise</a>
+                        </div>
 
-            <div ng-switch-when="true">
-                <!-- HEAD LINE START -->
-                <div class="header navbar" >
-                    <md-content md-theme="docs-dark" class="md-padding" >
-                        <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-                            <md-nav-item md-nav-href="booking" name="booking"> Buchen </md-nav-item >
-                            <md-nav-item md-nav-href="manage"  name="manage" > Verwalten </md-nav-item>
-                            <md-nav-item md-nav-href="profile" name="profile" > Profil bearbeiten </md-nav-item>
-                        </md-nav-bar>
-                    </md-content>
-                </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="booking" name="booking"> Buchen </a></li>
+                                <li><a href="manage" name="manage"> Verwalten </a></li>
+                                <li><a href="profile" name="profile"> Profil bearbeiten </a></li>
+
+                            </ul>
+                            <div ng-switch-when="false">
+                                <ul class="nav navbar-nav navbar-right" >
+                                    <li><a href="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                    <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                </ul>
+                            </div>
+                            <p  ng-switch-when="true"class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link"> USERNAME</a></p>
+
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
                 <!-- HEAD LINE END -->
             </div>
             <div ng-view></div>
 
-		
-		</div>
-		
-            <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-            <script>
-                !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-                    (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-                    r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-                                        }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-                ga('create', 'UA-XXXXX-X');
-                ga('send', 'pageview');
-            </script>
+        </div>
 
-		
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+        <script>
+            !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+                (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+                r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+                                    }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-XXXXX-X');
+            ga('send', 'pageview');
+        </script>
+
+
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o">
         </script>
@@ -88,16 +96,16 @@
         <!-- endbower -->
         <!-- endbuild -->
 
-            <!-- build:js({.tmp,app}) scripts/scripts.js -->
-            <script src="scripts/app.js"></script>
-            <script src="scripts/controllers/main.js"></script>
-            <script src="scripts/controllers/loginRegister.js"></script>
-            <script src="scripts/controllers/booking.js"></script>
-            <script src="scripts/controllers/manage.js"></script>
-            <script src="scripts/controllers/booking.js"></script>
-            <script src="scripts/controllers/profile.js"></script>
-            <script src="scripts/controllers/mainCtrl.js"></script>
-            <script src="styles/design.js"></script>
-            <!-- endbuild -->
-        </body>
- </html>
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/loginRegister.js"></script>
+        <script src="scripts/controllers/booking.js"></script>
+        <script src="scripts/controllers/manage.js"></script>
+        <script src="scripts/controllers/booking.js"></script>
+        <script src="scripts/controllers/profile.js"></script>
+        <script src="scripts/controllers/mainCtrl.js"></script>
+        <script src="styles/design.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>
