@@ -1,5 +1,6 @@
 // Generated on 2017-04-18 using generator-angular 0.16.0
 'use strict';
+var modRewrite = require('connect-modrewrite');
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -80,6 +81,7 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
+              modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png$ /index.html [L]']),
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -220,7 +222,7 @@ module.exports = function (grunt) {
             }
           }
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
