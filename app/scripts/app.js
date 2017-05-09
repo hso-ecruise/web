@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 /**
  * @ngdoc overview
@@ -76,7 +76,7 @@ application.config(function ($routeProvider, $locationProvider){
 	
 	.otherwise(
 	    {
-			templateUrl : 'views/login.html',
+			templateUrl : 'views/start.html',
 			controller: 'Ctrl_Login_Register'
 			//template: 'NO PAGE'
 	    });
