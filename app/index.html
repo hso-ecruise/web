@@ -9,7 +9,6 @@
         <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
@@ -23,36 +22,36 @@
     <body ng-app="webApp">
         <base href="/index.html">
         <div ng-controller="Ctrl_Main" ng-cloak ng-switch on="loggedIN" ng-app="MyApp">
-                <!-- HEAD LINE START -->
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
-                            <a class="navbar-brand" href="#">e-Cruise</a>
-                        </div>
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <li><a href="booking" name="booking"> Buchen </a></li>
-                                <li><a href="manage" name="manage"> Verwalten </a></li>
-                                <li><a href="profile" name="profile"> Profil bearbeiten </a></li>
+            <!-- HEAD LINE START -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
+                        <a class="navbar-brand" href="start">e-Cruise</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="booking" name="booking"> Buchen </a></li>
+                            <li><a href="manage" name="manage"> Verwalten </a></li>
+                            <li><a href="profile" name="profile"> Profil bearbeiten </a></li>
+                        </ul>
+                        <div ng-switch-when="false">
+                            <ul class="nav navbar-nav navbar-right" >
+                                <li><a href="register"><span class="glyphicon glyphicon-user"></span> Registrieren </a></li>
+                                <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
                             </ul>
-                            <div ng-switch-when="false">
-                                <ul class="nav navbar-nav navbar-right" >
-                                    <li><a href="register"><span class="glyphicon glyphicon-user"></span> Registrieren </a></li>
-                                    <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
-                                </ul>
-                            </div>
-                            <div ng-switch-when="true" >
-                                <ul class="nav navbar-nav navbar-right" ><li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li></ul>
-                            </div>
-                        </div><!-- /.navbar-collapse -->
-                    </div><!-- /.container-fluid -->
-                </nav>
-                <!-- HEAD LINE END -->
-            </div>
-            <div ng-view></div>
+                        </div>
+                        <div ng-switch-when="true" >
+                            <ul class="nav navbar-nav navbar-right" ><li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li></ul>
+                        </div>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            <!-- HEAD LINE END -->
+        </div>
+        <div ng-view></div>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
         <script>

@@ -20,7 +20,7 @@
 var checkRouting= function ($rootScope, $location) {
     if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
     {
-		$location.path("/login");
+		$location.path("/start");
     }
     else
     {
