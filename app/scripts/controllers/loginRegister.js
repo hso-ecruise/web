@@ -1,14 +1,20 @@
 'use strict';
 
-application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $location) {
+application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $location, $cookies) {
 
   $scope.Login = function () {
 
+	$cookies.put('logInState', true);
+	
+//	var loggedIN = $cookies.get('loginState');
+	
+//	alert("Cookie: " + loggedIN);
+	
     var email = $scope.login.email;
     var password = $scope.login.password;
     console.log("LOGIN " + email + "   " + password);
-
-    if (email === "test" && password === "test") {
+	
+    if ((email === "test" && password === "test")) {
       $rootScope.loggedIN = "true";
 		//      $rootScope.currentView = "booking";
 		if (email === "test" && password === "test") {
@@ -21,7 +27,18 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $loc
 			$rootScope.login = login;
 			$rootScope.customerID = 12345;
 			
+	//		$cookies.put('logInState', "wahr");
+			
+	//		alert("Cookie: " + $cookies.get('logInState'));
+			
+	//		$cookies.putObject("logInData", login);
+			
+	//		console.log($cookies.getAll());
+			
 			$location.path("/booking");
+			
+		}else{
+	//		cookies.put("loggedInState", "falsch");
 		}
     }
 
@@ -30,11 +47,22 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $loc
   var init = function () {
 
     $scope.loginORregister = "login";
-
+	
+	console.log($cookies.get('logInState'));
+	
+	if($cookies.get('logInState') === true){
+		$location.path("/booking");
+		
+	}
+	
   };
 
   init();
-
+	
+	var favoriteCookie = $cookies.get('myFavorite');
+	console.log(favoriteCookie);
+	// Setting a cookie
+	$cookies.put('myFavorite', 'oatmeal');
 
 	
 	$scope.Register = function () {
