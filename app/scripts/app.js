@@ -41,7 +41,7 @@ application.config(function ($routeProvider, $locationProvider){
 
     $routeProvider
 	.when('/', {
-	    templateUrl: 'views/main.html',
+	    templateUrl: 'views/start.html',
 	    resolve: {
 			factory: checkRouting
 			}
@@ -95,7 +95,7 @@ application.config(function ($routeProvider, $locationProvider){
 });
  
  
- /*
+/* 
  var application = angular.module('webApp', [
     'ngAnimate',
     'ngAria',
@@ -107,14 +107,14 @@ application.config(function ($routeProvider, $locationProvider){
     'ngTouch',
 	'blubb', []
 ]);
-
+*/
 var checkRouting= function ($rootScope, $location) {
 	
 	console.log("CALLED");
 	
     if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
     {
-		$location.path("/login");
+		$location.path("/start");
     }
     else
     {
@@ -122,7 +122,7 @@ var checkRouting= function ($rootScope, $location) {
 		alert($rootScope.LoggedIN);
     }
 };
-
+/*
 application.config(function ($routeProvider, $locationProvider){
 
     $routeProvider
