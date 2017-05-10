@@ -14,11 +14,19 @@
     'ngAnimate',
     'ngMaterial',
     'ngMap',
-    'ngRoute'
+    'ngRoute',
+	'ngCookies'
 ]);
 
-var checkRouting= function ($rootScope, $location) {
-    if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
+var checkRouting= function ($rootScope, $location, $cookies) {
+    
+	var loggedIN = cookies.get('logInState');
+	
+	console.log(loggedIN);
+	
+	//$rootScope.LoggedIN = loggedIN;
+	
+	if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
     {
 		$location.path("/start");
     }
