@@ -24,7 +24,6 @@ var checkRouting= function ($rootScope, $location, $cookies) {
 	
 	console.log(loggedIN);
 	
-    
 	//$rootScope.LoggedIN = loggedIN;
 	
 	if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
@@ -43,7 +42,7 @@ application.config(function ($routeProvider, $locationProvider){
     $routeProvider
 	.when('/', {
 	    templateUrl: 'views/start.html',
-        resolve: {
+	    resolve: {
 			factory: checkRouting
 			}
 		})
@@ -96,7 +95,7 @@ application.config(function ($routeProvider, $locationProvider){
 });
  
  
- /*
+/* 
  var application = angular.module('webApp', [
     'ngAnimate',
     'ngAria',
@@ -108,14 +107,14 @@ application.config(function ($routeProvider, $locationProvider){
     'ngTouch',
 	'blubb', []
 ]);
-
+*/
 var checkRouting= function ($rootScope, $location) {
 	
 	console.log("CALLED");
 	
     if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
     {
-		$location.path("/login");
+		$location.path("/start");
     }
     else
     {
@@ -123,7 +122,7 @@ var checkRouting= function ($rootScope, $location) {
 		alert($rootScope.LoggedIN);
     }
 };
-
+/*
 application.config(function ($routeProvider, $locationProvider){
 
     $routeProvider
@@ -180,14 +179,13 @@ application.config(function ($routeProvider, $locationProvider){
     .html5Mode(true);
 
 });
-
 */
 application.config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/start.html',
         controller: 'Ctrl_Login_Register',
-        controllerAs: 'start'
+        controllerAs: 'main'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
