@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 /**
  * @ngdoc overview
@@ -24,6 +24,7 @@ var checkRouting= function ($rootScope, $location, $cookies) {
 	
 	console.log(loggedIN);
 	
+    
 	//$rootScope.LoggedIN = loggedIN;
 	
 	if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
@@ -41,8 +42,8 @@ application.config(function ($routeProvider, $locationProvider){
 
     $routeProvider
 	.when('/', {
-	    templateUrl: 'views/main.html',
-	    resolve: {
+	    templateUrl: 'views/start.html',
+        resolve: {
 			factory: checkRouting
 			}
 		})
@@ -180,13 +181,13 @@ application.config(function ($routeProvider, $locationProvider){
 
 });
 
-/*
+*/
 application.config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/start.html',
+        controller: 'Ctrl_Login_Register',
+        controllerAs: 'start'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -197,4 +198,3 @@ application.config(function ($routeProvider, $locationProvider) {
         redirectTo: '/'
       });
   });
-*/
