@@ -2,6 +2,9 @@
 
 application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, RESTFactory, Helper) {    
 
+	var customerID = $rootScope.customerID;
+
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         center: new google.maps.LatLng(49.5, 8.434),
@@ -196,7 +199,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         }, function(response){
 
             console.log("Failed to get cars position.");
-
+/*
             for(var i = 0; i < 50; i++){
 
                 var car = {
@@ -209,7 +212,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                 AddVehicle(car);
 
             }
-
+*/
         });
 
 
@@ -227,7 +230,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         }, function(response){
 
             console.log("Failed to get cars position.");
-
+/*
             for(var i = 0; i < 50; i++){
 
                 var station = {
@@ -238,16 +241,14 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                 };
 
                 AddStation(station);
-
             }
+*/
 
         });
 
     }
 
     function ShowInputPopUp(address, lat, lon){
-
-        console.log("SHOW");
 
         $scope.address = address;
 
@@ -275,11 +276,11 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
             '		<md-content flex layout-padding>' +
             '			<md-input-container>' +
-            '				<input type="date" placeholder="Datum" class="md-input" ng-model="date">' +
+            '				<input type="date" placeholder="Datum" min="minDate" class="md-input" ng-model="date">' +
             //'               <md-datepicker type="date" placeholder="Datum" ng-model="date"></md-datepicker> ' +    waere zwar schoner aber scheiss drauf       
             '			</md-input-container>' +
             '			<md-input-container>' +
-            '				<input type="time" placeholder="Uhrzeit" class="md-input" ng-model="time">' +
+            '				<input type="time" placeholder="Uhrzeit" class="md-input" ng-model="date">' +
             '			</md-input-container>' +
             '		</md-content>' +
 
@@ -296,18 +297,40 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                 $scope.address = address;
 
                 $scope.date = new Date();
+				$scope.minDate = new Date();
                 $scope.time = new Date();
-                $scope.time.setMilliseconds(0);
-                $scope.time.setSeconds(0);
+                $scope.date.setMilliseconds(0);
+                $scope.date.setSeconds(0);
                 
                 $scope.closeDialog = function(){
                     $mdDialog.hide();
                 };
 
                 $scope.Save = function(){
-
-                    console.log("REST call for booking: " + lat + " , " + lon + "  Datum: " + $scope.date + " Uhrzeit: " + $scope.time);
-
+					
+					var plannedDate = $scope.date;
+					
+					var now = new Date();
+					
+					var data = {
+						CustomerId: customerID,
+						BookedPositionLatitude: lat,
+						BookedPositionLongitude: lon,
+						BookingDate: now,
+						PlannedDate: plannedDate
+					};
+					
+                    console.log("REST call for booking");
+					console.log(data);
+					
+					var prom_booking = RESTFactory.Bookings_Post(data);
+					
+					prom_booking.then(function(response){
+						alert("Buchung erfolgreich");
+					}, function(response){
+						alert("Buchung fehlgeschlagen");
+					})
+					
                     $scope.closeDialog();
                 };
 

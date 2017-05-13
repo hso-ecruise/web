@@ -2,70 +2,12 @@
 
 application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory, Helper) {
     
+	var customerID = $rootScope.customerID;
+	
 	var open_bookings = [];
     var done_bookings = [];
     
-    //Make REST Call to /bookings/by-customer/{CustomerID} to get all Bookings
-    
-	//Check if the trip is in the neyt 30 Minutes, then get the Trip and get the CarID
-	//Filter all the bookings if they are ended or not for every Booking, where the Planneddate is in the past, call /trips/{TripID}
-	//Check if the tripend is set then call /invoices/{InvoiceId}/items
 	
-    /*
-		
-		//FROM BACKEND
-		
-		Booking {
-			"BookingId": 0,
-			"CustomerId": 0,
-			"TripId": 0,
-			"InvoiceId": 0,
-			"BookedPositionLatitude": 0,
-			"BookedPositionLongitude": 0,
-			"BookingDate": "2017-04-23T11:52:57.780Z",
-			"PlannedDate": "2017-04-23T11:52:57.780Z"
-		}
-		
-		Trip {
-			"TripId": 0,
-			"CarId": 0,
-			"CustomerId": 0,
-			"StartDate": "2017-04-25T18:52:46.839Z",
-			"EndDate": "2017-04-25T18:52:46.839Z",
-			"StartPositionLatitude": 0,
-			"StartPositionLongitude": 0,
-			"EndPositionLatitude": 0,
-			"EndPositionLongitude": 0
-		}
-		
-		Invoice {
-			"InvoiceId": 0,
-			"TotalAmount": 0,
-			"Paid": true
-		}
-		
-		//List
-		InvoiceItem {
-			"InvoiceItemId": 0,
-			"InvoiceId": 0,
-			"Reason": "string",
-			"Type": "DEBIT",
-			"Amount": 0
-		}
-		
-		
-		//FOR HTML
-		booking {
-			bookingID,
-			start,
-			onMap,		//if start is in future less then 30Min
-			end,		//if start was in past
-			invoice,	//if start was in past
-		}
-		
-      
-    */
-    
     var i = 0;
 
 	
@@ -117,6 +59,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			$scope.open_bookings = open_bookings;
 			
 		});
+		
 	}
 	
 	function Handle_DoneBooking(response){
@@ -350,6 +293,28 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	GetBilling(1,2017);
 	
 	
+	
+	var init = function(){
+		
+		var prom_bookings = RESTFactory.Bookings_Get_CustomerID(customerID);
+		
+		prom_bookings.then(function(response){
+			
+			var data = response.data;
+			
+			for(var j = 0; j < data.length; j++){
+				HandleResult_Booking(data[j]);
+			}
+			
+		}, function(response){
+			
+			console.log("Failed to get results");
+			
+		});
+		
+	};
+	
+	init();
 	
 	//TEST FUNCTION
     for (i = 0; i < 6; i++) {

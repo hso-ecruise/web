@@ -252,11 +252,31 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 		},
 		Invoices_Post: function(id, data){
 			var url = 'http://' + IP + ':' + PORT + "/invoices/" + id + "/items";
-			var orig = Promise.resolve(PostCaller.Get(url, data));
+			var orig = Promise.resolve(PostCaller.Post(url, data));
 			return orig;
 		},
 		Invoices_Get_Items_ItemID: function(id, itemID){
 			var url = 'http://' + IP + ':' + PORT + "/invoices/" + id + "/items/" + itemID;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
+		User_Login: function(email, password){
+			var url = 'http://' + IP + ':' + PORT + "/public/login/" + email;
+			var orig = Promise.resolve(PostCaller.Post(url, password));
+			return orig;
+		},
+		User_Register: function(data){
+			var url = 'http://' + IP + ':' + PORT + "/customers";
+			var orig = Promise.resolve(PostCaller.Post(url, data));
+			return orig;
+		},
+		Bookings_Post: function(data){
+			var url = 'http://' + IP + ':' + PORT + "/bookings";
+			var orig = Promise.resolve(PostCaller.Post(url, data));
+			return orig;
+		},
+		Bookings_Get_CustomerID: function(id){
+			var url = 'http://' + IP + ':' + PORT + "/bookings/by-customer/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		}

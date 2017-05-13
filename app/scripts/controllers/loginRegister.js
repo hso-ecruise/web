@@ -15,8 +15,9 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $loc
     console.log("LOGIN " + email + "   " + password);
 	
     if ((email === "test" && password === "test")) {
-      $rootScope.loggedIN = "true";
-		//      $rootScope.currentView = "booking";
+		
+		$rootScope.loggedIN = "true";
+		
 		if (email === "test" && password === "test") {
 			$rootScope.loggedIN = "true";
 			
@@ -27,19 +28,17 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $loc
 			$rootScope.login = login;
 			$rootScope.customerID = 12345;
 			
-	//		$cookies.put('logInState', "wahr");
+			angular.element('#mainCtrl').scope().login(true);
 			
-	//		alert("Cookie: " + $cookies.get('logInState'));
-			
-	//		$cookies.putObject("logInData", login);
-			
-	//		console.log($cookies.getAll());
+			$scope.$emit('login', "args");
 			
 			$location.path("/booking");
 			
 		}else{
-	//		cookies.put("loggedInState", "falsch");
+			
 		}
+		
+		
     }
 
   };

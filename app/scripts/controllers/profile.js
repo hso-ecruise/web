@@ -3,6 +3,7 @@
 application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope) {
     
 	var customerID = $rootScope.customerID;
+	$scope.customerID = customerID;
 	
 	function LoadData(){
 		
@@ -39,7 +40,6 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			
 			
 			var user = {
-				userID : "12345",
 				name : "Failed",
 				familyName: "Connection",
 				email : {
