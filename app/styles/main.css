@@ -38,16 +38,13 @@ md-nav-bar md-nav-ink-bar {
 .booking-dialog{
     min-width: 350px;
 }
-.booking-map{
-    width: 100%;
-    height: 90%;
+
+
+#ng_view{
+	height: calc(100% - 52px - 10px);
 }
-#map{
-    width: 100%;
-    min-height: 670px;
-    max-height: 870px;
-    -webkit-logical-height: 870px;
-}
+
+
 .user-edit-left{
     max-width: 450px;
 }
