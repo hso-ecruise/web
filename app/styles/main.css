@@ -39,11 +39,23 @@ md-nav-bar md-nav-ink-bar {
     min-width: 350px;
 }
 
-
 #ng_view{
 	height: calc(100% - 52px - 10px);
 }
 
+#search_input{
+	
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-top: 10px;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 300px;
+	
+}
 
 .user-edit-left{
     max-width: 450px;

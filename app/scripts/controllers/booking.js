@@ -4,7 +4,9 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 	var customerID = $rootScope.customerID;
 
-
+	
+	
+	
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         center: new google.maps.LatLng(49.5, 8.434),
@@ -17,13 +19,54 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         var lon = event.latLng.lng();
         console.log( lat + ', ' + lon );
 
-        map.panTo(new google.maps.LatLng(lat, lon));
-
         Helper.Get_Address(lat, lon).then(function(address){
             ShowInputPopUp(address, lat, lon);
         });
 
     });
+	
+	
+		
+		var input = document.getElementById('search_input');
+		var searchBox = new google.maps.places.SearchBox(input);
+		
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+		
+		map.addListener('bounds_changed', function() {
+			searchBox.setBounds(map.getBounds());
+		});
+		
+	
+	var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+			
+          var places = searchBox.getPlaces();
+
+		  
+          if (places.length == 0) {
+            return;
+          }
+
+		  
+			var place = places[0].geometry.location;
+			
+			var lat = place.lat();
+			var lon = place.lng();
+			
+			var prom_addr = Helper.Get_Address(lat, lon);
+			prom_addr.then(function(response){
+				ShowInputPopUp(response, lat, lon)
+			});
+			
+			console.log("Lat: " + lat + "   Lon: " + lon);
+		  
+
+        });
+	
+	
+	
 
     var icons = {
         car_available: {
@@ -199,20 +242,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         }, function(response){
 
             console.log("Failed to get cars position.");
-/*
-            for(var i = 0; i < 50; i++){
 
-                var car = {
-                    LastKnownPositionLatitude: 49.5 + Math.random() * 0.1,
-                    LastKnownPositionLongitude: 8.434 + Math.random() * 0.1,
-                    ChargeLevel: Math.random() * 100.0,
-                    BookingState: "FREE"
-                };
-
-                AddVehicle(car);
-
-            }
-*/
         });
 
 
@@ -229,20 +259,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         }, function(response){
 
-            console.log("Failed to get cars position.");
-/*
-            for(var i = 0; i < 50; i++){
-
-                var station = {
-                    Slots: parseInt(2 + Math.random() * 3),
-                    SlotsOccupied: parseInt(Math.random() * 5),
-                    Latitude: 49.5 + Math.random() * 0.1,
-                    Longitude: 8.434 + Math.random() * 0.1
-                };
-
-                AddStation(station);
-            }
-*/
+            console.log("Failed to get stations position.");
 
         });
 
@@ -250,6 +267,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     function ShowInputPopUp(address, lat, lon){
 
+        map.panTo(new google.maps.LatLng(lat, lon));
+		
         $scope.address = address;
 
         $mdDialog.show({
