@@ -288,7 +288,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 
 
 
-application.factory('Helper', function (RESTFactory) {
+application.factory('Helper', function (RESTFactory, $cookies) {
 
 	return {
 		Get_Time: function (input){
@@ -345,6 +345,14 @@ application.factory('Helper', function (RESTFactory) {
 				});
 			});
 		
+		},
+		Cookie_Set: function (name, value){
+			var text = name + "=" + value;
+			document.cookie = text;
+			return "";
+		},
+		Cookie_Get: function (name){
+			return $cookies.get(name);
 		}
 		
 	};

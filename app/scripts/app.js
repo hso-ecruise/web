@@ -18,20 +18,34 @@
 	'ngCookies'
 ]);
 
-var checkRouting= function ($rootScope, $location, $cookies) {
+var checkRouting= function ($rootScope, $location, Helper) {
 	
-	if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
+	var loggedIN = Helper.Cookie_Get("loggedIN");
+	var token = Helper.Cookie_Get("token");
+	var customerID = Helper.Cookie_Get("customerID");
+	
+	if(loggedIN !== "true"){
+		loggedIN = false;
+	}
+	
+	$rootScope.loggedIN = loggedIN;
+	$rootScope.token = token;
+	$rootScope.customerID = customerID;
+	
+	if ($rootScope.loggedIN === false || $rootScope.loggedIN === undefined)
     {
-		if($rootScope.LoggedIN === undefined){
-			$rootScope.LoggedIN = false;
+		if($rootScope.loggedIN === undefined){
+			$rootScope.loggedIN = false;
 		}
+		
+		console.log("FAILED ");
 		
 		$location.path("/start");
     }
     else
     {
 		alert("true or other");
-		alert($rootScope.LoggedIN);
+		alert($rootScope.loggedIN);
     }
 };
 

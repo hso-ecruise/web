@@ -9,7 +9,7 @@
  */
  
  
-application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog) {
+application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Helper, $location) {
     
 	var inited = false;
 	
@@ -19,12 +19,19 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog) {
 			return;
 		}
 		
+		var loggedIN = Helper.Cookie_Get("loggedIN");
+		var token = Helper.Cookie_Get("token");
+		var customerID = Helper.Cookie_Get("customerID");
+		
+		if(loggedIN !== "true"){
+			loggedIN = false;
+		}
+		
+		$rootScope.loggedIN = loggedIN;
+		$rootScope.token = token;
+		$rootScope.customerID = customerID;
 		
 		inited = true;
-		
-		if($rootScope.loggedIN === undefined){
-			$rootScope.loggedIN = false;
-		}
 		
 		$scope.loggedIN = $rootScope.loggedIN;
 
@@ -41,6 +48,10 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog) {
 		
 		$rootScope.loggedIN = false;
 		$scope.loggedIN = false;
+		
+		Helper.Cookie_Set("loggedIN", false);
+		Helper.Cookie_Set("token", "");
+		Helper.Cookie_Set("customerID", "");
 		
 		$location.path('/start');
 		
@@ -83,7 +94,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog) {
             '	</md-dialog-content>' +
             '</md-dialog>',
 
-            controller: function DialogController($scope, $rootScope, $location, $mdDialog, RESTFactory){
+            controller: function DialogController($scope, $rootScope, $location, $mdDialog, RESTFactory, Helper){
 				
 
                 $scope.closeDialog = function(){
@@ -109,9 +120,12 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog) {
 						$rootScope.loggedIN = true;
 						$scope.loggedIN = true;
 						
-						$rootScope.$apply( function(){$location.path('/booking'); } );
+						//Save data in cookies
+						Helper.Cookie_Set("loggedIN", true);
+						Helper.Cookie_Set("token", data.token);
+						Helper.Cookie_Set("customerID", data.id);
 						
-						//SAFE DATA IN COOKIES
+						$rootScope.$apply( function(){$location.path('/booking'); } );
 						
 					}, function(response){
 						
@@ -124,6 +138,11 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog) {
 							
 							$rootScope.loggedIN = true;
 							$scope.loggedIN = true;
+							
+							//Save data in cookies
+							Helper.Cookie_Set("loggedIN", true);
+							Helper.Cookie_Set("token", "tokenSKHDFADJF");
+							Helper.Cookie_Set("customerID", -1000);
 							
 							$rootScope.$apply( function(){$location.path('/booking'); } );
 							
@@ -138,7 +157,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog) {
             }
         });
 		
-	}
+	};
 	
 	
 	
@@ -234,7 +253,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog) {
             }
         });
 		
-	}
+	};
 	
 	
 });
