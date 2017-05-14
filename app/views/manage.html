@@ -19,9 +19,6 @@
 						<h4>Stra&szlig;e Nr.: {{ booking.start.address.street }} {{ booking.start.address.number }} </h4>
 						<p>PLZ:  {{ booking.start.address.zip }}</p>
 						<p>Stadt: {{ booking.start.address.city }}</p>
-
-						<!-- Icon das über ng-switch-when="true" angezeigt wird (Fahrzeug schon verfügbar) -->
-
 					</div>
                     <md-divider ></md-divider>
                 </md-list-item>
@@ -50,17 +47,7 @@
                         <p>von Stra&szlig;e : {{ booking.start.address.street }} {{ booking.start.address.number }}</p>
                         <h4>Ende {{ booking.end.date }} um {{ booking.end.time }} </h4>
                         <p>bis Stra&szlig;e Nr.: {{ booking.end.address.street }} {{ booking.end.address.number }}</p>
-
-                        <!-- <p ng-switch-when="true" style="background: #00ff00">Rechnung: bezahlt</p>
-                        <p ng-switch-when="false" style="background: #aa0000">Rechnung: nicht bezahlt</p>
-                        -->
-                        <!-- Feld oder Button in grün/rot der über ng-switch-when="true/false" dargestellt wird (Rechnung bezahl oder nicht) -->
-
-                        <!--
-                        <h3>{{ booking.start.date }} </h3>
-                        <h4>Fahrtbeginn:  {{ booking.start.time }}  {{ booking.start.address.street }}</h4>
-                        <h4>Fahrtende:  {{ booking.endTime }}  {{ booking.endPlace }}</h4>
-                        -->
+						
                     </div>
                     <md-divider ></md-divider>
                 </md-list-item>
