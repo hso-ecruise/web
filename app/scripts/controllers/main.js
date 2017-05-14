@@ -9,87 +9,11 @@
  */
 
 const IP = 'localhost';
-const PORT = '8080';
+const PORT = '3000';
 const CUSTOMER = "customers";
 const API_KEY = "AIzaSyBCbY_MjWJ1cDjugF_MBHwnYDWFNJYAa4o&callback=initMap";
 
-/*
-var application = angular.module('webApp', [
-    'ngAnimate',
-    'ngMaterial',
-    'ngMap',
-    'ngRoute'
-]);
-
-var checkRouting= function ($rootScope, $location) {
-    if ($rootScope.LoggedIN === false || $rootScope.LoggedIN === undefined)
-    {
-		$location.path("/login");
-    }
-    else
-    {
-		alert("true or other");
-		alert($rootScope.LoggedIN);
-    }
-};
-
-application.config(function ($routeProvider, $locationProvider){
-
-    $routeProvider
-	.when('/', {
-	    templateUrl: 'views/main.html',
-	    resolve: {
-			factory: checkRouting
-			}
-		})
-	
-	.when('/login',
-	    {
-			templateUrl : 'views/login.html',
-			controller: 'Ctrl_Login_Register'
-	    })
-		
-	.when('/register',
-	    {
-			templateUrl : 'views/register.html',
-			controller: 'Ctrl_Login_Register'
-	    })
-		
-    .when('/booking',
-	    {
-			templateUrl : 'views/booking.html',
-			controller: 'Ctrl_Booking'
-		})
-		
-	.when ('/about',
-		{
-			templateUrl: 'views/about.html'
-		})
-    
-	.when ('/manage',
-		{
-			templateUrl: 'views/manage.html',
-			controller: 'Ctrl_Manage'
-		})
-	
-	.when ('/profile',
-		{
-			templateUrl: 'views/profile.html',
-			controller: 'Ctrl_Manage'
-		})
-	
-	.otherwise(
-	    {
-			templateUrl : 'views/login.html',
-			controller: 'Ctrl_Login_Register'
-			//template: 'NO PAGE'
-	    });
-	
-    $locationProvider
-    .html5Mode(true);
-
-});
-*/
+//REPLACE ALL _ by /
 
 
 
@@ -156,7 +80,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		Trips_Get_TripID: function(id){
-			var url = 'http://' + IP + ':' + PORT + "/trips?TripId=" + id;
+			var url = 'http://' + IP + ':' + PORT + "/trips_TripId/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
@@ -220,6 +144,11 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
+		Charging_Stations_Get_Charging_StationID: function(id){
+			var url = 'http://' + IP + ':' + PORT + "/charging-stations/" + id;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
 		Car_Charging_Stations_Get_CarID: function(id){
 			var url = 'http://' + IP + ':' + PORT + "/car-charging-stations/by-car/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
@@ -246,7 +175,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		Invoices_Get_Items: function(id){
-			var url = 'http://' + IP + ':' + PORT + "/invoices/" + id + "/items";
+			var url = 'http://' + IP + ':' + PORT + "/invoices_" + id + "_items";
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
@@ -276,7 +205,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		Bookings_Get_CustomerID: function(id){
-			var url = 'http://' + IP + ':' + PORT + "/bookings/by-customer/" + id;
+			var url = 'http://' + IP + ':' + PORT + "/bookings_by-customer/";// + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		}

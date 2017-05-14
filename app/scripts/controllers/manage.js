@@ -1,6 +1,6 @@
 'use strict';
 
-application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory, Helper) {
+application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory, Helper, $location) {
     
 	var customerID = $rootScope.customerID;
 	
@@ -11,9 +11,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
     var i = 0;
 
 	
-	function HandleResult_Booking(response){
+	var HandleResult_Booking = function(response){
 		
-		var d = new Date(return_obj.PlannedDate);
+		var d = new Date(response.PlannedDate);
 		var now = new Date();
 		var dif = (d.getTime() - now.getTime()) / 1000 / 60;
 		
@@ -27,7 +27,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 	}
 	
-	function Handle_OpenBooking(response, dif){
+	var Handle_OpenBooking = function(response, dif){
 		
 		var booking = {};
 		
@@ -38,31 +38,43 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			booking.onMap = true;
 		}
 		
-		var lat = return_obj.BookedPositionLatitude;
-		var lon = return_obj.BookedPositionLongitude;
-	
+		var lat = response.BookedPositionLatitude;
+		var lon = response.BookedPositionLongitude;
+		
 		Helper.Get_Address(lat, lon).then(function(address){
 			
 			var start = {
-				date : Helper.Get_Date(return_obj.PlannedDate),
-				time: Helper.Get_Time(return_obj.PlannedDate),
+				date : Helper.Get_Date(response.PlannedDate),
+				time: Helper.Get_Time(response.PlannedDate),
 				address: address
 			};
 			
-			var booking = {
-				bookingId: response.BookingId,
-				start: start
-			};
+			
+			booking.start = start;
 			
 			open_bookings.push(booking);
 			
 			$scope.open_bookings = open_bookings;
 			
+			$scope.$apply();
+			
 		});
 		
-	}
+	};
 	
-	function Handle_DoneBooking(response){
+	
+	$scope.ShowOnMap = function(booking){
+		
+		if(booking.onMap === false){
+			return;
+		}
+		
+		$location.path("/booking");
+		
+	};
+	
+	
+	var Handle_DoneBooking = function(response){
 		
 		var booking = {};
 		
@@ -71,79 +83,93 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		booking.invoiceItemID = response.InvoiceItemId;
 		
 		//Get Trip from backend with response.tripId
-		var trip = RESTFactory.Trips_Get_TripID(booking.tripID);
+		var prom_trip = RESTFactory.Trips_Get_TripID(booking.tripID);
 		
-//		var invoice_item = RESTFactory.Invoice_Get();
 		
+		
+		/*
+		
+			TODO MAKE A REQUEST TO BACKEND TO GET THE INVOICE
+		
+		*/
+		
+		var prom_invoice = RESTFactory.Invoices_Get_InvoiceID(booking.invoiceItemID);
 		
 		var invoice = {
-			InvoiceId: 10,
+			InvoiceId: 1,
 			TotalAmount: 100,
 			Paid: true
 		};
 		
-		trip.then(function(trip_response){
-			
-			var trip_response = {
-				TripId: 0,
-				CarId: 0,
-				CustomerId: 0,
-				StartDate: "2017-04-25T18:52:46.839Z",
-				EndDate: "2017-04-25T20:52:46.839Z",
-				StartPositionLatitude: 50.127714,
-				StartPositionLongitude: 8.640663,
-				EndPositionLatitude: 50.127714,
-				EndPositionLongitude: 8.640663
-			};
-			
-			var start_lat = trip.StartPositionLatitude;
-			var start_lon = trip.StartPositionLongitude;
+		booking.invoice = invoice;
 		
-			var end_lat = trip.EndPositionLatitude;
-			var end_lon = trip.EndPositionLongitude;
-		
-			var start_get = Helper.Get_Address(start_lat, start_lon);
-			var end_get = Helper.Get_Address(end_lat, end_lon);
+		prom_trip.then(function(trip_response){
 			
-			start_get.then(function(start_addr){
-				end_get.then(function(end_addr){
+			var trip = trip_response.data;
+			
+			var prom_start_station = RESTFactory.Charging_Stations_Get_Charging_StationID(trip.StartChargingStationId);
+			var prom_end_station = RESTFactory.Charging_Stations_Get_Charging_StationID(trip.EndChargingStationId);
+			
+			prom_start_station.then(function(start_response){
+				
+				prom_end_station.then(function(end_response){
 					
-					var start = {
-						date : Helper.Get_Date(trip.StartDate),
-						time: Helper.Get_Time(trip.StartDate),
-						address: start_addr
-					};
+					var start_station = start_response.data;
+					var end_station = end_response.data;
 					
-					var end = {
-						date : Helper.Get_Date(trip.EndDate),
-						time: Helper.Get_Time(trip.EndDate),
-						address: end_addr
-					};
+					var start_lat = start_station.Latitude;
+					var start_lon = start_station.Longitude;
+				
+					var end_lat = end_station.Latitude;
+					var end_lon = end_station.Longitude;
+				
+					var start_get = Helper.Get_Address(start_lat, start_lon);
+					var end_get = Helper.Get_Address(end_lat, end_lon);
 					
-					var booking = {
-						bookingID: bookingID,
-						start: start,
-						end: end
-					};
+					start_get.then(function(start_addr){
+						
+						end_get.then(function(end_addr){
+							
+							var start = {
+								date : Helper.Get_Date(trip.StartDate),
+								time: Helper.Get_Time(trip.StartDate),
+								address: start_addr
+							};
+							
+							var end = {
+								endDate: trip.EndDate,
+								date: Helper.Get_Date(trip.EndDate),
+								time: Helper.Get_Time(trip.EndDate),
+								address: end_addr
+							};
+							
+							booking.start = start;
+							booking.end = end;
+							
+							//Invoice taken from Backend
+							
+							booking.invoice = {
+								invoiceID: invoice.InvoiceId,
+								totalAmount: invoice.TotalAmount,
+								paid: invoice.Paid
+							};
+							
+							done_bookings.push(booking);
+							
+							$scope.done_bookings = done_bookings;
+							
+							$scope.$apply();
+							
+						}, function(errorReponse){
+							console.log("Cant get address for end-point");
+						});
+						
+					}, function(errorReponse){
+						console.log("Cant get address for start-point");
+					});
 					
-					//Invoice taken from Backend
-					
-					booking.invoice = {
-						invoiceID: invoice.InvoiceId,
-						totalAmount: invoice.TotalAmount,
-						paid: invoice.Paid
-					}
-					
-					done_bookings.push(booking);
-					
-					$scope.done_bookings = done_bookings;
-					
-				}, function(errorReponse){
-					console.log("Cant get address for end-point");
 				});
 				
-			}, function(errorReponse){
-				console.log("Cant get address for start-point");
 			});
 			
 		}, function(errorReponse){
@@ -154,11 +180,11 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 		
 		
-	}
+	};
 	
 	
 	
-	function GetBilling(month, year){
+	var GetBilling = function(month, year){
 		
 		var bill = {};
 		
@@ -168,13 +194,20 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 		for(i = 0; i < done_bookings.length; i++){
 			
-			if(done_bookings[i].end.date.month === month && done_bookings[i].end.date.year === year){
+			var curDate = new Date(done_bookings[i].end.endDate);
+			
+			if(curDate.getMonth() === month && curDate.getFullYear() === year){
 				relevant_bookings.push(done_bookings[i]);
 			}
 			
 		}
 		
-		var invoiceID = 123;
+		//TODO GET INVOICE ID
+		
+		if(relevant_bookings.length === 0)
+			return;
+		
+		var invoiceID = relevant_bookings[0].invoice.invoiceID;
 		
 		bill.date = {
 			month: month,
@@ -194,6 +227,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			bill.active = true;
 			
 			var prom_invoice_items = RESTFactory.Invoices_Get_Items(invoiceID);
+			
 			prom_invoice_items.then(function(response){
 				
 				var items = response.data;
@@ -208,90 +242,43 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 					item.type = items[i].Type;
 					item.amount = items[i].Amount;
 					item.hasBooking = false;
-				
-					var j = 0;
-					while(j < relevant_bookings.length){
-						if(relevant_bookings[j].invoice.inveoiceItemID === item.invoiceItemID){
+					
+					var jk = 0;
+					while(jk < relevant_bookings.length){
+						
+						if(relevant_bookings[jk].invoiceItemID === item.invoiceItemID){
 							item.hasBooking = true;
-							item.booking = relevant_bookings[j];
+							item.booking = relevant_bookings[jk];
 							break;
 						}
-						j++;
+						jk++;
 					}
 				
 					bill_items.push(item);
 					
 				}
 
+				bill.items = bill_items;
+				
 				$scope.currentBill = bill;
+				
+				$scope.$apply();
 
 			});
 			
 		}, function(response){
 			
 			console.log("Failed to get invoice");
-			console.log(response);
 			
 			bill.active = false;
 
-//REMOVE START
-			bill.invoiceID = 10;
-			bill.totalAmount = 200;
-			bill.paid = true;
-			bill.paidText = "Bezahlt";
-			if(bill.paid === false){ bill.paidText = "Nicht bezahlt";}
-			bill.active = true;
-			
-			var items = [
-				{
-					InvoiceItemId: 0,
-					InvoiceId: 0,
-					Reason: "string",
-					Type: "DEBIT",
-					Amount: 2200
-				},
-				{
-					InvoiceItemId: 1,
-					InvoiceId: 0,
-					Reason: "Auto kaputt",
-					Type: "DEBIT",
-					Amount: 0
-				}
-			
-			]
-			
-			var bill_items = [];
-				
-			for(var i = 0; i < items.length; i++){
-				
-				var item = {};
-				item.invoiceID = items[i].InvoiceId;
-				item.invoiceItemID = items[i].InvoiceItemId;
-				item.reason = items[i].Reason;
-				item.type = items[i].Type;
-				item.amount = items[i].Amount;
-				item.hasBooking = false;
-				
-				if(i === 0){
-					item.hasBooking = true;
-					item.booking = open_bookings[0];
-				}
-				
-				bill_items.push(item);
-				
-			}
-			
-			bill.items = bill_items;
-			
-//REMOVE END
 			$scope.currentBill = bill;
 			
 		});
 		
-	}
+	};
 	
-	GetBilling(1,2017);
-	
+	//GetBilling(1,2017);
 	
 	
 	var init = function(){
@@ -308,14 +295,12 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			
 		}, function(response){
 			
-			console.log("Failed to get results");
-			
 		});
 		
 	};
 	
 	init();
-	
+	/*
 	//TEST FUNCTION
     for (i = 0; i < 6; i++) {
 	
@@ -338,11 +323,16 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		HandleResult_Booking(return_obj);
 		
     }
-	
+	*/
 
-    $scope.ShowBilling = function (month) {
+    $scope.ShowBilling = function (input) {
 		
-		GetBilling(month);
+		var date = new Date(input);
+		
+		var month = date.getMonth();
+		var year = date.getFullYear();
+		
+		GetBilling(month, year);
 		
     };
 

@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
- 
+
  
  var application = angular.module('webApp', [
     'ngAnimate',
@@ -18,7 +18,7 @@
 	'ngCookies'
 ]);
 
-var checkRouting= function ($rootScope, $location, Helper) {
+var checkRouting = function ($rootScope, $location, Helper) {
 	
 	var loggedIN = Helper.Cookie_Get("loggedIN");
 	var token = Helper.Cookie_Get("token");
@@ -58,19 +58,7 @@ application.config(function ($routeProvider, $locationProvider){
 			factory: checkRouting
 			}
 		})
-	/*
-	.when('/login',
-	    {
-			templateUrl : 'views/login.html',
-			controller: 'Ctrl_Login_Register'
-	    })
-		
-	.when('/register',
-	    {
-			templateUrl : 'views/register.html',
-			controller: 'Ctrl_Login_Register'
-	    })
-	*/
+
     .when('/booking',
 	    {
 			templateUrl : 'views/booking.html',
