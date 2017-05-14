@@ -15,11 +15,11 @@
     [32mDone, without errors.[39m
     
     
-    Execution Time (2017-05-09 16:20:24 UTC+2)
-    loading tasks               306ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 56%
-    loading grunt-contrib-copy  191ms  ▇▇▇▇▇▇▇▇▇▇▇▇ 35%
-    copy:styles                  45ms  ▇▇▇ 8%
-    Total 543ms
+    Execution Time (2017-05-12 12:37:11 UTC+2)
+    loading tasks               319ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 46%
+    loading grunt-contrib-copy  322ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 46%
+    copy:styles                  51ms  ▇▇▇ 7%
+    Total 693ms
     
 [4mRunning "postcss:server" (postcss) task[24m
 [32m>> [39m1 processed stylesheet created.
@@ -29,128 +29,76 @@ Started connect web server on http://0.0.0.0:9000
 
 [4mRunning "watch" task[24m
 Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.002s at Sun May 14 2017 20:38:54 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/scripts/controllers/manage.js" changed.
+[32m>> [39mFile "app/images/yeoman.png" changed.
+[32m>> [39mFile "app/views/profile.html" changed.
+[32m>> [39mFile "app/views/booking.html" changed.
+[32m>> [39mFile "app/scripts/controllers/booking.js" changed.
+[32m>> [39mFile "app/views/start.html" changed.
+[32m>> [39mFile "app/scripts/controllers/profile.js" changed.
 [32m>> [39mFile "app/scripts/app.js" changed.
+[32m>> [39mFile "app/scripts/controllers/main.js" changed.
+[32m>> [39mFile "app/styles/main.css" changed.
+[32m>> [39mFile "app/index.html" changed.
+[32m>> [39mFile "app/scripts/controllers/loginRegister.js" changed.
+[32m>> [39mFile "app/scripts/controllers/mainCtrl.js" deleted.
+[32m>> [39mFile "app/views/main.html" deleted.
+[32m>> [39mFile "app/images/yeoman2.png" renamed.
+[32m>> [39mFile "app/scripts/controllers/start.js" renamed.
 [4mRunning "newer:jshint:all" (newer) task[24m
+No newer files to process.
 
-[4mRunning "jshint:all" (jshint) task[24m
+[4mRunning "newer:jscs:all" (newer) task[24m
+No newer files to process.
 
-app/scripts/app.js
-  line 27   col 9   'alert' is not defined.
-  line 28   col 9   'alert' is not defined.
-
-app/scripts/controllers/booking.js
-  line 20   col 13  Missing 'new' prefix when invoking a constructor.
-  line 118  col 29  Missing 'new' prefix when invoking a constructor.
-  line 120  col 29  Missing 'new' prefix when invoking a constructor.
-  line 122  col 29  Missing 'new' prefix when invoking a constructor.
-  line 124  col 29  Missing 'new' prefix when invoking a constructor.
-  line 136  col 25  Missing 'new' prefix when invoking a constructor.
-  line 138  col 25  Missing 'new' prefix when invoking a constructor.
-  line 140  col 25  Missing 'new' prefix when invoking a constructor.
-  line 142  col 25  Missing 'new' prefix when invoking a constructor.
-  line 153  col 17  Missing 'new' prefix when invoking a constructor.
-  line 176  col 13  Missing 'new' prefix when invoking a constructor.
-  line 178  col 13  Missing 'new' prefix when invoking a constructor.
-  line 193  col 17  Missing 'new' prefix when invoking a constructor.
-  line 209  col 17  Missing 'new' prefix when invoking a constructor.
-  line 224  col 17  Missing 'new' prefix when invoking a constructor.
-  line 240  col 17  Missing 'new' prefix when invoking a constructor.
-  line 319  col 5   Missing 'new' prefix when invoking a constructor.
-  line 3    col 1   'application' is not defined.
-  line 5    col 19  'google' is not defined.
-  line 7    col 21  'google' is not defined.
-  line 17   col 23  'google' is not defined.
-  line 66   col 29  'google' is not defined.
-  line 67   col 25  'google' is not defined.
-  line 68   col 25  'google' is not defined.
-  line 73   col 26  'google' is not defined.
-  line 74   col 27  'google' is not defined.
-  line 80   col 13  'alert' is not defined.
-  line 87   col 24  'alert' is not defined.
-  line 89   col 17  'alert' is not defined.
-  line 79   col 46  'event' is defined but never used.
-  line 128  col 29  'response' is defined but never used.
-  line 196  col 21  'response' is defined but never used.
-  line 227  col 21  'response' is defined but never used.
-
-app/scripts/controllers/loginRegister.js
-  line 3    col 1   'application' is not defined.
-
-app/scripts/controllers/main.js
-  line 253  col 22  Duplicate key 'Invoices_Post'.
-  line 96   col 1   'application' is not defined.
-  line 112  col 1   'application' is not defined.
-  line 125  col 1   'application' is not defined.
-  line 139  col 1   'application' is not defined.
-  line 271  col 1   'application' is not defined.
-
-app/scripts/controllers/mainCtrl.js
-  line 3    col 1   'application' is not defined.
-
-app/scripts/controllers/manage.js
-  line 80   col 13  Missing 'new' prefix when invoking a constructor.
-  line 83   col 13  Missing 'new' prefix when invoking a constructor.
-  line 144  col 31  'trip_response' is already defined.
-  line 192  col 22  Missing semicolon.
-  line 318  col 14  Missing semicolon.
-  line 350  col 5   Missing 'new' prefix when invoking a constructor.
-  line 373  col 9   Missing 'new' prefix when invoking a constructor.
-  line 380  col 9   Missing 'new' prefix when invoking a constructor.
-  line 3    col 1   'application' is not defined.
-  line 181  col 36  'bookingID' is not defined.
-  line 144  col 17  'trip_response' is defined but never used.
-  line 198  col 29  'errorReponse' is defined but never used.
-  line 202  col 25  'errorReponse' is defined but never used.
-  line 206  col 21  'errorReponse' is defined but never used.
-
-app/scripts/controllers/profile.js
-  line 71   col 9   Missing 'new' prefix when invoking a constructor.
-  line 108  col 9   Missing 'new' prefix when invoking a constructor.
-  line 168  col 9   Missing 'new' prefix when invoking a constructor.
-  line 3    col 1   'application' is not defined.
-  line 27   col 26  'reponse' is not defined.
-  line 31   col 27  'reponse' is not defined.
-  line 81   col 21  'userID' is not defined.
-  line 36   col 21  'response' is defined but never used.
-  line 80   col 13  'obj' is defined but never used.
-  line 98   col 35  'response' is defined but never used.
-  line 100  col 21  'reponse' is defined but never used.
-  line 125  col 39  'response' is defined but never used.
-  line 127  col 29  'response' is defined but never used.
-  line 154  col 41  'response' is defined but never used.
-  line 156  col 29  'response' is defined but never used.
-
-  ⚠  72 warnings
-
-[33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
-
-[31mAborted due to warnings.[39m
+[32mDone, without errors.[39m
 
 
-Execution Time (2017-05-09 16:21:00 UTC+2)
-loading tasks                 298ms  ▇▇▇▇▇▇▇▇ 22%
-loading grunt-newer           103ms  ▇▇▇ 8%
-newer:jshint:all               29ms  ▇ 2%
-loading grunt-contrib-jshint  398ms  ▇▇▇▇▇▇▇▇▇▇ 30%
-jshint:all                    506ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
-Total 1.3s
+Execution Time (2017-05-14 20:38:58 UTC+2)
+loading tasks        281ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 72%
+loading grunt-newer   81ms  ▇▇▇▇▇▇▇▇▇ 21%
+newer:jshint:all      19ms  ▇▇▇ 5%
+newer:jscs:all         7ms  ▇ 2%
+Total 389ms
 
-[36mCompleted in 1.802s at Tue May 09 2017 16:21:01 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/about.html" deleted.
-[36mCompleted in 0.000s at Tue May 09 2017 16:23:13 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/OLD MANAGE BACKUP.html" deleted.
-[36mCompleted in 0.000s at Tue May 09 2017 16:23:22 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/start.html" changed.
-[36mCompleted in 0.000s at Tue May 09 2017 16:26:01 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/start.html" deleted.
-[36mCompleted in 0.000s at Tue May 09 2017 16:26:19 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/start.html" added.
-[36mCompleted in 0.000s at Tue May 09 2017 16:26:23 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/start.html" changed.
-[36mCompleted in 0.000s at Tue May 09 2017 16:26:59 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/start.html" changed.
-[36mCompleted in 0.000s at Tue May 09 2017 16:27:26 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/start.html" changed.
-[36mCompleted in 0.000s at Tue May 09 2017 16:28:02 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/views/start.html" changed.
-[36mCompleted in 0.000s at Tue May 09 2017 16:28:07 GMT+0200 (CEST)[39m - Waiting...
+[4mRunning "newer:copy:styles" (newer) task[24m
+
+[4mRunning "copy:styles" (copy) task[24m
+Copied 1 file
+
+[4mRunning "newer-postrun:copy:styles:1:/shared/web/node_modules/grunt-newer/.cache" (newer-postrun) task[24m
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-05-14 20:38:59 UTC+2)
+loading tasks                   279ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 41%
+loading grunt-newer              29ms  ▇▇ 4%
+newer:copy:styles                17ms  ▇ 2%
+copy:styles                       9ms  ▇ 1%
+newer-postrun:...-newer/.cache  126ms  ▇▇▇▇▇▇ 18%
+loading grunt-postcss            59ms  ▇▇▇ 9%
+postcss:server                  131ms  ▇▇▇▇▇▇ 19%
+postcss:dist                     27ms  ▇▇ 4%
+Total 684ms
+
+[36mCompleted in 4.487s at Sun May 14 2017 20:38:59 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[32m>> [39mFile "app/index.html" deleted.
+[36mCompleted in 0.000s at Sun May 14 2017 20:41:39 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" added.
+[36mCompleted in 0.000s at Sun May 14 2017 20:41:49 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Sun May 14 2017 20:41:58 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Sun May 14 2017 20:43:46 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/index.html" changed.
+[36mCompleted in 0.000s at Sun May 14 2017 20:43:57 GMT+0200 (CEST)[39m - Waiting...
