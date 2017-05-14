@@ -58,7 +58,7 @@ application.config(function ($routeProvider, $locationProvider){
 			factory: checkRouting
 			}
 		})
-	
+	/*
 	.when('/login',
 	    {
 			templateUrl : 'views/login.html',
@@ -70,7 +70,7 @@ application.config(function ($routeProvider, $locationProvider){
 			templateUrl : 'views/register.html',
 			controller: 'Ctrl_Login_Register'
 	    })
-		
+	*/
     .when('/booking',
 	    {
 			templateUrl : 'views/booking.html',

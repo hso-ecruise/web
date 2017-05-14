@@ -1,10 +1,9 @@
 'use strict';
 
-application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $location, $cookies) {
+application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $location) {
 
   $scope.Login = function () {
 
-	$cookies.put('logInState', true);
 	
 //	var loggedIN = $cookies.get('loginState');
 	
@@ -47,21 +46,9 @@ application.controller('Ctrl_Login_Register', function ($rootScope, $scope, $loc
 
     $scope.loginORregister = "login";
 	
-	console.log($cookies.get('logInState'));
-	
-	if($cookies.get('logInState') === true){
-		$location.path("/booking");
-		
-	}
-	
   };
 
   init();
-	
-	var favoriteCookie = $cookies.get('myFavorite');
-	console.log(favoriteCookie);
-	// Setting a cookie
-	$cookies.put('myFavorite', 'oatmeal');
 
 	
 	$scope.Register = function () {
