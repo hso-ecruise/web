@@ -295,11 +295,11 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
             '		<md-content flex layout-padding>' +
             '			<md-input-container>' +
-            '				<input type="date" placeholder="Datum" min="minDate" class="md-input" ng-model="date">' +
+            '				<input type="date" placeholder="Datum" min="{{minDate}}" class="md-input" ng-model="date">' +
             //'               <md-datepicker type="date" placeholder="Datum" ng-model="date"></md-datepicker> ' +    waere zwar schoner aber scheiss drauf       
             '			</md-input-container>' +
             '			<md-input-container>' +
-            '				<input type="time" placeholder="Uhrzeit" class="md-input" ng-model="date">' +
+            '				<input type="time" placeholder="Uhrzeit" min="{{minTime}}" class="md-input" ng-model="time">' +
             '			</md-input-container>' +
             '		</md-content>' +
 
@@ -315,21 +315,47 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
                 $scope.address = address;
 
-                $scope.date = new Date();
-				$scope.minDate = new Date();
-                $scope.time = new Date();
-                $scope.date.setMilliseconds(0);
-                $scope.date.setSeconds(0);
-                
+				var timeInput = new Date();
+				timeInput.setMilliseconds(0);
+				timeInput.setSeconds(0);
+				
+				var minTime = timeInput;
+				minTime.setMinutes(timeInput.getMinutes() - 1);
+				
+				
+				var dateInput = new Date();
+				dateInput.setMilliseconds(0);
+				dateInput.setSeconds(0);
+				dateInput.setMinutes(0);
+				dateInput.setHours(0);
+				
+				var minDate = dateInput;
+				
+				$scope.time = timeInput;
+				$scope.minTime = minTime;
+				
+				$scope.date = dateInput;
+				$scope.minDate = minDate;
+
                 $scope.closeDialog = function(){
                     $mdDialog.hide();
                 };
 
                 $scope.Save = function(){
 					
-					var plannedDate = $scope.date;
+					var date = $scope.date;
+					var time = $scope.time;
+					
+					var plannedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), 0, 0);
+					
+					console.log(plannedDate);
 					
 					var now = new Date();
+					
+					if(plannedDate.getTime() - now.getTime() < 0){
+						alert("Die Startzeit liegt in der Vergangenheit. Bitte überprüfen Sie Ihre Eingaben.");
+						return;
+					}
 					
 					var data = {
 						CustomerId: customerID,
