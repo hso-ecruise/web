@@ -98,7 +98,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		var invoice = {
 			InvoiceId: 1,
 			TotalAmount: 100,
-			Paid: true
+			Paid: false
 		};
 		
 		booking.invoice = invoice;

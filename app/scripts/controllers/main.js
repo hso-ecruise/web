@@ -150,7 +150,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		Car_Charging_Stations_Get_CarID: function(id){
-			var url = 'http://' + IP + ':' + PORT + "/car-charging-stations/by-car/" + id;
+			var url = 'http://' + IP + ':' + PORT + "/car-charging-stations_by-car/";// + id;			//TODO
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
@@ -190,7 +190,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		User_Login: function(email, password){
-			var url = 'http://' + IP + ':' + PORT + "/public/login/" + email;
+			var url = 'http://' + IP + ':' + PORT + "/public_login/" + email;
 			var orig = Promise.resolve(PostCaller.Post(url, password));
 			return orig;
 		},
@@ -205,7 +205,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		Bookings_Get_CustomerID: function(id){
-			var url = 'http://' + IP + ':' + PORT + "/bookings_by-customer/";// + id;
+			var url = 'http://' + IP + ':' + PORT + "/bookings_by-customer/";// + id;			//TODO
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		}

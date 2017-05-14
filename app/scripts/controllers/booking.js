@@ -220,7 +220,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     function AddVehicle(car){
 
-        if(car.BookingState === "FREE"){
+        if(car.BookingState === "AVAILABLE"){
 
             var lat = car.LastKnownPositionLatitude;
             var lon = car.LastKnownPositionLongitude;
@@ -230,43 +230,44 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             var title = "Fahrzeugdetails:";
 
             if(bat < 100){
-
+				
                 var res = RESTFactory.Car_Charging_Stations_Get_CarID(carID);
 
                 res.then(function(response){
-                    var info = response.data;
-                    if(info.length > 0){
+					
+					var info = response.data;
+					
+					for(var tz = 0; tz < info.length; tz++){
+						
+						var station = info[tz];
+						
+						if(station.CarId === carID){
+						
+							if(info.length > 0){
 
-                        var time = Helper.Get_Time(info[0].ChargeEnd);
-                        var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtlich um " + time + "fertig geladen.";
+								var time = Helper.Get_Time(info[tz].ChargeEnd);
+								var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtlich um " + time + " fertig geladen.";
 
-                        if(bat < 25){
-                            AddMarker(title, content, "car_loading_00", lat, lon);
-                        }else if (bat < 50){
-                            AddMarker(title, content, "car_loading_25", lat, lon);
-                        }else if (bat < 75){
-                            AddMarker(title, content, "car_loading_50", lat, lon);
-                        }else if (bat < 100){
-                            AddMarker(title, content, "car_loading_75", lat, lon);
-                        }
+								if(bat < 25){
+									AddMarker(title, content, "car_loading_00", lat, lon);
+								}else if (bat < 50){
+									AddMarker(title, content, "car_loading_25", lat, lon);
+								}else if (bat < 75){
+									AddMarker(title, content, "car_loading_50", lat, lon);
+								}else if (bat < 100){
+									AddMarker(title, content, "car_loading_75", lat, lon);
+								}
 
-                    }
+							}
+							
+							break;
+							
+						}
+					}
+					
                 }, function(response){
 
                     console.log("Failed to get loading informations");
-
-                    var time = Helper.Get_Time(new Date());
-
-                    var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtlich um " + time + " fertig geladen.";
-                    if(bat < 25){
-                        AddMarker(title, content, "car_loading_00", lat, lon);
-                    }else if (bat < 50){
-                        AddMarker(title, content, "car_loading_25", lat, lon);
-                    }else if (bat < 75){
-                        AddMarker(title, content, "car_loading_50", lat, lon);
-                    }else if (bat < 100){
-                        AddMarker(title, content, "car_loading_75", lat, lon);
-                    }
 
                 });
 
@@ -309,13 +310,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
     function LoadPositions(){
 
         //GET Call to get all cars
-        var res_cars = RESTFactory.Cars_Get();
-        res_cars.then(function(response){
-
+        var prom_cars = RESTFactory.Cars_Get();
+        prom_cars.then(function(response){
+			
             var cars = response.data;
-
-            for(var i = 0; i < cars.length; i++){
-                var car = cars[i];
+			
+            for(var ij = 0; ij < cars.length; ij++){
+                var car = cars[ij];
                 AddVehicle(car);
             }
 
