@@ -18,6 +18,7 @@ md-input-container{
     margin: auto;
     margin-top: 10px;
     margin-bottom: 0; 
+    max-height: 80%;
 }
 
 md-nav-bar md-nav-ink-bar {
@@ -28,6 +29,7 @@ md-nav-bar md-nav-ink-bar {
     display:flex;
     width: 55%;
     margin: auto;
+    max-height: 80%;
 }
 .navbar{
     width: 60%;
@@ -39,21 +41,21 @@ md-nav-bar md-nav-ink-bar {
 }
 
 #ng_view{
-	height: calc(100% - 52px - 10px);
+    height: calc(100% - 52px - 10px);
 }
 
 #search_input{
-	
-	background-color: #fff;
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-	margin-top: 10px;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
-	width: 300px;
-	
+
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-top: 10px;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+
 }
 
 .user-edit-left{
