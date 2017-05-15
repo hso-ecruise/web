@@ -3,14 +3,19 @@
 application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope) {
     
 	var customerID = $rootScope.customerID;
+	
+	var oldUser = {};
+	
 	$scope.customerID = customerID;
+	
 	
 	function LoadData(){
 		
 		
 		//GET Call
-		var res = RESTFactory.Customers_Get_CustomerID(customerID);
-		res.then(function(response){
+		var prom_data = RESTFactory.Customers_Get_CustomerID(customerID);
+		
+		prom_data.then(function(response){
 			
 			var user = {
 				userID: customerID,
@@ -25,18 +30,19 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 					number: response.HouseNumber,
 					country: response.Country,
 					city: response.City,
-					zip: reponse.ZipCode,
+					zip: response.ZipCode,
 					extra: response.AddressExtraLine
 				},
 				activated: response.Activated,
-				verified: reponse.Verified
+				verified: response.Verified
+				
 			};
+			
+			oldUser = user;
 			
 			$scope.user = user;
 			
 		}, function(response){
-			
-			console.log("Failed to get user data");
 			
 			
 			var user = {
@@ -77,12 +83,26 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	
     $scope.Safe = function () {
 
-		var obj = {
-			userID: userID,
-			name: $scope.user.name,
-			familyName: $scope.user.familyName,
-			phoneNr: $scope.user.phoneNr
+		var changedPhone = {
+			PhoneNumber: $scope.user.phoneNr
 		};
+		
+		if(changedPhone.PhoneNumber !== oldUser.phoneNr){
+			
+			var prom_phone = RESTFactory.Customers_Patch_PhoneNr(customerID, changedPhone);
+			
+			prom_phone.then(function(response){
+				LoadData();
+				alert("Telefonnummer erfolgreich geändert");
+			}, function(response){
+				LoadData();
+				alert("Telefonnummer konnte nicht geändert werden");
+			});
+			
+			
+		}else{
+			console.log("Nothing to change Phone");
+		}
 		
 		var address = {
 			Country: $scope.user.address.country,
@@ -93,14 +113,27 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			AddressExtraLine: $scope.user.address.extra
 		};
 		
-		var chg_address = RESTFactory.Customers_Patch_Address(customerID, address);
+		if(	address.Country !== oldUser.address.country || 
+			address.City !== oldUser.address.city ||
+			address.ZipCode !== oldUser.address.zip ||
+			address.Street !== oldUser.address.street ||
+			address.HouseNumber !== oldUser.address.number ||
+			address.AddressExtraLine !== oldUser.address.extra)
+		{
 		
-		chg_address.then(function(response){
-			console.log("Address changed successfull");
-		}, function(reponse){
-			console.log("Address changed failed");
-		});
-
+			var chg_address = RESTFactory.Customers_Patch_Address(customerID, address);
+			
+			chg_address.then(function(response){
+				LoadData();
+				console.log("Addresse wurde erfolgreich geändert");
+			}, function(reponse){
+				LoadData();
+				console.log("Addresse konnte nicht geändert werden");
+			});
+		}else{
+			console.log("Nothing to change address");
+		}
+		
     };
 
     $scope.Cancel = function () {
@@ -114,8 +147,6 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		var old_password = $scope.user.password.current;
 		var new_password = $scope.user.password.new;
 		var new_password_conf = $scope.user.password.confirm;
-		
-		console.log("Change Password: " + old_password + "   " + new_password + "   " + new_password_conf);
 		
 		if (new_password === new_password_conf) {
 			

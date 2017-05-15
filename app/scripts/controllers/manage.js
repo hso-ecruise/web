@@ -204,9 +204,12 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 		//TODO GET INVOICE ID
 		
-		if(relevant_bookings.length === 0)
+		if(relevant_bookings.length === 0){
+			bill.active = false;
+			$scope.currentBill = bill;
+			$scope.$apply();
 			return;
-		
+		}
 		var invoiceID = relevant_bookings[0].invoice.invoiceID;
 		
 		bill.date = {

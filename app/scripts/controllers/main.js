@@ -134,6 +134,11 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(PatchCaller.Patch(url, address));
 			return orig;
 		},
+		Customers_Patch_PhoneNr: function(id, phoneNr){
+			var url = 'http://' + IP + ':' + PORT + "/customers/" + id + "/phone-number";
+			var orig = Promise.resolve(PatchCaller.Patch(url, address));
+			return orig;
+		},
 		Cars_Get: function(){
 			var url = 'http://' + IP + ':' + PORT + "/cars";
 			var orig = Promise.resolve(GetCaller.Get(url));
