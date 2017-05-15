@@ -1,7 +1,7 @@
 
-.login-form{
+.start-page{
     margin: auto;
-    width: 420px;
+    width: 800px;
 }
 
 .button-to-right {
@@ -11,7 +11,6 @@
 md-input-container{
     height: 37px;
 }
-
 
 .manage-flex-container{
     display:flex;
@@ -63,10 +62,6 @@ md-nav-bar md-nav-ink-bar {
 .user-edit-right{
     max-width: 450px;
 }
-body {
-    overflow:hidden;
-}
-
 
 .user-edit-right md-content {
     background-color: transparent !important; }

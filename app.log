@@ -15,11 +15,11 @@
     [32mDone, without errors.[39m
     
     
-    Execution Time (2017-05-12 12:37:11 UTC+2)
-    loading tasks               319ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 46%
-    loading grunt-contrib-copy  322ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 46%
-    copy:styles                  51ms  ▇▇▇ 7%
-    Total 693ms
+    Execution Time (2017-05-15 18:47:59 UTC+2)
+    loading tasks               313ms  ▇▇▇▇▇▇▇▇▇▇▇ 30%
+    loading grunt-contrib-copy  557ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 53%
+    copy:styles                 179ms  ▇▇▇▇▇▇ 17%
+    Total 1.1s
     
 [4mRunning "postcss:server" (postcss) task[24m
 [32m>> [39m1 processed stylesheet created.
@@ -30,45 +30,148 @@ Started connect web server on http://0.0.0.0:9000
 [4mRunning "watch" task[24m
 Waiting...
 [32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.002s at Sun May 14 2017 20:38:54 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/scripts/controllers/manage.js" changed.
-[32m>> [39mFile "app/images/yeoman.png" changed.
-[32m>> [39mFile "app/views/profile.html" changed.
-[32m>> [39mFile "app/views/booking.html" changed.
-[32m>> [39mFile "app/scripts/controllers/booking.js" changed.
-[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.001s at Mon May 15 2017 18:49:43 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile "app/scripts/controllers/profile.js" changed.
 [32m>> [39mFile "app/scripts/app.js" changed.
-[32m>> [39mFile "app/scripts/controllers/main.js" changed.
-[32m>> [39mFile "app/styles/main.css" changed.
+[32m>> [39mFile "app/scripts/controllers/manage.js" changed.
+[32m>> [39mFile "app/views/booking.html" changed.
+[32m>> [39mFile "app/views/start.html" changed.
+[32m>> [39mFile "app/views/profile.html" changed.
+[32m>> [39mFile "app/views/manage.html" changed.
+[32m>> [39mFile "app/scripts/controllers/booking.js" changed.
 [32m>> [39mFile "app/index.html" changed.
-[32m>> [39mFile "app/scripts/controllers/loginRegister.js" changed.
-[32m>> [39mFile "app/scripts/controllers/mainCtrl.js" deleted.
-[32m>> [39mFile "app/views/main.html" deleted.
-[32m>> [39mFile "app/images/yeoman2.png" renamed.
-[32m>> [39mFile "app/scripts/controllers/start.js" renamed.
+[32m>> [39mFile "app/scripts/controllers/main.js" changed.
+[32m>> [39mFile "app/scripts/controllers/about.js" deleted.
+[32m>> [39mFile "app/scripts/controllers/loginRegister.js" deleted.
+[32m>> [39mFile "app/views/login.html" deleted.
+[32m>> [39mFile "app/views/register.html" deleted.
 [4mRunning "newer:jshint:all" (newer) task[24m
-No newer files to process.
 
-[4mRunning "newer:jscs:all" (newer) task[24m
-No newer files to process.
+[4mRunning "jshint:all" (jshint) task[24m
 
-[32mDone, without errors.[39m
+app/scripts/app.js
+  line 47   col 9   'alert' is not defined.
+  line 48   col 9   'alert' is not defined.
+
+app/scripts/controllers/booking.js
+  line 23   col 13  Missing 'new' prefix when invoking a constructor.
+  line 58   col 17  Missing 'new' prefix when invoking a constructor.
+  line 130  col 29  Missing 'new' prefix when invoking a constructor.
+  line 136  col 18  Don't make functions within a loop.
+  line 252  col 37  Missing 'new' prefix when invoking a constructor.
+  line 254  col 37  Missing 'new' prefix when invoking a constructor.
+  line 256  col 37  Missing 'new' prefix when invoking a constructor.
+  line 258  col 37  Missing 'new' prefix when invoking a constructor.
+  line 280  col 17  Missing 'new' prefix when invoking a constructor.
+  line 303  col 13  Missing 'new' prefix when invoking a constructor.
+  line 305  col 13  Missing 'new' prefix when invoking a constructor.
+  line 320  col 17  Missing 'new' prefix when invoking a constructor.
+  line 338  col 17  Missing 'new' prefix when invoking a constructor.
+  line 468  col 5   Missing 'new' prefix when invoking a constructor.
+  line 3    col 1   'application' is not defined.
+  line 10   col 19  'google' is not defined.
+  line 12   col 21  'google' is not defined.
+  line 31   col 29  'google' is not defined.
+  line 33   col 22  'google' is not defined.
+  line 192  col 29  'google' is not defined.
+  line 193  col 25  'google' is not defined.
+  line 194  col 25  'google' is not defined.
+  line 199  col 26  'google' is not defined.
+  line 200  col 27  'google' is not defined.
+  line 206  col 13  'alert' is not defined.
+  line 213  col 24  'alert' is not defined.
+  line 215  col 17  'alert' is not defined.
+  line 351  col 23  'google' is not defined.
+  line 437  col 25  'alert' is not defined.
+  line 455  col 25  'alert' is not defined.
+  line 457  col 25  'alert' is not defined.
+  line 140  col 21  'response' is defined but never used.
+  line 205  col 46  'event' is defined but never used.
+  line 268  col 29  'response' is defined but never used.
+  line 323  col 21  'response' is defined but never used.
+  line 341  col 21  'response' is defined but never used.
+  line 454  col 48  'response' is defined but never used.
+  line 456  col 33  'response' is defined but never used.
+
+app/scripts/controllers/main.js
+  line 187  col 22  Duplicate key 'Invoices_Post'.
+  line 20   col 1   'application' is not defined.
+  line 36   col 1   'application' is not defined.
+  line 49   col 1   'application' is not defined.
+  line 63   col 1   'application' is not defined.
+  line 139  col 63  'address' is not defined.
+  line 225  col 1   'application' is not defined.
+  line 137  col 47  'phoneNr' is defined but never used.
+  line 157  col 51  'id' is defined but never used.
+  line 212  col 43  'id' is defined but never used.
+
+app/scripts/controllers/manage.js
+  line 22   col 13  Missing 'new' prefix when invoking a constructor.
+  line 25   col 13  Missing 'new' prefix when invoking a constructor.
+  line 28   col 6   Missing semicolon.
+  line 296  col 17  Missing 'new' prefix when invoking a constructor.
+  line 338  col 9   Missing 'new' prefix when invoking a constructor.
+  line 3    col 1   'application' is not defined.
+  line 11   col 9   'i' is defined but never used.
+  line 96   col 13  'prom_invoice' is defined but never used.
+  line 163  col 37  'errorReponse' is defined but never used.
+  line 167  col 33  'errorReponse' is defined but never used.
+  line 175  col 21  'errorReponse' is defined but never used.
+  line 272  col 21  'response' is defined but never used.
+  line 299  col 21  'response' is defined but never used.
+
+app/scripts/controllers/profile.js
+  line 77   col 9   Missing 'new' prefix when invoking a constructor.
+  line 95   col 17  Missing 'new' prefix when invoking a constructor.
+  line 98   col 17  Missing 'new' prefix when invoking a constructor.
+  line 127  col 17  Missing 'new' prefix when invoking a constructor.
+  line 130  col 17  Missing 'new' prefix when invoking a constructor.
+  line 141  col 9   Missing 'new' prefix when invoking a constructor.
+  line 199  col 9   Missing 'new' prefix when invoking a constructor.
+  line 3    col 1   'application' is not defined.
+  line 96   col 17  'alert' is not defined.
+  line 99   col 17  'alert' is not defined.
+  line 45   col 21  'response' is defined but never used.
+  line 94   col 38  'response' is defined but never used.
+  line 97   col 25  'response' is defined but never used.
+  line 126  col 39  'response' is defined but never used.
+  line 129  col 25  'reponse' is defined but never used.
+  line 156  col 39  'response' is defined but never used.
+  line 158  col 29  'response' is defined but never used.
+  line 185  col 41  'response' is defined but never used.
+  line 187  col 29  'response' is defined but never used.
+
+  ⚠  82 warnings
+
+[33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
+
+[31mAborted due to warnings.[39m
 
 
-Execution Time (2017-05-14 20:38:58 UTC+2)
-loading tasks        281ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 72%
-loading grunt-newer   81ms  ▇▇▇▇▇▇▇▇▇ 21%
-newer:jshint:all      19ms  ▇▇▇ 5%
-newer:jscs:all         7ms  ▇ 2%
-Total 389ms
+Execution Time (2017-05-15 18:49:49 UTC+2)
+loading tasks                 280ms  ▇▇▇▇▇▇▇▇ 24%
+loading grunt-newer            76ms  ▇▇▇ 6%
+newer:jshint:all               30ms  ▇ 3%
+loading grunt-contrib-jshint  360ms  ▇▇▇▇▇▇▇▇▇▇ 30%
+jshint:all                    442ms  ▇▇▇▇▇▇▇▇▇▇▇▇ 37%
+Total 1.2s
 
+[36mCompleted in 1.698s at Mon May 15 2017 18:49:50 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" deleted.
+[36mCompleted in 0.000s at Mon May 15 2017 18:52:45 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" added.
+[36mCompleted in 0.000s at Mon May 15 2017 18:52:48 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 18:59:24 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.001s at Mon May 15 2017 18:59:36 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:00:22 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:01:05 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" deleted.
 [4mRunning "newer:copy:styles" (newer) task[24m
-
-[4mRunning "copy:styles" (copy) task[24m
-Copied 1 file
-
-[4mRunning "newer-postrun:copy:styles:1:/shared/web/node_modules/grunt-newer/.cache" (newer-postrun) task[24m
+No newer files to process.
 
 [4mRunning "postcss:server" (postcss) task[24m
 [32m>> [39m1 processed stylesheet created.
@@ -79,26 +182,206 @@ Copied 1 file
 [32mDone, without errors.[39m
 
 
-Execution Time (2017-05-14 20:38:59 UTC+2)
-loading tasks                   279ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇ 41%
-loading grunt-newer              29ms  ▇▇ 4%
-newer:copy:styles                17ms  ▇ 2%
-copy:styles                       9ms  ▇ 1%
-newer-postrun:...-newer/.cache  126ms  ▇▇▇▇▇▇ 18%
-loading grunt-postcss            59ms  ▇▇▇ 9%
-postcss:server                  131ms  ▇▇▇▇▇▇ 19%
-postcss:dist                     27ms  ▇▇ 4%
-Total 684ms
+Execution Time (2017-05-15 19:01:49 UTC+2)
+loading tasks          280ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 41%
+loading grunt-newer     32ms  ▇▇ 5%
+newer:copy:styles       14ms  ▇ 2%
+loading grunt-postcss   58ms  ▇▇▇▇ 9%
+postcss:server         270ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 40%
+postcss:dist            25ms  ▇▇ 4%
+Total 680ms
 
-[36mCompleted in 4.487s at Sun May 14 2017 20:38:59 GMT+0200 (CEST)[39m - Waiting...
+[36mCompleted in 1.185s at Mon May 15 2017 19:01:50 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile ".tmp/styles/main.css" changed.
+[32m>> [39mFile "app/styles/main.css" added.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-05-15 19:01:54 UTC+2)
+loading tasks          278ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
+loading grunt-newer     29ms  ▇▇ 4%
+newer:copy:styles       17ms  ▇ 3%
+loading grunt-postcss   59ms  ▇▇▇▇ 9%
+postcss:server         255ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+postcss:dist            28ms  ▇▇ 4%
+Total 666ms
+
+[36mCompleted in 1.170s at Mon May 15 2017 19:01:54 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.001s at Mon May 15 2017 19:02:29 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:02:32 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:02:39 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:03:17 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:03:29 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.003s at Mon May 15 2017 19:04:36 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:05:05 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-05-15 19:05:45 UTC+2)
+loading tasks          277ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 41%
+loading grunt-newer     29ms  ▇▇ 4%
+newer:copy:styles       18ms  ▇▇ 3%
+loading grunt-postcss   65ms  ▇▇▇▇ 10%
+postcss:server         260ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+postcss:dist            28ms  ▇▇ 4%
+Total 677ms
+
+[36mCompleted in 1.173s at Mon May 15 2017 19:05:45 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-05-15 19:06:48 UTC+2)
+loading tasks          284ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
+loading grunt-newer     28ms  ▇▇ 4%
+newer:copy:styles       17ms  ▇ 3%
+loading grunt-postcss   58ms  ▇▇▇▇ 9%
+postcss:server         254ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+postcss:dist            28ms  ▇▇ 4%
+Total 671ms
+
+[36mCompleted in 1.175s at Mon May 15 2017 19:06:49 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-05-15 19:07:03 UTC+2)
+loading tasks          285ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
+loading grunt-newer     29ms  ▇▇ 4%
+newer:copy:styles       17ms  ▇ 2%
+loading grunt-postcss   58ms  ▇▇▇▇ 8%
+postcss:server         256ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 37%
+postcss:dist            37ms  ▇▇▇ 5%
+Total 683ms
+
+[36mCompleted in 1.188s at Mon May 15 2017 19:07:04 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[32m>> [39mFile "app/views/start.html" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:07:11 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile "app/index.html" deleted.
-[36mCompleted in 0.000s at Sun May 14 2017 20:41:39 GMT+0200 (CEST)[39m - Waiting...
+[36mCompleted in 0.000s at Mon May 15 2017 19:07:29 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile "app/index.html" added.
-[36mCompleted in 0.000s at Sun May 14 2017 20:41:49 GMT+0200 (CEST)[39m - Waiting...
+[36mCompleted in 0.000s at Mon May 15 2017 19:07:34 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-05-15 19:07:52 UTC+2)
+loading tasks          281ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
+loading grunt-newer     29ms  ▇▇ 4%
+newer:copy:styles       17ms  ▇ 3%
+loading grunt-postcss   58ms  ▇▇▇▇ 9%
+postcss:server         257ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+postcss:dist            27ms  ▇▇ 4%
+Total 670ms
+
+[36mCompleted in 1.171s at Mon May 15 2017 19:07:52 GMT+0200 (CEST)[39m - Waiting...
 [32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Sun May 14 2017 20:41:58 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Sun May 14 2017 20:43:46 GMT+0200 (CEST)[39m - Waiting...
-[32m>> [39mFile "app/index.html" changed.
-[36mCompleted in 0.000s at Sun May 14 2017 20:43:57 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:07:53 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-05-15 19:08:07 UTC+2)
+loading tasks          279ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 41%
+loading grunt-newer     29ms  ▇▇ 4%
+newer:copy:styles       16ms  ▇ 2%
+loading grunt-postcss   58ms  ▇▇▇▇ 9%
+postcss:server         254ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+postcss:dist            38ms  ▇▇▇ 6%
+Total 675ms
+
+[36mCompleted in 1.183s at Mon May 15 2017 19:08:07 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:08:08 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile "app/styles/main.css" changed.
+[4mRunning "newer:copy:styles" (newer) task[24m
+No newer files to process.
+
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[4mRunning "postcss:dist" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+
+[32mDone, without errors.[39m
+
+
+Execution Time (2017-05-15 19:09:11 UTC+2)
+loading tasks          279ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 42%
+loading grunt-newer     30ms  ▇▇ 4%
+newer:copy:styles       17ms  ▇ 3%
+loading grunt-postcss   58ms  ▇▇▇▇ 9%
+postcss:server         256ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 38%
+postcss:dist            28ms  ▇▇ 4%
+Total 668ms
+
+[36mCompleted in 1.172s at Mon May 15 2017 19:09:12 GMT+0200 (CEST)[39m - Waiting...
+[32m>> [39mFile ".tmp/styles/main.css" changed.
+[36mCompleted in 0.000s at Mon May 15 2017 19:09:12 GMT+0200 (CEST)[39m - Waiting...
