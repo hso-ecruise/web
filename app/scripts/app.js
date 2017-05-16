@@ -18,6 +18,8 @@ var application = angular.module('webApp', [
     'ngCookies'
 ]);
 
+application.service
+
 var checkRouting = function ($rootScope, $location, Helper) {
     
     var loggedIN = Helper.Cookie_Get("loggedIN");
@@ -25,7 +27,7 @@ var checkRouting = function ($rootScope, $location, Helper) {
     var customerID = Helper.Cookie_Get("customerID");
     
     if(loggedIN !== "true"){
-	loggedIN = false;
+		loggedIN = false;
     }
     
     $rootScope.loggedIN = loggedIN;
@@ -34,18 +36,16 @@ var checkRouting = function ($rootScope, $location, Helper) {
     
     if ($rootScope.loggedIN === false || $rootScope.loggedIN === undefined)
     {
-	if($rootScope.loggedIN === undefined){
-	    $rootScope.loggedIN = false;
-	}
-	
-	console.log("FAILED ");
-	
-	$location.path("/start");
+		if($rootScope.loggedIN === undefined){
+			$rootScope.loggedIN = false;
+		}
+		
+		$location.path("/start");
     }
     else
     {
-	alert("true or other");
-	alert($rootScope.loggedIN);
+		//alert("true or other");
+		//alert($rootScope.loggedIN);
     }
 };
 
@@ -55,45 +55,42 @@ application.config(function ($routeProvider, $locationProvider){
 	.when('/', {
 	    templateUrl: 'views/start.html',
 	    resolve: {
-		factory: checkRouting
+			factory: checkRouting
 	    }
 	})
 
 	.when('/booking',
-	      {
-		  templateUrl : 'views/booking.html',
-		  factory: checkRouting
-	      },
-	      controller: 'Ctrl_Booking'
-	     })
-		   
-		   .when ('/about',
-			  {
-			      templateUrl: 'views/about.html'
-			  })
-		   
-		   .when ('/manage',
-			  {
-			      templateUrl: 'views/manage.html',
-		    	      factory: checkRouting
-			  },
-			  controller: 'Ctrl_Manage'
-			 })
+	{
+		templateUrl : 'views/booking.html',
+		resolve: {
+			factory: checkRouting
+		},
+		controller: 'Ctrl_Booking'
+	})
+	
+	.when ('/manage',
+	{
+		templateUrl: 'views/manage.html',
+		resolve: {
+			factory: checkRouting
+		},
+		controller: 'Ctrl_Manage'
+	})
 
     .when ('/profile',
-	   {
-	       templateUrl: 'views/profile.html',
-	       factory: checkRouting
-	   },
-	   controller: 'Ctrl_Manage'
-	  })
+	{
+		templateUrl: 'views/profile.html',
+		resolve: {
+			factory: checkRouting
+		},
+		controller: 'Ctrl_Manage'
+	})
 	
 	.otherwise(
-	    {
-			templateUrl : 'views/start.html',
-			controller: 'Ctrl_Main'
-			//template: 'NO PAGE'
-	    });
+	{
+		templateUrl : 'views/start.html',
+		controller: 'Ctrl_Main'
+	});
 	
     $locationProvider
     .html5Mode(true);
