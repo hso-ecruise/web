@@ -64,153 +64,153 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 
 	return {
 		GetUser: function (id) {
-			var url = 'http://' + IP + '/' + CUSTOMER + "?userID=" + id;
+			var url = 'https://' + IP + '/' + CUSTOMER + "?userID=" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		GetAddress: function(lat, lon){
-			var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+			var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
 			url += lat + "," + lon + "&key=" + API_KEY;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Trips_Get: function(){
-			var url = 'http://' + IP + "/trips";
+			var url = 'https://' + IP + "/trips";
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Trips_Get_TripID: function(id){
-			var url = 'http://' + IP + "/trips_TripId/" + id;
+			var url = 'https://' + IP + "/trips/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Trips_Get_CarID: function(id){
-			var url = 'http://' + IP + "/trips/by-car?CarId=" + id;
+			var url = 'https://' + IP + "/trips/by-car/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Trips_Post: function(data){
-			var url = 'http://' + IP + "/trips";
+			var url = 'https://' + IP + "/trips";
 			var orig = Promise.resolve(PostCaller.Get(url, data));
 			return orig;
 		},
 		Trips_Patch: function(id, data){
-			var url = 'http://' + IP + "/trips?TripId=" + id;
+			var url = 'https://' + IP + "/trips?TripId=" + id;
 			var orig = Promise.resolve(PatchCaller.Patch(url, data));
 			return orig;
 		},
 		Login_Get: function(email, data){
-			var url = 'http://' + IP + "/public/login/" + email;
+			var url = 'https://' + IP + "/public/login/" + email;
 			var orig = Promise.resolve(GetCaller.Get(url, data));
 			return orig;
 		},
 		Customers_Get: function(){
-			var url = 'http://' + IP + "/customers";
+			var url = 'https://' + IP + "/customers";
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Customers_Post: function(data){
-			var url = 'http://' + IP + "/customers";
+			var url = 'https://' + IP + "/customers";
 			var orig = Promise.resolve(PostCaller.Get(url, data));
 			return orig;
 		},
 		Customers_Get_CustomerID: function(id){
-			var url = 'http://' + IP + "/customers/" + id;
+			var url = 'https://' + IP + "/customers/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Customers_Patch_Password: function(id, pwd){
-			var url = 'http://' + IP + "/customers/" + id + "/password";
+			var url = 'https://' + IP + "/customers/" + id + "/password";
 			var orig = Promise.resolve(PatchCaller.Patch(url, pwd));
 			return orig;
 		},
 		Customers_Patch_Email: function(id, email){
-			var url = 'http://' + IP + "/customers/" + id + "/email";
+			var url = 'https://' + IP + "/customers/" + id + "/email";
 			var orig = Promise.resolve(PatchCaller.Patch(url, email));
 			return orig;
 		},
 		Customers_Patch_Address: function(id, address){
-			var url = 'http://' + IP + "/customers/" + id + "/address";
+			var url = 'https://' + IP + "/customers/" + id + "/address";
 			var orig = Promise.resolve(PatchCaller.Patch(url, address));
 			return orig;
 		},
 		Customers_Patch_PhoneNr: function(id, phoneNr){
-			var url = 'http://' + IP + "/customers/" + id + "/phone-number";
+			var url = 'https://' + IP + "/customers/" + id + "/phone-number";
 			var orig = Promise.resolve(PatchCaller.Patch(url, address));
 			return orig;
 		},
 		Cars_Get: function(){
-			var url = 'http://' + IP + "/cars";
+			var url = 'https://' + IP + "/cars";
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Charging_Stations_Get: function(){
-			var url = 'http://' + IP + "/charging-stations";
+			var url = 'https://' + IP + "/charging-stations";
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Charging_Stations_Get_Charging_StationID: function(id){
-			var url = 'http://' + IP + "/charging-stations/" + id;
+			var url = 'https://' + IP + "/charging-stations/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Car_Charging_Stations_Get_CarID: function(id){
-			var url = 'http://' + IP + "/car-charging-stations/by-car/" + id;
+			var url = 'https://' + IP + "/car-charging-stations/by-car/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Invoices_Get: function(){
-			var url = 'http://' + IP + "/invoices";
+			var url = 'https://' + IP + "/invoices";
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Invoices_Post: function(data){
-			var url = 'http://' + IP + "/invoices";
+			var url = 'https://' + IP + "/invoices";
 			var orig = Promise.resolve(PostCaller.Get(url, data));
 			return orig;
 		},
 		Invoices_Get_InvoiceID: function(id){
-			var url = 'http://' + IP + "/invoices/" + id;
+			var url = 'https://' + IP + "/invoices/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Invoices_Patch_Paid: function(id, data){
-			var url = 'http://' + IP + "/invoices/" + id + "/paid";
+			var url = 'https://' + IP + "/invoices/" + id + "/paid";
 			var orig = Promise.resolve(PatchCaller.Patch(url, data));
 			return orig;
 		},
 		Invoices_Get_Items: function(id){
-			var url = 'http://' + IP + "/invoices/" + id + "/items";
+			var url = 'https://' + IP + "/invoices/" + id + "/items";
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		Invoices_Post: function(id, data){
-			var url = 'http://' + IP + "/invoices/" + id + "/items";
+			var url = 'https://' + IP + "/invoices/" + id + "/items";
 			var orig = Promise.resolve(PostCaller.Post(url, data));
 			return orig;
 		},
 		Invoices_Get_Items_ItemID: function(id, itemID){
-			var url = 'http://' + IP + "/invoices/" + id + "/items/" + itemID;
+			var url = 'https://' + IP + "/invoices/" + id + "/items/" + itemID;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
 		User_Login: function(email, password){
-			var url = 'http://' + IP + "/public/login/" + email;
+			var url = 'https://' + IP + "/public/login/" + email;
 			var orig = Promise.resolve(PostCaller.Post(url, password));
 			return orig;
 		},
 		User_Register: function(data){
-			var url = 'http://' + IP + "/customers";
+			var url = 'https://' + IP + "/customers";
 			var orig = Promise.resolve(PostCaller.Post(url, data));
 			return orig;
 		},
 		Bookings_Post: function(data){
-			var url = 'http://' + IP + "/bookings";
+			var url = 'https://' + IP + "/bookings";
 			var orig = Promise.resolve(PostCaller.Post(url, data));
 			return orig;
 		},
 		Bookings_Get_CustomerID: function(id){
-			var url = 'http://' + IP + "/bookings/by-customer/" + id;
+			var url = 'https://' + IP + "/bookings/by-customer/" + id;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		}
@@ -227,7 +227,7 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 	return {
 		Get_Time: function (input){
 			var d = new Date(input);
-			var time = d.getHours() + ":" + d.getMinutes();
+			var time = (d.getHours() - 2) + ":" + d.getMinutes();
 			return time;
 		},
 		Get_Date: function (input){

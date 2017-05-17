@@ -17,7 +17,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         var lat = event.latLng.lat();
         var lon = event.latLng.lng();
-        console.log( lat + ', ' + lon );
 
         Helper.Get_Address(lat, lon).then(function(address){
             ShowInputPopUp(address, lat, lon);
@@ -79,7 +78,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 				
 				var booking = bookings[jk];
 				
-				var d = new Date(booking.PlannedDate);
+				var d = new Date(booking.plannedDate);
 				var now = new Date();
 				var dif = (d.getTime() - now.getTime()) / 1000 / 60;
 				
@@ -100,7 +99,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 					var trip = response.data;
 					
 					var carID = trip.CarId;
-					var chargingID = trip.StartChargingStationId;
+					var chargingID = trip.startChargingStationId;
 					
 					var prom_charge = RESTFactory.Charging_Stations_Get_Charging_StationID(chargingID);
 					
@@ -108,8 +107,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 						
 						var station = response.data;
 						
-						var lat = station.Latitude;
-						var lon = station.Longitude;
+						var lat = station.latitude;
+						var lon = station.longitude;
 						
 						Helper.Get_Address(lat, lon).then(function(address){
 							
@@ -120,8 +119,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 							soon_booking.stationID = chargingID;
 							soon_booking.carID = carID;
 							soon_booking.address = address;
-							soon_booking.date = Helper.Get_Date(booking2.PlannedDate);
-							soon_booking.time = Helper.Get_Time(booking2.PlannedDate);
+							soon_booking.date = Helper.Get_Date(booking2.plannedDate);
+							soon_booking.time = Helper.Get_Time(booking2.plannedDate);
 							
 							soon_bookings.push(soon_booking);
 							
@@ -191,7 +190,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             url: 'images/icons/car_available.png',
             scaledSize: new google.maps.Size(60, 87),
             origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(0, 30)
+            anchor: new google.maps.Point(30, 87)
         };
 
         img.url = icons[image_string].icon;
@@ -220,20 +219,20 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     function AddVehicle(car){
 
-        if(car.BookingState === "AVAILABLE"){
+        if(car.bookingState === 0){
 
-            var lat = car.LastKnownPositionLatitude;
-            var lon = car.LastKnownPositionLongitude;
-            var bat = car.ChargeLevel;
-            var carID = car.CarId;
+            var lat = car.lastKnownPositionLatitude;
+            var lon = car.lastKnownPositionLongitude;
+            var bat = car.chargeLevel;
+            var carID = car.carId;
 
             var title = "Fahrzeugdetails:";
 
             if(bat < 100){
 				
-                var res = RESTFactory.Car_Charging_Stations_Get_CarID(carID);
+                var prom_charge = RESTFactory.Car_Charging_Stations_Get_CarID(carID);
 
-                res.then(function(response){
+                prom_charge.then(function(response){
 					
 					var info = response.data;
 					
@@ -245,8 +244,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 						
 							if(info.length > 0){
 
-								var time = Helper.Get_Time(info[tz].ChargeEnd);
-								var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtlich um " + time + " fertig geladen.";
+								var time = Helper.Get_Time(info[tz].chargeEnd);
+								var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: gegen " + time;
 
 								if(bat < 25){
 									AddMarker(title, content, "car_loading_00", lat, lon);
@@ -266,9 +265,21 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 					}
 					
                 }, function(response){
-
-                    console.log("Failed to get loading informations");
-
+					
+					var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: kann nicht abgerufen werden";
+					
+					if(bat < 25){
+						AddMarker(title, content, "car_loading_00", lat, lon);
+					}else if (bat < 50){
+						AddMarker(title, content, "car_loading_25", lat, lon);
+					}else if (bat < 75){
+						AddMarker(title, content, "car_loading_50", lat, lon);
+					}else if (bat < 100){
+						AddMarker(title, content, "car_loading_75", lat, lon);
+					}
+					
+					
+					
                 });
 
 
@@ -287,12 +298,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     function AddStation(station){
 
-        var lat = station.Latitude;
-        var lon = station.Longitude;
+        var lat = station.latitude;
+        var lon = station.longitude;
 
 
-        var occupied = station.SlotsOccupied;
-        var total = station.Slots;
+        var occupied = station.slotsOccupied;
+        var total = station.slots;
 
         var diff = total - occupied;
 
@@ -310,8 +321,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
     function LoadPositions(){
 
         //GET Call to get all cars
-        var prom_cars = RESTFactory.Cars_Get();
-        prom_cars.then(function(response){
+        RESTFactory.Cars_Get().then(function(response){
+			
 			
             var cars = response.data;
 			
@@ -328,8 +339,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 
         //GET Call to get all stations
-        var res_stations = RESTFactory.Cars_Get();
-        res_stations.then(function(response){
+        RESTFactory.Cars_Get().then(function(response){
 
             var stations = response.data;
 

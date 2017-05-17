@@ -11,30 +11,30 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	
 	function LoadData(){
 		
-		
-		//GET Call
 		var prom_data = RESTFactory.Customers_Get_CustomerID(customerID);
 		
 		prom_data.then(function(response){
 			
+			var data = response.data;
+			
 			var user = {
 				userID: customerID,
-				name: response.FirstName,
-				familyName: response.LastName,
+				name: data.firstName,
+				familyName: data.lastName,
 				email: {
-					current: response.Email
+					current: data.email
 				},
-				phoneNr: response.PhoneNumber,
+				phoneNr: data.phoneNumber,
 				address: {
-					street: response.Street,
-					number: response.HouseNumber,
-					country: response.Country,
-					city: response.City,
-					zip: response.ZipCode,
-					extra: response.AddressExtraLine
+					street: data.street,
+					number: data.houseNumber,
+					country: data.country,
+					city: data.city,
+					zip: data.zipCode,
+					extra: data.addressExtraLine
 				},
-				activated: response.Activated,
-				verified: response.Verified
+				activated: data.activated,
+				verified: data.verified
 				
 			};
 			
@@ -43,26 +43,6 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			$scope.user = user;
 			
 		}, function(response){
-			
-			
-			var user = {
-				name : "Failed",
-				familyName: "Connection",
-				email : {
-					current: "max.mustermann@gmail.com"
-				},
-				phoneNr : 12354356,
-				address : {
-					street : "Musterstrasse",
-					number : 123,
-					country : "Germany",
-					zip: 234234,
-					city: "Musterstadt",
-					extra: "ZUSATZFELD"
-				}
-			};
-			
-			$scope.user = user;
 			
 		});
 		

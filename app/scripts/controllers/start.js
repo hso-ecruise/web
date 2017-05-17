@@ -134,7 +134,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 						if(email === "test" && password === "test"){
 							
 							$rootScope.token = "tokenSKHDFADJF";
-							$rootScope.customerID = -1000;
+							$rootScope.customerID = 1;
 							
 							$rootScope.loggedIN = true;
 							$scope.loggedIN = true;
@@ -142,7 +142,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 							//Save data in cookies
 							Helper.Cookie_Set("loggedIN", true);
 							Helper.Cookie_Set("token", "tokenSKHDFADJF");
-							Helper.Cookie_Set("customerID", -1000);
+							Helper.Cookie_Set("customerID", 1);
 							
 							$rootScope.$apply( function(){$location.path('/booking'); } );
 							

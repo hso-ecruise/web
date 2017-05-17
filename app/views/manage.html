@@ -9,7 +9,7 @@
         <md-content>
             <md-list flex>
                 <!--  <md-subheader class="md-no-sticky"></md-subheader> -->
-                <md-list-item class="md-3-line" ng-repeat="booking in open_bookings track by $index" ng-click="ShowOnMap(booking)" ng-switch="booking.onMap">
+                <md-list-item class="md-3-line" ng-repeat="(key, booking) in open_bookings track by $index" ng-click="ShowOnMap(booking)" ng-switch="booking.onMap">
 					
 					<i class="material-icons md-avatar" style="color: #green; width:25px;" title="Auf Karte anzeigen" ng-switch-when="true">map</i>
 					
@@ -36,7 +36,7 @@
         </md-toolbar>
         <md-content>
             <md-list flex>
-                <md-list-item class="md-3-line" ng-repeat="booking in done_bookings track by $index" ng-click="ShowBilling(booking.end.endDate)" ng-switch="booking.invoice.paid">
+                <md-list-item class="md-3-line" ng-repeat="(key, booking) in done_bookings track by $index" ng-click="ShowBilling(booking.end.endDate)" ng-switch="booking.invoice.paid">
                     
                     <i ng-switch-when="true" class="material-icons md-avatar" style="color: #00ff00; width:25px;" aria-label="Rechnung bezahlt" >done</i>
                     <i ng-switch-when="false" class="material-icons md-avatar" style="color: #aa0000;">report_problem</i>              
@@ -93,7 +93,7 @@
             </md-content>
 			
 			<md-content flex layout-padding class="md-block" ng-switch-when="false">
-                <label> Fehler beim Herunterladen der Rechnungsinformationen von Monat: {{currentBill.date.month }}.{{currentBill.date.year }} </label>
+                <label> Fehler beim Herunterladen der Rechnungsinformationen von Monat: {{currentBill.date.month + 1 }}.{{currentBill.date.year }} </label>
             </md-content>
         </div>
     </div>
