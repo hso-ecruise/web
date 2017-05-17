@@ -17,10 +17,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         var lat = event.latLng.lat();
         var lon = event.latLng.lng();
-
+		
         Helper.Get_Address(lat, lon).then(function(address){
-            ShowInputPopUp(address, lat, lon);
-        });
+            console.log(address);
+			ShowInputPopUp(address, lat, lon);
+        }, function(response){
+			
+		});
 
     });
 	
@@ -39,14 +42,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         // more details for that place.
         searchBox.addListener('places_changed', function() {
 			
-          var places = searchBox.getPlaces();
+			var places = searchBox.getPlaces();
 
-		  
-          if (places.length === 0) {
-            return;
-          }
-
-		  
+			if (places.length === 0) {
+				return;
+			}
+			
 			var place = places[0].geometry.location;
 			
 			var lat = place.lat();
@@ -57,9 +58,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 				ShowInputPopUp(response, lat, lon);
 			});
 			
-			console.log("Lat: " + lat + "   Lon: " + lon);
-		  
-
         });
 		
 		
@@ -309,8 +307,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         var title = "Ladestation";
         var content =  diff + " von " + total + " Slots frei";
-
-		console.log(content);
 		
         if(diff === 0){
             AddMarker(title, content, "station_occupied", lat, lon);

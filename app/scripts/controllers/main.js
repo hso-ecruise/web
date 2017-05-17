@@ -71,7 +71,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		GetAddress: function(lat, lon){
-			var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
+			var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 			url += lat + "," + lon + "&key=" + API_KEY;
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
