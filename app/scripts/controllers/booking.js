@@ -301,8 +301,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         var lat = station.latitude;
         var lon = station.longitude;
 
-
-        var occupied = station.slotsOccupied;
+		//FEHLER OCCUPIED
+        var occupied = station.slotsOccupuied;
         var total = station.slots;
 
         var diff = total - occupied;
@@ -310,6 +310,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         var title = "Ladestation";
         var content =  diff + " von " + total + " Slots frei";
 
+		console.log(content);
+		
         if(diff === 0){
             AddMarker(title, content, "station_occupied", lat, lon);
         }else{
@@ -339,10 +341,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 
         //GET Call to get all stations
-        RESTFactory.Cars_Get().then(function(response){
+        RESTFactory.Charging_Stations_Get().then(function(response){
 
             var stations = response.data;
 
+			console.log(stations);
+			
             for(var i = 0; i < stations.length; i++){
                 var station = stations[i];
                 AddStation(station);

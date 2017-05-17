@@ -124,6 +124,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 						Helper.Cookie_Set("loggedIN", true);
 						Helper.Cookie_Set("token", data.token);
 						Helper.Cookie_Set("customerID", data.id);
+						Helper.Cookie_Set("password", password);
 						
 						$rootScope.$apply( function(){$location.path('/booking'); } );
 						
@@ -143,6 +144,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 							Helper.Cookie_Set("loggedIN", true);
 							Helper.Cookie_Set("token", "tokenSKHDFADJF");
 							Helper.Cookie_Set("customerID", 1);
+							Helper.Cookie_Set("password", password);
 							
 							$rootScope.$apply( function(){$location.path('/booking'); } );
 							

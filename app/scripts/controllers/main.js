@@ -49,12 +49,14 @@ application.service('PostCaller', function ($http) {
 application.service('PatchCaller', function ($http) {
 
 	this.Patch = function (url, body) {
+		/*
 		var post = $http({
 			method: "patch",
 			url: url,
-			data: body
+			data: angular.toJson(body)
 		});
-		return post;
+		*/
+		return $http.patch(url, body);
 	};
 
 });
@@ -136,7 +138,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 		},
 		Customers_Patch_PhoneNr: function(id, phoneNr){
 			var url = 'https://' + IP + "/customers/" + id + "/phone-number";
-			var orig = Promise.resolve(PatchCaller.Patch(url, address));
+			var orig = Promise.resolve(PatchCaller.Patch(url, phoneNr));
 			return orig;
 		},
 		Cars_Get: function(){

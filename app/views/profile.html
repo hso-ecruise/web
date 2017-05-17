@@ -42,7 +42,7 @@
                     <input placeholder="Stadt" ng-model="user.address.city" />
                 </md-input-container>
                 <md-input-container>
-                    <input placeholder="PLZ" ng-model="user.address.zip" />
+                    <input placeholder="PLZ" type="number" max="99999" min="10000" ng-model="user.address.zip" />
                 </md-input-container>
             </md-content>
 
