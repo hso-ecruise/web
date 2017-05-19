@@ -30,28 +30,28 @@
 
             <md-content flex layout-padding>
                 <md-input-container>
-                    <input placeholder="Telefon" ng-model="user.phoneNr"/>
+                    <input placeholder="Telefon" ng-model="user.phoneNr" ng-required="true" />
                 </md-input-container>
                 <md-input-container>
-                    <input placeholder="Land" ng-model="user.address.country" />
+                    <input placeholder="Land" ng-model="user.address.country" ng-required="true" />
                 </md-input-container>
             </md-content>
 
             <md-content flex layout-padding>
                 <md-input-container>
-                    <input placeholder="Stadt" ng-model="user.address.city" />
+                    <input placeholder="Stadt" ng-model="user.address.city" ng-required="true" />
                 </md-input-container>
                 <md-input-container>
-                    <input placeholder="PLZ" type="number" max="99999" min="10000" ng-model="user.address.zip" />
+                    <input placeholder="PLZ" type="number" max="99999" min="10000" ng-model="user.address.zip" ng-required="true" />
                 </md-input-container>
             </md-content>
 
             <md-content flex layout-padding >	
                 <md-input-container>
-                    <input placeholder="Strasse" ng-model="user.address.street" />
+                    <input placeholder="Strasse" ng-model="user.address.street" ng-required="true" />
                 </md-input-container>
                 <md-input-container>
-                    <input placeholder="Hausnummer" ng-model="user.address.number" />
+                    <input placeholder="Hausnummer" ng-model="user.address.number" ng-required="true" />
                 </md-input-container>
             </md-content>
 
@@ -80,19 +80,20 @@
                     <md-tab label="Passwort">
                         <md-content flex layout-padding>	
                             <md-input-container>
-                                <input type="password" placeholder="Altes Passwort" ng-model="user.password.current"/>
+                                <input type="password" placeholder="Altes Passwort" ng-model="user.password.current" ng-required="true" ng-change="pwdInPressed()"/>
                             </md-input-container>
                         </md-content>
 
                         <md-content flex layout-padding>	
                             <md-input-container>
-                                <input type="password" placeholder="Neues Passwort" ng-model="user.password.new" />
+                                <input type="password" placeholder="Neues Passwort" ng-model="user.password.new" ng-required="pwd_required" />
                             </md-input-container>
                             <md-input-container>
-                                <input type="password" placeholder="Passwort bestätigen" ng-model="user.password.confirm" />
+                                <input type="password" placeholder="Passwort bestätigen" ng-model="user.password.confirm" ng-required="pwd_required" />
                             </md-input-container>
                         </md-content>
-
+						
+						
                         <md-content flex layout-padding>
                             <md-button class="md-raised md-primary button-to-right" ng-click="ChangePassword()"> Speichern </md-button>
                         </md-content>
@@ -107,19 +108,20 @@
 						
                         <md-content flex layout-padding>
                             <md-input-container class="md-block" flex-gt-sm>
-                                <input placeholder="Neue Email-Adresse" ng-model="user.email.new" type="email" width="140px" />
+                                <input placeholder="Neue Email-Adresse" ng-model="user.email.new" type="email" width="140px" ng-required="true" />
                             </md-input-container>
                         </md-content >
 						
                         <md-content flex layout-padding>
                             <md-input-container class="md-block" flex-gt-sm>
-                                <input placeholder="Neue Email-Adresse best&auml;tigen" ng-model="user.email.confirm" type="email" width="140px" />
+                                <input placeholder="Neue Email-Adresse best&auml;tigen" ng-model="user.email.confirm" type="email" width="140px" ng-required="true" />
                             </md-input-container>
                             <md-button class="md-raised md-primary button-to-right" ng-click="ChangeEmail()"> Speichern </md-button>
                         </md-content>
                     </md-tab>
 				</md-tabs>
 			</md-content>
+						<label value="{{user.password.current}}"/>
         </div>
     </div>
 </div>

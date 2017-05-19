@@ -22,7 +22,9 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 				name: data.firstName,
 				familyName: data.lastName,
 				email: {
-					current: data.email
+					current: data.email,
+					new: "",
+					confirm: ""
 				},
 				phoneNr: data.phoneNumber,
 				address: {
@@ -38,7 +40,11 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 				
 			};
 			
-			var password = {};
+			var password = {
+				current: "",
+				new: "",
+				confirm: ""
+			};
 			user.password = password;
 			
 			oldUser = {
@@ -86,13 +92,13 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	
     $scope.Safe = function () {
 
-		var changedPhone = {
-			phoneNumber: $scope.user.phoneNr
-		};
+		var new_phone_number = $scope.user.phoneNr;
 		
-		if(changedPhone.phoneNumber !== oldUser.phoneNr){
+		if(new_phone_number !== oldUser.phoneNr){
 			
-			RESTFactory.Customers_Patch_PhoneNr(customerID, changedPhone).then(function(response){
+			var upload = "\"" + new_phone_number + "\"";
+			
+			RESTFactory.Customers_Patch_PhoneNr(customerID, upload).then(function(response){
 				LoadData();
 				alert("Telefonnummer wurde erfolgreich geändert");
 			}, function(response){
@@ -146,19 +152,17 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
     $scope.ChangePassword = function(){
 		
 		var orig_password = Helper.Cookie_Get("password");
-		var old_password = $scope.user.password.current;
-		var new_password = $scope.user.password.new;
-		var new_password_conf = $scope.user.password.confirm;
+		var old_password = String($scope.user.password.current);
+		var new_password = String($scope.user.password.new);
+		var new_password_conf = String($scope.user.password.confirm);
 		
 		if (new_password === new_password_conf && new_password !== "" && new_password !== undefined) {
 			
 			if(orig_password === old_password){
 				
-				var pwd_Obj = {
-					password: new_password
-				};
+				var pwd = "\"" + new_password + "\"";
 				
-				RESTFactory.Customers_Patch_Password(customerID, pwd_Obj).then(function(response){
+				RESTFactory.Customers_Patch_Password(customerID, pwd).then(function(response){
 					alert("Passwort wurde erfolgreich geändert");
 				}, function(response){
 					alert("Passwort konnte nicht geändert werden");
@@ -171,23 +175,32 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		$scope.user.password.current = "";
 		$scope.user.password.new = "";
 		$scope.user.password.confirm = "";
-
+		$scope.pwd_required = false;
+		
     };
+	
+	$scope.pwdInPressed = function(){
+		
+		var input = $scope.user.password.current;
+		
+		if(input === undefined || String(input).length === 0){
+			$scope.pwd_required = false;
+		}else{
+			$scope.pwd_required = true;
+		}
+		
+	};
 	
 	$scope.ChangeEmail = function(){
 		
 		var new_email = $scope.user.email.new;
 		var new_email_conf = $scope.user.email.confirm;
 		
-		if(new_email === new_email_conf){
+		if(new_email === new_email_conf && new_email !== undefined){
 			
-			var emailObj = {
-				email: new_email
-			};
+			var em = "\"" + new_email + "\"";
 			
-			console.log(emailObj);
-			
-			var chg_email = RESTFactory.Customers_Patch_Email(customerID, emailObj);
+			var chg_email = RESTFactory.Customers_Patch_Email(customerID, em);
 			chg_email.then(function(response){
 				LoadData();
 				alert("Email wurde erfolgreich geändert");
@@ -197,7 +210,7 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			
 		}
 		
-		$scope.user.email.new = "";
+		$scope.user.email.new_ = "";
 		$scope.user.email.confirm = "";
 		
 		LoadData();

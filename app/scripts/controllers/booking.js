@@ -386,11 +386,10 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
             '		<md-content flex layout-padding>' +
             '			<md-input-container>' +
-            '				<input type="date" placeholder="Datum" min="{{minDate}}" class="md-input" ng-model="date">' +
-            //'               <md-datepicker type="date" placeholder="Datum" ng-model="date"></md-datepicker> ' +    waere zwar schoner aber scheiss drauf       
+            '				<input type="date" placeholder="Datum" min="{{minDate}}" class="md-input" ng-model="date" ng-required="true" >' +   
             '			</md-input-container>' +
             '			<md-input-container>' +
-            '				<input type="time" placeholder="Uhrzeit" min="{{minTime}}" class="md-input" ng-model="time">' +
+            '				<input type="time" placeholder="Uhrzeit" min="{{minTime}}" class="md-input" ng-model="time" ng-required="true" >' +
             '			</md-input-container>' +
             '		</md-content>' +
 
@@ -448,12 +447,15 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 						return;
 					}
 					
+					now = "\"" + now + "\"";
+					plannedDate = "\"" + plannedDate + "\"";
+					
 					var data = {
-						CustomerId: customerID,
-						BookedPositionLatitude: lat,
-						BookedPositionLongitude: lon,
-						BookingDate: now,
-						PlannedDate: plannedDate
+						customerId: customerID,
+						bookedPositionLatitude: lat,
+						bookedPositionLongitude: lon,
+						bookingDate: now,
+						plannedDate: plannedDate
 					};
 					
                     console.log("REST call for booking");

@@ -78,11 +78,11 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             '		<md-content flex layout-padding>' +
 			
 			'			<md-input-container>' +
-			'				<input placeholder="E-Mail" type="" ng-model="login_email"/>' +
+			'				<input placeholder="E-Mail" type="email" ng-model="login_email" ng-required="true" />' +
 			'			</md-input-container>' +
 			
 			'			<md-input-container>' +
-			'				<input placeholder="Passwort" type="password" ng-model="login_password" /> ' +
+			'				<input placeholder="Passwort" type="password" ng-model="login_password" ng-required="true" /> ' +
 			'			</md-input-container>' +
 			
             '		</md-content>' +
@@ -104,9 +104,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
                 $scope.Login = function(){
 
 					var email = $scope.login_email;
-					var password = $scope.login_password;
-					
-					console.log("login with" + email + "  " + password);
+					var password = String($scope.login_password);
 					
 					var prom_Login = RESTFactory.User_Login(email, password);
 					
@@ -182,24 +180,24 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'		<md-content flex layout-padding>' +
 			'			<md-input-container>' +
 			'				<label>Vorname</label>' +
-			'				<input ng-model="register_name"/>' +
+			'				<input ng-model="register_name" ng-required="true" />' +
 			'			</md-input-container>' +
 			
 			'			<md-input-container>' +
 			'				<label>Nachname</label>' +
-			'				<input ng-model="register_familyName"/>' +
+			'				<input ng-model="register_familyName" ng-required="true" />' +
 			'			</md-input-container>' +
 			'		</md-content>' +
 			
 			'		<md-content flex layout-padding>' +
 			'			<md-input-container>' +
 			'				<label>Email</label>' +
-			'				<input ng-model="email" type="register_email" />' +
+			'				<input ng-model="register_email" type="email" ng-required="true" />' +
 			'			</md-input-container>' +
 			
 			'			<md-input-container>' +
 			'				<label>Passwort</label>' +
-			'				<input type="password" ng-model="register_password" />' +
+			'				<input type="password" ng-model="register_password" ng-required="true" />' +
 			'			</md-input-container>' +
 			'		</md-content>' +
 			
@@ -225,26 +223,25 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 					var email = $scope.register_email;
 					var password = $scope.register_password;
 					
+					name = "\"" + name + "\"";
+					familyName = "\"" + familyName + "\"";
+					email = "\"" + email + "\"";
+					password = "\"" + password + "\"";
+					
 					var data = {
-						Email: email,
-						Password: password,
-						FirstName: name,
-						LastName: familyName
+						email: email,
+						password: password,
+						firstName: name,
+						lastName: familyName
 					};
 					
-					console.log("Register with" + name + "  " + familyName + "   " + email + "  " + password);
-					
-					var prom_Register = RESTFactory.User_Register(data);
-					
-					prom_Register.then(function(response){
+					RESTFactory.User_Register(data).then(function(response){
 						
 						alert("Bitte bestätigen Sie Ihre Email Adresse");
 						
-						//$location.path("/start");
-						
 					}, function(response){
 						
-						console.log("Failed to register");
+						console.log("Registrierung fehlgeschlagen");
 						
 					});
 					
