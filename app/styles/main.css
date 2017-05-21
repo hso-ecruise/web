@@ -18,7 +18,7 @@ md-input-container{
     margin: auto;
     margin-top: 10px;
     margin-bottom: 0; 
-    max-height: 80%;
+    height: 90%;
 }
 
 md-nav-bar md-nav-ink-bar {
@@ -56,6 +56,11 @@ md-nav-bar md-nav-ink-bar {
     text-overflow: ellipsis;
     width: 300px;
 
+}
+
+md-list.make-scrollable {
+	height: 90%;
+	overflow-y: scroll; 
 }
 
 .user-edit-left{
