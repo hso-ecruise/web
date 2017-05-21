@@ -106,7 +106,9 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 					var email = $scope.login_email;
 					var password = String($scope.login_password);
 					
-					var prom_Login = RESTFactory.User_Login(email, password);
+					var use_pwd = "\"" + password + "\"";
+					
+					var prom_Login = RESTFactory.User_Login(email, use_pwd);
 					
 					prom_Login.then(function(response){
 						
