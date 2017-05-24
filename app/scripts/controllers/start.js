@@ -68,7 +68,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             template:
             '<md-dialog class="login-dialog">'+
             '	<md-dialog-content>' +
-
+			'	<form ng-submit="Login()">' +
             '		<md-toolbar class="md-hue-2">' +
             '			<div class="md-toolbar-tools">' +
             '				<h2 class="md-flex">Anmelden</h2>' +
@@ -88,9 +88,10 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             '		</md-content>' +
 
             '		<md-content flex layout-padding>' +
+			'			<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
             '			<md-button class="md-raised md-primary button-to-right" ng-click="Login()"> Login </md-button>' +
             '		</md-content>' +
-
+			'		</form>' +
             '	</md-dialog-content>' +
             '</md-dialog>',
 
