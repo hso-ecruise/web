@@ -68,29 +68,29 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             template:
             '<md-dialog class="login-dialog">'+
             '	<md-dialog-content>' +
-			'	<form ng-submit="Login()">' +
-            '		<md-toolbar class="md-hue-2">' +
-            '			<div class="md-toolbar-tools">' +
-            '				<h2 class="md-flex">Anmelden</h2>' +
-            '			</div>' +
-            '		</md-toolbar>' +
+			'		<form ng-submit="Login()">' +
+            '			<md-toolbar class="md-hue-2">' +
+            '				<div class="md-toolbar-tools">' +
+            '					<h2 class="md-flex">Anmelden</h2>' +
+            '				</div>' +
+            '			</md-toolbar>' +
 
-            '		<md-content flex layout-padding>' +
+            '			<md-content flex layout-padding>' +
 			
-			'			<md-input-container>' +
-			'				<input placeholder="E-Mail" type="email" ng-model="login_email" ng-required="true" />' +
-			'			</md-input-container>' +
+			'				<md-input-container>' +
+			'					<input placeholder="E-Mail" type="email" ng-model="login_email" ng-required="true" />' +
+			'				</md-input-container>' +
 			
-			'			<md-input-container>' +
-			'				<input placeholder="Passwort" type="password" ng-model="login_password" ng-required="true" /> ' +
-			'			</md-input-container>' +
+			'				<md-input-container>' +
+			'					<input placeholder="Passwort" type="password" ng-model="login_password" ng-required="true" /> ' +
+			'				</md-input-container>' +
 			
-            '		</md-content>' +
+            '			</md-content>' +
 
-            '		<md-content flex layout-padding>' +
-			'			<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
-            '			<md-button class="md-raised md-primary button-to-right" ng-click="Login()"> Login </md-button>' +
-            '		</md-content>' +
+            '			<md-content flex layout-padding>' +
+			'				<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
+            '				<md-button class="md-raised md-primary button-to-right" ng-click="Login()"> Login </md-button>' +
+            '			</md-content>' +
 			'		</form>' +
             '	</md-dialog-content>' +
             '</md-dialog>',
@@ -173,41 +173,44 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             template:
             '<md-dialog class="login-dialog">'+
             '	<md-dialog-content>' +
+			
+			'		<form ng-submit="Register()">' +
+            '			<md-toolbar class="md-hue-2">' +
+            '				<div class="md-toolbar-tools">' +
+            '					<h2 class="md-flex">Registieren</h2>' +
+            '				</div>' +
+            '			</md-toolbar>' +
 
-            '		<md-toolbar class="md-hue-2">' +
-            '			<div class="md-toolbar-tools">' +
-            '				<h2 class="md-flex">Registieren</h2>' +
-            '			</div>' +
-            '		</md-toolbar>' +
-
-			'		<md-content flex layout-padding>' +
-			'			<md-input-container>' +
-			'				<label>Vorname</label>' +
-			'				<input ng-model="register_name" ng-required="true" />' +
-			'			</md-input-container>' +
+			'			<md-content flex layout-padding>' +
+			'				<md-input-container>' +
+			'					<label>Vorname</label>' +
+			'					<input ng-model="register_name" ng-required="true" />' +
+			'				</md-input-container>' +
 			
-			'			<md-input-container>' +
-			'				<label>Nachname</label>' +
-			'				<input ng-model="register_familyName" ng-required="true" />' +
-			'			</md-input-container>' +
-			'		</md-content>' +
+			'				<md-input-container>' +
+			'					<label>Nachname</label>' +
+			'					<input ng-model="register_familyName" ng-required="true" />' +
+			'				</md-input-container>' +
+			'			</md-content>' +
 			
-			'		<md-content flex layout-padding>' +
-			'			<md-input-container>' +
-			'				<label>Email</label>' +
-			'				<input ng-model="register_email" type="email" ng-required="true" />' +
-			'			</md-input-container>' +
+			'			<md-content flex layout-padding>' +
+			'				<md-input-container>' +
+			'					<label>Email</label>' +
+			'					<input ng-model="register_email" type="email" ng-required="true" />' +
+			'				</md-input-container>' +
 			
-			'			<md-input-container>' +
-			'				<label>Passwort</label>' +
-			'				<input type="password" ng-model="register_password" ng-required="true" />' +
-			'			</md-input-container>' +
-			'		</md-content>' +
+			'				<md-input-container>' +
+			'					<label>Passwort</label>' +
+			'					<input type="password" ng-model="register_password" ng-required="true" />' +
+			'				</md-input-container>' +
+			'			</md-content>' +
 			
-            '		<md-content flex layout-padding>' +
-            '			<md-button class="md-raised md-primary button-to-right" ng-click="Register()"> Registrieren </md-button>' +
-            '		</md-content>' +
-
+            '			<md-content flex layout-padding>' +
+			'			<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
+            '				<md-button class="md-raised md-primary button-to-right" ng-click="Register()"> Registrieren </md-button>' +
+            '			</md-content>' +
+			'		</form>'
+			
             '	</md-dialog-content>' +
             '</md-dialog>',
 
