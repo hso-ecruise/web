@@ -34,78 +34,18 @@
                 <h2 class="md-flex">Abgeschlossene Fahrten</h2>
             </div>
         </md-toolbar>
-		
-        <md-content style="height:90%;">
-            <md-list flex class="make-scrollable">
+        <md-content>
+            <md-list flex class="make-scrollablea">
                 <md-list-item class="md-3-line" ng-repeat="(key, booking) in done_bookings track by $index" ng-click="ShowBilling(booking.end.endDate)" ng-switch="booking.invoice.paid">
                     
                     <i ng-switch-when="true" class="material-icons md-avatar" style="color: #00ff00; width:25px;" aria-label="Rechnung bezahlt" >done</i>
                     <i ng-switch-when="false" class="material-icons md-avatar" style="color: #aa0000;">report_problem</i>              
                     
 					<div class="md-list-item-text" layout="column" >
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
-text
-<br/>
                         <h4>Start {{ booking.start.date }} um {{ booking.start.time }} </h4>
                         <p>von Stra&szlig;e : {{ booking.start.address.street }} {{ booking.start.address.number }}</p>
                         <h4>Ende {{ booking.end.date }} um {{ booking.end.time }} </h4>
                         <p>bis Stra&szlig;e Nr.: {{ booking.end.address.street }} {{ booking.end.address.number }}</p>
-						
                     </div>
                     <md-divider ></md-divider>
                 </md-list-item>
