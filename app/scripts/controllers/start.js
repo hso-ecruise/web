@@ -209,7 +209,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'			<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
             '				<md-button class="md-raised md-primary button-to-right" ng-click="Register()"> Registrieren </md-button>' +
             '			</md-content>' +
-			'		</form>'
+			'		</form>' +
 			
             '	</md-dialog-content>' +
             '</md-dialog>',
