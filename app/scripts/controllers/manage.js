@@ -95,7 +95,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 		booking.bookingID = response.bookingId;
 		booking.tripID = response.tripId;
-		booking.invoiceID = response.invoiceId;
+		booking.invoiceItemID = response.invoiceItemId;
 		
 		var str = 'd' + booking.bookingID;
 		
@@ -106,7 +106,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 		
 		
-		RESTFactory.Invoices_Get_InvoiceID(booking.invoiceID).then(function(response){
+		RESTFactory.Invoices_Get_InvoiceItemID(booking.invoiceItemID).then(function(response){
 			
 			var data = response.data;
 			
@@ -243,6 +243,8 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			return;
 		}
 		
+		console.log(relevant_bookings);
+		
 		var invoiceID = relevant_bookings[0].invoice.invoiceID;
 		
 		bill.date = {
@@ -277,7 +279,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 				if(items[i].type === 1){ item.type = "Gutschrift";}
 				item.amount = items[i].amount;
 				item.hasBooking = false;
-				/*
+				
 				var jk = 0;
 				while(jk < relevant_bookings.length){
 		
@@ -288,7 +290,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 					}
 					jk++;
 				}
-				*/
+				
 				bill_items.push(item);
 				
 			}

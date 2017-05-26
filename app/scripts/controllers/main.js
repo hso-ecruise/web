@@ -166,6 +166,11 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(GetCaller.Get(url));
 			return orig;
 		},
+		Invoices_Get_InvoiceItemID: function(id){
+			var url = 'https://' + IP + "/invoices/by-invoice-item/" + id;
+			var orig = Promise.resolve(GetCaller.Get(url));
+			return orig;
+		},
 		Invoices_Post: function(data){
 			var url = 'https://' + IP + "/invoices";
 			var orig = Promise.resolve(PostCaller.Get(url, data));
