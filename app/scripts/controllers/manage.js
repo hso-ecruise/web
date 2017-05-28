@@ -106,7 +106,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		
 		
 		
-		RESTFactory.Invoices_Get_InvoiceItemID(booking.invoiceItemID).then(function(response){
+		RESTFactory.Invoices_Get_Items_ItemID(booking.invoiceItemID).then(function(response){
 			
 			var data = response.data;
 			
@@ -138,6 +138,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 				distance: data.distanceTravelled
 			};
 			
+			var start = Helper.Get_Zeit(trip.startDate);
+			var end = Helper.Get_Zeit(trip.endDate);
+			/*
 			var start = {
 				startDate: trip.startDate,
 				date : Helper.Get_Date(trip.startDate),
@@ -149,7 +152,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 				date : Helper.Get_Date(trip.endDate),
 				time: Helper.Get_Time(trip.endDate)
 			};
-			
+			*/
 			bookings_done[str].trip = trip;
 			bookings_done[str].start = start;
 			bookings_done[str].end = end;
@@ -226,9 +229,10 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			
 			if(bookings_done.hasOwnProperty(key)){
 				
-				var curDate = new Date(bookings_done[key].end.endDate);
+				var curMonth = bookings_done[key].end.date_ele.month;
+				var curYear = bookings_done[key].end.date_ele.year;
 				
-				if(curDate.getMonth() === month && curDate.getFullYear() === year){
+				if(curMonth === month && curYear === year){
 					relevant_bookings.push(bookings_done[key]);
 				}
 				
@@ -243,16 +247,12 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			return;
 		}
 		
-		console.log(relevant_bookings);
-		
 		var invoiceID = relevant_bookings[0].invoice.invoiceID;
 		
 		bill.date = {
 			month: month,
 			year: year
 		};
-		
-		console.log("GET SOMETHING FOR SOMETHING ELSE");
 		
 		bill.invoiceID = relevant_bookings[0].invoice.invoiceID;
 		bill.totalAmount = relevant_bookings[0].invoice.totalAmount;
@@ -310,13 +310,15 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	
 	
 
-    $scope.ShowBilling = function (input) {
+    $scope.ShowBilling = function (month, year) {
+		console.log(month + "  " + year);
 		
+		/*
 		var date = new Date(input);
 		
 		var month = date.getMonth();
 		var year = date.getFullYear();
-		
+		*/
 		GetBilling(month, year);
 		
     };
