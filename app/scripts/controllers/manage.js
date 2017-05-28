@@ -59,13 +59,14 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			booking.onMap = true;
 		}
 		
-		
+		var start = Helper.Get_Zeit(response.plannedDate);
+		/*
 		var start = {
 			startDate: response.plannedDate,
 			date : Helper.Get_Date(response.plannedDate),
 			time: Helper.Get_Time(response.plannedDate)
 		};
-		
+		*/
 		booking.start = start;
 		
 		bookings_open[str] = booking;

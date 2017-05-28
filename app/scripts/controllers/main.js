@@ -510,6 +510,9 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 		
 		var now = new Date();
 		
+		now.setSeconds(0);
+		now.setMilliseconds(0);
+		
 		var date = {};
 		
 		date.date = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
@@ -533,6 +536,9 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 	Get_Zeit: function(value){
 		
 		var now = new Date(value);
+		
+		now.setSeconds(0);
+		now.setMilliseconds(0);
 		
 		var date = {};
 		
