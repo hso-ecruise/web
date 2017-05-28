@@ -206,7 +206,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'			</md-content>' +
 			
             '			<md-content flex layout-padding>' +
-			'			<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
+			'				<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
             '				<md-button class="md-raised md-primary button-to-right" ng-click="Register()"> Registrieren </md-button>' +
             '			</md-content>' +
 			'		</form>' +
@@ -229,6 +229,16 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 					var email = $scope.register_email;
 					var password = $scope.register_password;
 					
+					if(email === undefined || familyName === undefined || name === undefined || password === undefined){
+						alert("Bitte füllen Sie alle Felder aus");
+						return;
+					}
+					
+					if(email === "" || familyName === "" || name === "" || password === ""){
+						alert("Bitte füllen Sie alle Felder aus");
+						return;
+					}
+					
 					name = "\"" + name + "\"";
 					familyName = "\"" + familyName + "\"";
 					email = "\"" + email + "\"";
@@ -241,13 +251,15 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 						lastName: familyName
 					};
 					
+					console.log(data);
+					
 					RESTFactory.User_Register(data).then(function(response){
 						
 						alert("Bitte bestätigen Sie Ihre Email Adresse");
 						
 					}, function(response){
 						
-						console.log("Registrierung fehlgeschlagen");
+						alert("Registrierung fehlgeschlagen");
 						
 					});
 					
