@@ -203,6 +203,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             alert = $mdDialog.alert({
                 title: title,
                 textContent: content,
+				clickOutsideToClose: true,
                 ok: 'OK'
             });
 
