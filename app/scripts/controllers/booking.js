@@ -84,7 +84,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         });
 
         marker.addListener('click', function(event){
-            alert = $mdDialog.alert({
+            var new_alert = $mdDialog.alert({
                 title: title,
                 textContent: content,
 				clickOutsideToClose: true,
@@ -92,9 +92,9 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             });
 
             $mdDialog
-                .show( alert )
+                .show( new_alert )
                 .finally(function() {
-                alert = undefined;
+                new_alert = undefined;
             });
         });
 
