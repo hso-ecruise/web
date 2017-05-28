@@ -80,7 +80,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lon),
             map: map,
-            icon: img
+            icon: img,
+			optimized: false
         });
 
         marker.addListener('click', function(event){
