@@ -339,7 +339,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 						alert("Buchung fehlgeschlagen");
 					});
 					
-                    $scope.closeDialog();
+					
                 };
 
             }
