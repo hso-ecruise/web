@@ -30,16 +30,16 @@
 
             <md-content flex layout-padding>
                 <md-input-container>
-                    <input placeholder="Telefon" ng-model="user.phoneNr" ng-required="true" />
+                    <input placeholder="Telefon" ng-model="user.phoneNr" pattern="[\+]{0,1}[0-9]{8,}" ng-required="true" />
                 </md-input-container>
                 <md-input-container>
-                    <input placeholder="Land" ng-model="user.address.country" ng-required="true" />
+                    <input placeholder="Land" ng-model="user.address.country" pattern="[A-Z]{2,3}" title="Bitte geben Sie Ihr Länderkürzel an" ng-required="true" />
                 </md-input-container>
             </md-content>
 
             <md-content flex layout-padding>
                 <md-input-container>
-                    <input placeholder="Stadt" ng-model="user.address.city" ng-required="true" />
+                    <input placeholder="Stadt" ng-model="user.address.city" ng-required="true" pattern="[A-Za-z\-\s]{5,}" title="Stadtname muss mindestens 5 Zeichen lang sein" />
                 </md-input-container>
                 <md-input-container>
                     <input placeholder="PLZ" type="number" max="99999" min="10000" ng-model="user.address.zip" ng-required="true" />
@@ -48,10 +48,10 @@
 
             <md-content flex layout-padding >	
                 <md-input-container>
-                    <input placeholder="Strasse" ng-model="user.address.street" ng-required="true" />
+                    <input placeholder="Strasse" ng-model="user.address.street" ng-required="true" pattern="[A-Za-z\-\s]{5,}" title="Verwenden Sie 'ss' statt '?' "/>
                 </md-input-container>
                 <md-input-container>
-                    <input placeholder="Hausnummer" ng-model="user.address.number" ng-required="true" />
+                    <input placeholder="Hausnummer" ng-model="user.address.number" ng-required="true" pattern="[0-9]{1,}.*"/>
                 </md-input-container>
             </md-content>
 
@@ -80,16 +80,16 @@
                     <md-tab label="Passwort">
                         <md-content flex layout-padding>	
                             <md-input-container>
-                                <input type="password" placeholder="Altes Passwort" ng-model="user.password.current" ng-required="true" ng-change="pwdInPressed()"/>
+                                <input type="password" placeholder="Altes Passwort" ng-model="user.password.current" ng-required="true" ng-change="pwdInPressed()" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
                             </md-input-container>
                         </md-content>
 
                         <md-content flex layout-padding>	
                             <md-input-container>
-                                <input type="password" placeholder="Neues Passwort" ng-model="user.password.new" ng-required="pwd_required" />
+                                <input type="password" placeholder="Neues Passwort" ng-model="user.password.new" ng-required="pwd_required" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
                             </md-input-container>
                             <md-input-container>
-                                <input type="password" placeholder="Passwort bestätigen" ng-model="user.password.confirm" ng-required="pwd_required" />
+                                <input type="password" placeholder="Passwort bestätigen" ng-model="user.password.confirm" ng-required="pwd_required" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
                             </md-input-container>
                         </md-content>
 						
