@@ -239,10 +239,10 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 						return;
 					}
 					
-					name = "\"" + name + "\"";
-					familyName = "\"" + familyName + "\"";
-					email = "\"" + email + "\"";
-					password = "\"" + password + "\"";
+				//	name = "\"" + name + "\"";
+				//	familyName = "\"" + familyName + "\"";
+				//	email = "\"" + email + "\"";
+				//	password = "\"" + password + "\"";
 					
 					var data = {
 						email: email,
@@ -254,6 +254,8 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 					console.log(data);
 					
 					RESTFactory.User_Register(data).then(function(response){
+						
+						console.log(response);
 						
 						alert("Bitte bestätigen Sie Ihre Email Adresse");
 						

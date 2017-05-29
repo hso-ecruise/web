@@ -65,9 +65,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 
     function AddMarker(title, content, image_string, lat, lon){
-
-		console.log("ADD");
-	
+		
         var img = {
             url: 'images/icons/car_available.png',
             scaledSize: new google.maps.Size(60, 87),
@@ -253,28 +251,30 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             '				<h2 class="md-flex">Bitte Fahrtdaten eingeben</h2>' +
             '			</div>' +
             '		</md-toolbar>' +
+			
+			'		<form name="registerForm">' +
+            '			<md-content flex layout-padding>' +
+            '				<div>' +
+            '					<label> Straße Nr.: {{ address.street }}  {{ address.number }}</label>' +
+            '					<br/>' +
+            '					<label> Stadt: {{ address.zip }}  {{ address.city }}</label>' +
+            '				</div>' +
+            '			</md-content>' +
 
-            '		<md-content flex layout-padding>' +
-            '			<div>' +
-            '				<label> Straße Nr.: {{ address.street }}  {{ address.number }}</label>' +
-            '				<br/>' +
-            '				<label> Stadt: {{ address.zip }}  {{ address.city }}</label>' +
-            '			</div>' +
-            '		</md-content>' +
+            '			<md-content flex layout-padding>' +
+            '				<md-input-container>' +
+            '					<input type="date" placeholder="Datum" min="{{minDate}}" class="md-input" ng-model="date" ng-required="true" >' +   
+            '				</md-input-container>' +
+            '				<md-input-container>' +
+            '					<input type="time" placeholder="Uhrzeit" min="{{minTime}}" class="md-input" ng-model="time" ng-required="true" >' +
+            '				</md-input-container>' +
+            '			</md-content>' +
 
-            '		<md-content flex layout-padding>' +
-            '			<md-input-container>' +
-            '				<input type="date" placeholder="Datum" min="{{minDate}}" class="md-input" ng-model="date" ng-required="true" >' +   
-            '			</md-input-container>' +
-            '			<md-input-container>' +
-            '				<input type="time" placeholder="Uhrzeit" min="{{minTime}}" class="md-input" ng-model="time" ng-required="true" >' +
-            '			</md-input-container>' +
-            '		</md-content>' +
-
-            '		<md-content flex layout-padding>' +
-            '			<md-button class="md-raised md-primary button-to-right" ng-click="Save()"> Speichern </md-button>' +
-            '			<md-button class="md-primary md-hue-1 button-to-right" ng-click="closeDialog()"> Verwerfen </md-button>' +
-            '		</md-content>' +
+            '			<md-content flex layout-padding>' +
+            '				<md-button class="md-raised md-primary button-to-right" ng-click="Save()" ng-disabled="registerForm.$invalid"> Speichern </md-button>' +
+            '				<md-button class="md-primary md-hue-1 button-to-right" ng-click="closeDialog()"> Verwerfen </md-button>' +
+            '			</md-content>' +
+			'		</form>' +
 
             '	</md-dialog-content>' +
             '</md-dialog>',
@@ -318,13 +318,11 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 					
 					var now = new Date();
 					
+					//TRITT EIGENTLICH NIE AUF
 					if(plannedDate.getTime() - now.getTime() < 0){
 						alert("Die Startzeit liegt in der Vergangenheit. Bitte überprüfen Sie Ihre Eingaben.");
 						return;
 					}
-					
-					now = "\"" + now + "\"";
-					plannedDate = "\"" + plannedDate + "\"";
 					
 					var data = {
 						customerId: customerID,

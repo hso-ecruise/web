@@ -51,8 +51,6 @@ var checkRouting = function ($rootScope, $location, Helper) {
 
 application.config(function ($routeProvider, $locationProvider, $httpProvider, $qProvider){
 
-	//$httpProvider.defaults.withCredentials = true;
-
     $routeProvider
 	.when('/', {
 	    templateUrl: 'views/start.html',
