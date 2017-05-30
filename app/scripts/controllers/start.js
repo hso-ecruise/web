@@ -80,7 +80,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'				<md-input-container>' +
 			'					<input placeholder="E-Mail" type="email" ng-model="login_email" ng-required="true" />' +
 			'				</md-input-container>' +
-			
+			//PASSWORT LÄNGE AUF 8 SETZEN
 			'				<md-input-container>' +
 			'					<input placeholder="Passwort" type="password" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein" ng-model="login_password" ng-required="true" /> ' +
 			'				</md-input-container>' +
@@ -201,7 +201,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			
 			'				<md-input-container>' +
 			'					<label>Passwort</label>' +
-			'					<input type="password" pattern="(?=.*[a-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein" ng-model="register_password" ng-required="true" />' +
+			'					<input type="password" pattern="(?=.*[a-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein" ng-model="register_password" ng-required="true" />' +
 			'				</md-input-container>' +
 			'			</md-content>' +
 			

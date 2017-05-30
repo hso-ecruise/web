@@ -49,7 +49,7 @@
 
 				<md-content flex layout-padding >	
 					<md-input-container>
-						<input placeholder="Strasse" ng-model="user.address.street" ng-required="true" pattern="[A-Za-z\-\s]{5,}" title="Verwenden Sie 'ss' statt '?' "/>
+						<input placeholder="Strasse" ng-model="user.address.street" ng-required="true" pattern="[A-Za-z\-\s]{5,}" title="Verwenden Sie 'ss' statt 'ß' "/>
 					</md-input-container>
 					<md-input-container>
 						<input placeholder="Hausnummer" ng-model="user.address.number" ng-required="true" pattern="[0-9]{1,}.*"/>
@@ -83,16 +83,16 @@
 						<form name="password_Form">
 							<md-content flex layout-padding>
 								<md-input-container>
-									<input type="password" placeholder="Altes Passwort" ng-model="user.password.current" ng-required="true" ng-change="pwdInPressed()" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
+									<input type="password" placeholder="Altes Passwort" ng-model="user.password.current" ng-required="true" ng-change="pwdInPressed()" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
 								</md-input-container>
 							</md-content>
 
 							<md-content flex layout-padding>	
 								<md-input-container>
-									<input type="password" placeholder="Neues Passwort" ng-model="user.password.new" ng-required="pwd_required" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
+									<input type="password" placeholder="Neues Passwort" ng-model="user.password.new" ng-required="pwd_required" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
 								</md-input-container>
 								<md-input-container>
-									<input type="password" placeholder="Passwort bestätigen" ng-model="user.password.confirm" ng-required="pwd_required" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
+									<input type="password" placeholder="Passwort bestätigen" ng-model="user.password.confirm" ng-required="pwd_required" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein"/>
 								</md-input-container>
 							</md-content>
 							
