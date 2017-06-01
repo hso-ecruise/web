@@ -43,7 +43,7 @@
 						<input placeholder="Stadt" ng-model="user.address.city" ng-required="true" pattern="[A-Za-z\-\s]{5,}" title="Stadtname muss mindestens 5 Zeichen lang sein" />
 					</md-input-container>
 					<md-input-container>
-						<input placeholder="PLZ" type="number" max="99999" min="10000" ng-model="user.address.zip" ng-required="true" />
+						<input placeholder="PLZ" type="text" ng-model="user.address.zip" pttern="[0-9]{5}" ng-required="true" />
 					</md-input-container>
 				</md-content>
 
@@ -113,13 +113,13 @@
 							
 							<md-content flex layout-padding>
 								<md-input-container class="md-block" flex-gt-sm>
-									<input placeholder="Neue Email-Adresse" ng-model="user.email.new" type="email" width="140px" ng-required="true" />
+									<input placeholder="Neue Email-Adresse" ng-model="user.email.new" type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$"  width="140px" ng-required="true" />
 								</md-input-container>
 							</md-content >
 							
 							<md-content flex layout-padding>
 								<md-input-container class="md-block" flex-gt-sm>
-									<input placeholder="Neue Email-Adresse best&auml;tigen" ng-model="user.email.confirm" type="email" width="140px" ng-required="true" />
+									<input placeholder="Neue Email-Adresse best&auml;tigen" ng-model="user.email.confirm" type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$"  width="140px" ng-required="true" />
 								</md-input-container>
 								<md-button class="md-raised md-primary button-to-right" ng-click="ChangeEmail()" ng-disabled="email_Form.$invalid"> Speichern </md-button>
 							</md-content>
@@ -127,7 +127,6 @@
                     </md-tab>
 				</md-tabs>
 			</md-content>
-						<label value="{{user.password.current}}"/>
         </div>
     </div>
 </div>

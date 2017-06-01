@@ -78,11 +78,11 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             '			<md-content flex layout-padding>' +
 			
 			'				<md-input-container>' +
-			'					<input placeholder="E-Mail" type="email" ng-model="login_email" ng-required="true" />' +
+			'					<input placeholder="E-Mail" type="text" ng-model="login_email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" ng-required="true" />' +
 			'				</md-input-container>' +
 			//PASSWORT LÄNGE AUF 8 SETZEN
 			'				<md-input-container>' +
-			'					<input placeholder="Passwort" type="password" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{7,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein" ng-model="login_password" ng-required="true" /> ' +
+			'					<input placeholder="Passwort" type="password" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein" ng-model="login_password" ng-required="true" /> ' +
 			'				</md-input-container>' +
 			
             '			</md-content>' +
@@ -184,12 +184,12 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'			<md-content flex layout-padding>' +
 			'				<md-input-container>' +
 			'					<label>Vorname</label>' +
-			'					<input ng-model="register_name" pattern="[A-Z]+[a-z]{1,20}" ng-required="true" />' +
+			'					<input ng-model="register_name" pattern="[A-Z]{1}[a-z]{1,}([-\s]{1}[A-Z]{1}[a-z]{1,}){0,}" ng-required="true" />' +
 			'				</md-input-container>' +
 			
 			'				<md-input-container>' +
 			'					<label>Nachname</label>' +
-			'					<input ng-model="register_familyName" pattern="[A-Z]+[a-z]{1,20}" ng-required="true" />' +
+			'					<input ng-model="register_familyName" pattern="[A-Z]{1}[a-z]{1,}([-\s]{1}[A-Z]{1}[a-z]{1,}){0,}" ng-required="true" />' +
 			'				</md-input-container>' +
 			'			</md-content>' +
 			
@@ -201,7 +201,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			
 			'				<md-input-container>' +
 			'					<label>Passwort</label>' +
-			'					<input type="password" pattern="(?=.*[a-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein" ng-model="register_password" ng-required="true" />' +
+			'					<input type="password" pattern="(?=.*[a-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 8 Zeichen lang sein" ng-model="register_password" ng-required="true" />' +
 			'				</md-input-container>' +
 			'			</md-content>' +
 			
