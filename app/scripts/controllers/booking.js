@@ -101,7 +101,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     function AddVehicle(car){
 
-        if(car.bookingState === 0 || car.bookingState === 1){
+        if(car.bookingState !== 1000){
 
             var lat = car.lastKnownPositionLatitude;
             var lon = car.lastKnownPositionLongitude;

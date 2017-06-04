@@ -68,7 +68,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             template:
             '<md-dialog class="login-dialog">'+
             '	<md-dialog-content>' +
-			'		<form ng-submit="Login()">' +
+			'		<form name="form_Login" ng-submit="Login()">' +
             '			<md-toolbar class="md-hue-2">' +
             '				<div class="md-toolbar-tools">' +
             '					<h2 class="md-flex">Anmelden</h2>' +
@@ -88,8 +88,8 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             '			</md-content>' +
 
             '			<md-content flex layout-padding>' +
-			'				<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
-            '				<md-button class="md-raised md-primary button-to-right" ng-click="Login()"> Login </md-button>' +
+			'				<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" ng-disabled="form_Login.$invalid" value=""/>' +
+            '				<md-button class="md-raised md-primary button-to-right" ng-disabled="form_Login.$invalid" ng-click="Login()"> Login </md-button>' +
             '			</md-content>' +
 			'		</form>' +
             '	</md-dialog-content>' +
@@ -174,7 +174,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             '<md-dialog class="login-dialog">'+
             '	<md-dialog-content>' +
 			
-			'		<form ng-submit="Register()">' +
+			'		<form name="form_Register" ng-submit="Register()">' +
             '			<md-toolbar class="md-hue-2">' +
             '				<div class="md-toolbar-tools">' +
             '					<h2 class="md-flex">Registieren</h2>' +
@@ -205,9 +205,42 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'				</md-input-container>' +
 			'			</md-content>' +
 			
+			'			<md-content flex layout-padding>' +
+			'				<md-input-container flex-gt-sm>' +
+			'					<input type="text" placeholder="Telefon" ng-model="currentCustomer.phoneNr" ng-disabled="editDisabled" required="true" pattern="[\+]{0,1}[0-9]{8,}" />' +
+			'				</md-input-container>' +
+			'				<md-input-container flex-gt-sm>' +
+			'						<input type="text" placeholder="Land" maxlength="2" ng-model="currentCustomer.address.country" ng-disabled="editDisabled" required="true" pattern="[A-Z]{2,3}" title="Bitte geben Sie Ihr Länderkürzel an"  />' +
+			'				</md-input-container>' +
+			'			</md-content>' +
+			
+			'			<md-content flex layout-padding>' +
+			'				<md-input-container flex-gt-sm>' +
+			'					<input type="text" placeholder="Straße" ng-model="currentCustomer.address.street" ng-disabled="editDisabled" required="true" pattern="[A-Za-z\-\s]{5,}" title="Verwenden Sie \'ss\' statt \'ß\' " />' +
+			'				</md-input-container>' +
+			'				<md-input-container flex-gt-sm>' +
+			'					<input type="text" placeholder="Nr" ng-model="currentCustomer.address.number" ng-disabled="editDisabled" required="true" pattern="[0-9]{1,}.*" />' +
+			'				</md-input-container>' +
+			'			</md-content>' +
+			
+			'			<md-content flex layout-padding>' +
+			'				<md-input-container flex-gt-sm>' +
+			'					<input type="text" placeholder="Stadt" ng-model="currentCustomer.address.city" ng-disabled="editDisabled" required="true" pattern="[A-Za-z\-\s]{3,}" />' +
+			'				</md-input-container>' +
+			'				<md-input-container flex-gt-sm>' +
+			'					<input type="text" placeholder="PLZ" ng-model="currentCustomer.address.zip" pattern="[0-9]{5}" ng-disabled="editDisabled" required="true"/>' +
+			'				</md-input-container>' +
+			'			</md-content>' +
+			
+			'			<md-content flex layout-padding>' +
+			'				<md-input-container flex-gt-sm>' +
+			'					<input type="text" placeholder="Extra" ng-model="currentCustomer.address.extra" ng-disabled="editDisabled"/>' +
+			'				</md-input-container>' +
+			'			</md-content>' +
+			
             '			<md-content flex layout-padding>' +
-			'				<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" value=""/>' +
-            '				<md-button class="md-raised md-primary button-to-right" ng-click="Register()"> Registrieren </md-button>' +
+			'				<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" ng-disabled="form_Register.$invalid" value=""/>' +
+            '				<md-button class="md-raised md-primary button-to-right" ng-disabled="form_Register.$invalid" ng-click="Register()"> Registrieren </md-button>' +
             '			</md-content>' +
 			'		</form>' +
 			
