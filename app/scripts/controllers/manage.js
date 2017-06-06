@@ -16,6 +16,8 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			
 			var data = response.data;
 			
+console.log(data);
+
 			for(var j = 0; j < data.length; j++){
 				HandleResult_Booking(data[j]);
 			}
@@ -31,6 +33,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	var HandleResult_Booking = function(response){
 		
 		var d = new Date(response.plannedDate);
+		d.setMonth(d.getMonth() + 1);
 		var now = new Date();
 		var dif = (d.getTime() - now.getTime()) / 1000 / 60;
 		
@@ -45,7 +48,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	}
 	
 	var Handle_OpenBooking = function(response, dif){
-		
+
 		var booking = {};
 		
 		booking.bookingID = response.bookingId;
@@ -76,8 +79,8 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		$scope.$apply();
 		
 		
-		var lat = response.bookedPositionLatitude;
-		var lon = response.bookedPositionLongitude;
+		var lat = response.bookingPositionLatitude;
+		var lon = response.bookingPositionLongitude;
 		
 		Helper.Get_Address(lat, lon).then(function(address){
 			

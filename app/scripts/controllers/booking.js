@@ -356,11 +356,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 					
 					var data = {
 						customerId: customerID,
-						bookedPositionLatitude: lat,
-						bookedPositionLongitude: lon,
+						bookingPositionLatitude: lat,
+						bookingPositionLongitude: lon,
 						bookingDate: now,
 						plannedDate: plannedDate
 					};
+                    console.log(data);
 					
 					RESTFactory.Bookings_Post(data).then(function(response){
 						alert("Buchung erfolgreich");

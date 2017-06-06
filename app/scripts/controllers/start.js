@@ -184,24 +184,24 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'			<md-content flex layout-padding>' +
 			'				<md-input-container>' +
 			'					<label>Vorname</label>' +
-			'					<input ng-model="register_name" pattern="[A-Z]{1}[a-z]{1,}([-\s]{1}[A-Z]{1}[a-z]{1,}){0,}" ng-required="true" />' +
+			'					<input ng-model="currentCustomer.name" pattern="[A-Z]{1}[a-z]{1,}([-\s]{1}[A-Z]{1}[a-z]{1,}){0,}" ng-required="true" />' +
 			'				</md-input-container>' +
 			
 			'				<md-input-container>' +
 			'					<label>Nachname</label>' +
-			'					<input ng-model="register_familyName" pattern="[A-Z]{1}[a-z]{1,}([-\s]{1}[A-Z]{1}[a-z]{1,}){0,}" ng-required="true" />' +
+			'					<input ng-model="currentCustomer.familyName" pattern="[A-Z]{1}[a-z]{1,}([-\s]{1}[A-Z]{1}[a-z]{1,}){0,}" ng-required="true" />' +
 			'				</md-input-container>' +
 			'			</md-content>' +
 			
 			'			<md-content flex layout-padding>' +
 			'				<md-input-container>' +
 			'					<label>Email</label>' +
-			'					<input type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" title="E-Mail muss folgend aufgebaut sein: xxx@yyy.zzz" ng-model="register_email"  ng-required="true" />' +
+			'					<input type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" title="E-Mail muss folgend aufgebaut sein: xxx@yyy.zzz" ng-model="currentCustomer.email"  ng-required="true" />' +
 			'				</md-input-container>' +
 			
 			'				<md-input-container>' +
 			'					<label>Passwort</label>' +
-			'					<input type="password" pattern="(?=.*[a-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 8 Zeichen lang sein" ng-model="register_password" ng-required="true" />' +
+			'					<input type="password" pattern="(?=.*[a-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 8 Zeichen lang sein" ng-model="currentCustomer.password" ng-required="true" />' +
 			'				</md-input-container>' +
 			'			</md-content>' +
 			
@@ -249,6 +249,10 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 
             controller: function DialogController($scope, $rootScope, $location, $mdDialog, RESTFactory){
 				
+				var currentCustomer = {};
+				currentCustomer.address = {};
+				$scope.currentCustomer = currentCustomer;
+
 
                 $scope.closeDialog = function(){
                     $mdDialog.hide();
@@ -256,32 +260,51 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 
                 $scope.Register = function(){
 
-					var name = $scope.register_name;
-					var familyName = $scope.register_familyName;
+					var customer = $scope.currentCustomer;
+					var address = customer.address;
+					
+
+					var name = customer.name;
+					var familyName = customer.familyName;
 				
-					var email = $scope.register_email;
-					var password = $scope.register_password;
+					var email = customer.email;
+					var password = customer.password;
+					var phoneNr = customer.phoneNr;
+
+					var country = address.country;
+					var street = address.street;
+					var number = address.number;
+					var city = address.city;
+					var zip = parseInt(address.zip);
+					var extra = address.extra;
+
+					if(extra === undefined){
+						extra = "";
+					}
+
 					
-					if(email === undefined || familyName === undefined || name === undefined || password === undefined){
+					if(email === undefined || familyName === undefined || name === undefined || password === undefined || phoneNr === undefined || country === undefined || street === undefined || number === undefined || city === undefined || zip === undefined){
 						alert("Bitte füllen Sie alle Felder aus");
 						return;
 					}
 					
-					if(email === "" || familyName === "" || name === "" || password === ""){
+					if(email === "" || familyName === "" || name === "" || password === "" || phoneNr === "" || country === "" || street === "" || number === "" || city === "" || zip === ""){
 						alert("Bitte füllen Sie alle Felder aus");
 						return;
 					}
-					
-				//	name = "\"" + name + "\"";
-				//	familyName = "\"" + familyName + "\"";
-				//	email = "\"" + email + "\"";
-				//	password = "\"" + password + "\"";
 					
 					var data = {
 						email: email,
 						password: password,
 						firstName: name,
-						lastName: familyName
+						lastName: familyName,
+						phoneNumber: phoneNr,
+						country: country,
+						street: street,
+						houseNumber: number,
+						city: city,
+						zipCode: zip,
+						addressExtraLine: extra
 					};
 					
 					console.log(data);
