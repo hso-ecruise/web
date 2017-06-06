@@ -137,6 +137,23 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			
             if(bat < 100){
 				
+                var endTime = new Date();
+                endTime.setTime(endTime.getTime() + ((100 - bat) * 60 * 1000));
+
+                var time = Helper.Get_Zeit().time;
+
+                var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: gegen " + time;
+
+				if(bat < 25){
+					new AddMarker(title, content, "car_loading_00", lat, lon);
+				}else if (bat < 50){
+					new AddMarker(title, content, "car_loading_25", lat, lon);
+				}else if (bat < 75){
+					new AddMarker(title, content, "car_loading_50", lat, lon);
+				}else if (bat < 100){
+					new AddMarker(title, content, "car_loading_75", lat, lon);
+				}
+                /*
 				RESTFactory.Car_Charging_Stations_Get_CarID(carID).then(function(response){
 					
 					var info = response.data;
@@ -148,6 +165,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 						if(station.carId === carID){
 						
 							if(info.length > 0){
+                                
+                                //PRO MINUTE 1%
 
 								var time = Helper.Get_Time(info[tz].chargeEnd);
 								var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: gegen " + time;
@@ -184,7 +203,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 					}
 					
                 });
-
+                */
             }else{
 
                 var content = "Das Fahrzeug ist voll geladen und kann benutzt werden.";
@@ -226,39 +245,49 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         carMarkers = [];
         stationMarkers = [];
+        
+        var refIntCarID = setInterval(GetCars, 1000);
+        var refIntStatID = setInterval(GetStations, 1000);
 
-        //GET Call to get all cars
-        RESTFactory.Cars_Get().then(function(response){
-			
-            var cars = response.data;
-			
-            for(var ij = 0; ij < cars.length; ij++){
-                var car = cars[ij];
-                new AddVehicle(car);
-            }
+        function GetCars(){
 
-        }, function(response){
+            //GET Call to get all cars
+            RESTFactory.Cars_Get().then(function(response){
+                
+                clearInterval(refIntCarID);
 
-            console.log("Failed to get cars position.");
+                var cars = response.data;
+                    
+                for(var ij = 0; ij < cars.length; ij++){
+                    var car = cars[ij];
+                    new AddVehicle(car);
+                }
 
-        });
+            }, function(response){
+                
+            });
 
+        }
 
-        //GET Call to get all stations
-        RESTFactory.Charging_Stations_Get().then(function(response){
+        function GetStations(){
 
-            var stations = response.data;
-			
-            for(var i = 0; i < stations.length; i++){
-                var station = stations[i];
-                new AddStation(station);
-            }
+            //GET Call to get all stations
+            RESTFactory.Charging_Stations_Get().then(function(response){
 
-        }, function(response){
+                clearInterval(refIntStatID);
 
-            console.log("Failed to get stations position.");
+                var stations = response.data;
+                
+                for(var i = 0; i < stations.length; i++){
+                    var station = stations[i];
+                    new AddStation(station);
+                }
 
-        });
+            }, function(response){
+
+            });
+
+        }
 
     }
 

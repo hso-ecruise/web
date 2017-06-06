@@ -557,7 +557,7 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 	    return new Promise(function(resolve, reject){
 		
 			RESTFactory.GetAddress(lat, lon).then(function(response){
-				
+
 				var ret = response.data.results[0].address_components;
 				
 				var address = { };
