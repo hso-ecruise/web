@@ -1,6 +1,0 @@
-'use strict';
-
-angular.module('webApp.controllers', ['ngRoute'])
-.controller('Ctrl2', [function() {
-
-}]);

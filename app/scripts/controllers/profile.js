@@ -9,6 +9,11 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	$scope.customerID = customerID;
 	
 	
+	/**
+	 * Description
+	 * @method LoadData
+	 * @return 
+	 */
 	function LoadData(){
 		
 		var prom_data = RESTFactory.Customers_Get_CustomerID(customerID);
@@ -81,6 +86,11 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
     
 
 
+    /**
+     * Description
+     * @method init
+     * @return 
+     */
     var init = function () {
 		
 		LoadData();
@@ -90,6 +100,11 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
     init();
 
 	
+    /**
+     * Description
+     * @method Safe
+     * @return 
+     */
     $scope.Safe = function () {
 
 		var new_phone_number = $scope.user.phoneNr;
@@ -143,12 +158,22 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		
     };
 
+    /**
+     * Description
+     * @method Cancel
+     * @return 
+     */
     $scope.Cancel = function () {
 		
 		LoadData();
     
 	};
 	
+    /**
+     * Description
+     * @method ChangePassword
+     * @return 
+     */
     $scope.ChangePassword = function(){
 		
 		var orig_password = Helper.Cookie_Get("password");
@@ -179,6 +204,11 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		
     };
 	
+	/**
+	 * Description
+	 * @method pwdInPressed
+	 * @return 
+	 */
 	$scope.pwdInPressed = function(){
 		
 		var input = $scope.user.password.current;
@@ -191,6 +221,11 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		
 	};
 	
+	/**
+	 * Description
+	 * @method ChangeEmail
+	 * @return 
+	 */
 	$scope.ChangeEmail = function(){
 		
 		var new_email = $scope.user.email.new;

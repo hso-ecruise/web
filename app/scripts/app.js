@@ -9,7 +9,6 @@
  * Main module of the application.
  */
 
-
 var application = angular.module('webApp', [
     'ngAnimate',
     'ngMaterial',
@@ -20,6 +19,15 @@ var application = angular.module('webApp', [
 
 application.service
 
+/**
+ * Description
+ * Funktion um zu schauen ob user eingeloggt ist und ihm die richtige ausgewaehlte Seite zu zeigen.
+ * @method checkRouting
+ * @param {} $rootScope
+ * @param {} $location
+ * @param {} Helper
+ * @return 
+ */
 var checkRouting = function ($rootScope, $location, Helper) {
     
     var loggedIN = Helper.Cookie_Get("loggedIN");
@@ -34,7 +42,7 @@ var checkRouting = function ($rootScope, $location, Helper) {
     $rootScope.token = token;
     $rootScope.customerID = customerID;
     
-    if ($rootScope.loggedIN === false || $rootScope.loggedIN === undefined)
+    if ($rootScope.loggedIN === false || $rootScope.loggedIN === undefined) // falls user eingeloggt -> start, sonst passiert nichts
     {
 		if($rootScope.loggedIN === undefined){
 			$rootScope.loggedIN = false;
@@ -49,6 +57,8 @@ var checkRouting = function ($rootScope, $location, Helper) {
     }
 };
 
+
+// Funktion die Urls und ihre Controller abhaengig von der ausgewaehlten Seite laedt
 application.config(function ($routeProvider, $locationProvider, $httpProvider, $qProvider){
 
     $routeProvider

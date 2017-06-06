@@ -1,18 +1,19 @@
 'use strict';
-
+// Initialisierungsfunktion für die Seite bookings.html
+// Karte, Icons und Marker werden initialisiert und geladen
 application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, RESTFactory, Helper) {    
 
-	var customerID = $rootScope.customerID;
+    var customerID = $rootScope.customerID;
 
-	var carMarkers = [];
+    var carMarkers = [];
     var stationMarkers = [];
 
     var carsVisible = true;
     var stationsVisible = true;
-	
+
     $scope.activeCar = "images/icons/car_available.png";
     $scope.activeStation = "images/icons/station_available.png";
-	
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         center: new google.maps.LatLng(49.5, 8.434),
@@ -23,15 +24,15 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         var lat = event.latLng.lat();
         var lon = event.latLng.lng();
-		
+
         Helper.Get_Address(lat, lon).then(function(address){
-			new ShowInputPopUp(address, lat, lon);
+            new ShowInputPopUp(address, lat, lon);
         }, function(response){
-			
-		});
+
+        });
 
     });
-	
+
 
     var icons = {
         car_available: {
@@ -81,8 +82,20 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
     };
 
 
+    /**
+     * Description
+     * Funktion um Marker hinzuzufügen
+     * Hier werden auf der Karte Marker und Ihre Icons hinzugefügt
+     * @method AddMarker
+     * @param {} title
+     * @param {} content
+     * @param {} image_string
+     * @param {} lat
+     * @param {} lon
+     * @return 
+     */
     function AddMarker(title, content, image_string, lat, lon){
-		
+
         var img = {
             url: 'images/icons/car_available.png',
             scaledSize: new google.maps.Size(60, 87),
@@ -96,15 +109,14 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             position: new google.maps.LatLng(lat, lon),
             map: map,
             icon: img,
-			optimized: false
+            optimized: false
         });
-
-
+        // Falls einer Marker angelickt wird, erschein ein PopUp (mdDialog) mit information 
         marker.addListener('click', function(event){
             var new_alert = $mdDialog.alert({
                 title: title,
                 textContent: content,
-				clickOutsideToClose: true,
+                clickOutsideToClose: true,
                 ok: 'OK'
             });
 
@@ -114,15 +126,21 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                 new_alert = undefined;
             });
         });
-
+        // Hier werden Marker gerendert
         if(icons[image_string].type === "car"){
             carMarkers.push(marker);
         }else{
             stationMarkers.push(marker);
         }
-
     }
 
+    /**
+     * Description
+     * Funktion um Autos der Karte hinzuzufügen
+     * @method AddVehicle
+     * @param {} car
+     * @return 
+     */
     function AddVehicle(car){
 
         if(car.bookingState !== 1000){
@@ -131,12 +149,10 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             var lon = car.lastKnownPositionLongitude;
             var bat = car.chargeLevel;
             var carID = car.carId;
-
             var title = "Fahrzeugdetails:";
-			
-			
+
             if(bat < 100){
-				
+
                 var endTime = new Date();
                 endTime.setTime(endTime.getTime() + ((100 - bat) * 60 * 1000));
 
@@ -144,28 +160,28 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
                 var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: gegen " + time;
 
-				if(bat < 25){
-					new AddMarker(title, content, "car_loading_00", lat, lon);
-				}else if (bat < 50){
-					new AddMarker(title, content, "car_loading_25", lat, lon);
-				}else if (bat < 75){
-					new AddMarker(title, content, "car_loading_50", lat, lon);
-				}else if (bat < 100){
-					new AddMarker(title, content, "car_loading_75", lat, lon);
-				}
+                if(bat < 25){
+                    new AddMarker(title, content, "car_loading_00", lat, lon);
+                }else if (bat < 50){
+                    new AddMarker(title, content, "car_loading_25", lat, lon);
+                }else if (bat < 75){
+                    new AddMarker(title, content, "car_loading_50", lat, lon);
+                }else if (bat < 100){
+                    new AddMarker(title, content, "car_loading_75", lat, lon);
+                }
                 /*
 				RESTFactory.Car_Charging_Stations_Get_CarID(carID).then(function(response){
-					
+
 					var info = response.data;
-					
+
 					for(var tz = 0; tz < info.length; tz++){
-						
+
 						var station = info[tz];
-						
+
 						if(station.carId === carID){
-						
+
 							if(info.length > 0){
-                                
+
                                 //PRO MINUTE 1%
 
 								var time = Helper.Get_Time(info[tz].chargeEnd);
@@ -182,16 +198,16 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 								}
 
 							}
-							
+
 							break;
-							
+
 						}
 					}
-					
+
                 }, function(response){
-					
+
 					var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: kann nicht abgerufen werden";
-					
+
 					if(bat < 25){
 						new AddMarker(title, content, "car_loading_00", lat, lon);
 					}else if (bat < 50){
@@ -201,7 +217,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 					}else if (bat < 100){
 						new AddMarker(title, content, "car_loading_75", lat, lon);
 					}
-					
+
                 });
                 */
             }else{
@@ -216,12 +232,18 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     }
 
+    /**
+     * Description
+     * @method AddStation
+     * @param {} station
+     * @return 
+     */
     function AddStation(station){
 
         var lat = station.latitude;
         var lon = station.longitude;
 
-		//FEHLER OCCUPIED
+        //FEHLER OCCUPIED
         var occupied = station.slotsOccupuied;
         var total = station.slots;
 
@@ -229,7 +251,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         var title = "Ladestation";
         var content =  diff + " von " + total + " Slots frei";
-		
+
         if(diff === 0){
             new AddMarker(title, content, "station_occupied", lat, lon);
         }else{
@@ -238,6 +260,11 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     }
 
+    /**
+     * Description
+     * @method LoadPositions
+     * @return 
+     */
     function LoadPositions(){
 
         carsVisible = true;
@@ -245,30 +272,40 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         carMarkers = [];
         stationMarkers = [];
-        
+
         var refIntCarID = setInterval(GetCars, 1000);
         var refIntStatID = setInterval(GetStations, 1000);
 
+        /**
+         * Description
+         * @method GetCars
+         * @return 
+         */
         function GetCars(){
 
             //GET Call to get all cars
             RESTFactory.Cars_Get().then(function(response){
-                
+
                 clearInterval(refIntCarID);
 
                 var cars = response.data;
-                    
+
                 for(var ij = 0; ij < cars.length; ij++){
                     var car = cars[ij];
                     new AddVehicle(car);
                 }
 
             }, function(response){
-                
+
             });
 
         }
 
+        /**
+         * Description
+         * @method GetStations
+         * @return 
+         */
         function GetStations(){
 
             //GET Call to get all stations
@@ -277,7 +314,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                 clearInterval(refIntStatID);
 
                 var stations = response.data;
-                
+
                 for(var i = 0; i < stations.length; i++){
                     var station = stations[i];
                     new AddStation(station);
@@ -291,10 +328,18 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     }
 
+    /**
+     * Description
+     * @method ShowInputPopUp
+     * @param {} address
+     * @param {} lat
+     * @param {} lon
+     * @return 
+     */
     function ShowInputPopUp(address, lat, lon){
 
         map.panTo(new google.maps.LatLng(lat, lon));
-		
+
         $scope.address = address;
 
         $mdDialog.show({
@@ -310,8 +355,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             '				<h2 class="md-flex">Bitte Fahrtdaten eingeben</h2>' +
             '			</div>' +
             '		</md-toolbar>' +
-			
-			'		<form name="registerForm">' +
+
+            '		<form name="registerForm">' +
             '			<md-content flex layout-padding>' +
             '				<div>' +
             '					<label> Straße Nr.: {{ address.street }}  {{ address.number }}</label>' +
@@ -333,73 +378,90 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             '				<md-button class="md-raised md-primary button-to-right" ng-click="Save()" ng-disabled="registerForm.$invalid"> Speichern </md-button>' +
             '				<md-button class="md-primary md-hue-1 button-to-right" ng-click="closeDialog()"> Verwerfen </md-button>' +
             '			</md-content>' +
-			'		</form>' +
+            '		</form>' +
 
             '	</md-dialog-content>' +
             '</md-dialog>',
 
+            /**
+             * Description
+             * @method controller
+             * @param {} $scope
+             * @param {} $mdDialog
+             * @return 
+             */
             controller: function DialogController($scope, $mdDialog){
 
                 $scope.address = address;
 
-				var timeInput = new Date();
-				timeInput.setMilliseconds(0);
-				timeInput.setSeconds(0);
-				
-				var minTime = timeInput;
-				minTime.setMinutes(timeInput.getMinutes() - 1);
-				
-				
-				var dateInput = new Date();
-				dateInput.setMilliseconds(0);
-				dateInput.setSeconds(0);
-				dateInput.setMinutes(0);
-				dateInput.setHours(0);
-				
-				var minDate = dateInput;
-				
-				$scope.time = timeInput;
-				$scope.minTime = minTime;
-				
-				$scope.date = dateInput;
-				$scope.minDate = minDate;
+                var timeInput = new Date();
+                timeInput.setMilliseconds(0);
+                timeInput.setSeconds(0);
 
+                var minTime = timeInput;
+                minTime.setMinutes(timeInput.getMinutes() - 1);
+
+
+                var dateInput = new Date();
+                dateInput.setMilliseconds(0);
+                dateInput.setSeconds(0);
+                dateInput.setMinutes(0);
+                dateInput.setHours(0);
+
+                var minDate = dateInput;
+
+                $scope.time = timeInput;
+                $scope.minTime = minTime;
+
+                $scope.date = dateInput;
+                $scope.minDate = minDate;
+
+                /**
+                 * Description
+                 * @method closeDialog
+                 * @return 
+                 */
                 $scope.closeDialog = function(){
                     $mdDialog.hide();
                 };
 
+                /**
+                 * Description
+                 * @method Save
+                 * @return 
+                 */
                 $scope.Save = function(){
-					
-					var date = new Date($scope.date);
-					var time = new Date($scope.time);
-					
-					var plannedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), 0, 0);
-					
-					var now = new Date();
-					
-					//TRITT EIGENTLICH NIE AUF
-					if(plannedDate.getTime() - now.getTime() < 0){
-						alert("Die Startzeit liegt in der Vergangenheit. Bitte überprüfen Sie Ihre Eingaben.");
-						return;
-					}
-					
-					var data = {
-						customerId: customerID,
-						bookingPositionLatitude: lat,
-						bookingPositionLongitude: lon,
-						bookingDate: now,
-						plannedDate: plannedDate
-					};
+
+                    var date = new Date($scope.date);
+                    var time = new Date($scope.time);
+
+                    var plannedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), 0, 0);
+
+                    var now = new Date();
+
+                    //TRITT EIGENTLICH NIE AUF
+                    if(plannedDate.getTime() - now.getTime() < 0){
+                        alert("Die Startzeit liegt in der Vergangenheit. Bitte überprüfen Sie Ihre Eingaben.");
+                        return;
+                    }
+
+                    var data = {
+                        customerId: customerID,
+                        bookingPositionLatitude: lat,
+                        bookingPositionLongitude: lon,
+                        bookingDate: now,
+                        plannedDate: plannedDate
+                    };
                     console.log(data);
-					
-					RESTFactory.Bookings_Post(data).then(function(response){
-						alert("Buchung erfolgreich");
-					}, function(response){
-						alert("Buchung fehlgeschlagen");
-					});
-					
-					$scope.closeDialog();
-					
+
+                    RESTFactory.Bookings_Post(data).then(function(response){
+                        alert("Buchung erfolgreich");
+                    }, function(response){
+                        alert("Buchung fehlgeschlagen");
+                    });
+
+                    $scope.closeDialog();
+
                 };
 
             }
@@ -407,6 +469,11 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     }
 
+    /**
+     * Description
+     * @method ToggleCars
+     * @return 
+     */
     function ToggleCars(){
         if(carsVisible === true){
             carsVisible = false;
@@ -422,7 +489,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             }
         }
     }
-	
+
+    /**
+     * Description
+     * @method ToggleStations
+     * @return 
+     */
     function ToggleStations(){
         if(stationsVisible === true){
             stationsVisible = false;
@@ -440,136 +512,151 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
     }
 
 
-	
+
+    /**
+     * Description
+     * @method Init
+     * @return 
+     */
     function Init(){
-		
-		var input = document.getElementById('search_input');
-		var searchBox = new google.maps.places.SearchBox(input);
-		
+
+        var input = document.getElementById('search_input');
+        var searchBox = new google.maps.places.SearchBox(input);
+
         var carBtn = document.getElementById('car_btn');
         var stationBtn = document.getElementById('station_btn');
 
-		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(carBtn);
         map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(stationBtn);
 
 
-		map.addListener('bounds_changed', function() {
-			searchBox.setBounds(map.getBounds());
-		});
-		
+        map.addListener('bounds_changed', function() {
+            searchBox.setBounds(map.getBounds());
+        });
+
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function() {
-			
-			var places = searchBox.getPlaces();
 
-			if (places.length === 0) {
-				return;
-			}
-			
-			var place = places[0].geometry.location;
-			
-			var lat = place.lat();
-			var lon = place.lng();
-			
-			var prom_addr = Helper.Get_Address(lat, lon);
-			prom_addr.then(function(response){
-				new ShowInputPopUp(response, lat, lon);
-			});
-			
+            var places = searchBox.getPlaces();
+
+            if (places.length === 0) {
+                return;
+            }
+
+            var place = places[0].geometry.location;
+
+            var lat = place.lat();
+            var lon = place.lng();
+
+            var prom_addr = Helper.Get_Address(lat, lon);
+            prom_addr.then(function(response){
+                new ShowInputPopUp(response, lat, lon);
+            });
+
         });
-		
-		//GET NEXT BOOKINGS
-		RESTFactory.Bookings_Get_CustomerID(customerID).then(function(response){
-			
-			var bookings = response.data;
-			
-			var interested = [];
-			
-			var soon_bookings = [];
-			
-			for(var jk = 0; jk < bookings.length; jk++){
-				
-				var booking = bookings[jk];
-				
-				var d = new Date(booking.plannedDate);
-				var now = new Date();
-				var dif = (d.getTime() - now.getTime()) / 1000 / 60;
-				
-				if(dif < 30 && dif > 0){
-					interested.push(booking);
-				}
-				
-			}
-			
-			for(var kl = 0; kl < interested.length; kl++){
-				
-				var booking2 = interested[kl];
-				
-				RESTFactory.Trips_Get_TripID(booking2.TripId).then(function(response){
-					
-					var trip = response.data;
-					
-					var carID = trip.CarId;
-					var chargingID = trip.startChargingStationId;
-					
-					RESTFactory.Charging_Stations_Get_Charging_StationID(chargingID).then(function(response){
-						
-						var station = response.data;
-						
-						var lat = station.latitude;
-						var lon = station.longitude;
-						
-						Helper.Get_Address(lat, lon).then(function(address){
-							
-							var soon_booking = {};
-						
-							soon_booking.lat = lat;
-							soon_booking.lon = lon;
-							soon_booking.stationID = chargingID;
-							soon_booking.carID = carID;
-							soon_booking.address = address;
-							soon_booking.date = Helper.Get_Date(booking2.plannedDate);
-							soon_booking.time = Helper.Get_Time(booking2.plannedDate);
-							
-							soon_bookings.push(soon_booking);
-							
-							var content = "Ihr Fahrzeug mit der ID: " + soon_booking.carID + " steht ab " + soon_booking.time + " am " + soon_booking.date + " an der Station " + soon_booking.stationID + " bereit";
-							
-							new AddMarker("Ihre Reservierung", content, "car_reserved", lat, lon);
-							
-						}, function(response){
-							
-						});
-						
-					}, function(response){
-						
-					});
-					
-				}, function(response){
-					
-				});
-				
-			}
-			
-		}, function(response){
-			
-		});
-		
-		
-		new LoadPositions();
-		
-	}
-	
+
+        //GET NEXT BOOKINGS
+        RESTFactory.Bookings_Get_CustomerID(customerID).then(function(response){
+
+            var bookings = response.data;
+
+            var interested = [];
+
+            var soon_bookings = [];
+
+            for(var jk = 0; jk < bookings.length; jk++){
+
+                var booking = bookings[jk];
+
+                var d = new Date(booking.plannedDate);
+                var now = new Date();
+                var dif = (d.getTime() - now.getTime()) / 1000 / 60;
+
+                if(dif < 30 && dif > 0){
+                    interested.push(booking);
+                }
+
+            }
+
+            for(var kl = 0; kl < interested.length; kl++){
+
+                var booking2 = interested[kl];
+
+                RESTFactory.Trips_Get_TripID(booking2.TripId).then(function(response){
+
+                    var trip = response.data;
+
+                    var carID = trip.CarId;
+                    var chargingID = trip.startChargingStationId;
+
+                    RESTFactory.Charging_Stations_Get_Charging_StationID(chargingID).then(function(response){
+
+                        var station = response.data;
+
+                        var lat = station.latitude;
+                        var lon = station.longitude;
+
+                        Helper.Get_Address(lat, lon).then(function(address){
+
+                            var soon_booking = {};
+
+                            soon_booking.lat = lat;
+                            soon_booking.lon = lon;
+                            soon_booking.stationID = chargingID;
+                            soon_booking.carID = carID;
+                            soon_booking.address = address;
+                            soon_booking.date = Helper.Get_Date(booking2.plannedDate);
+                            soon_booking.time = Helper.Get_Time(booking2.plannedDate);
+
+                            soon_bookings.push(soon_booking);
+
+                            var content = "Ihr Fahrzeug mit der ID: " + soon_booking.carID + " steht ab " + soon_booking.time + " am " + soon_booking.date + " an der Station " + soon_booking.stationID + " bereit";
+
+                            new AddMarker("Ihre Reservierung", content, "car_reserved", lat, lon);
+
+                        }, function(response){
+
+                        });
+
+                    }, function(response){
+
+                    });
+
+                }, function(response){
+
+                });
+
+            }
+
+        }, function(response){
+
+        });
+
+
+        new LoadPositions();
+
+    }
+
+    /**
+     * Description
+     * @method ToggleCars
+     * @return 
+     */
     $scope.ToggleCars = function(){
         new ToggleCars();
     }
 
+    /**
+     * Description
+     * @method ToggleStations
+     * @return 
+     */
     $scope.ToggleStations = function(){
         new ToggleStations();
     }
 
-	new Init();
+    new Init();
 
 });

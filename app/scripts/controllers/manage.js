@@ -10,6 +10,11 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
     var i = 0;
 
 	
+	/**
+	 * Description
+	 * @method init
+	 * @return 
+	 */
 	var init = function(){
 		
 		RESTFactory.Bookings_Get_CustomerID(customerID).then(function(response){
@@ -30,6 +35,12 @@ console.log(data);
 	
 	init();
 	
+	/**
+	 * Description
+	 * @method HandleResult_Booking
+	 * @param {} response
+	 * @return 
+	 */
 	var HandleResult_Booking = function(response){
 		
 		var d = new Date(response.plannedDate);
@@ -47,6 +58,13 @@ console.log(data);
 		
 	}
 	
+	/**
+	 * Description
+	 * @method Handle_OpenBooking
+	 * @param {} response
+	 * @param {} dif
+	 * @return 
+	 */
 	var Handle_OpenBooking = function(response, dif){
 
 		var booking = {};
@@ -93,6 +111,12 @@ console.log(data);
 		
 	};
 		
+	/**
+	 * Description
+	 * @method Handle_DoneBooking
+	 * @param {} response
+	 * @return 
+	 */
 	var Handle_DoneBooking = function(response){
 		
 		var booking = {};
@@ -221,6 +245,13 @@ console.log(data);
 	
 	
 	
+	/**
+	 * Description
+	 * @method GetBilling
+	 * @param {} month
+	 * @param {} year
+	 * @return 
+	 */
 	var GetBilling = function(month, year){
 		
 		var bill = {};
@@ -314,6 +345,13 @@ console.log(data);
 	
 	
 
+    /**
+     * Description
+     * @method ShowBilling
+     * @param {} month
+     * @param {} year
+     * @return 
+     */
     $scope.ShowBilling = function (month, year) {
 		console.log(month + "  " + year);
 		
@@ -328,6 +366,12 @@ console.log(data);
     };
 	
 	
+	/**
+	 * Description
+	 * @method ShowOnMap
+	 * @param {} booking
+	 * @return 
+	 */
 	$scope.ShowOnMap = function(booking){
 		
 		if(booking.onMap === false){

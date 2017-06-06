@@ -13,6 +13,11 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
     
 	var inited = false;
 	
+	/**
+	 * Description
+	 * @method init
+	 * @return 
+	 */
 	var init = function(){
 		
 		if(inited === true){
@@ -39,6 +44,11 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 	
 	init();
 	
+	/**
+	 * Description
+	 * @method Logout
+	 * @return 
+	 */
 	$scope.Logout = function(){
 		
 		//DELETE COOKIES
@@ -59,6 +69,11 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 	
 	
 	
+	/**
+	 * Description
+	 * @method showLogin
+	 * @return 
+	 */
 	$scope.showLogin = function(){
 		
 		$mdDialog.show({
@@ -95,13 +110,34 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             '	</md-dialog-content>' +
             '</md-dialog>',
 
+            /**
+             * Description
+             * @method controller
+             * @param {} $scope
+             * @param {} $rootScope
+             * @param {} $location
+             * @param {} $mdDialog
+             * @param {} RESTFactory
+             * @param {} Helper
+             * @return 
+             */
             controller: function DialogController($scope, $rootScope, $location, $mdDialog, RESTFactory, Helper){
 				
 
+                /**
+                 * Description
+                 * @method closeDialog
+                 * @return 
+                 */
                 $scope.closeDialog = function(){
                     $mdDialog.hide();
                 };
 
+                /**
+                 * Description
+                 * @method Login
+                 * @return 
+                 */
                 $scope.Login = function(){
 
 					var email = $scope.login_email;
@@ -164,6 +200,11 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 	
 	
 	
+	/**
+	 * Description
+	 * @method showRegister
+	 * @return 
+	 */
 	$scope.showRegister = function(){
 		
 		$mdDialog.show({
@@ -247,6 +288,16 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
             '	</md-dialog-content>' +
             '</md-dialog>',
 
+            /**
+             * Description
+             * @method controller
+             * @param {} $scope
+             * @param {} $rootScope
+             * @param {} $location
+             * @param {} $mdDialog
+             * @param {} RESTFactory
+             * @return 
+             */
             controller: function DialogController($scope, $rootScope, $location, $mdDialog, RESTFactory){
 				
 				var currentCustomer = {};
@@ -254,10 +305,20 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 				$scope.currentCustomer = currentCustomer;
 
 
+                /**
+                 * Description
+                 * @method closeDialog
+                 * @return 
+                 */
                 $scope.closeDialog = function(){
                     $mdDialog.hide();
                 };
 
+                /**
+                 * Description
+                 * @method Register
+                 * @return 
+                 */
                 $scope.Register = function(){
 
 					var customer = $scope.currentCustomer;
