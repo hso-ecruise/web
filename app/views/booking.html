@@ -1,7 +1,20 @@
 <div style="height: 100%;">
 
 	<input type="text" id='search_input' value="" placeholder="Suchen"/>
+
 	
+	<img id='car_btn' style="max-height: 50px; max-width: 50px; margin-bottom: 10px;" src="{{activeCar}}" ng-click="ToggleCars()" ></img>
+	
+	<img id='station_btn' style="max-height: 50px; max-width: 50px; margin-bottom: 10px;" src="{{activeStation}}" ng-click="ToggleStations()" ></img>
+
+<!--
+	<md-content flex layout-padding id='car_btn'>
+		<md-button class="md-fab md-mini md-primary" aria-label="Eat cake">
+            <img style="max-height: 160%; max-width: 160%;" src="images/icons/car_available.png"></img>
+        </md-button>
+    	<md-button class="md-primary" ng-click="ToggleCars()" > Fahrzeuge An/Aus </md-button>
+    </md-content>
+-->
 	<div style="height: 100%" id='map' ></div>
 	
 </div>

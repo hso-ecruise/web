@@ -4,8 +4,14 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 	var customerID = $rootScope.customerID;
 
+	var carMarkers = [];
+    var stationMarkers = [];
+
+    var carsVisible = true;
+    var stationsVisible = true;
 	
-	
+    $scope.activeCar = "images/icons/car_available.png";
+    $scope.activeStation = "images/icons/station_available.png";
 	
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -29,37 +35,48 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     var icons = {
         car_available: {
-            icon: "images/icons/car_available.png"
+            icon: "images/icons/car_available.png",
+            type: "car"
         },
         car_loading_00:{
-            icon: "images/icons/car_loading_00.png"
+            icon: "images/icons/car_loading_00.png",
+            type: "car"
         },
         car_loading_25:{
-            icon: "images/icons/car_loading_25.png"
+            icon: "images/icons/car_loading_25.png",
+            type: "car"
         },
         car_loading_50:{
-            icon: "images/icons/car_loading_50.png"
+            icon: "images/icons/car_loading_50.png",
+            type: "car"
         },
         car_loading_75:{
-            icon: "images/icons/car_loading_75.png"
+            icon: "images/icons/car_loading_75.png",
+            type: "car"
         },
         car_occupied:{
-            icon: "images/icons/car_occupied.png"
+            icon: "images/icons/car_occupied.png",
+            type: "car"
         },
         car_reserved:{
-            icon: "images/icons/car_reserved.png"
+            icon: "images/icons/car_reserved.png",
+            type: "car"
         },
         car_standing_admin:{
-            icon: "images/icons/car_standing_admin.png"
+            icon: "images/icons/car_standing_admin.png",
+            type: "car"
         },
         car_standing_user:{
-            icon: "images/icons/car_standing_user.png"
+            icon: "images/icons/car_standing_user.png",
+            type: "car"
         },
         station_available:{
-            icon: "images/icons/station_available.png"
+            icon: "images/icons/station_available.png",
+            type: "station"
         },
         station_occupied:{
-            icon: "images/icons/station_occupied.png"
+            icon: "images/icons/station_occupied.png",
+            type: "station"
         }
     };
 
@@ -82,6 +99,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			optimized: false
         });
 
+
         marker.addListener('click', function(event){
             var new_alert = $mdDialog.alert({
                 title: title,
@@ -96,6 +114,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                 new_alert = undefined;
             });
         });
+
+        if(icons[image_string].type === "car"){
+            carMarkers.push(marker);
+        }else{
+            stationMarkers.push(marker);
+        }
 
     }
 
@@ -196,6 +220,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
     }
 
     function LoadPositions(){
+
+        carsVisible = true;
+        stationsVisible = true;
+
+        carMarkers = [];
+        stationMarkers = [];
 
         //GET Call to get all cars
         RESTFactory.Cars_Get().then(function(response){
@@ -347,15 +377,53 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     }
 
+    function ToggleCars(){
+        if(carsVisible === true){
+            carsVisible = false;
+            $scope.activeCar = "images/icons/car_available_INACT.png";
+            for(var i = 0; i < carMarkers.length; i++){
+                carMarkers[i].setMap(null);
+            }
+        }else{
+            carsVisible = true;
+            $scope.activeCar = "images/icons/car_available.png";
+            for(var i = 0; i < carMarkers.length; i++){
+                carMarkers[i].setMap(map);
+            }
+        }
+    }
 	
+    function ToggleStations(){
+        if(stationsVisible === true){
+            stationsVisible = false;
+            $scope.activeStation = "images/icons/station_available_INACT.png";
+            for(var i = 0; i < stationMarkers.length; i++){
+                stationMarkers[i].setMap(null);
+            }
+        }else{
+            stationsVisible = true;
+            $scope.activeStation = "images/icons/station_available.png";
+            for(var i = 0; i < stationMarkers.length; i++){
+                stationMarkers[i].setMap(map);
+            }
+        }
+    }
+
+
 	
     function Init(){
 		
 		var input = document.getElementById('search_input');
 		var searchBox = new google.maps.places.SearchBox(input);
 		
+        var carBtn = document.getElementById('car_btn');
+        var stationBtn = document.getElementById('station_btn');
+
 		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-		
+        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(carBtn);
+        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(stationBtn);
+
+
 		map.addListener('bounds_changed', function() {
 			searchBox.setBounds(map.getBounds());
 		});
@@ -381,7 +449,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			});
 			
         });
-		
 		
 		//GET NEXT BOOKINGS
 		RESTFactory.Bookings_Get_CustomerID(customerID).then(function(response){
@@ -465,6 +532,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 		
 	}
 	
+    $scope.ToggleCars = function(){
+        new ToggleCars();
+    }
+
+    $scope.ToggleStations = function(){
+        new ToggleStations();
+    }
 
 	new Init();
 
