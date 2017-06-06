@@ -151,13 +151,11 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             var carID = car.carId;
             var title = "Fahrzeugdetails:";
 
+            // Unterschiedliche Icons für jeweilige Akkuladung des Autos
             if(bat < 100){
-
                 var endTime = new Date();
                 endTime.setTime(endTime.getTime() + ((100 - bat) * 60 * 1000));
-
                 var time = Helper.Get_Zeit().time;
-
                 var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: gegen " + time;
 
                 if(bat < 25){
@@ -171,22 +169,14 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                 }
                 /*
 				RESTFactory.Car_Charging_Stations_Get_CarID(carID).then(function(response){
-
 					var info = response.data;
-
 					for(var tz = 0; tz < info.length; tz++){
-
 						var station = info[tz];
-
 						if(station.carId === carID){
-
 							if(info.length > 0){
-
                                 //PRO MINUTE 1%
-
 								var time = Helper.Get_Time(info[tz].chargeEnd);
 								var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: gegen " + time;
-
 								if(bat < 25){
 									new AddMarker(title, content, "car_loading_00", lat, lon);
 								}else if (bat < 50){
@@ -196,18 +186,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 								}else if (bat < 100){
 									new AddMarker(title, content, "car_loading_75", lat, lon);
 								}
-
 							}
-
 							break;
-
 						}
 					}
-
                 }, function(response){
-
 					var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: kann nicht abgerufen werden";
-
 					if(bat < 25){
 						new AddMarker(title, content, "car_loading_00", lat, lon);
 					}else if (bat < 50){
@@ -217,23 +201,18 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 					}else if (bat < 100){
 						new AddMarker(title, content, "car_loading_75", lat, lon);
 					}
-
                 });
                 */
             }else{
-
                 var content = "Das Fahrzeug ist voll geladen und kann benutzt werden.";
-
                 new AddMarker(title, content, "car_available", lat, lon);
-
             }
-
         }
-
     }
 
     /**
      * Description
+     * Funktion um Stationen der Karte hinzuzufügen
      * @method AddStation
      * @param {} station
      * @return 
@@ -246,12 +225,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         //FEHLER OCCUPIED
         var occupied = station.slotsOccupuied;
         var total = station.slots;
-
         var diff = total - occupied;
 
         var title = "Ladestation";
         var content =  diff + " von " + total + " Slots frei";
 
+        // Abfrage ob Station frei oder besetz für die Ausgabe von Info
         if(diff === 0){
             new AddMarker(title, content, "station_occupied", lat, lon);
         }else{
@@ -262,6 +241,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     /**
      * Description
+     * Funktion um die Position für Marker, Autos und Stationen zu laden
      * @method LoadPositions
      * @return 
      */
@@ -269,40 +249,33 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         carsVisible = true;
         stationsVisible = true;
-
         carMarkers = [];
         stationMarkers = [];
-
         var refIntCarID = setInterval(GetCars, 1000);
         var refIntStatID = setInterval(GetStations, 1000);
 
         /**
          * Description
+         * Hier werden alle Autos von Rest-Schnittstelle geholt
          * @method GetCars
          * @return 
          */
         function GetCars(){
-
             //GET Call to get all cars
             RESTFactory.Cars_Get().then(function(response){
-
                 clearInterval(refIntCarID);
-
                 var cars = response.data;
-
                 for(var ij = 0; ij < cars.length; ij++){
                     var car = cars[ij];
                     new AddVehicle(car);
                 }
-
             }, function(response){
-
             });
-
         }
 
         /**
          * Description
+         * Hier werden alle Stationen von Rest-Schnittstelle geholt
          * @method GetStations
          * @return 
          */
@@ -310,26 +283,22 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
             //GET Call to get all stations
             RESTFactory.Charging_Stations_Get().then(function(response){
-
                 clearInterval(refIntStatID);
-
                 var stations = response.data;
-
                 for(var i = 0; i < stations.length; i++){
                     var station = stations[i];
                     new AddStation(station);
                 }
-
             }, function(response){
 
             });
-
         }
-
     }
 
     /**
      * Description
+     * Funktion zeigt ein PopUp auf der Karte
+     * Durch diesen Dialog kann der User eine Fahrt zu buchen
      * @method ShowInputPopUp
      * @param {} address
      * @param {} lat
@@ -339,9 +308,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
     function ShowInputPopUp(address, lat, lon){
 
         map.panTo(new google.maps.LatLng(lat, lon));
-
         $scope.address = address;
-
         $mdDialog.show({
             clickOutsideToClose: true,
             scope: $scope,
@@ -385,7 +352,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
             /**
              * Description
-             * @method controller
+             * Funktion um Datum und Uhrzeit für eine Bestellung in einem Dialog anzuzeigen und bearbeiten
+             * @method DialogController
              * @param {} $scope
              * @param {} $mdDialog
              * @return 
@@ -393,14 +361,12 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             controller: function DialogController($scope, $mdDialog){
 
                 $scope.address = address;
-
                 var timeInput = new Date();
                 timeInput.setMilliseconds(0);
                 timeInput.setSeconds(0);
 
                 var minTime = timeInput;
                 minTime.setMinutes(timeInput.getMinutes() - 1);
-
 
                 var dateInput = new Date();
                 dateInput.setMilliseconds(0);
@@ -418,6 +384,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
                 /**
                  * Description
+                 * Funktion um ein Dialog zu verstecken
                  * @method closeDialog
                  * @return 
                  */
@@ -427,6 +394,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
                 /**
                  * Description
+                 * Funktion um eingegebene Daten für eine Buchung zu überprüfen und dem User bescheid zu geben ob eine Buchung erfolgreich war
                  * @method Save
                  * @return 
                  */
@@ -434,9 +402,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
                     var date = new Date($scope.date);
                     var time = new Date($scope.time);
-
                     var plannedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), 0, 0);
-
                     var now = new Date();
 
                     //TRITT EIGENTLICH NIE AUF
@@ -471,6 +437,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     /**
      * Description
+     * Funktion um Auto-Marker zu verstecken bzw zu anzuzeigen
      * @method ToggleCars
      * @return 
      */
@@ -492,6 +459,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     /**
      * Description
+     * Funktion um Stationen-Marker zu verstecken bzw zu anzuzeigen
      * @method ToggleStations
      * @return 
      */
@@ -515,6 +483,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
     /**
      * Description
+     * Funktion die Karte auf die Seite lädt, Suchleiste in die Karte rendert,
+     * und alle für eine Buchung benötigte Daten zu vorbereiten 
      * @method Init
      * @return 
      */
@@ -525,12 +495,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         var carBtn = document.getElementById('car_btn');
         var stationBtn = document.getElementById('station_btn');
-
+        
+        // Controls auf die Karte setzen 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(carBtn);
         map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(stationBtn);
 
-
+        
         map.addListener('bounds_changed', function() {
             searchBox.setBounds(map.getBounds());
         });
@@ -557,17 +528,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         });
 
-        //GET NEXT BOOKINGS
+        //hier werden benötigte Daten von der Rest-Schnittstelle gehollt.
         RESTFactory.Bookings_Get_CustomerID(customerID).then(function(response){
-
             var bookings = response.data;
-
             var interested = [];
-
             var soon_bookings = [];
 
             for(var jk = 0; jk < bookings.length; jk++){
-
                 var booking = bookings[jk];
 
                 var d = new Date(booking.plannedDate);
