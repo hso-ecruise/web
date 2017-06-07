@@ -3,14 +3,12 @@
 application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope, Helper) {
     
 	var customerID = $rootScope.customerID;
-	
 	var oldUser = {};
-	
 	$scope.customerID = customerID;
-	
-	
+		
 	/**
 	 * Description
+     * Funktion um die Daten aus der Rest-Schnittstelle zu laden und in auf der Webseite anzuzeigen
 	 * @method LoadData
 	 * @return 
 	 */
@@ -82,12 +80,10 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		
 		
 	}
-	
-    
-
 
     /**
      * Description
+     * Init-Funktion deren Funktion daran besteht, die LoadData() zu starten
      * @method init
      * @return 
      */
@@ -102,6 +98,7 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	
     /**
      * Description
+     * Funktion um geänderte Userdaten mithilfe von Patch zur Rest-Schnittstelle zu übergeben 
      * @method Safe
      * @return 
      */
@@ -112,7 +109,6 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		if(new_phone_number !== oldUser.phoneNr){
 			
 			var upload = "\"" + new_phone_number + "\"";
-			
 			RESTFactory.Customers_Patch_PhoneNr(customerID, upload).then(function(response){
 				LoadData();
 				alert("Telefonnummer wurde erfolgreich geändert");
@@ -160,17 +156,20 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 
     /**
      * Description
+     * Funktion die bei Click auf Verwerfen-Button aufgerufen wird.
      * @method Cancel
      * @return 
      */
     $scope.Cancel = function () {
-		
 		LoadData();
-    
 	};
 	
     /**
      * Description
+     * Funktion die für das Ändern des Passworts dient.
+     * Dabei wird der aktuelle Passwort überprüft
+     * und falls der neue Passwort den Passwordanforderungen entspricht
+     * wird dieser der Rest-Schnittstelle übergeben
      * @method ChangePassword
      * @return 
      */
@@ -207,23 +206,25 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	
 	/**
 	 * Description
+     * Funktion die den Userinput in Passwort-Feld abfängt
 	 * @method pwdInPressed
 	 * @return 
 	 */
 	$scope.pwdInPressed = function(){
 		
 		var input = $scope.user.password.current;
-		
+        
 		if(input === undefined || String(input).length === 0){
 			$scope.pwd_required = false;
 		}else{
 			$scope.pwd_required = true;
 		}
-		
 	};
 	
 	/**
 	 * Description
+     * Funktion um den User eine neue eMail-Adresse zuzuweisen
+     * und diese der Rest-Schnittstelle zu übergeben
 	 * @method ChangeEmail
 	 * @return 
 	 */
