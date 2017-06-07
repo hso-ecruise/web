@@ -255,8 +255,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         var lat = station.latitude;
         var lon = station.longitude;
 
-        //FEHLER OCCUPIED
-        var occupied = station.slotsOccupuied;
+        var occupied = station.slotsOccupied;
         var total = station.slots;
         var diff = total - occupied;
 
