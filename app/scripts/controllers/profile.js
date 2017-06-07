@@ -188,7 +188,8 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 				var pwd = "\"" + new_password + "\"";
 				
 				RESTFactory.Customers_Patch_Password(customerID, pwd).then(function(response){
-					alert("Passwort wurde erfolgreich geändert");
+					alert("Passwort wurde erfolgreich geändert. Bitte melden Sie sich neu an.");
+					angular.element(document.getElementById('mainCtrl')).scope().Logout();
 				}, function(response){
 					alert("Passwort konnte nicht geändert werden");
 				});
@@ -238,7 +239,8 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			var chg_email = RESTFactory.Customers_Patch_Email(customerID, em);
 			chg_email.then(function(response){
 				LoadData();
-				alert("Email wurde erfolgreich geändert");
+				alert("Email wurde erfolgreich geändert. Bitte melden Sie sich neu an.");
+				angular.element(document.getElementById('mainCtrl')).scope().Logout();
 			}, function(response){
 				alert("Email konnte nicht geändert werden");
 			});

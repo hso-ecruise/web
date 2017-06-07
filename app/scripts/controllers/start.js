@@ -97,7 +97,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'				</md-input-container>' +
 			//PASSWORT LÄNGE AUF 8 SETZEN
 			'				<md-input-container>' +
-			'					<input placeholder="Passwort" type="password" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 7 Zeichen lang sein" ng-model="login_password" ng-required="true" /> ' +
+			'					<input placeholder="Passwort" type="password" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 8 Zeichen lang sein" ng-model="login_password" ng-required="true" /> ' +
 			'				</md-input-container>' +
 			
             '			</md-content>' +
@@ -163,29 +163,16 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 						Helper.Cookie_Set("customerID", data.id);
 						Helper.Cookie_Set("password", password);
 						
+						$scope.login_email = "";
+						$scope.login_password = "";
+
 						$rootScope.$apply( function(){$location.path('/booking'); } );
 						
 					}, function(response){
 						
-						console.log("Failed to login");
-						
-						if(email === "test" && password === "test"){
-							
-							$rootScope.token = "tokenSKHDFADJF";
-							$rootScope.customerID = 1;
-							
-							$rootScope.loggedIN = true;
-							$scope.loggedIN = true;
-							
-							//Save data in cookies
-							Helper.Cookie_Set("loggedIN", true);
-							Helper.Cookie_Set("token", "tokenSKHDFADJF");
-							Helper.Cookie_Set("customerID", 1);
-							Helper.Cookie_Set("password", password);
-							
-							$rootScope.$apply( function(){$location.path('/booking'); } );
-							
-						}
+						alert("Anmelden fehgeschlagen");
+
+						$scope.login_password = "";
 						
 					});
 					

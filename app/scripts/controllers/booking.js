@@ -81,12 +81,48 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         }
     };
 
+	var LOADING_STATES = {
+		1: {
+			text: "Entladen",
+			be: "DISCHARGING",
+			id: 1
+		},
+		2: {
+			text: "Laden",
+			be: "CHARGING",
+			id: 2
+		},
+		3: {
+			text: "Geladen",
+			be: "FULL",
+			id: 3
+		}
+	};
+	
+	var BOOKING_STATES = {
+		1: {
+			text: "Verfügbar",
+			be: "AVAILABLE",
+			id: 1
+		},
+		2: {
+			text: "Gebucht",
+			be: "BOOKED",
+			id: 2
+		},
+		3: {
+			text: "Geblockt",
+			be: "BLOCKED",
+			id: 3
+		}
+	};
 
     /**
      * Description
      * Funktion um Marker hinzuzufügen
      * Hier werden auf der Karte Marker und Ihre Icons hinzugefügt
      * @method AddMarker
+     * @param {} id
      * @param {} title
      * @param {} content
      * @param {} image_string
@@ -94,8 +130,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
      * @param {} lon
      * @return 
      */
-    function AddMarker(title, content, image_string, lat, lon){
-
+	function AddMarker(id, title, content, image_string, lat, lon){
+	
         var img = {
             url: 'images/icons/car_available.png',
             scaledSize: new google.maps.Size(60, 87),
@@ -109,14 +145,16 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             position: new google.maps.LatLng(lat, lon),
             map: map,
             icon: img,
-            optimized: false
+			optimized: false,
+			id: id
         });
-        // Falls einer Marker angelickt wird, erschein ein PopUp (mdDialog) mit information 
+
         marker.addListener('click', function(event){
+
             var new_alert = $mdDialog.alert({
                 title: title,
                 textContent: content,
-                clickOutsideToClose: true,
+				clickOutsideToClose: true,
                 ok: 'OK'
             });
 
@@ -134,81 +172,76 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         }
     }
 
+
     /**
-     * Description
+	 * Description
      * Funktion um Autos der Karte hinzuzufügen
-     * @method AddVehicle
-     * @param {} car
-     * @return 
-     */
-    function AddVehicle(car){
+	 * @method Cars_AddMarker
+	 * @param {} car
+	 * @return 
+	 */
+	function Cars_AddMarker(car){
 
-        if(car.bookingState !== 1000){
+        var lat = car.lastLat;
+        var lon = car.lastLon;
+        var bat = car.chargeLevel;
+        var carID = car.vehicleID;
 
-            var lat = car.lastKnownPositionLatitude;
-            var lon = car.lastKnownPositionLongitude;
-            var bat = car.chargeLevel;
-            var carID = car.carId;
-            var title = "Fahrzeugdetails:";
+        var title = "Fahrzeugdetails " + carID;
+		
+		switch(car.bookingStateObj.be){
 
-            // Unterschiedliche Icons für jeweilige Akkuladung des Autos
-            if(bat < 100){
-                var endTime = new Date();
-                endTime.setTime(endTime.getTime() + ((100 - bat) * 60 * 1000));
-                var time = Helper.Get_Zeit().time;
-                var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: gegen " + time;
+			case "AVAILABLE":
 
-                if(bat < 25){
-                    new AddMarker(title, content, "car_loading_00", lat, lon);
-                }else if (bat < 50){
-                    new AddMarker(title, content, "car_loading_25", lat, lon);
-                }else if (bat < 75){
-                    new AddMarker(title, content, "car_loading_50", lat, lon);
-                }else if (bat < 100){
-                    new AddMarker(title, content, "car_loading_75", lat, lon);
-                }
-                /*
-				RESTFactory.Car_Charging_Stations_Get_CarID(carID).then(function(response){
-					var info = response.data;
-					for(var tz = 0; tz < info.length; tz++){
-						var station = info[tz];
-						if(station.carId === carID){
-							if(info.length > 0){
-                                //PRO MINUTE 1%
-								var time = Helper.Get_Time(info[tz].chargeEnd);
-								var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: gegen " + time;
-								if(bat < 25){
-									new AddMarker(title, content, "car_loading_00", lat, lon);
-								}else if (bat < 50){
-									new AddMarker(title, content, "car_loading_25", lat, lon);
-								}else if (bat < 75){
-									new AddMarker(title, content, "car_loading_50", lat, lon);
-								}else if (bat < 100){
-									new AddMarker(title, content, "car_loading_75", lat, lon);
-								}
-							}
-							break;
+				if(car.chargeLevel < 100){
+
+					RESTFactory.Cars_Get_ChargeLevelPerMinute().then(function(response){
+						
+						var loadingPerSecond = response.data;
+					
+						var endTime = new Date();
+						endTime.setTime(endTime.getTime() + (100 - bat) * 1000 * 60 * loadingPerSecond);
+
+						var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + " (" + car.loadingStateObj.text + "). Voraussichtliches Ende gegen " + Helper.Get_Zeit(endTime).time + ", bei einer Aufladung von " + loadingPerSecond + "% pro Minute.";
+						if(bat < 25){
+							new AddMarker(carID, title, content, "car_loading_00", lat, lon);
+						}else if (bat < 50){
+							new AddMarker(carID, title, content, "car_loading_25", lat, lon);
+						}else if (bat < 75){
+							new AddMarker(carID, title, content, "car_loading_50", lat, lon);
+						}else if (bat < 100){
+							new AddMarker(carID, title, content, "car_loading_75", lat, lon);
 						}
-					}
-                }, function(response){
-					var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + "%. Voraussichtliches Ende: kann nicht abgerufen werden";
-					if(bat < 25){
-						new AddMarker(title, content, "car_loading_00", lat, lon);
-					}else if (bat < 50){
-						new AddMarker(title, content, "car_loading_25", lat, lon);
-					}else if (bat < 75){
-						new AddMarker(title, content, "car_loading_50", lat, lon);
-					}else if (bat < 100){
-						new AddMarker(title, content, "car_loading_75", lat, lon);
-					}
-                });
-                */
-            }else{
-                var content = "Das Fahrzeug ist voll geladen und kann benutzt werden.";
-                new AddMarker(title, content, "car_available", lat, lon);
-            }
-        }
+
+					}, function(response){
+						
+						var endTime = new Date();
+						endTime.setTime(endTime.getTime() + (100 - bat) * 1000 * 60);
+
+						var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + " (" + car.loadingStateObj.text + "). Voraussichtliches Ende gegen " + Helper.Get_Zeit(endTime).time + ", bei einer Aufladung von 1% pro Minute.";
+						if(bat < 25){
+							new AddMarker(carID, title, content, "car_loading_00", lat, lon);
+						}else if (bat < 50){
+							new AddMarker(carID, title, content, "car_loading_25", lat, lon);
+						}else if (bat < 75){
+							new AddMarker(carID, title, content, "car_loading_50", lat, lon);
+						}else if (bat < 100){
+							new AddMarker(carID, title, content, "car_loading_75", lat, lon);
+						}
+
+					});
+
+				}else{
+					var content = "Das Fahrzeug ist voll geladen und kann benutzt werden.";
+                	new AddMarker(carID, title, content, "car_available", lat, lon);
+				}
+
+				break;
+
+		}
+
     }
+
 
     /**
      * Description
@@ -232,9 +265,9 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
         // Abfrage ob Station frei oder besetz für die Ausgabe von Info
         if(diff === 0){
-            new AddMarker(title, content, "station_occupied", lat, lon);
+            new AddMarker(station.stationID, title, content, "station_occupied", lat, lon);
         }else{
-            new AddMarker(title, content, "station_available", lat, lon);
+            new AddMarker(station.stationID, title, content, "station_available", lat, lon);
         }
 
     }
@@ -263,13 +296,42 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         function GetCars(){
             //GET Call to get all cars
             RESTFactory.Cars_Get().then(function(response){
+
+                console.log(response);
+
                 clearInterval(refIntCarID);
-                var cars = response.data;
-                for(var ij = 0; ij < cars.length; ij++){
-                    var car = cars[ij];
-                    new AddVehicle(car);
-                }
+                
+                var data = response.data;
+
+                data.forEach(function(data_use, index){
+				
+                    var vehicle = {};
+                    
+                    var ID_STR = data_use.carId;
+                    
+                    vehicle.vehicleID = data_use.carId;
+                    vehicle.licensePlate = data_use.licensePlate;
+                    vehicle.chargingState = data_use.chargingState;
+                    vehicle.bookingState = data_use.bookingState;
+                    vehicle.bookingStateObj = BOOKING_STATES[data_use.bookingState];
+                    vehicle.loadingStateObj = LOADING_STATES[data_use.chargingState];
+                    vehicle.mileage = data_use.mileage;
+                    vehicle.chargeLevel = data_use.chargeLevel;
+                    vehicle.kilowatts = data_use.kilowatts;
+                    vehicle.manufacturer = data_use.manufacturer;
+                    vehicle.model = data_use.model;
+                    vehicle.constructionYear = data_use.yearOfConstruction;
+                    vehicle.lastLat = data_use.lastKnownPositionLatitude;
+                    vehicle.lastLon = data_use.lastKnownPositionLongitude;
+                    vehicle.lastDate = Helper.Get_Zeit_Server(data_use.lastKnownPositionDate);
+                    vehicle.address_state = "false";
+                    
+                    new Cars_AddMarker(vehicle);
+                    
+                });
+
             }, function(response){
+
             });
         }
 
@@ -537,9 +599,9 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             for(var jk = 0; jk < bookings.length; jk++){
                 var booking = bookings[jk];
 
-                var d = new Date(booking.plannedDate);
+                var d = Helper.Get_Zeit_Server(booking.plannedDate);
                 var now = new Date();
-                var dif = (d.getTime() - now.getTime()) / 1000 / 60;
+                var dif = (d.value - now.getTime()) / 1000 / 60;
 
                 if(dif < 30 && dif > 0){
                     interested.push(booking);
@@ -574,14 +636,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                             soon_booking.stationID = chargingID;
                             soon_booking.carID = carID;
                             soon_booking.address = address;
-                            soon_booking.date = Helper.Get_Date(booking2.plannedDate);
-                            soon_booking.time = Helper.Get_Time(booking2.plannedDate);
+                            soon_booking.date = Helper.Get_Zeit_Server(booking2.plannedDate);
 
                             soon_bookings.push(soon_booking);
 
-                            var content = "Ihr Fahrzeug mit der ID: " + soon_booking.carID + " steht ab " + soon_booking.time + " am " + soon_booking.date + " an der Station " + soon_booking.stationID + " bereit";
+                            var content = "Ihr Fahrzeug mit der ID: " + soon_booking.carID + " steht ab " + soon_booking.date.time + " am " + soon_booking.date.date + " an der Station " + soon_booking.stationID + " bereit";
 
-                            new AddMarker("Ihre Reservierung", content, "car_reserved", lat, lon);
+                            new AddMarker(soon_booking.carID, "Ihre Reservierung", content, "car_reserved", lat, lon);
 
                         }, function(response){
 
@@ -623,7 +684,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
     $scope.ToggleStations = function(){
         new ToggleStations();
     }
-
+    
     new Init();
 
 });
