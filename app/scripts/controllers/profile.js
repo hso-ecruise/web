@@ -1,6 +1,6 @@
 'use strict';
 
-application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope, Helper) {
+application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope, Helper, $location) {
     
 	var customerID = $rootScope.customerID;
 	var oldUser = {};
@@ -186,9 +186,8 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 				
 				var pwd = "\"" + new_password + "\"";
 				
-				RESTFactory.Customers_Patch_Password(customerID, pwd).then(function(response){
+				RESTFactory.Customers_Patch_Password(customerID, pwd).then(function (response) {
 					alert("Passwort wurde erfolgreich geändert. Bitte melden Sie sich neu an.");
-					angular.element(document.getElementById('mainCtrl')).scope().Logout();
 				}, function(response){
 					alert("Passwort konnte nicht geändert werden");
 				});
@@ -202,7 +201,9 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		$scope.user.password.confirm = "";
 		$scope.pwd_required = false;
 		
-    };
+	};
+
+
 	
 	/**
 	 * Description

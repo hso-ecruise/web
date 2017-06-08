@@ -294,12 +294,14 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
          */
         function GetCars(){
             //GET Call to get all cars
-            RESTFactory.Cars_Get().then(function(response){
-
-                console.log(response);
-
+            RESTFactory.Cars_Get().then(function (response) {
+                
                 clearInterval(refIntCarID);
                 
+                if (response.data.length === null || response.data.length === 0) {
+                    return;
+                }
+
                 var data = response.data;
 
                 data.forEach(function(data_use, index){
