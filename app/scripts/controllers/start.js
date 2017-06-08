@@ -49,6 +49,7 @@ application.controller('Ctrl_Login', function ($rootScope, $scope, $mdDialog, RE
 			$scope.login_email = "";
 			$scope.login_password = "";
 
+			//Uncomment for tests			
 			$rootScope.$apply(function () { $location.path('/booking'); });
 
 		}, function (response) {
@@ -143,8 +144,6 @@ application.controller('Ctrl_Register', function ($rootScope, $scope, $mdDialog,
 			addressExtraLine: extra
 		};
 
-		console.log(data);
-
 		RESTFactory.User_Register(data).then(function (response) {
 
 			alert("Bitte bestätigen Sie Ihre Email Adresse");
@@ -171,7 +170,7 @@ application.controller('Ctrl_Register', function ($rootScope, $scope, $mdDialog,
  */
 application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Helper, $location) {
 
-	var inited = false;
+	$scope.inited = false;
 
 	/**
 	 * Description
@@ -180,7 +179,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 	 */
 	var init = function () {
 
-		if (inited === true) {
+		if ($scope.inited === true) {
 			return;
 		}
 
@@ -196,14 +195,18 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 		$rootScope.token = token;
 		$rootScope.customerID = customerID;
 
-		inited = true;
+		$scope.inited = true;
 
 		$scope.loggedIN = $rootScope.loggedIN;
 
 	};
 
 	init();
-	
+
+	$scope.init = function () {
+		init();
+	}
+
 	/**
 	 * Description
 	 * @method Logout
