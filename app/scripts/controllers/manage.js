@@ -74,9 +74,8 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
         var booking = {};
 
         booking.bookingID = response.bookingId;
-        //booking.tripID = response.tripId;
-
-        var str = 'o' + booking.bookingID;
+        
+        var str = booking.bookingID;
 
         booking.onMap = false;
 
@@ -84,14 +83,8 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
             booking.onMap = true;
         }
 
-        var start = Helper.Get_Zeit(response.plannedDate);
-        /*
-		var start = {
-			startDate: response.plannedDate,
-			date : Helper.Get_Date(response.plannedDate),
-			time: Helper.Get_Time(response.plannedDate)
-		};
-		*/
+        var start = Helper.Get_Zeit_Server(response.plannedDate);
+        
         booking.start = start;
 
         bookings_open[str] = booking;
@@ -169,21 +162,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
                 distance: data.distanceTravelled
             };
 
-            var start = Helper.Get_Zeit(trip.startDate);
-            var end = Helper.Get_Zeit(trip.endDate);
-            /*
-			var start = {
-				startDate: trip.startDate,
-				date : Helper.Get_Date(trip.startDate),
-				time: Helper.Get_Time(trip.startDate)
-			};
+            var start = Helper.Get_Zeit_Server(trip.startDate);
+            var end = Helper.Get_Zeit_Server(trip.endDate);
 
-			var end = {
-				endDate: trip.endDate,
-				date : Helper.Get_Date(trip.endDate),
-				time: Helper.Get_Time(trip.endDate)
-			};
-			*/
             bookings_done[str].trip = trip;
             bookings_done[str].start = start;
             bookings_done[str].end = end;
