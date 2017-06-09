@@ -2,43 +2,61 @@
 
 describe('Testsuite: Startpage user', function () {
 	
+	var MainCtrl;
+	var scope;
+	var q;
+	var deferred;
+
+	var RESTFactory;
+	var Helper;
+	var mdDialog;
+
 	beforeEach(module('webApp'));
 	beforeEach(module('ngAnimate'));
 	beforeEach(module('ngMap'));
 	beforeEach(module('ngRoute'));
 	beforeEach(module('ngCookies'));
 	
+	beforeEach(function () {
+		RESTFactory = {
+			User_Login: function (email, pwd) {
+				deferred = q.defer();
+				return deferred.promise;
+			},
+			User_Register: function (data) {
+				deferred = q.defer();
+				return deferred.promise;
+			}
+		};
+		mdDialog = {
+			show: function () {
+				
+			},
+			hide: function () {
+				
+			}
+		}
+		
+	});
+
 	describe('Login Testsuite', function() {
 		
-		var MainCtrl;
-		var scope;
-		var RESTFactory;
-		var q;
-		var deferred;
-
 		var login_response;	
 
-
-		beforeEach(function () {
-
-			login_response = { 'data': { 'token': '1234567890', 'id': 3 } };
-
-			RESTFactory = {
-				User_Login: function (email, pwd) {
-					deferred = q.defer();
-					return deferred.promise;
-				}
-			}
-		});
 
 		beforeEach(inject(function ($controller, $rootScope, $q) {
 			q = $q;
 			scope = $rootScope.$new();
 			MainCtrl = $controller('Ctrl_Login', {
 				$scope: scope,
-				RESTFactory: RESTFactory
+				RESTFactory: RESTFactory,
+				$mdDialog: mdDialog
 			});
 
+			//RESPONSE STUFF			
+			login_response = { 'data': { 'token': '1234567890', 'id': 3 } };
+			
+			//SCOPE STUFF
 			scope.testing = true;
 			scope.login_email = "tkorten@ecruise.me";
 			scope.login_password = 'test1234';
@@ -118,35 +136,23 @@ describe('Testsuite: Startpage user', function () {
 
 	describe('Register Testsuite', function () {
 
-		var MainCtrl;
-		var scope;
-		var RESTFactory;
-		var q;
-		var deferred;
-
 		var register_response;
 
-
-		beforeEach(function () {
-
-			register_response = { 'data': { 'id': 4 } };
-
-			RESTFactory = {
-				User_Register: function (data) {
-					deferred = q.defer();
-					return deferred.promise;
-				}
-			}
-		});
 
 		beforeEach(inject(function ($controller, $rootScope, $q) {
 			q = $q;
 			scope = $rootScope.$new();
 			MainCtrl = $controller('Ctrl_Register', {
 				$scope: scope,
-				RESTFactory: RESTFactory
+				RESTFactory: RESTFactory,
+				$mdDialog: mdDialog
 			});
 
+
+			//RESPONSE STUFF
+			register_response = { 'data': { 'id': 4 } };
+
+			//SCOPE STUFF
 			var currntCustomer = {
 				name: "Tobias",
 				familyName: "Korten",
@@ -258,44 +264,12 @@ describe('Testsuite: Startpage user', function () {
 
 	describe('Main Testsuite', function () {
 
-		var MainCtrl;
-		var scope;
-		var RESTFactory;
-		var q;
-		var deferred;
-		var Helper;
-		var mdDialog;
-
-		beforeEach(function () {
-			Helper = {
-				Cookie_Get(val) {
-					switch (val) {
-						case "loggedIN":
-							return true;
-						case "token":
-							return "1234567890";
-						case "customerID":
-							return 3;
-					}
-				},
-				Cookie_Set(key, val) {
-					
-				}
-			}
-			mdDialog = {
-				show() {
-
-				}
-			}
-		});
-
 		beforeEach(inject(function ($controller, $rootScope, $q) {
 
 			q = $q;
 			scope = $rootScope.$new();
 			MainCtrl = $controller('Ctrl_Main', {
 				$scope: scope,
-				Helper: Helper,
 				$mdDialog: mdDialog
 			});
 

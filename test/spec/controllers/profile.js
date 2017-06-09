@@ -65,26 +65,6 @@ describe('Testsuite: Profilepage user', function () {
 				}
 			};
 
-			Helper = {
-				Cookie_Get(val) {
-					switch (val) {
-						case "loggedIN":
-							return true;
-						case "token":
-							return "1234567890";
-						case "customerID":
-							return 3;
-						case "password":
-							return "test1234";
-					}
-				},
-				Cookie_Set(key, val) {
-
-				}
-			}
-
-
-
 		});
 
 		beforeEach(inject(function ($controller, $rootScope, $q) {
