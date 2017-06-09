@@ -9,6 +9,8 @@
  */
 application.controller('Ctrl_Login', function ($rootScope, $scope, $mdDialog, RESTFactory, Helper, $location) {
 
+	$scope.testing = false;
+
 	/**
     * Description
     * @method closeDialog
@@ -49,8 +51,9 @@ application.controller('Ctrl_Login', function ($rootScope, $scope, $mdDialog, RE
 			$scope.login_email = "";
 			$scope.login_password = "";
 
-			//Uncomment for tests			
-			$rootScope.$apply(function () { $location.path('/booking'); });
+			if ($scope.testing === false) {
+				$rootScope.$apply(function () { $location.path('/booking'); });
+			}
 
 		}, function (response) {
 

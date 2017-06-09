@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on 2017-01-12
 
-module.exports = function(config) {
+module.exports = function (config) {
   'use strict';
 
   config.set({
@@ -16,7 +16,15 @@ module.exports = function(config) {
     frameworks: [
       'jasmine'
     ],
-
+    // Code coverage report
+    reporters: ['progress', 'coverage'],
+    preprocessors: {
+      'app/scripts/**/*.js': ['coverage']
+    },
+    coverageReporter: {
+      type: 'html',
+      dir: 'coverage/'
+    },
     // list of files / patterns to load in the browser
     files: [
       // bower:js
@@ -36,6 +44,7 @@ module.exports = function(config) {
       'bower_components/ngmap/build/scripts/ng-map.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
+      'app/scripts/app.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
@@ -57,13 +66,15 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS'
+      'Firefox'
     ],
 
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-firefox-launcher',
+      'karma-coverage'
     ],
 
     // Continuous Integration mode

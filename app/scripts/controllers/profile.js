@@ -1,9 +1,11 @@
 'use strict';
 
-application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope, Helper, $location) {
+application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope, Helper, $location) {
     
+	$scope.testing = false;
+
 	var customerID = $rootScope.customerID;
-	var oldUser = {};
+	$scope.oldUser = {};
 	$scope.customerID = customerID;
 		
 	/**
@@ -14,9 +16,7 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	 */
 	function LoadData(){
 		
-		var prom_data = RESTFactory.Customers_Get_CustomerID(customerID);
-		
-		prom_data.then(function(response){
+		RESTFactory.Customers_Get_CustomerID(customerID).then(function(response){
 			
 			var data = response.data;
 			
@@ -50,7 +50,7 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			};
 			user.password = password;
 			
-			oldUser = {
+			$scope.oldUser = {
 				userID: customerID,
 				name: data.firstName,
 				familyName: data.lastName,
@@ -72,9 +72,9 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			};
 			
 			$scope.user = user;
-			$scope.$apply();
-			
-		}, function(response){
+			if ($scope.testing === false) {
+				$scope.$apply();
+			}
 			
 		});
 		
@@ -93,7 +93,11 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 	
     };
 
-    init();
+	init();
+	
+	$scope.init = function () {
+		init();
+	}
 
 	
     /**
@@ -104,9 +108,11 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
      */
     $scope.Safe = function () {
 
+		var oldUser = $scope.oldUser;
+
 		var new_phone_number = $scope.user.phoneNr;
 		
-		if(new_phone_number !== oldUser.phoneNr){
+		if (new_phone_number !== oldUser.phoneNr) {
 			
 			var upload = "\"" + new_phone_number + "\"";
 			RESTFactory.Customers_Patch_PhoneNr(customerID, upload).then(function(response){
@@ -118,8 +124,6 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			});
 			
 			
-		}else{
-			console.log("Nothing to change Phone");
 		}
 		
 		
@@ -148,8 +152,6 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 				LoadData();
 				alert("Adresse konnte nicht geändert werden");
 			});
-		}else{
-			console.log("Nothing to change address");
 		}
 		
     };
@@ -183,7 +185,7 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		if (new_password === new_password_conf && new_password !== "" && new_password !== undefined) {
 			
 			if(orig_password === old_password){
-				
+		
 				var pwd = "\"" + new_password + "\"";
 				
 				RESTFactory.Customers_Patch_Password(customerID, pwd).then(function (response) {
@@ -238,13 +240,15 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 			
 			var em = "\"" + new_email + "\"";
 			
-			var chg_email = RESTFactory.Customers_Patch_Email(customerID, em);
-			chg_email.then(function(response){
-				LoadData();
+			RESTFactory.Customers_Patch_Email(customerID, em).then(function(response){
 				alert("Email wurde erfolgreich geändert. Bitte melden Sie sich neu an.");
-				angular.element(document.getElementById('mainCtrl')).scope().Logout();
+				LoadData();
+				if ($scope.testing === false) {
+					angular.element(document.getElementById('mainCtrl')).scope().Logout();
+				}
 			}, function(response){
 				alert("Email konnte nicht geändert werden");
+				LoadData();
 			});
 			
 		}
@@ -252,7 +256,6 @@ application.controller('Ctrl_Profile', function (RESTFactory, $rootScope, $scope
 		$scope.user.email.new_ = "";
 		$scope.user.email.confirm = "";
 		
-		LoadData();
 		
 	};
 
