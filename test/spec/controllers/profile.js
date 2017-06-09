@@ -68,6 +68,9 @@ describe('Testsuite: Profilepage user', function () {
 		});
 
 		beforeEach(inject(function ($controller, $rootScope, $q) {
+
+			spyOn(RESTFactory, 'Customers_Get_CustomerID').and.callThrough();
+
 			q = $q;
 			scope = $rootScope.$new();
 			MainCtrl = $controller('Ctrl_Profile', {
@@ -78,21 +81,16 @@ describe('Testsuite: Profilepage user', function () {
 			scope.testing = true;
 			scope.customerID = 3;
 
+
 		}));
 
 		it('Check if RESTFactory.Customers_Get_CustomerID was called at init', function () {
-
-			spyOn(RESTFactory, 'Customers_Get_CustomerID').and.callThrough();
-
-			scope.init();
-
+			
 			expect(RESTFactory.Customers_Get_CustomerID).toHaveBeenCalled();
 
 		});
 
 		it('Check if oldUser is set to user_data after init. Therefore use email', function () {
-
-			scope.init();
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();
@@ -102,8 +100,6 @@ describe('Testsuite: Profilepage user', function () {
 		});
 
 		it('Check if user is set to user_data after init. Therefore use email', function () {
-
-			scope.init();
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();
@@ -115,8 +111,6 @@ describe('Testsuite: Profilepage user', function () {
 		it('Check if phoneNr can be changed successful', function () {
 
 			spyOn(window, 'alert');
-
-			scope.init();
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();
@@ -136,8 +130,6 @@ describe('Testsuite: Profilepage user', function () {
 
 			spyOn(window, 'alert');
 
-			scope.init();
-
 			deferred.resolve(user_data);
 			scope.$root.$digest();
 
@@ -155,8 +147,6 @@ describe('Testsuite: Profilepage user', function () {
 		it('Check if address can be changed successful (using street)', function () {
 
 			spyOn(window, 'alert');
-
-			scope.init();
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();
@@ -176,8 +166,6 @@ describe('Testsuite: Profilepage user', function () {
 
 			spyOn(window, 'alert');
 
-			scope.init();
-
 			deferred.resolve(user_data);
 			scope.$root.$digest();
 
@@ -195,8 +183,6 @@ describe('Testsuite: Profilepage user', function () {
 
 
 		it('Check if cancel resets data (useing email)', function () {
-
-			scope.init();
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();
@@ -219,8 +205,6 @@ describe('Testsuite: Profilepage user', function () {
 
 			spyOn(window, 'alert');
 
-			scope.init();
-
 			deferred.resolve(user_data);
 			scope.$root.$digest();
 
@@ -241,8 +225,6 @@ describe('Testsuite: Profilepage user', function () {
 
 			spyOn(window, 'alert');
 
-			scope.init();
-
 			deferred.resolve(user_data);
 			scope.$root.$digest();
 
@@ -262,8 +244,6 @@ describe('Testsuite: Profilepage user', function () {
 
 		it('Check if password is typed in with text (using "test12345")', function () {
 
-			scope.init();
-
 			deferred.resolve(user_data);
 			scope.$root.$digest();
 
@@ -276,8 +256,6 @@ describe('Testsuite: Profilepage user', function () {
 		});
 
 		it('Check if password is typed in with text (using undefined)', function () {
-
-			scope.init();
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();
@@ -295,8 +273,6 @@ describe('Testsuite: Profilepage user', function () {
 		it('Check if email can be changed successful', function () {
 
 			spyOn(window, 'alert');
-
-			scope.init();
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();
@@ -316,8 +292,6 @@ describe('Testsuite: Profilepage user', function () {
 		it('Check if email can be changed failing', function () {
 
 			spyOn(window, 'alert');
-
-			scope.init();
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();

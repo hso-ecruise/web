@@ -3,7 +3,8 @@
 // Karte, Icons und Marker werden initialisiert und geladen
 application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, RESTFactory, Helper) {    
 
-    var customerID = $rootScope.customerID;
+	$scope.testing = false;	
+    $scope.customerID = $rootScope.customerID;
 
     var carMarkers = [];
     var stationMarkers = [];
@@ -14,24 +15,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
     $scope.activeCar = "images/icons/car_available.png";
     $scope.activeStation = "images/icons/station_available.png";
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: new google.maps.LatLng(49.5, 8.434),
-        mapTypeId: 'roadmap'
-    });
-
-    map.addListener("click", function(event){
-
-        var lat = event.latLng.lat();
-        var lon = event.latLng.lng();
-
-        Helper.Get_Address(lat, lon).then(function(address){
-            new ShowInputPopUp(address, lat, lon);
-        }, function(response){
-
-        });
-
-    });
+	var map;
 
 
     var icons = {
@@ -283,8 +267,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         stationsVisible = true;
         carMarkers = [];
         stationMarkers = [];
-        var refIntCarID = setInterval(GetCars, 1000);
-        var refIntStatID = setInterval(GetStations, 1000);
+        var refIntCarID;
+        var refIntStatID;
 
         /**
          * Description
@@ -308,8 +292,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 				
                     var vehicle = {};
                     
-                    var ID_STR = data_use.carId;
-                    
                     vehicle.vehicleID = data_use.carId;
                     vehicle.licensePlate = data_use.licensePlate;
                     vehicle.chargingState = data_use.chargingState;
@@ -331,9 +313,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                     
                 });
 
-            }, function(response){
-
-            });
+			});
+			
         }
 
         /**
@@ -352,10 +333,14 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                     var station = stations[i];
                     new AddStation(station);
                 }
-            }, function(response){
-
             });
-        }
+		}
+		
+		//Start spamming backend to get values
+		refIntCarID = setInterval(GetCars, 1000);
+		refIntStatID = setInterval(GetStations, 1000);
+
+
     }
 
     /**
@@ -475,7 +460,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                     }
 
                     var data = {
-                        customerId: customerID,
+                        customerId: $scope.customerID,
                         bookingPositionLatitude: lat,
                         bookingPositionLongitude: lon,
                         bookingDate: now,
@@ -559,6 +544,24 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
         var carBtn = document.getElementById('car_btn');
         var stationBtn = document.getElementById('station_btn');
         
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 16,
+			center: new google.maps.LatLng(49.5, 8.434),
+			mapTypeId: 'roadmap'
+		});
+
+		map.addListener("click", function (event) {
+
+			var lat = event.latLng.lat();
+			var lon = event.latLng.lng();
+
+			RESTFactory.Get_Address(lat, lon).then(function (address) {
+				new ShowInputPopUp(address, lat, lon);
+			});
+
+		});
+
+
         // Controls auf die Karte setzen 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(carBtn);
@@ -584,15 +587,14 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
             var lat = place.lat();
             var lon = place.lng();
 
-            var prom_addr = Helper.Get_Address(lat, lon);
-            prom_addr.then(function(response){
+            RESTFactory.Get_Address(lat, lon).then(function(response){
                 new ShowInputPopUp(response, lat, lon);
             });
 
         });
 
         //hier werden benötigte Daten von der Rest-Schnittstelle gehollt.
-        RESTFactory.Bookings_Get_CustomerID(customerID).then(function(response){
+        RESTFactory.Bookings_Get_CustomerID($scope.customerID).then(function(response){
             var bookings = response.data;
             var interested = [];
             var soon_bookings = [];
@@ -628,7 +630,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
                         var lat = station.latitude;
                         var lon = station.longitude;
 
-                        Helper.Get_Address(lat, lon).then(function(address){
+                        RESTFactory.Get_Address(lat, lon).then(function(address){
 
                             var soon_booking = {};
 
@@ -645,21 +647,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
                             new AddMarker(soon_booking.carID, "Ihre Reservierung", content, "car_reserved", lat, lon);
 
-                        }, function(response){
-
                         });
 
-                    }, function(response){
-
                     });
-
-                }, function(response){
 
                 });
 
             }
-
-        }, function(response){
 
         });
 
@@ -673,18 +667,18 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
      * @method ToggleCars
      * @return 
      */
-    $scope.ToggleCars = function(){
-        new ToggleCars();
-    }
+	$scope.ToggleCars = function () {
+		new ToggleCars();
+	};
 
     /**
      * Description
      * @method ToggleStations
      * @return 
      */
-    $scope.ToggleStations = function(){
-        new ToggleStations();
-    }
+	$scope.ToggleStations = function () {
+		new ToggleStations();
+	};
     
     new Init();
 

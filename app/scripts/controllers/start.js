@@ -159,7 +159,7 @@ application.controller('Ctrl_Register', function ($rootScope, $scope, $mdDialog,
 
 		$scope.closeDialog();
 
-	}
+	};
 });
 
 
@@ -173,18 +173,14 @@ application.controller('Ctrl_Register', function ($rootScope, $scope, $mdDialog,
  */
 application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Helper, $location) {
 
-	$scope.inited = false;
+	$scope.testing = false;
 
 	/**
 	 * Description
-	 * @method init
+	 * @method Init
 	 * @return 
 	 */
-	var init = function () {
-
-		if ($scope.inited === true) {
-			return;
-		}
+	function Init() {
 
 		var loggedIN = Helper.Cookie_Get("loggedIN");
 		var token = Helper.Cookie_Get("token");
@@ -192,23 +188,21 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 
 		if (loggedIN !== "true") {
 			loggedIN = false;
+		} else {
+			loggedIN = true;
 		}
 
 		$rootScope.loggedIN = loggedIN;
 		$rootScope.token = token;
 		$rootScope.customerID = customerID;
 
-		$scope.inited = true;
-
 		$scope.loggedIN = $rootScope.loggedIN;
 
-	};
-
-	init();
-
-	$scope.init = function () {
-		init();
 	}
+
+	new Init();
+
+	
 
 	/**
 	 * Description
@@ -229,8 +223,10 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 		Helper.Cookie_Set("token", "");
 		Helper.Cookie_Set("customerID", "");
 
-		$location.path('/start');
-
+		if ($scope.testing === false) {
+			$rootScope.$apply(function () { $location.path('/start'); });
+		}
+		
 	};
 
 

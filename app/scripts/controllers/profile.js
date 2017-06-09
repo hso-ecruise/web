@@ -1,6 +1,6 @@
 'use strict';
 
-application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope, Helper, $location) {
+application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope, Helper) {
     
 	$scope.testing = false;
 
@@ -17,7 +17,6 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
 	function LoadData(){
 		
 		RESTFactory.Customers_Get_CustomerID(customerID).then(function(response){
-			
 			var data = response.data;
 			
 			var user = {
@@ -84,20 +83,16 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
     /**
      * Description
      * Init-Funktion deren Funktion daran besteht, die LoadData() zu starten
-     * @method init
+     * @method Init
      * @return 
      */
-    var init = function () {
+	function Init() {
 		
-		LoadData();
-	
-    };
+		new LoadData();
 
-	init();
-	
-	$scope.init = function () {
-		init();
-	}
+    }
+
+	new Init();
 
 	
     /**
@@ -116,11 +111,11 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
 			
 			var upload = "\"" + new_phone_number + "\"";
 			RESTFactory.Customers_Patch_PhoneNr(customerID, upload).then(function(response){
-				LoadData();
 				alert("Telefonnummer wurde erfolgreich geändert");
+				new LoadData();
 			}, function(response){
-				LoadData();
 				alert("Telefonnummer konnte nicht geändert werden");
+				new LoadData();
 			});
 			
 			
@@ -146,11 +141,11 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
 		{
 		
 			RESTFactory.Customers_Patch_Address(customerID, address).then(function(response){
-				LoadData();
 				alert("Adresse wurde erfolgreich geändert");
-			}, function(reponse){
-				LoadData();
+				new LoadData();
+			}, function(response){
 				alert("Adresse konnte nicht geändert werden");
+				new LoadData();
 			});
 		}
 		
@@ -163,7 +158,7 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
      * @return 
      */
     $scope.Cancel = function () {
-		LoadData();
+		new LoadData();
 	};
 	
     /**
@@ -190,6 +185,9 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
 				
 				RESTFactory.Customers_Patch_Password(customerID, pwd).then(function (response) {
 					alert("Passwort wurde erfolgreich geändert. Bitte melden Sie sich neu an.");
+					if ($scope.testing === false) {
+						angular.element(document.getElementById('mainCtrl')).scope().Logout();
+					}
 				}, function(response){
 					alert("Passwort konnte nicht geändert werden");
 				});
@@ -242,13 +240,13 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
 			
 			RESTFactory.Customers_Patch_Email(customerID, em).then(function(response){
 				alert("Email wurde erfolgreich geändert. Bitte melden Sie sich neu an.");
-				LoadData();
+				new LoadData();
 				if ($scope.testing === false) {
 					angular.element(document.getElementById('mainCtrl')).scope().Logout();
 				}
 			}, function(response){
 				alert("Email konnte nicht geändert werden");
-				LoadData();
+				new LoadData();
 			});
 			
 		}

@@ -172,8 +172,45 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 		GetAddress: function(lat, lon){
 			var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 			url += lat + "," + lon + "&key=" + API_KEY;
-			var orig = Promise.resolve(GetCaller.Get(url, null, false));
-			return orig;
+
+			return new Promise(function (resolve, reject) {
+
+				GetCaller.Get(url, null, false).then(function (response) {
+
+					var ret = response.data.results[0].address_components;
+
+					var address = {};
+
+					for (var i = 0; i < ret.length; i++) {
+						for (var j = 0; j < ret[i].types.length; j++) {
+							switch (ret[i].types[j]) {
+								case "street_number":
+									address.number = ret[i].long_name;
+									break;
+								case "route":
+									address.street = ret[i].long_name;
+									break;
+								case "locality":
+									address.city = ret[i].long_name;
+									break;
+								case "postal_code":
+									address.zip = ret[i].long_name;
+									break;
+								default:
+									break;
+							}
+						}
+					}
+
+					resolve(address);
+
+					reject("error");
+
+				});
+			});
+
+			//var orig = Promise.resolve(GetCaller.Get(url, null, false));
+			//return orig;
 		},
 		
 		
@@ -961,209 +998,101 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 application.factory('Helper', function (RESTFactory, $cookies) {
 
     return {
-	/**
-	 * Description
-	 * @method Get_Time
-	 * @param {} input
-	 * @return time
-	 */
-	Get_Time: function (input){
-	    var d = new Date(input);
-	    var time = d.getHours() + ":" + d.getMinutes();
-		if(d.getMinutes() < 10){
-			time = d.getHours() + ":0" + d.getMinutes();
-		}
-	    return time;
-	},
-	/**
-	 * Description
-	 * @method Get_Date
-	 * @param {} input
-	 * @return date
-	 */
-	Get_Date: function (input){
-	    var d = new Date(input);
-	    var day = d.getDate();
-	    var month = d.getMonth() + 1;
-	    var year = d.getFullYear();
-	    if(month < 10){
-			month = "0" + month;
-	    }
-	    var date = day + "." + month + "." + year;
-	    return date;
-	},
-	/**
-	 * Description
-	 * @method Get_Address
-	 * @param {} lat
-	 * @param {} lon
-	 * @return NewExpression
-	 */
-	Get_Address: function(lat, lon){
-	    
-	    return new Promise(function(resolve, reject){
-		
-			RESTFactory.GetAddress(lat, lon).then(function(response){
 
-				var ret = response.data.results[0].address_components;
-				
-				var address = { };
-				
-				for(var i = 0;i < ret.length; i++){
-					for(var j = 0; j < ret[i].types.length; j++){
-						switch(ret[i].types[j]){
-						case "street_number":
-						address.number = ret[i].long_name;
-						break;
-						case "route":
-						address.street = ret[i].long_name;
-						break;
-						case "locality":
-						address.city = ret[i].long_name;
-						break;
-						case "postal_code":
-						address.zip = ret[i].long_name;
-						break;
-						default:
-						break;
-						}
-					}
-				}
-				
-				resolve(address);
-				
-				reject("error");
-				
-			});
-	    });
-	    
-	},
-	/**
-	 * Description
-	 * @method Cookie_Set
-	 * @param {} name
-	 * @param {} value
-	 * @return Literal
-	 */
-	Cookie_Set: function (name, value){
-	    var text = name + "=" + value;
-	    document.cookie = text;
-	    return "";
-	},
-	/**
-	 * Description
-	 * @method Cookie_Get
-	 * @param {} name
-	 * @return CallExpression
-	 */
-	Cookie_Get: function (name){
-	    return $cookies.get(name);
-	},
-	
-	/**
-	 * Description
-	 * @method Get_Now
-	 * @return date
-	 */
-	Get_Now: function(){
-		
-		var now = new Date();
-		
-		var date = {};
-		
-		date.date = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
-		date.time = now.getHours() + ":" + now.getMinutes();
-		if(now.getMinutes() < 10){
-			date.time = now.getHours() + ":0" + now.getMinutes();
-		}
-		date.value = now.getTime();
-		date.string = now;
-		
-		date.date_ele = {};
-		date.date_ele.day = now.getDate();
-		date.date_ele.month = now.getMonth();
-		date.date_ele.year = now.getFullYear();
-		
-		date.time_ele = {};
-		date.time_ele.minutes = now.getMinutes();
-		date.time_ele.hours = now.getHours();
-		
-		return date;
-		
-	},
-	
-	/**
-	 * Description
-	 * @method Get_Zeit
-	 * @param {} value
-	 * @return date
-	 */
-	Get_Zeit: function(value){
-		
-		var now = new Date(value);
-		
-		var date = {};
-		
-		date.date = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
-		date.time = now.getHours() + ":" + now.getMinutes();
-		if(now.getMinutes() < 10){
-			date.time = now.getHours() + ":0" + now.getMinutes();
-		}
-		date.value = now.getTime();
-		date.string = now;
-		
-		date.date_ele = {};
-		date.date_ele.day = now.getDate();
-		date.date_ele.month = now.getMonth();
-		date.date_ele.year = now.getFullYear();
-		
-		date.time_ele = {};
-		date.time_ele.minutes = now.getMinutes();
-		date.time_ele.hours = now.getHours();
-		
-		return date;
-		
-	},
+		/**
+		 * Description
+		 * @method Cookie_Set
+		 * @param {} name
+		 * @param {} value
+		 * @return Literal
+		 */
+		Cookie_Set: function (name, value) {
+			var text = name + "=" + value;
+			document.cookie = text;
+			return "";
+		},
+		/**
+		 * Description
+		 * @method Cookie_Get
+		 * @param {} name
+		 * @return CallExpression
+		 */
+		Cookie_Get: function (name) {
+			return $cookies.get(name);
+		},
 
-	/**
-	 * Funktion um das aktuelle Datum und Uhrzeit von Server zu kriegen
-	 * @method Get_Zeit_Server
-	 * @param {} value
-	 * @return date
-	 */
-	Get_Zeit_Server: function(value){
-		
-		var date = {};
-		if(value === null){
-			date.state = "false";
+		/**
+		 * Description
+		 * @method Get_Zeit
+		 * @param {} value
+		 * @return date
+		 */
+		Get_Zeit: function (value) {
+
+			var now = new Date(value);
+
+			var date = {};
+
+			date.date = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
+			date.time = now.getHours() + ":" + now.getMinutes();
+			if (now.getMinutes() < 10) {
+				date.time = now.getHours() + ":0" + now.getMinutes();
+			}
+			date.value = now.getTime();
+			date.string = now;
+
+			date.date_ele = {};
+			date.date_ele.day = now.getDate();
+			date.date_ele.month = now.getMonth();
+			date.date_ele.year = now.getFullYear();
+
+			date.time_ele = {};
+			date.time_ele.minutes = now.getMinutes();
+			date.time_ele.hours = now.getHours();
+
 			return date;
-		}
-		
-		value += "Z";
 
-		var now = new Date(value);
+		},
 
-		date.state = true;
-		date.date = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
-		date.time = now.getHours() + ":" + now.getMinutes();
-		if(now.getMinutes() < 10){
-			date.time = now.getHours() + ":0" + now.getMinutes();
+		/**
+		 * Funktion um das aktuelle Datum und Uhrzeit von Server zu kriegen
+		 * @method Get_Zeit_Server
+		 * @param {} value
+		 * @return date
+		 */
+		Get_Zeit_Server: function (value) {
+
+			var date = {};
+			if (value === null) {
+				date.state = "false";
+				return date;
+			}
+
+			value += "Z";
+
+			var now = new Date(value);
+
+			date.state = true;
+			date.date = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
+			date.time = now.getHours() + ":" + now.getMinutes();
+			if (now.getMinutes() < 10) {
+				date.time = now.getHours() + ":0" + now.getMinutes();
+			}
+			date.value = now.getTime();
+			date.string = now;
+
+			date.date_ele = {};
+			date.date_ele.day = now.getDate();
+			date.date_ele.month = now.getMonth();
+			date.date_ele.year = now.getFullYear();
+
+			date.time_ele = {};
+			date.time_ele.minutes = now.getMinutes();
+			date.time_ele.hours = now.getHours();
+
+			return date;
+
 		}
-		date.value = now.getTime();
-		date.string = now;
-		
-		date.date_ele = {};
-		date.date_ele.day = now.getDate();
-		date.date_ele.month = now.getMonth();
-		date.date_ele.year = now.getFullYear();
-		
-		date.time_ele = {};
-		date.time_ele.minutes = now.getMinutes();
-		date.time_ele.hours = now.getHours();
-		
-		return date;
-		
-	}
 	
     };
 

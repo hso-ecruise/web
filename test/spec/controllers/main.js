@@ -275,19 +275,13 @@ describe('Testsuite: Startpage user', function () {
 
 		}));
 
-		it('Check if init() was called, useless af', function () {
+		afterEach(function () {
+			scope.Logout();
+		})
 
-			spyOn(scope, 'init').and.callThrough();
+		it('Check if loggedIN is set true after previous tests, where the login was set true', function () {
 
-			scope.init();
-
-			expect(scope.init).toHaveBeenCalled();
-
-		});
-
-		it('Check if inited is set true after start', function () {
-
-			expect(scope.inited).toBe(true);
+			expect(scope.loggedIN).toBe(true);
 
 		});
 

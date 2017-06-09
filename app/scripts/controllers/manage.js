@@ -1,41 +1,38 @@
 'use strict';
 
-application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory, Helper, $location, $q) {
+application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory, Helper, $location) {
 
-    var customerID = $rootScope.customerID;
+	$scope.testing = false;	
+    $scope.customerID = $rootScope.customerID;
 
     var bookings_done = {};
     var bookings_open = {};
-
-    var i = 0;
 
 
     /**
 	 * Description
      * Init-Funktion die Rest-Schnittstelle initialsiert,
      * daten ausliest und sie speichert
-	 * @method init
+	 * @method Init
 	 * @return 
 	 */
-    var init = function(){
+    function Init(){
 
-        RESTFactory.Bookings_Get_CustomerID(customerID).then(function(response){
+        RESTFactory.Bookings_Get_CustomerID($scope.customerID).then(function(response){
 
             var data = response.data;
 
             console.log(data);
 
             for(var j = 0; j < data.length; j++){
-                HandleResult_Booking(data[j]);
+                new HandleResult_Booking(data[j]);
             }
-
-        }, function(response){
 
         });
 
-    };
+    }
 
-    init();
+    new Init();
 
     /**
 	 * Description
@@ -44,7 +41,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	 * @param {} response
 	 * @return 
 	 */
-    var HandleResult_Booking = function(response){
+    function HandleResult_Booking(response){
 
         var d = new Date(response.plannedDate);
         d.setMonth(d.getMonth() + 1);
@@ -53,10 +50,10 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 
         if(dif < 0){
             //Trip in past
-            Handle_DoneBooking(response);
+            new Handle_DoneBooking(response);
         }else{
             //Trip in future
-            Handle_OpenBooking(response, dif);
+            new Handle_OpenBooking(response, dif);
         }
 
     }
@@ -69,7 +66,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	 * @param {} dif
 	 * @return 
 	 */
-    var Handle_OpenBooking = function(response, dif){
+    function Handle_OpenBooking(response, dif){
 
         var booking = {};
 
@@ -90,7 +87,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
         bookings_open[str] = booking;
 
         $scope.open_bookings = bookings_open;
-        $scope.$apply();
+		if ($scope.testing === false) {
+			$scope.$apply();
+		}
 
         var lat = response.bookingPositionLatitude;
         var lon = response.bookingPositionLongitude;
@@ -100,11 +99,13 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
             bookings_open[str].start.address = address;
 
             $scope.open_bookings = bookings_open;
-            $scope.$apply();
+			if ($scope.testing === false) {
+				$scope.$apply();
+			}
 
         });
 
-    };
+    }
 
     /**
 	 * Description
@@ -115,7 +116,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	 * @param {} response
 	 * @return 
 	 */
-    var Handle_DoneBooking = function(response){
+    function Handle_DoneBooking(response){
 
         var booking = {};
 
@@ -128,7 +129,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
         bookings_done[str] = booking;
 
         $scope.done_bookings = bookings_done;
-        $scope.$apply();
+		if ($scope.testing === false) {
+			$scope.$apply();
+		}
 
         RESTFactory.Invoices_Get_Items_ItemID(booking.invoiceItemID).then(function(response){
 
@@ -143,7 +146,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
             bookings_done[str].invoice = invoice;
 
             $scope.done_bookings = bookings_done;
-            $scope.$apply();
+			if ($scope.testing === false) {
+				$scope.$apply();
+			}
 
         });
 
@@ -171,7 +176,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 
 
             $scope.done_bookings = bookings_done;
-            $scope.$apply();
+			if ($scope.testing === false) {
+				$scope.$apply();
+			}
 
 
             RESTFactory.Charging_Stations_Get_Charging_StationID(trip.startChargingStationID).then(function(response){
@@ -188,14 +195,12 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
                     bookings_done[str].start.address = address;
 
                     $scope.done_bookings = bookings_done;
-                    $scope.$apply();
+					if ($scope.testing === false) {
+						$scope.$apply();
+					}
 
-                }, function(response){
-                    console.log("Cant get address for start station");
                 });
 
-            }, function(response){
-                console.log("Cant get start station");
             });
 
             RESTFactory.Charging_Stations_Get_Charging_StationID(trip.endChargingStationID).then(function(response){
@@ -212,20 +217,18 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
                     bookings_done[str].end.address = address;
 
                     $scope.done_bookings = bookings_done;
-                    $scope.$apply();
+					if ($scope.testing === false) {
+						$scope.$apply();
+					}
 
 
-                }, function(response){
-                    console.log("Cant get address for end station");
                 });
 
-            }, function(response){
-                console.log("Cant get end station");
             });
 
         });
 
-    };
+    }
 
 
 
@@ -242,8 +245,6 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
         var bill = {};
 
         var relevant_bookings = [];
-
-        var i;
 
         for(var key in bookings_done){
 
@@ -263,7 +264,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
         if(relevant_bookings.length === 0){
             bill.active = false;
             $scope.currentBill = bill;
-            $scope.$apply();
+			if ($scope.testing === false) {
+				$scope.$apply();
+			}
             return;
         }
 
@@ -295,7 +298,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
                 item.invoiceID = items[i].invoiceId;
                 item.invoiceItemID = items[i].invoiceItemId;
                 item.reason = items[i].reason;
-                item.type = "Rechnung"
+				item.type = "Rechnung";
                 if(items[i].type === 1){ item.type = "Gutschrift";}
                 item.amount = items[i].amount;
                 item.hasBooking = false;
@@ -318,8 +321,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
             bill.items = bill_items;
 
             $scope.currentBill = bill;
-
-            $scope.$apply();
+			if ($scope.testing === false) {
+            	$scope.$apply();
+			}
 
         });
 
@@ -339,7 +343,6 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
      * @return 
      */
     $scope.ShowBilling = function (month, year) {
-        console.log(month + "  " + year);
 
         /*
 		var date = new Date(input);
@@ -347,7 +350,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		var month = date.getMonth();
 		var year = date.getFullYear();
 		*/
-        GetBilling(month, year);
+        new GetBilling(month, year);
 
     };
 
