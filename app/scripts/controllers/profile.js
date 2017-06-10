@@ -186,7 +186,7 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
 				RESTFactory.Customers_Patch_Password(customerID, pwd).then(function (response) {
 					alert("Passwort wurde erfolgreich geändert. Bitte melden Sie sich neu an.");
 					if ($scope.testing === false) {
-						angular.element(document.getElementById('mainCtrl')).scope().Logout();
+						angular.element(document.getElementById('mainCtrl')).scope().Logout(true);
 					}
 				}, function(response){
 					alert("Passwort konnte nicht geändert werden");
@@ -242,7 +242,7 @@ application.controller('Ctrl_Profile', function ($rootScope, RESTFactory, $scope
 				alert("Email wurde erfolgreich geändert. Bitte melden Sie sich neu an.");
 				new LoadData();
 				if ($scope.testing === false) {
-					angular.element(document.getElementById('mainCtrl')).scope().Logout();
+					angular.element(document.getElementById('mainCtrl')).scope().Logout(true);
 				}
 			}, function(response){
 				alert("Email konnte nicht geändert werden");

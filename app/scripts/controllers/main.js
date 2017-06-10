@@ -169,7 +169,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 		 * @param {} lon
 		 * @return orig
 		 */
-		GetAddress: function(lat, lon){
+		Get_Address: function(lat, lon){
 			var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 			url += lat + "," + lon + "&key=" + API_KEY;
 

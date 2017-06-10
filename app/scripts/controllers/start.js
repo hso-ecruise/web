@@ -209,7 +209,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 	 * @method Logout
 	 * @return 
 	 */
-	$scope.Logout = function () {
+	$scope.Logout = function (remote) {
 
 		//DELETE COOKIES
 
@@ -224,7 +224,11 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 		Helper.Cookie_Set("customerID", "");
 
 		if ($scope.testing === false) {
-			$rootScope.$apply(function () { $location.path('/start'); });
+			if (remote === true) {
+				$rootScope.$apply(function () { $location.path('/start'); });
+			} else {
+				$location.path('/start');
+			}
 		}
 		
 	};
@@ -257,7 +261,7 @@ application.controller('Ctrl_Main', function ($rootScope, $scope, $mdDialog, Hel
 			'				<md-input-container>' +
 			'					<input placeholder="E-Mail" type="text" ng-model="login_email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" ng-required="true" />' +
 			'				</md-input-container>' +
-			//PASSWORT LÄNGE AUF 8 SETZEN
+			
 			'				<md-input-container>' +
 			'					<input placeholder="Passwort" type="password" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" title="Passwort muss mindestens eine Zahl und einen kleinen oder großen Buchstaben enthalten und mindestens 8 Zeichen lang sein" ng-model="login_password" ng-required="true" /> ' +
 			'				</md-input-container>' +

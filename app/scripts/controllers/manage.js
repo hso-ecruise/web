@@ -94,7 +94,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
         var lat = response.bookingPositionLatitude;
         var lon = response.bookingPositionLongitude;
 
-        Helper.Get_Address(lat, lon).then(function(address){
+        RESTFactory.Get_Address(lat, lon).then(function(address){
 
             bookings_open[str].start.address = address;
 
@@ -188,7 +188,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
                 var lat = data.latitude;
                 var lon = data.longitude;
 
-                Helper.Get_Address(lat, lon).then(function(response){
+                RESTFactory.Get_Address(lat, lon).then(function(response){
 
                     var address = response;
 
@@ -210,7 +210,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
                 var lat = data.latitude;
                 var lon = data.longitude;
 
-                Helper.Get_Address(lat, lon).then(function(response){
+                RESTFactory.Get_Address(lat, lon).then(function(response){
 
                     var address = response;
 
