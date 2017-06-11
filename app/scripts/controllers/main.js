@@ -23,12 +23,13 @@ application.service('GetCaller', function ($http, $rootScope) {
      * @param {} token
      * @return get
      */
+/* Uncomment if call with token is added
+
     this.Get = function (url, body, token) {
 		
 		var myToken = $rootScope.token;
 		
 		var get = {};
-		
 		if(token === true){
 			
 			get = $http({
@@ -40,6 +41,7 @@ application.service('GetCaller', function ($http, $rootScope) {
 				}
 			});
 		}else{
+		
 			get = $http({
 				method: "get",
 				url: url,
@@ -49,6 +51,7 @@ application.service('GetCaller', function ($http, $rootScope) {
 		
 		return get;
     };
+*/
 	/**
 	 * Description
 	 * @method GetShort
@@ -142,12 +145,6 @@ application.service('PatchCaller', function ($http, $rootScope) {
 					'access_token': $rootScope.token
 				}
 			});
-		}else{
-			patch = $http({
-				method: "patch",
-				url: url,
-				data: body
-			});
 		}
 		
 		return patch;
@@ -174,7 +171,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 
 			return new Promise(function (resolve, reject) {
 
-				GetCaller.Get(url, null, false).then(function (response) {
+				GetCaller.GetShort(url, false).then(function (response) {
 
 					var ret = response.data.results[0].address_components;
 
@@ -208,8 +205,6 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 				});
 			});
 
-			//var orig = Promise.resolve(GetCaller.Get(url, null, false));
-			//return orig;
 		},
 		
 		
@@ -462,6 +457,13 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 
 			var date = {};
 
+			if (value === null) {
+				date.state = false;
+				return date;
+			}
+
+			date.state = true;
+
 			date.date = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
 			date.time = now.getHours() + ":" + now.getMinutes();
 			if (now.getMinutes() < 10) {
@@ -492,10 +494,13 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 		Get_Zeit_Server: function (value) {
 
 			var date = {};
+			
 			if (value === null) {
-				date.state = "false";
+				date.state = false;
 				return date;
 			}
+
+			date.state = true;
 
 			if (!(value[value.length - 1] === 'T' && value[value.length - 2] === 'M' && value[value.length - 3] === 'G')) {
 				//ALTERNATVE

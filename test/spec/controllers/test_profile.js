@@ -19,7 +19,6 @@ describe('Testsuite: Profilepage user', function () {
 
 		var user_data;
 
-
 		beforeEach(function () {
 
 			user_data = {
@@ -207,10 +206,10 @@ describe('Testsuite: Profilepage user', function () {
 
 			deferred.resolve(user_data);
 			scope.$root.$digest();
-
+		
 			scope.user.password.current = "test1234";
-			scope.user.password.new = "test12345";
-			scope.user.password.confirm = "test12345";
+			scope.user.password.new = "test123456";
+			scope.user.password.confirm = "test123456";
 
 			scope.ChangePassword();
 

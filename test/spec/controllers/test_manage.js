@@ -117,8 +117,8 @@ describe('Testsuite: Managepage user', function () {
 				"invoiceItemId": null,
 				"bookingPositionLatitude": 50,
 				"bookingPositionLongitude": 8,
-				"bookingDate": "2017-06-08T12:14:00.000Z",
-				"plannedDate": "2018-06-12T12:14:00.000Z"
+				"bookingDate": "2017-06-08T12:04:00.000Z",
+				"plannedDate": "2018-06-12T12:04:00.000Z"
 			};
 		});
 
@@ -143,7 +143,7 @@ describe('Testsuite: Managepage user', function () {
 
 		it('Check if openBooking date is converted from utc to now (plannedDate hour + 2)', function () {
 
-			var plannedTime = "14:14";
+			var plannedTime = "14:04";
 			var bookingID = booking_open_be.bookingId;
 			var data = [];
 			data.push(booking_open_be);
