@@ -472,7 +472,7 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 
 			date.date_ele = {};
 			date.date_ele.day = now.getDate();
-			date.date_ele.month = now.getMonth();
+			date.date_ele.month = now.getMonth() + 1;
 			date.date_ele.year = now.getFullYear();
 
 			date.time_ele = {};
@@ -518,7 +518,7 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 
 			date.date_ele = {};
 			date.date_ele.day = now.getDate();
-			date.date_ele.month = now.getMonth();
+			date.date_ele.month = now.getMonth() + 1;
 			date.date_ele.year = now.getFullYear();
 
 			date.time_ele = {};
