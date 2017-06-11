@@ -161,7 +161,6 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 
 	return {
 
-	//OTHERS
 		/**
 		 * Description
 		 * @method GetAddress
@@ -215,18 +214,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 		
 		
 		
-		
 	//TRIPS
-		/**
-		 * Description
-		 * @method Trips_Get
-		 * @return orig
-		 */
-		Trips_Get: function(){
-			var url = IP + "/trips";
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
 		/**
 		 * Description
 		 * @method Trips_Get_TripID
@@ -238,59 +226,10 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(GetCaller.GetShort(url, true));
 			return orig;
 		},
-		/**
-		 * Description
-		 * @method Trips_Get_CarID
-		 * @param {} id
-		 * @return orig
-		 */
-		Trips_Get_CarID: function(id){
-			var url = IP + "/trips/by-car/" + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Trips_Post
-		 * @param {} data
-		 * @return orig
-		 */
-		Trips_Post: function(data){
-			var url = IP + "/trips";
-			var orig = Promise.resolve(PostCaller.Get(url, data, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Trips_Patch
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Trips_Patch: function(id, data){
-			var url = IP + "/trips?TripId=" + id;
-			var orig = Promise.resolve(PatchCaller.Patch(url, data, true));
-			return orig;
-		},
-		
-		
+
 		
 		
 	//PUBLIC
-		/**
-		 * Description
-		 * @method Login_Get
-		 * @param {} email
-		 * @param {} data
-		 * @return orig
-		 */
-		Login_Get: function(email, data){
-			var url = IP + "/public/login/" + email;
-			var orig = Promise.resolve(GetCaller.Get(url, data, false));
-			return orig;
-		},
 		/**
 		 * Description
 		 * @method User_Login
@@ -317,18 +256,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 		
 		
 		
-	
 	//CUSTOMERS
-		/**
-		 * Description
-		 * @method Customers_Get
-		 * @return orig
-		 */
-		Customers_Get: function(){
-			var url = IP + "/customers";
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
 		/**
 		 * Description
 		 * @method Customers_Get_CustomerID
@@ -340,30 +268,6 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(GetCaller.GetShort(url, true));
 			return orig;
 		},
-		/**
-		 * Description
-		 * @method Customers_Get_Name
-		 * @param {} name
-		 * @return orig
-		 */
-		Customers_Get_Name: function(name){
-			var url = IP + "/customers/by-lastname/" + name;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Customers_Post
-		 * @param {} data
-		 * @return orig
-		 */
-		Customers_Post: function(data){
-			var url = IP + "/public/register";		// "/customers";
-			var orig = Promise.resolve(PostCaller.Post(url, data, true));
-			return orig;
-		},
-		
 		/**
 		 * Description
 		 * @method Customers_Patch_Password
@@ -412,30 +316,6 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(PatchCaller.Patch(url, address, true));
 			return orig;
 		},
-		/**
-		 * Description
-		 * @method Customers_Patch_ChipCard
-		 * @param {} id
-		 * @param {} chipID
-		 * @return orig
-		 */
-		Customers_Patch_ChipCard: function(id, chipID){
-			var url = IP + "/customers/" + id + "/chipcarduid";
-			var orig = Promise.resolve(PatchCaller.Patch(url, chipID, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Customers_Patch_Verified
-		 * @param {} id
-		 * @param {} verified
-		 * @return orig
-		 */
-		Customers_Patch_Verified: function(id, verified){
-			var url = IP + "/customers/" + id + "/verified";
-			var orig = Promise.resolve(PatchCaller.Patch(url, verified, true));
-			return orig;
-		},
 		
 		
 		
@@ -451,29 +331,6 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		/**
-		 * Description
-		 * @method Cars_Get_CarID
-		 * @param {} id
-		 * @return orig
-		 */
-		Cars_Get_CarID: function(id){
-			var url = IP + "/cars/" + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Cars_Get_ClosestTo
-		 * @param {} lat
-		 * @param {} lon
-		 * @return orig
-		 */
-		Cars_Get_ClosestTo: function(lat, lon){
-			var url = IP + "/cars/closest-to/" + lat + "/" + lon;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
 		 * GET Funktion für Autoladestatus
 		 * @method Cars_Get_ChargeLevelPerMinute
 		 * @return orig
@@ -484,83 +341,8 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			return orig;
 		},
 		
-		/**
-		 * Description
-		 * @method Cars_Post
-		 * @param {} data
-		 * @return orig
-		 */
-		Cars_Post: function(data){
-			var url = IP + "/cars";
-			var orig = Promise.resolve(PostCaller.Post(url, data, true));
-			return orig;
-		},
 		
-		/**
-		 * Description
-		 * @method Cars_Patch_ChargingState
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Cars_Patch_ChargingState: function(id, data){
-			var url = IP + "/cars/" + id + "/chargingstate";
-			var orig = Promise.resolve(PatchCaller.Patch(url, data, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Cars_Patch_BookingState
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Cars_Patch_BookingState: function(id, data){
-			var url = IP + "/cars/" + id + "/bookingstate";
-			var orig = Promise.resolve(PatchCaller.Patch(url, data, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Cars_Patch_Mileage
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Cars_Patch_Mileage: function(id, data){
-			var url = IP + "/cars/" + id + "/mileage";
-			var orig = Promise.resolve(PatchCaller.Patch(url, data, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Cars_Patch_ChargeLevel
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Cars_Patch_ChargeLevel: function(id, data){
-			var url = IP + "/cars/" + id + "/chargelevel";
-			var orig = Promise.resolve(PatchCaller.Patch(url, data, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Cars_Patch_Position
-		 * @param {} id
-		 * @param {} lat
-		 * @param {} lon
-		 * @return orig
-		 */
-		Cars_Patch_Position: function(id, lat, lon){
-			var url = IP + "/cars/" + id + "/position/" + lat + "/" + lon;
-			var orig = Promise.resolve(PatchCaller.Patch(url, null));
-			return orig;
-		},
-		
-		
-		
-		
+
 	//CHARGING-STATION
 		/**
 		 * Description
@@ -583,129 +365,10 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(GetCaller.GetShort(url, true));
 			return orig;
 		},
-		/**
-		 * Description
-		 * @method Charging_Stations_Get_ClosestTo
-		 * @param {} lat
-		 * @param {} lon
-		 * @return orig
-		 */
-		Charging_Stations_Get_ClosestTo: function(lat, lon){
-			var url = IP + "/charging-stations/closest-to/" + lat + "/" + lon;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
 		
-		/**
-		 * Description
-		 * @method Charging_Stations_Post
-		 * @param {} data
-		 * @return orig
-		 */
-		Charging_Stations_Post: function(data){
-			var url = IP + "/charging-stations";
-			var orig = Promise.resolve(PostCaller.Post(url, data, true));
-			return orig;
-		},
-		
-		
-		
-	
-	//CAR CHARGING STATION
-		/**
-		 * Description
-		 * @method Car_Charging_Stations_Get
-		 * @return orig
-		 */
-		Car_Charging_Stations_Get: function(){
-			var url = IP + "/car-charging-stations";
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Car_Charging_Stations_Get_CarID
-		 * @param {} id
-		 * @return orig
-		 */
-		Car_Charging_Stations_Get_CarID: function(id){
-			var url = IP + "/car-charging-stations/by-car/" + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Car_Charging_Stations_Get_ChargingStationID
-		 * @param {} id
-		 * @return orig
-		 */
-		Car_Charging_Stations_Get_ChargingStationID: function(id){
-			var url = IP + "/car-charging-stations/by-charging-station/" + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Car_Charging_Stations_Post
-		 * @param {} data
-		 * @return orig
-		 */
-		Car_Charging_Stations_Post: function(data){
-			var url = IP + "/car-charging-stations";
-			var orig = Promise.resolve(PostCaller.Post(url, data, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Car_Charging_Stations_Patch_ChargeEnd
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Car_Charging_Stations_Patch_ChargeEnd: function(id, data){
-			var url = IP + "/car-charging-stations/" + id + "/charge-end/";
-			var orig = Promise.resolve(PatchCaller.Patch(url, data, true));
-			return orig;
-		},
-		
-	
 	
 	
 	//INVOICES
-		/**
-		 * Description
-		 * @method Invoices_Get
-		 * @return orig
-		 */
-		Invoices_Get: function(){
-			var url = IP + "/invoices";
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Invoices_Get_InvoiceID
-		 * @param {} id
-		 * @return orig
-		 */
-		Invoices_Get_InvoiceID: function(id){
-			var url = IP + "/invoices/" + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Invoices_Get_CustomerID
-		 * @param {} id
-		 * @return orig
-		 */
-		Invoices_Get_CustomerID: function(id){
-			var url = IP + "/invoices/by-customer/" + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
 		/**
 		 * Description
 		 * @method Invoices_Get_Items
@@ -728,74 +391,10 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(GetCaller.GetShort(url, true));
 			return orig;
 		},
-		/**
-		 * Description
-		 * @method Invoices_Get_InvoiceID_Items_ItemID
-		 * @param {} id
-		 * @param {} itemID
-		 * @return orig
-		 */
-		Invoices_Get_InvoiceID_Items_ItemID: function(id, itemID){
-			var url = IP + "/invoices/" + id + "/items/" + itemID;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		
-		/**
-		 * Invoices_Post: function(data){
-		 * var url = IP + "/invoices";
-		 * var orig = Promise.resolve(PostCaller.Get(url, data));
-		 * return orig;
-		 * },
-		 * @method Invoices_Post_Items
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Invoices_Post_Items: function(id, data){
-			var url = IP + "/invoices/" + id + "/items";
-			var orig = Promise.resolve(PostCaller.Post(url, data, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Invoices_Patch_Paid
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Invoices_Patch_Paid: function(id, data){
-			var url = IP + "/invoices/" + id + "/paid";
-			var orig = Promise.resolve(PatchCaller.Patch(url, data, true));
-			return orig;
-		},
-
 		
 		
 		
 	//BOOKINGS
-		/**
-		 * Description
-		 * @method Bookings_Get
-		 * @return orig
-		 */
-		Bookings_Get: function(){
-			var url = IP + "/bookings";
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Bookings_Get_BookingID
-		 * @param {} id
-		 * @return orig
-		 */
-		Bookings_Get_BookingID: function(id){
-			var url = IP + "/bookings/" + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
 		/**
 		 * Description
 		 * @method Bookings_Get_CustomerID
@@ -809,29 +408,6 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 		},
 		/**
 		 * Description
-		 * @method Bookings_Get_TripID
-		 * @param {} id
-		 * @return orig
-		 */
-		Bookings_Get_TripID: function(id){
-			var url = IP + "/bookings/by-trip/" + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Bookings_Get_Date
-		 * @param {} date
-		 * @return orig
-		 */
-		Bookings_Get_Date: function(date){
-			var url = IP + "/bookings/date/" + date;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
 		 * @method Bookings_Post
 		 * @param {} data
 		 * @return orig
@@ -840,154 +416,7 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var url = IP + "/bookings";
 			var orig = Promise.resolve(PostCaller.Post(url, data, true));
 			return orig;
-		},
-	
-	
-	
-	
-	//MAINTENANCES
-		/**
-		 * Description
-		 * @method Maintances_Get
-		 * @return orig
-		 */
-		Maintances_Get: function(){
-			var url = IP + '/maintenances';
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Maintances_Get_MaintenanceID
-		 * @param {} id
-		 * @return orig
-		 */
-		Maintances_Get_MaintenanceID: function(id){
-			var url = IP + '/maintenances/' + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Maintances_Post
-		 * @param {} data
-		 * @return orig
-		 */
-		Maintances_Post: function(data){
-			var url = IP + "/maintenances";
-			var orig = Promise.resolve(PostCaller.Post(url, data, true));
-			return orig;
-		},
-		
-		
-		
-		
-	//CAR MAINTENANCES
-		/**
-		 * Description
-		 * @method Car_Maintances_Get
-		 * @return orig
-		 */
-		Car_Maintances_Get: function(){
-			var url = IP + '/car-maintenances';
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Car_Maintances_Get_CarMaintenanceID
-		 * @param {} id
-		 * @return orig
-		 */
-		Car_Maintances_Get_CarMaintenanceID: function(id){
-			var url = IP + '/car-maintenances/' + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Car_Maintances_Get_MaintenanceID
-		 * @param {} id
-		 * @return orig
-		 */
-		Car_Maintances_Get_MaintenanceID: function(id){
-			var url = IP + '/car-maintenances/by-maintenance/' + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Car_Maintances_Get_CarID
-		 * @param {} id
-		 * @return orig
-		 */
-		Car_Maintances_Get_CarID: function(id){
-			var url = IP + '/car-maintenances/by-car/' + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Car_Maintances_Get_InvoiceItemID
-		 * @param {} id
-		 * @return orig
-		 */
-		Car_Maintances_Get_InvoiceItemID: function(id){
-			var url = IP + '/car-maintenances/by-invoice-item/' + id;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Car_Maintances_Post
-		 * @param {} data
-		 * @return orig
-		 */
-		Car_Maintances_Post: function(data){
-			var url = IP + "/car-maintenances";
-			var orig = Promise.resolve(PostCaller.Post(url, data, true));
-			return orig;
-		},
-		
-		/**
-		 * Description
-		 * @method Car_Maintances_Patch_CompletedDate
-		 * @param {} id
-		 * @param {} data
-		 * @return orig
-		 */
-		Car_Maintances_Patch_CompletedDate: function(id, data){
-			var url = IP + "/car-maintenances/" + id + "/completed-date";
-			var orig = Promise.resolve(PatchCaller.Patch(url, data, true));
-			return orig;
-		},
-		
-	//STATISTICS
-		/**
-		 * Description
-		 * @method Statistics_Get
-		 * @return orig
-		 */
-		Statistics_Get: function(){
-			var url = IP + '/statistics';
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
-		},
-		/**
-		 * Description
-		 * @method Statistics_Get_ByDate
-		 * @param {} date
-		 * @return orig
-		 */
-		Statistics_Get_ByDate: function(date){
-			var url = IP + '/statistics/' + date;
-			var orig = Promise.resolve(GetCaller.GetShort(url, true));
-			return orig;
 		}
-		
-		
 		
 	};
 
@@ -1068,10 +497,16 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 				return date;
 			}
 
-			value += "Z";
+			if (!(value[value.length - 1] === 'T' && value[value.length - 2] === 'M' && value[value.length - 3] === 'G')) {
+				//ALTERNATVE
+				if (value[value.length - 1] !== 'Z') {
+					value += "Z";
+				}
+			}
+
 
 			var now = new Date(value);
-
+			
 			date.state = true;
 			date.date = now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear();
 			date.time = now.getHours() + ":" + now.getMinutes();
