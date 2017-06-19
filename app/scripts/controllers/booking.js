@@ -14,6 +14,7 @@ application.controller('Ctrl_Booking_Com', function ($rootScope, $scope, $mdDial
 
 	function Init() {
 
+		$scope.request = "false";		
 		$scope.address = $rootScope.address;
 		$scope.lat = $rootScope.lat;
 		$scope.lon = $rootScope.lon;
@@ -43,6 +44,14 @@ application.controller('Ctrl_Booking_Com', function ($rootScope, $scope, $mdDial
 		$mdDialog.hide();
 	};
 
+	/**
+    * Description
+    * @method Request
+    * @return 
+    */
+	$scope.Request = function () { 
+		$scope.request = "true";
+	}	
 
 
 	/**
@@ -79,6 +88,7 @@ application.controller('Ctrl_Booking_Com', function ($rootScope, $scope, $mdDial
 		});
 
 		$scope.closeDialog();
+		$scope.request = "false";
 
 	};
 
@@ -455,7 +465,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			preserveScope: true,
 			template:
 			'<md-dialog class="booking-dialog">' +
-			'	<md-dialog-content>' +
+			'	<md-dialog-content ng-switch="request">' +
 
 			'		<md-toolbar class="md-hue-2">' +
 			'			<div class="md-toolbar-tools">' +
@@ -463,7 +473,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			'			</div>' +
 			'		</md-toolbar>' +
 
-			'		<form name="registerForm">' +
+			'		<form name="bookingForm">' +
 			'			<md-content flex layout-padding>' +
 			'				<div>' +
 			'					<label> Straße Nr.: {{ address.street }}  {{ address.number }}</label>' +
@@ -481,8 +491,14 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			'				</md-input-container>' +
 			'			</md-content>' +
 
-			'			<md-content flex layout-padding>' +
-			'				<md-button class="md-raised md-primary button-to-right" ng-click="Save()" ng-disabled="registerForm.$invalid"> Speichern </md-button>' +
+			'			<md-content flex layout-padding ng-switch-when="true">' +
+			'				<p><label>Wollen Sie wirklich buchen?</label></p>' +
+			'				<md-button class="md-raised md-primary button-to-right" ng-click="Save()" ng-disabled="bookingForm.$invalid"> Speichern </md-button>' +
+			'				<md-button class="md-primary md-hue-1 button-to-right" ng-click="closeDialog()"> Verwerfen </md-button>' +
+			'			</md-content>' +
+
+			'			<md-content flex layout-padding ng-switch-when="false">' +
+			'				<md-button class="md-raised md-primary button-to-right" ng-click="Request()" ng-disabled="bookingForm.$invalid"> Speichern </md-button>' +
 			'				<md-button class="md-primary md-hue-1 button-to-right" ng-click="closeDialog()"> Verwerfen </md-button>' +
 			'			</md-content>' +
 			'		</form>' +
@@ -564,7 +580,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 		});
 
 		map.addListener("click", function (event) {
-			alert("CLICK");
 			var lat = event.latLng.lat();
 			var lon = event.latLng.lng();
 

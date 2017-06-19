@@ -222,6 +222,14 @@ describe('Testsuite: Bookingpage user', function () {
 
 			});
 
+			it('Check if request is shown after saving', function () {
+
+				scope.Request();
+				
+				expect(scope.request).toBe("true");
+
+			});
+
 		});
 
 	});

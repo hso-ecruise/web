@@ -235,7 +235,7 @@ describe('Testsuite: Profilepage user', function () {
 
 			deferred.reject({});
 			scope.$root.$digest();
-
+			
 			expect(window.alert).toHaveBeenCalledWith("Passwort konnte nicht geändert werden");
 
 		});
