@@ -152,57 +152,21 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			$scope.$apply();
 		}
 
-		RESTFactory.Invoices_Get_Items_ItemID(booking.invoiceItemID).then(function (response) {
-
-			var data = response.data;
-
-			var invoice = {
-				invoiceID: data.invoiceId,
-				totalAmount: data.totalAmount,
-				paid: data.paid
-			};
-
-			booking.invoice = invoice;
-			bookings_done[str] = booking;
-			$scope.done_bookings = bookings_done;
-
-			if ($scope.testing === false) {
-				$scope.$apply();
-			}
-
+		if (booking.invoiceItemID === null) {
 			new Get_Trip();
+		} else {
 
-		}, function (response) {
-			
-			new Get_Trip();
-
-		});
-		
-
-		function Get_Trip() {
-				
-			RESTFactory.Trips_Get_TripID(booking.tripID).then(function (response) {
+			RESTFactory.Invoices_Get_Items_ItemID(booking.invoiceItemID).then(function (response) {
 
 				var data = response.data;
 
-				var trip = {
-					tripID: data.tripId,
-					carID: data.carId,
-					customerID: data.customerId,
-					startDate: data.startDate,
-					endDate: data.endDate,
-					startChargingStationID: data.startChargingStationId,
-					endChargingStationID: data.endChargingStationId,
-					distance: data.distanceTravelled
+				var invoice = {
+					invoiceID: data.invoiceId,
+					totalAmount: data.totalAmount,
+					paid: data.paid
 				};
 
-				var start = Helper.Get_Zeit_Server(trip.startDate);
-				var end = Helper.Get_Zeit_Server(trip.endDate);
-
-				booking.trip = trip;
-				booking.start = start;
-				booking.end = end;
-
+				booking.invoice = invoice;
 				bookings_done[str] = booking;
 				$scope.done_bookings = bookings_done;
 
@@ -210,78 +174,122 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 					$scope.$apply();
 				}
 
-				function Get_StartChargingStation() {
-					
-					RESTFactory.Charging_Stations_Get_Charging_StationID(trip.startChargingStationID).then(function (response) {
-
-						var data = response.data;
-
-						var lat = data.latitude;
-						var lon = data.longitude;
-
-						RESTFactory.Get_Address(lat, lon).then(function (response) {
-
-							var address = response;
-
-							booking.start.address = address;
-
-							bookings_done[str] = booking;
-							$scope.done_bookings = bookings_done;
-
-							if ($scope.testing === false) {
-								$scope.$apply();
-							}
-
-							new Get_EndChargingStation();
-
-						}, function () {
-							new Get_EndChargingStation();
-						});
-
-					}, function (response) {
-						new Get_EndChargingStation();
-					})
-
-
-				}
-
-				function Get_EndChargingStation() {
-					
-					RESTFactory.Charging_Stations_Get_Charging_StationID(trip.endChargingStationID).then(function (response) {
-
-						var data = response.data;
-
-						var lat = data.latitude;
-						var lon = data.longitude;
-
-
-						RESTFactory.Get_Address(lat, lon).then(function (response) {
-
-							var address = response;
-
-							booking.end.address = address;
-
-							bookings_done[str] = booking;
-							$scope.done_bookings = bookings_done;
-							if ($scope.testing === false) {
-								$scope.$apply();
-							}
-							
-						}, function (response) {
-							
-						});
-
-					}, function (response) {
-						
-					});
-					
-				}
-
-				new Get_StartChargingStation();
+				new Get_Trip();
 
 			}, function (response) {
-				
+				new Get_Trip();
 			});
+			
+		}	
+		
+
+		function Get_Trip() {
+			
+			if (booking.tripID !== null) {
+
+				RESTFactory.Trips_Get_TripID(booking.tripID).then(function (response) {
+
+					var data = response.data;
+
+					var trip = {
+						tripID: data.tripId,
+						carID: data.carId,
+						customerID: data.customerId,
+						startDate: data.startDate,
+						endDate: data.endDate,
+						startChargingStationID: data.startChargingStationId,
+						endChargingStationID: data.endChargingStationId,
+						distance: data.distanceTravelled
+					};
+
+					var start = Helper.Get_Zeit_Server(trip.startDate);
+					var end = Helper.Get_Zeit_Server(trip.endDate);
+
+					booking.trip = trip;
+					booking.start = start;
+					booking.end = end;
+
+					bookings_done[str] = booking;
+					$scope.done_bookings = bookings_done;
+
+					if ($scope.testing === false) {
+						$scope.$apply();
+					}
+
+					function Get_StartChargingStation() {
+
+						RESTFactory.Charging_Stations_Get_Charging_StationID(trip.startChargingStationID).then(function (response) {
+
+							var data = response.data;
+
+							var lat = data.latitude;
+							var lon = data.longitude;
+
+							RESTFactory.Get_Address(lat, lon).then(function (response) {
+
+								var address = response;
+
+								booking.start.address = address;
+
+								bookings_done[str] = booking;
+								$scope.done_bookings = bookings_done;
+
+								if ($scope.testing === false) {
+									$scope.$apply();
+								}
+
+								new Get_EndChargingStation();
+
+							}, function () {
+								new Get_EndChargingStation();
+							});
+
+						}, function (response) {
+							new Get_EndChargingStation();
+						})
+
+
+					}
+
+					function Get_EndChargingStation() {
+					
+						RESTFactory.Charging_Stations_Get_Charging_StationID(trip.endChargingStationID).then(function (response) {
+
+							var data = response.data;
+
+							var lat = data.latitude;
+							var lon = data.longitude;
+
+
+							RESTFactory.Get_Address(lat, lon).then(function (response) {
+
+								var address = response;
+
+								booking.end.address = address;
+
+								bookings_done[str] = booking;
+								$scope.done_bookings = bookings_done;
+								if ($scope.testing === false) {
+									$scope.$apply();
+								}
+							
+							}, function (response) {
+							
+							});
+
+						}, function (response) {
+						
+						});
+					
+					}
+
+					new Get_StartChargingStation();
+
+				}, function (response) {
+				
+				});
+			
+			}
 
 		}
 
