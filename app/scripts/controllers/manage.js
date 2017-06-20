@@ -77,7 +77,6 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	 * @return 
 	 */
 	function Handle_OpenBooking(response, dif) {
-
 		var booking = {};
 
 		booking.bookingID = response.bookingId;
@@ -118,8 +117,6 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		}, function (response) {
 			//console.log("failed");
 			return "failed";
-
-		}).then(function (data) {
 
 		});
 
@@ -218,72 +215,84 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 
 					function Get_StartChargingStation() {
 
-						RESTFactory.Charging_Stations_Get_Charging_StationID(trip.startChargingStationID).then(function (response) {
+						if (trip.startChargingStationID === null) {
+							new Get_EndChargingStation();
+						} else {
 
-							var data = response.data;
+							RESTFactory.Charging_Stations_Get_Charging_StationID(trip.startChargingStationID).then(function (response) {
 
-							var lat = data.latitude;
-							var lon = data.longitude;
+								var data = response.data;
 
-							RESTFactory.Get_Address(lat, lon).then(function (response) {
+								var lat = data.latitude;
+								var lon = data.longitude;
 
-								var address = response;
+								RESTFactory.Get_Address(lat, lon).then(function (response) {
 
-								booking.start.address = address;
+									var address = response;
 
-								bookings_done[str] = booking;
-								$scope.done_bookings = bookings_done;
+									booking.start.address = address;
 
-								if ($scope.testing === false) {
-									$scope.$apply();
-								}
+									bookings_done[str] = booking;
+									$scope.done_bookings = bookings_done;
 
-								new Get_EndChargingStation();
+									if ($scope.testing === false) {
+										$scope.$apply();
+									}
 
-							}, function () {
+									new Get_EndChargingStation();
+
+								}, function () {
+									new Get_EndChargingStation();
+								});
+
+							}, function (response) {
 								new Get_EndChargingStation();
 							});
-
-						}, function (response) {
-							new Get_EndChargingStation();
-						})
-
+							
+						}
 
 					}
 
 					function Get_EndChargingStation() {
 					
-						RESTFactory.Charging_Stations_Get_Charging_StationID(trip.endChargingStationID).then(function (response) {
+						if (trip.endChargingStationID === null) {
 
-							var data = response.data;
+						} else {
 
-							var lat = data.latitude;
-							var lon = data.longitude;
+							RESTFactory.Charging_Stations_Get_Charging_StationID(trip.endChargingStationID).then(function (response) {
+
+								var data = response.data;
+
+								var lat = data.latitude;
+								var lon = data.longitude;
 
 
-							RESTFactory.Get_Address(lat, lon).then(function (response) {
+								RESTFactory.Get_Address(lat, lon).then(function (response) {
 
-								var address = response;
+									var address = response;
 
-								booking.end.address = address;
+									booking.end.address = address;
 
-								bookings_done[str] = booking;
-								$scope.done_bookings = bookings_done;
-								if ($scope.testing === false) {
-									$scope.$apply();
-								}
+									bookings_done[str] = booking;
+									$scope.done_bookings = bookings_done;
+									if ($scope.testing === false) {
+										$scope.$apply();
+									}
 							
+								}, function (response) {
+							
+								});
+
 							}, function (response) {
-							
-							});
-
-						}, function (response) {
 						
-						});
+							});
+						
+						}	
 					
 					}
 
 					new Get_StartChargingStation();
+					
 
 				}, function (response) {
 				

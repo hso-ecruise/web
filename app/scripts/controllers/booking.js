@@ -212,7 +212,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
      * @param {} lon
      * @return 
      */
-	function AddMarker(id, title, content, image_string, lat, lon) {
+	function AddMarker(id, title, content, image_string, lat, lon, z_Index) {
 
 		var img = {
 			url: 'images/icons/car_available.png',
@@ -228,7 +228,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			map: map,
 			icon: img,
 			optimized: false,
-			id: id
+			id: id,
+			zIndex: z_Index
 		});
 
 		marker.addListener('click', function (event) {
@@ -286,13 +287,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 						var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + " (" + car.loadingStateObj.text + "). Voraussichtliches Ende gegen " + Helper.Get_Zeit(endTime).time + ", bei einer Aufladung von " + loadingPerSecond + "% pro Minute.";
 						if (bat < 25) {
-							new AddMarker(carID, title, content, "car_loading_00", lat, lon);
+							new AddMarker(carID, title, content, "car_loading_00", lat, lon, 10);
 						} else if (bat < 50) {
-							new AddMarker(carID, title, content, "car_loading_25", lat, lon);
+							new AddMarker(carID, title, content, "car_loading_25", lat, lon, 11);
 						} else if (bat < 75) {
-							new AddMarker(carID, title, content, "car_loading_50", lat, lon);
+							new AddMarker(carID, title, content, "car_loading_50", lat, lon, 12);
 						} else if (bat < 100) {
-							new AddMarker(carID, title, content, "car_loading_75", lat, lon);
+							new AddMarker(carID, title, content, "car_loading_75", lat, lon, 13);
 						}
 
 					}, function (response) {
@@ -302,20 +303,20 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 						var content = "Das Fahrzeug lädt. Ladezustand " + parseInt(bat) + " (" + car.loadingStateObj.text + "). Voraussichtliches Ende gegen " + Helper.Get_Zeit(endTime).time + ", bei einer Aufladung von 1% pro Minute.";
 						if (bat < 25) {
-							new AddMarker(carID, title, content, "car_loading_00", lat, lon);
+							new AddMarker(carID, title, content, "car_loading_00", lat, lon, 10);
 						} else if (bat < 50) {
-							new AddMarker(carID, title, content, "car_loading_25", lat, lon);
+							new AddMarker(carID, title, content, "car_loading_25", lat, lon, 11);
 						} else if (bat < 75) {
-							new AddMarker(carID, title, content, "car_loading_50", lat, lon);
+							new AddMarker(carID, title, content, "car_loading_50", lat, lon, 12);
 						} else if (bat < 100) {
-							new AddMarker(carID, title, content, "car_loading_75", lat, lon);
+							new AddMarker(carID, title, content, "car_loading_75", lat, lon, 13);
 						}
 
 					});
 
 				} else {
 					var content = "Das Fahrzeug ist voll geladen und kann benutzt werden.";
-					new AddMarker(carID, title, content, "car_available", lat, lon);
+					new AddMarker(carID, title, content, "car_available", lat, lon, 20);
 				}
 
 				break;
@@ -346,9 +347,9 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 		// Abfrage ob Station frei oder besetz für die Ausgabe von Info
 		if (diff === 0) {
-			new AddMarker(station.stationID, title, content, "station_occupied", lat, lon);
+			new AddMarker(station.stationID, title, content, "station_occupied", lat, lon, 19);
 		} else {
-			new AddMarker(station.stationID, title, content, "station_available", lat, lon);
+			new AddMarker(station.stationID, title, content, "station_available", lat, lon, 21);
 		}
 
 	}
@@ -630,6 +631,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			var interested = [];
 			var soon_bookings = [];
 
+			console.log(response);
+
 			for (var jk = 0; jk < bookings.length; jk++) {
 				var booking = bookings[jk];
 
@@ -642,7 +645,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 				}
 
 			}
-
+			
 			for (var kl = 0; kl < interested.length; kl++) {
 
 				var booking2 = interested[kl];
@@ -676,7 +679,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 							var content = "Ihr Fahrzeug mit der ID: " + soon_booking.carID + " steht ab " + soon_booking.date.time + " am " + soon_booking.date.date + " an der Station " + soon_booking.stationID + " bereit";
 
-							new AddMarker(soon_booking.carID, "Ihre Reservierung", content, "car_reserved", lat, lon);
+							new AddMarker(soon_booking.carID, "Ihre Reservierung", content, "car_reserved", lat, lon, 25);
 
 						});
 
