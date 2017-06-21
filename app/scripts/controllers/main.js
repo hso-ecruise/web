@@ -335,8 +335,26 @@ application.factory('RESTFactory', function ($http, GetCaller, PostCaller, Patch
 			var orig = Promise.resolve(GetCaller.GetShort(url, true));
 			return orig;
 		},
-		
-		
+		/**
+		 * Description
+		 * @method Cars_Get_Find
+		 * @return orig
+		 */
+		Cars_Get_Find: function (id) {
+			var url = IP + "/cars/" + id + "/find";
+			var orig = Promise.resolve(GetCaller.GetShort(url, true));
+			return orig;
+		},
+		/**
+		 * Description
+		 * @method Cars_Get_Find
+		 * @return orig
+		 */
+		Cars_Get_IsWanted: function (id) {
+			var url = IP + "/cars/" + id + "/is-wanted";
+			var orig = Promise.resolve(GetCaller.GetShort(url, true));
+			return orig;
+		},
 
 	//CHARGING-STATION
 		/**

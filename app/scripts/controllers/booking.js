@@ -13,7 +13,7 @@ application.controller('Ctrl_Booking_Com', function ($rootScope, $scope, $mdDial
 	$scope.testing = false;
 
 	function Init() {
-
+		
 		$scope.request = "false";		
 		$scope.address = $rootScope.address;
 		$scope.lat = $rootScope.lat;
@@ -103,7 +103,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 	$scope.testing = false;
 	$scope.customerID = $rootScope.customerID;
-
+	var currentCarID = [];
+	
 	var carMarkers = [];
 	var stationMarkers = [];
 
@@ -112,6 +113,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 	$scope.activeCar = "images/icons/car_available.png";
 	$scope.activeStation = "images/icons/station_available.png";
+	$scope.activeTrip = "images/icons/car_standing_user_INACT.png";
 
 	var map;
 
@@ -568,10 +570,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
      */
 	function Init() {
 
+		currentCarID = [];
+
 		var input = document.getElementById('search_input');
 
 		var carBtn = document.getElementById('car_btn');
 		var stationBtn = document.getElementById('station_btn');
+		var reqPosBtn = document.getElementById('request_btn');
 
 		var searchBox = new google.maps.places.SearchBox(input);
 		map = new google.maps.Map(document.getElementById('map'), {
@@ -596,6 +601,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 		map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(carBtn);
 		map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(stationBtn);
+		map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(reqPosBtn);
 
 
 
@@ -622,16 +628,13 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 				new ShowInputPopUp(response, lat, lon);
 			});
 
-		});
-
+		});		
 
 		//hier werden benötigte Daten von der Rest-Schnittstelle gehollt.
 		RESTFactory.Bookings_Get_CustomerID($scope.customerID).then(function (response) {
 			var bookings = response.data;
 			var interested = [];
 			var soon_bookings = [];
-
-			console.log(response);
 
 			for (var jk = 0; jk < bookings.length; jk++) {
 				var booking = bookings[jk];
@@ -656,6 +659,9 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 					var carID = trip.CarId;
 					var chargingID = trip.startChargingStationId;
+					currentCarID.push(carID);
+
+					$scope.activeTrip = "images/icons/car_standing_user.png";
 
 					RESTFactory.Charging_Stations_Get_Charging_StationID(chargingID).then(function (response) {
 
@@ -714,6 +720,56 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 		new ToggleStations();
 	};
 
+	/**
+     * Description
+     * @method ToggleStations
+     * @return 
+     */
+	$scope.RequestCarPosition = function () {
+
+		console.log("REQ " + currentCarID.length);
+		return;
+
+		if (currentCarID.length === 0) {
+			return;
+		}
+
+		var interval = null;
+		var intervalCounter = 0;
+
+		function Request() {
+
+			intervalCounter--;
+
+			for (var i = 0; i < currentCarID.length; i++) {
+			
+				RESTFactory.Cars_Get_Find(currentCarID[i]).then(function (response) {
+
+					clearInterval(interval);
+					interval = null;
+
+					var data = response.data;
+
+					var lat = data.lastKnownPositionLatitude;
+					var lon = data.lastKnownPositionLongitude;
+
+					var content = "Hier haben Sie Ihr Auto abgestellt";
+
+					new AddMarker(carID, title, content, "car_standing_user", lat, lon, 30);
+
+				}, function (response) {
+				
+				});
+
+			}
+		}
+
+		if (interval === null) {
+			intervalCounter = 10;
+			interval = setInterval(Rquest, 10000);
+		}
+
+	}	
 
 	new Init();
 
