@@ -727,9 +727,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
      */
 	$scope.RequestCarPosition = function () {
 
-		console.log("REQ " + currentCarID.length);
-		return;
-
 		if (currentCarID.length === 0) {
 			return;
 		}
@@ -740,6 +737,10 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 		function Request() {
 
 			intervalCounter--;
+			if (intervalCounter === 0) {
+				clearInterval(interval);
+				interval = null;
+			}
 
 			for (var i = 0; i < currentCarID.length; i++) {
 			
