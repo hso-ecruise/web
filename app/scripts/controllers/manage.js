@@ -100,6 +100,9 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	 * @return 
 	 */
 	function Handle_OpenBooking(response) {
+
+		console.log(response);
+
 		var booking = {};
 
 		booking.bookingID = response.bookingId;
@@ -108,7 +111,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 
 		booking.onMap = false;
 
-		if (booking.tripId !== null) {
+		if (response.tripId !== null && response.tripId !== 0) {
 			booking.onMap = true;
 		}
 
@@ -136,7 +139,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			}
 
 		}, function (response) {
-			
+
 		});
 
 	}

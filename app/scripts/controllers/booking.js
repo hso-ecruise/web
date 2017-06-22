@@ -672,8 +672,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 			function Load_1() {
 
-				console.log(interested);
-
 				intervalCounter--;
 				if (intervalCounter === 0) {
 					clearInterval(interval);
