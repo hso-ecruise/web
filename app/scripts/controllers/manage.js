@@ -53,9 +53,32 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	 */
 	function HandleResult_Booking(response) {
 
+		if (response.tripId === null) {
+
+			Handle_OpenBooking(response);
+
+		} else {
+
+			RESTFactory.Trips_Get_TripID(response.tripId).then(function (responseTrip) {
+				
+				var data = responseTrip.data;
+				console.log(data);
+				if (data.endDate === null) {
+					Handle_OpenBooking(response);
+				} else {
+					Handle_DoneBooking(response);
+				}
+
+			}, function () {
+				
+			});
+
+		}
+
+/*
 		var d = Helper.Get_Zeit_Server(response.plannedDate);
 		var now = Helper.Get_Zeit(new Date());
-
+		console.log(response);
 		var dif = (d.value - now.value) / 1000 / 60;
 
 		if (dif < 0) {
@@ -65,7 +88,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			//Trip in future
 			new Handle_OpenBooking(response, dif);
 		}
-
+*/
 	}
 
     /**
@@ -76,7 +99,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	 * @param {} dif
 	 * @return 
 	 */
-	function Handle_OpenBooking(response, dif) {
+	function Handle_OpenBooking(response) {
 		var booking = {};
 
 		booking.bookingID = response.bookingId;
@@ -85,7 +108,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 
 		booking.onMap = false;
 
-		if (dif < 30) {
+		if (booking.tripId !== null) {
 			booking.onMap = true;
 		}
 
@@ -112,12 +135,8 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 				$scope.$apply();
 			}
 
-			return "success";
-
 		}, function (response) {
-			//console.log("failed");
-			return "failed";
-
+			
 		});
 
 	}

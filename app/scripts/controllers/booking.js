@@ -639,60 +639,98 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			for (var jk = 0; jk < bookings.length; jk++) {
 				var booking = bookings[jk];
 
-				var d = Helper.Get_Zeit_Server(booking.plannedDate);
-				var now = new Date();
-				var dif = (d.value - now.getTime()) / 1000 / 60;
+				if (booking.plannedDate === null) {
 
-				if (dif < 30 && dif > 0) {
-					interested.push(booking);
+					RESTFactory.Trips_Get_TripID(booking.tripId).then(function (response) {
+						
+						var data = response.data;
+
+						if (data.endDate === null) {
+							interested.push(booking);
+						}
+
+					}, function () {
+						
+					});
+
+				} else {
+
+					var d = Helper.Get_Zeit_Server(booking.plannedDate);
+					var now = new Date();
+					var dif = (d.value - now.getTime()) / 1000 / 60;
+
+					if (dif < 30 && dif > 0) {
+						interested.push(booking);
+					}
 				}
 
 			}
+
 			
-			for (var kl = 0; kl < interested.length; kl++) {
+			var interval = null;
+			var intervalCounter = 5;
 
-				var booking2 = interested[kl];
+			function Load_1() {
 
-				RESTFactory.Trips_Get_TripID(booking2.TripId).then(function (response) {
+				console.log(interested);
 
-					var trip = response.data;
+				intervalCounter--;
+				if (intervalCounter === 0) {
+					clearInterval(interval);
+					interval == null;
+				}
 
-					var carID = trip.CarId;
-					var chargingID = trip.startChargingStationId;
-					currentCarID.push(carID);
+				for (var kl = 0; kl < interested.length; kl++) {
 
-					$scope.activeTrip = "images/icons/car_standing_user.png";
+					var booking2 = interested[kl];
 
-					RESTFactory.Charging_Stations_Get_Charging_StationID(chargingID).then(function (response) {
+					RESTFactory.Trips_Get_TripID(booking2.tripId).then(function (response) {
 
-						var station = response.data;
+						var trip = response.data;
 
-						var lat = station.latitude;
-						var lon = station.longitude;
+						var carID = trip.carId;
+						var chargingID = trip.startChargingStationId;
+						currentCarID.push(carID);
 
-						RESTFactory.Get_Address(lat, lon).then(function (address) {
+						$scope.activeTrip = "images/icons/car_standing_user.png";
 
-							var soon_booking = {};
+						RESTFactory.Charging_Stations_Get_Charging_StationID(chargingID).then(function (response) {
 
-							soon_booking.lat = lat;
-							soon_booking.lon = lon;
-							soon_booking.stationID = chargingID;
-							soon_booking.carID = carID;
-							soon_booking.address = address;
-							soon_booking.date = Helper.Get_Zeit_Server(booking2.plannedDate);
+							var station = response.data;
 
-							soon_bookings.push(soon_booking);
+							var lat = station.latitude;
+							var lon = station.longitude;
 
-							var content = "Ihr Fahrzeug mit der ID: " + soon_booking.carID + " steht ab " + soon_booking.date.time + " am " + soon_booking.date.date + " an der Station " + soon_booking.stationID + " bereit";
+							RESTFactory.Get_Address(lat, lon).then(function (address) {
 
-							new AddMarker(soon_booking.carID, "Ihre Reservierung", content, "car_reserved", lat, lon, 25);
+								var soon_booking = {};
+
+								soon_booking.lat = lat;
+								soon_booking.lon = lon;
+								soon_booking.stationID = chargingID;
+								soon_booking.carID = carID;
+								soon_booking.address = address;
+								soon_booking.date = Helper.Get_Zeit_Server(trip.startDate);
+
+								soon_bookings.push(soon_booking);
+
+								var content = "Ihr Fahrzeug mit der ID: " + soon_booking.carID + " steht ab " + soon_booking.date.time + " am " + soon_booking.date.date + " an der Station " + soon_booking.stationID + " bereit";
+
+								new AddMarker(soon_booking.carID, "Ihre Reservierung", content, "car_reserved", lat, lon, 25);
+
+							});
 
 						});
 
 					});
 
-				});
+				}
+			
+			}
 
+			if (interval === null) {
+				intervalCounter = 5;
+				interval = setInterval(Load_1, 1000);
 			}
 
 		});
