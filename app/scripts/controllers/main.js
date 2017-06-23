@@ -528,6 +528,7 @@ application.factory('Helper', function (RESTFactory, $cookies) {
 			}
 
 
+
 			var now = new Date(value);
 			
 			date.state = true;

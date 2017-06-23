@@ -62,33 +62,16 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 			RESTFactory.Trips_Get_TripID(response.tripId).then(function (responseTrip) {
 				
 				var data = responseTrip.data;
-				console.log(data);
 				if (data.endDate === null) {
 					Handle_OpenBooking(response);
 				} else {
 					Handle_DoneBooking(response);
 				}
 
-			}, function () {
-				
 			});
 
 		}
 
-/*
-		var d = Helper.Get_Zeit_Server(response.plannedDate);
-		var now = Helper.Get_Zeit(new Date());
-		console.log(response);
-		var dif = (d.value - now.value) / 1000 / 60;
-
-		if (dif < 0) {
-			//Trip in past
-			new Handle_DoneBooking(response);
-		} else {
-			//Trip in future
-			new Handle_OpenBooking(response, dif);
-		}
-*/
 	}
 
     /**
@@ -100,8 +83,6 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 	 * @return 
 	 */
 	function Handle_OpenBooking(response) {
-
-		console.log(response);
 
 		var booking = {};
 
@@ -237,42 +218,36 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 
 					function Get_StartChargingStation() {
 
-						if (trip.startChargingStationID === null) {
-							new Get_EndChargingStation();
-						} else {
+						RESTFactory.Charging_Stations_Get_Charging_StationID(trip.startChargingStationID).then(function (response) {
 
-							RESTFactory.Charging_Stations_Get_Charging_StationID(trip.startChargingStationID).then(function (response) {
+							var data = response.data;
 
-								var data = response.data;
+							var lat = data.latitude;
+							var lon = data.longitude;
 
-								var lat = data.latitude;
-								var lon = data.longitude;
+							RESTFactory.Get_Address(lat, lon).then(function (response) {
 
-								RESTFactory.Get_Address(lat, lon).then(function (response) {
+								var address = response;
 
-									var address = response;
+								booking.start.address = address;
 
-									booking.start.address = address;
+								bookings_done[str] = booking;
+								$scope.done_bookings = bookings_done;
 
-									bookings_done[str] = booking;
-									$scope.done_bookings = bookings_done;
+								if ($scope.testing === false) {
+									$scope.$apply();
+								}
 
-									if ($scope.testing === false) {
-										$scope.$apply();
-									}
+								new Get_EndChargingStation();
 
-									new Get_EndChargingStation();
-
-								}, function () {
-									new Get_EndChargingStation();
-								});
-
-							}, function (response) {
+							}, function () {
 								new Get_EndChargingStation();
 							});
-							
-						}
 
+						}, function (response) {
+							new Get_EndChargingStation();
+						});
+						
 					}
 
 					function Get_EndChargingStation() {

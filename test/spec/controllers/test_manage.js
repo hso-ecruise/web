@@ -19,7 +19,6 @@ describe('Testsuite: Managepage user', function () {
 	var response_invoice;
 
 
-
 	beforeEach(module('webApp'));
 	beforeEach(module('ngAnimate'));
 	beforeEach(module('ngRoute'));
@@ -66,17 +65,17 @@ describe('Testsuite: Managepage user', function () {
 	});
 
 	beforeEach(inject(function ($controller, $rootScope, $q) {
-		
+
 		spyOn(RESTFactory, 'Bookings_Get_CustomerID').and.callThrough();
 		spyOn(RESTFactory, 'Get_Address').and.callThrough();
 		spyOn(RESTFactory, 'Invoices_Get_Items_ItemID').and.callThrough();
 		spyOn(RESTFactory, 'Trips_Get_TripID').and.callThrough();
 		spyOn(RESTFactory, 'Charging_Stations_Get_Charging_StationID').and.callThrough();
 		spyOn(RESTFactory, 'Invoices_Get_Items').and.callThrough();
-		
+
 		q = $q;
 		scope = $rootScope.$new();
-		
+
 		MainCtrl = $controller('Ctrl_Manage', {
 			$scope: scope,
 			RESTFactory: RESTFactory,
@@ -108,6 +107,7 @@ describe('Testsuite: Managepage user', function () {
 	describe('Open Booking tests', function () {
 
 		var booking_open_be;
+		var trip;
 
 		beforeEach(function () {
 			booking_open_be = {
@@ -119,6 +119,16 @@ describe('Testsuite: Managepage user', function () {
 				"bookingPositionLongitude": 8,
 				"bookingDate": "2017-06-08T12:04:00.000Z",
 				"plannedDate": "2018-06-12T12:04:00.000Z"
+			};
+			trip = {
+				"tripId": 10,
+				"carId": 2,
+				"customerId": 3,
+				"startDate": "2017-06-23T15:06:42.668Z",
+				"endDate": null,
+				"startChargingStationId": 0,
+				"endChargingStationId": 0,
+				"distanceTravelled": 0
 			};
 		});
 
@@ -139,7 +149,7 @@ describe('Testsuite: Managepage user', function () {
 
 			expect(scope.open_bookings).not.toBe(undefined);
 
-		});	
+		});
 
 		it('Check if openBooking date is converted from utc to now (plannedDate hour + 2)', function () {
 
@@ -157,31 +167,35 @@ describe('Testsuite: Managepage user', function () {
 
 			deferred.resolve(response_address);
 			scope.$root.$digest();
-			
+
 			expect(scope.open_bookings[bookingID].start.time).toBe(plannedTime);
 
 		});
 
-		it('Check if openBooking will be shown onMap if under 30Minutes', function () {
+		it('Check if openBooking will be shown onMap if under 30Minutes or on the way', function () {
 
-			var now = new Date();
-			now.setMinutes(now.getMinutes() + 20);
-			now.setSeconds(0);
-			now.setMilliseconds(0);
-
-			booking_open_be.plannedDate = now.toUTCString();
-
+			booking_open_be.tripId = 10;
 			var bookingID = booking_open_be.bookingId;
 			var data = [];
 			data.push(booking_open_be);
-			
+
+
 			bookings_response = {
 				'data': data
 			};
 
 			deferred.resolve(bookings_response);
 			scope.$root.$digest();
-			
+
+			//TRIP		
+			var trip_response = {
+				'data': trip
+			};
+
+			deferred.resolve(trip_response);
+			scope.$root.$digest();
+
+			//ADDRESS			
 			deferred.reject(response_address);
 			scope.$root.$digest();
 
@@ -246,6 +260,7 @@ describe('Testsuite: Managepage user', function () {
 		var bookingID = 3;
 		var response_trip;
 		var response_chargingStation;
+		var trip;
 
 		beforeEach(function () {
 			booking_done_be = {
@@ -284,6 +299,16 @@ describe('Testsuite: Managepage user', function () {
 				"latitude": 50,
 				"longitude": 8
 			};
+			trip = {
+				"tripId": 10,
+				"carId": 2,
+				"customerId": 3,
+				"startDate": "2017-06-23T15:06:42.668Z",
+				"endDate": "2017-06-23T15:10:42.668Z",
+				"startChargingStationId": 0,
+				"endChargingStationId": 0,
+				"distanceTravelled": 0
+			};
 
 			var b_data = [];
 
@@ -299,7 +324,14 @@ describe('Testsuite: Managepage user', function () {
 
 			deferred.resolve(bookings_response);
 			scope.$root.$digest();
-		
+			//TRIP		
+			var trip_response = {
+				'data': trip
+			};
+
+			deferred.resolve(trip_response);
+			scope.$root.$digest();
+
 		});
 
 		it('Check if doneBooking was placed', function () {
@@ -309,10 +341,10 @@ describe('Testsuite: Managepage user', function () {
 		});
 
 		describe('Done booking stuff', function () {
-			
+
 
 			describe('Success', function () {
-				
+
 				beforeEach(function () {
 					//INVOICE
 					deferred.resolve({ 'data': invoice_main });
@@ -335,7 +367,7 @@ describe('Testsuite: Managepage user', function () {
 
 
 				describe('Trip', function () {
-					
+
 					beforeEach(function () {
 						//TRIP			
 						deferred.resolve({ 'data': response_trip });
@@ -361,7 +393,7 @@ describe('Testsuite: Managepage user', function () {
 							//START CHARGINGSTATION			
 							deferred.resolve({ 'data': response_chargingStation });
 							scope.$root.$digest();
-							
+
 							//ADDRESS
 							deferred.resolve(response_address);
 							scope.$root.$digest();
@@ -386,7 +418,7 @@ describe('Testsuite: Managepage user', function () {
 
 						});
 
-						
+
 						describe('End chargingstation tests', function () {
 
 							beforeEach(function () {
@@ -398,7 +430,7 @@ describe('Testsuite: Managepage user', function () {
 								//START ADDRESS
 								deferred.resolve(response_address);
 								scope.$root.$digest();
-						
+
 							});
 
 
@@ -413,6 +445,7 @@ describe('Testsuite: Managepage user', function () {
 								expect(scope.done_bookings[bookingID].end.address.street).toBe("Guntherstreet");
 
 							});
+
 
 						});
 
@@ -429,9 +462,9 @@ describe('Testsuite: Managepage user', function () {
 
 
 			describe('Reject', function () {
-				
+
 				describe('Reject Invoice', function () {
-					
+
 					it('Check if Trip is gettin called if invoice failed', function () {
 
 						//INVOICE
@@ -445,9 +478,9 @@ describe('Testsuite: Managepage user', function () {
 				});
 
 				describe('Reject Trip', function () {
-					
+
 					it('Get trip failing', function () {
-						
+
 						//INVOICE
 						deferred.reject({});
 						scope.$root.$digest();
@@ -455,7 +488,7 @@ describe('Testsuite: Managepage user', function () {
 						//TRIP
 						deferred.reject({});
 						scope.$root.$digest();
-						
+
 						expect(RESTFactory.Charging_Stations_Get_Charging_StationID).not.toHaveBeenCalled();
 
 					});
@@ -533,10 +566,10 @@ describe('Testsuite: Managepage user', function () {
 
 					});
 
-				});			
+				});
 
-			});		
-			
+			});
+
 
 		});
 
@@ -545,9 +578,9 @@ describe('Testsuite: Managepage user', function () {
 
 
 	describe('ShowonMap', function () {
-		
+
 		it('Show on map success', function () {
-			
+
 			var booking = {};
 
 			booking.onMap = true;
@@ -572,11 +605,11 @@ describe('Testsuite: Managepage user', function () {
 
 
 	describe('ShowBilling', function () {
-		
+
 		var bookingID = 3;
 
 		beforeEach(function () {
-			
+
 			booking_done_be = {
 				"bookingId": bookingID,
 				"customerId": 3,
@@ -625,18 +658,22 @@ describe('Testsuite: Managepage user', function () {
 			deferred.resolve(bookings_response);
 			scope.$root.$digest();
 
+			//TRIP			
+			deferred.resolve({ 'data': response_trip });
+			scope.$root.$digest();
+
 			//INVOICES			
-			deferred.resolve({'data': response_invoice});
+			deferred.resolve({ 'data': response_invoice });
 			scope.$root.$digest();
 
 			//TRIP			
-			deferred.resolve({'data': response_trip});
+			deferred.resolve({ 'data': response_trip });
 			scope.$root.$digest();
 
 			//START CHARGINGSTATION			
 			deferred.resolve({ 'data': response_chargingStation });
 			scope.$root.$digest();
-			
+
 			//START ADDRESS
 			deferred.resolve(response_address);
 			scope.$root.$digest();
@@ -652,7 +689,7 @@ describe('Testsuite: Managepage user', function () {
 		});
 
 		it('Show billing with billing is defined (items.length = 2)', function () {
-			
+
 			scope.ShowBilling(6, 2017);
 
 			var i_data = [];
@@ -677,7 +714,7 @@ describe('Testsuite: Managepage user', function () {
 			i_data.push(invoice_item2);
 
 			//INVOICE ITEMS
-			deferred.resolve({'data': i_data});
+			deferred.resolve({ 'data': i_data });
 			scope.$root.$digest();
 
 			expect(scope.currentBill).not.toBe(undefined);
