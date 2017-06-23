@@ -803,7 +803,7 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 		if (interval === null) {
 			intervalCounter = 10;
-			interval = setInterval(Rquest, 10000);
+			interval = setInterval(Request, 10000);
 		}
 
 	}	
