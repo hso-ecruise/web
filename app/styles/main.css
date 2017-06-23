@@ -40,6 +40,15 @@ md-nav-bar md-nav-ink-bar {
     min-width: 350px;
 }
 
+#scroll3{
+    height: calc(100vh - 300px);
+    overflow: auto;
+}
+.scroll2{
+    height: calc(100vh - 200px);
+    overflow:auto;
+}
+
 #ng_view{
     height: calc(100% - 52px - 10px);
 }
