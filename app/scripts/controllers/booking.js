@@ -580,8 +580,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 
 		var searchBox = new google.maps.places.SearchBox(input);
 		map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 16,
-			center: new google.maps.LatLng(49.5, 8.434),
+			zoom: 15,
+			center: new google.maps.LatLng(49.488813, 8.465976),
 			mapTypeId: 'roadmap'
 		});
 
@@ -639,8 +639,8 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 			for (var jk = 0; jk < bookings.length; jk++) {
 				var booking = bookings[jk];
 
-				if (booking.plannedDate === null) {
-
+				if (booking.tripId !== null) {
+					
 					RESTFactory.Trips_Get_TripID(booking.tripId).then(function (response) {
 						
 						var data = response.data;
@@ -653,15 +653,6 @@ application.controller('Ctrl_Booking', function ($rootScope, $scope, $mdDialog, 
 						
 					});
 
-				} else {
-
-					var d = Helper.Get_Zeit_Server(booking.plannedDate);
-					var now = new Date();
-					var dif = (d.value - now.getTime()) / 1000 / 60;
-
-					if (dif < 30 && dif > 0) {
-						interested.push(booking);
-					}
 				}
 
 			}
