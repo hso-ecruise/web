@@ -353,7 +353,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 		};
 
 		bill.invoiceID = relevant_bookings[0].invoice.invoiceID;
-		bill.totalAmount = relevant_bookings[0].invoice.totalAmount;
+		bill.totalAmount = relevant_bookings[0].invoice.totalAmount.toFixed(2);
 		bill.paid = relevant_bookings[0].invoice.paid;
 		bill.paidText = "Bezahlt";
 		if (bill.paid === false) { bill.paidText = "Nicht bezahlt"; }
@@ -374,7 +374,7 @@ application.controller('Ctrl_Manage', function ($rootScope, $scope, RESTFactory,
 				item.invoiceItemID = items[i].invoiceItemId;
 				item.reason = items[i].reason;
 				item.type = INVOICE_TYPES[items[0].type].text;
-				item.amount = items[i].amount;
+				item.amount = items[i].amount.toFixed(2);
 				item.hasBooking = false;
 
 				var jk = 0;

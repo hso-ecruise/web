@@ -48,6 +48,10 @@ md-nav-bar md-nav-ink-bar {
     height: calc(100vh - 200px);
     overflow:auto;
 }
+.scroll3{
+    height: calc(100vh - 300px);
+    overflow: auto;
+}
 
 #ng_view{
     height: calc(100% - 52px - 10px);
