@@ -12,7 +12,7 @@
                     <!--  <md-subheader class="md-no-sticky"></md-subheader> -->
                     <md-list-item class="md-3-line" ng-repeat="(key, booking) in open_bookings track by $index" ng-click="ShowOnMap(booking)" ng-switch="booking.onMap">
 
-                        <i class="material-icons md-avatar" style="color: #green; width:25px;" title="Auf Karte anzeigen" ng-switch-when="true">map</i>
+                        <i class="material-icons md-avatar" style="color: #green; width:25px;" title="Auf Karte anzeigen" ng-switch-when="true"><span class="glyphicon glyphicon-map-marker"></span></i>
 
                         <i class="material-icons md-avatar" style="color: #green; width:25px;" title="Auf Karte anzeigen" ng-switch-when="false"></i>
                         <div class="md-list-item-text" layout="column" ng-switch on="{{ booking.state }}">
@@ -41,9 +41,9 @@
                 <md-list flex class="make-scrollablea">
                     <md-list-item class="md-3-line" ng-repeat="(key, booking) in done_bookings track by $index" ng-click="ShowBilling(booking.end.date_ele.month, booking.end.date_ele.year)" ng-switch="booking.invoice.paid">
 
-                        <i ng-switch-when="true" class="material-icons md-avatar" style="color: #00ff00; width:25px;" aria-label="Rechnung bezahlt" >done</i>
-                        <i ng-switch-when="false" class="material-icons md-avatar" style="color: #aa0000;">report_problem</i>              
-
+						<i class="material-icons md-avatar" style="color: #green; width:25px;" title="Rechnung bezahlt" ng-switch-when="true"><span class="glyphicon glyphicon-check"></span></i>
+						<i class="material-icons md-avatar" style="color: #green; width:25px;" title="Rechnung nicht bezahlt" ng-switch-when="true"><span class="glyphicon glyphicon-unchecked"></span></i>
+						<i class="material-icons md-avatar" style="color: #green; width:25px;" title="Rechnung nicht abrufbar" ng-switch-when="undefined"></span></i>
                         <div class="md-list-item-text" layout="column" >
                             <h4>Start {{ booking.start.date }} um {{ booking.start.time }} </h4>
                             <p>von Stra&szlig;e : {{ booking.start.address.street }} {{ booking.start.address.number }}</p>
